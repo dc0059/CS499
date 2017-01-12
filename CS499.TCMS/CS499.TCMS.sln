@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS499.TCMS.VIEW", "CS499.TCMS.VIEW\CS499.TCMS.VIEW.csproj", "{5475C943-B198-418B-A966-DC896002028F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS499.TCMS.Model", "CS499.TCMS.Model\CS499.TCMS.Model.csproj", "{AD3F15B6-221F-4ABA-87B8-E56DFDFCA540}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS499.TCMS.DataAccess", "CS499.TCMS.DataAccess\CS499.TCMS.DataAccess.csproj", "{B72DD45C-376D-46DC-84F8-61D5AF59818A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5475C943-B198-418B-A966-DC896002028F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5475C943-B198-418B-A966-DC896002028F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5475C943-B198-418B-A966-DC896002028F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5475C943-B198-418B-A966-DC896002028F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD3F15B6-221F-4ABA-87B8-E56DFDFCA540}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD3F15B6-221F-4ABA-87B8-E56DFDFCA540}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD3F15B6-221F-4ABA-87B8-E56DFDFCA540}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD3F15B6-221F-4ABA-87B8-E56DFDFCA540}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B72DD45C-376D-46DC-84F8-61D5AF59818A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B72DD45C-376D-46DC-84F8-61D5AF59818A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B72DD45C-376D-46DC-84F8-61D5AF59818A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B72DD45C-376D-46DC-84F8-61D5AF59818A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
