@@ -9,11 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS499.TCMS.Model", "CS499.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS499.TCMS.DataAccess", "CS499.TCMS.DataAccess\CS499.TCMS.DataAccess.csproj", "{B72DD45C-376D-46DC-84F8-61D5AF59818A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{40302E79-C7E5-4C45-BB48-D3D5552C86CB}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\P07_TruckingCompanyManagement.doc = ..\..\P07_TruckingCompanyManagement.doc
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSA99.TCMS.TCMSWebService", "CSA99.TCMS.TCMSWebService\CSA99.TCMS.TCMSWebService.csproj", "{44D91240-4A20-48CA-BD2B-DAB14116774B}"
 EndProject
 Global
