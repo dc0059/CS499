@@ -3,11 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS499.TCMS.VIEW", "CS499.TCMS.VIEW\CS499.TCMS.VIEW.csproj", "{5475C943-B198-418B-A966-DC896002028F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS499.TCMS.View", "CS499.TCMS.VIEW\CS499.TCMS.View.csproj", "{5475C943-B198-418B-A966-DC896002028F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS499.TCMS.Model", "CS499.TCMS.Model\CS499.TCMS.Model.csproj", "{AD3F15B6-221F-4ABA-87B8-E56DFDFCA540}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS499.TCMS.DataAccess", "CS499.TCMS.DataAccess\CS499.TCMS.DataAccess.csproj", "{B72DD45C-376D-46DC-84F8-61D5AF59818A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{40302E79-C7E5-4C45-BB48-D3D5552C86CB}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\P07_TruckingCompanyManagement.doc = ..\..\P07_TruckingCompanyManagement.doc
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSA99.TCMS.TCMSWebService", "CSA99.TCMS.TCMSWebService\CSA99.TCMS.TCMSWebService.csproj", "{44D91240-4A20-48CA-BD2B-DAB14116774B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +34,10 @@ Global
 		{B72DD45C-376D-46DC-84F8-61D5AF59818A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B72DD45C-376D-46DC-84F8-61D5AF59818A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B72DD45C-376D-46DC-84F8-61D5AF59818A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44D91240-4A20-48CA-BD2B-DAB14116774B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44D91240-4A20-48CA-BD2B-DAB14116774B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44D91240-4A20-48CA-BD2B-DAB14116774B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44D91240-4A20-48CA-BD2B-DAB14116774B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

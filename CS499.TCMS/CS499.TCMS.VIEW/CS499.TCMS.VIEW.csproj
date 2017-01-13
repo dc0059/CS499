@@ -7,8 +7,8 @@
     <ProjectGuid>{5475C943-B198-418B-A966-DC896002028F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CS499.TCMS.VIEW</RootNamespace>
-    <AssemblyName>CS499.TCMS.VIEW</AssemblyName>
+    <RootNamespace>CS499.TCMS.View</RootNamespace>
+    <AssemblyName>CS499.TCMS.View</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -93,6 +93,16 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CS499.TCMS.DataAccess\CS499.TCMS.DataAccess.csproj">
+      <Project>{b72dd45c-376d-46dc-84f8-61d5af59818a}</Project>
+      <Name>CS499.TCMS.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CS499.TCMS.Model\CS499.TCMS.Model.csproj">
+      <Project>{ad3f15b6-221f-4aba-87b8-e56dfdfca540}</Project>
+      <Name>CS499.TCMS.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
