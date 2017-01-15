@@ -1,0 +1,2 @@
+C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CS499.TCMS.VIEW\bin\Debug\CS499.TCMS.VIEW.exe.config
+C:\Users\Administrator\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CS499.TCMS.VIEW\bin\Debug\CS499.TCMS.View.exe.config
