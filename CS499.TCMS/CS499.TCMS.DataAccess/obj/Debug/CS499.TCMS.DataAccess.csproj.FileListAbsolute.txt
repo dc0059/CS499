@@ -1,0 +1,7 @@
+C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CS499.TCMS.DataAccess\bin\Debug\CS499.TCMS.DataAccess.dll
+C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CS499.TCMS.DataAccess\bin\Debug\CS499.TCMS.DataAccess.pdb
+C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CS499.TCMS.DataAccess\bin\Debug\log4net.dll
+C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CS499.TCMS.DataAccess\bin\Debug\log4net.xml
+C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CS499.TCMS.DataAccess\obj\Debug\CS499.TCMS.DataAccess.csprojResolveAssemblyReference.cache
+C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CS499.TCMS.DataAccess\obj\Debug\CS499.TCMS.DataAccess.dll
+C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CS499.TCMS.DataAccess\obj\Debug\CS499.TCMS.DataAccess.pdb

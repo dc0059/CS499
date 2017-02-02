@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CS499.TCMS.VIEW")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Trucking Company Management System (TCMS)")]
+[assembly: AssemblyDescription("The objective of this project is to develop a system, which will maintain detailed information current and historical for a major trucking company.  Records must be maintained for a ten-year period.  To protect the privacy and security of company information users of the system will have access to information only on a “need to know” basis.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("CS499.TCMS.VIEW")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2017")]
+[assembly: AssemblyCompany("UAH")]
+[assembly: AssemblyProduct("")]
+[assembly: AssemblyCopyright("Copyright © UAH 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -51,5 +51,6 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.0.1719")]
+[assembly: AssemblyFileVersion("1.0.0.1719")]
+[assembly: GuidAttribute("151B5836-D2C6-49B1-A24E-DB5BA9551C9B")]

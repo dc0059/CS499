@@ -4,3 +4,6 @@ C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CSA99.TCMS.TCMSWe
 C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CSA99.TCMS.TCMSWebService\obj\Debug\CSA99.TCMS.TCMSWebService.csprojResolveAssemblyReference.cache
 C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CSA99.TCMS.TCMSWebService\obj\Debug\CSA99.TCMS.TCMSWebService.dll
 C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CSA99.TCMS.TCMSWebService\obj\Debug\CSA99.TCMS.TCMSWebService.pdb
+C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CSA99.TCMS.TCMSWebService\bin\Debug\log4net.dll
+C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CSA99.TCMS.TCMSWebService\bin\Debug\MySql.Data.dll
+C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\CS499.TCMS\CSA99.TCMS.TCMSWebService\bin\Debug\log4net.xml
