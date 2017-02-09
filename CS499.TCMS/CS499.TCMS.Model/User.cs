@@ -19,16 +19,33 @@ namespace CS499.TCMS.Model
         /// <param name="id">unique identifier</param>
         /// <param name="userName">username associated to user</param>
         /// <param name="firstName">first name of the user</param>
+        /// <param name="middleName">middle name of the user</param>
         /// <param name="lastName">last name of the user</param>
-        /// <param name="emailAddress">email address of the user</param>
+        /// <param name="address">street address of the user</param>
+        /// <param name="city">city of the user</param>
+        /// <param name="state">state of the user</param>
+        /// <param name="zipCode">zipCode of the user</param>
+        /// <param name="homePhone">home phone number of the user</param>
+        /// <param name="cellPhone">cell phone number of the user</param>
+        /// <param name="payRate">pay rate of the user</param>
+        /// <param name="jobDescription">job description of the user</param>
         /// <param name="isActive">flag indicating an active user</param>
-        public User(long id, string userName, string firstName, string lastName, string emailAddress, bool isActive)
+        public User(long id, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
+            string homePhone, string cellPhone, int payRate, string jobDescription, bool isActive)
         {
             this.ID = id;
             this.UserName = userName;
             this.FirstName = firstName;
+            this.MiddleName = middleName;
             this.LastName = lastName;
-            this.EmailAddress = emailAddress;
+            this.Address = address;
+            this.City = city;
+            this.State = state;
+            this.ZipCode = zipCode;
+            this.HomePhone = homePhone;
+            this.CellPhone = cellPhone;
+            this.PayRate = payRate;
+            this.JobDescription = jobDescription;
             this.IsActive = isActive;
         }
 
@@ -59,12 +76,44 @@ namespace CS499.TCMS.Model
                     error = this.ValidateFirstName();
                     break;
 
+                case "MiddleName":
+                    error = this.ValidateMiddleName();
+                    break;
+
                 case "LastName":
                     error = this.ValidateLastName();
                     break;
 
-                case "EmailAddress":
-                    error = this.ValidateEmailAddress();
+                case "Address":
+                    error = this.ValidateAddress();
+                    break;
+
+                case "City":
+                    error = this.ValidateCity();
+                    break;
+
+                case "State":
+                    error = this.ValidateState();
+                    break;
+
+                case "ZipCode":
+                    error = this.ValidateZipCode();
+                    break;
+
+                case "HomePhone":
+                    error = this.ValidateHomePhone();
+                    break;
+
+                case "CellPhone":
+                    error = this.ValidateCellPhone();
+                    break;
+
+                case "PayRate":
+                    error = this.ValidatePayRate();
+                    break;
+
+                case "JobDescription":
+                    error = this.ValidateJobDescription();
                     break;
 
                 default:
@@ -77,21 +126,21 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Validate the email address
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateEmailAddress()
-        {
-            return !IsValidEmailAddress(this.EmailAddress) ? Messages.InvalidEmailAddress : null;
-        }
-
-        /// <summary>
         /// Validate the last name
         /// </summary>
         /// <returns>string for the error</returns>
         private string ValidateLastName()
         {
             return IsEmpty(this.LastName) ? Messages.InvalidName : null;
+        }
+
+        /// <summary>
+        /// Validate the middle name
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateMiddleName()
+        {
+            return IsEmpty(this.MiddleName) ? Messages.InvalidName : null;
         }
 
         /// <summary>
@@ -113,6 +162,78 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
+        /// Validate the street address
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateAddress()
+        {
+            return IsEmpty(this.LastName) ? Messages.InvalidAddress : null;
+        }
+
+        /// <summary>
+        /// Validate the city name
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateCity()
+        {
+            return IsEmpty(this.LastName) ? Messages.InvalidCity : null;
+        }
+
+        /// <summary>
+        /// Validate the state name
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateState()
+        {
+            return IsEmpty(this.LastName) ? Messages.InvalidState : null;
+        }
+
+        /// <summary>
+        /// Validate the zip code
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateZipCode()
+        {
+            return IsEmpty(this.LastName) ? Messages.InvalidZip : null;
+        }
+
+        /// <summary>
+        /// Validate the home phone number
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateHomePhone()
+        {
+            return IsEmpty(this.LastName) ? Messages.InvalidPhone : null;
+        }
+
+        /// <summary>
+        /// Validate the cell phone number
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateCellPhone()
+        {
+            return IsEmpty(this.LastName) ? Messages.InvalidPhone : null;
+        }
+
+        /// <summary>
+        /// Validate the last name
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidatePayRate()
+        {
+            return IsEmpty(this.LastName) ? Messages.InvalidPay : null;
+        }
+
+        /// <summary>
+        /// Validate the last name
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateJobDescription()
+        {
+            return IsEmpty(this.LastName) ? Messages.InvalidDescription : null;
+        }
+
+        /// <summary>
         /// Check to make sure the value is not null 
         /// or empty
         /// </summary>
@@ -122,7 +243,7 @@ namespace CS499.TCMS.Model
         {
             return string.IsNullOrEmpty(value);
         }
-
+        
         /// <summary>
         /// Validates an email address
         /// </summary>
@@ -197,8 +318,16 @@ namespace CS499.TCMS.Model
         {
             "UserName",
             "FirstName",
+            "MiddleName",
             "LastName",
-            "EmailAddress"
+            "Address",
+            "City",
+            "State",
+            "ZipCode",
+            "HomePhone",
+            "CellPhone",
+            "PayRate",
+            "JobDescription"
         };
 
         /// <summary>
@@ -217,14 +346,54 @@ namespace CS499.TCMS.Model
         public string FirstName { get; set; }
 
         /// <summary>
+        /// Middle name of the user
+        /// </summary>
+        public string MiddleName { get; set; }
+
+        /// <summary>
         /// Last name of the user
         /// </summary>
         public string LastName { get; set; }
 
         /// <summary>
-        /// Email address of the user
+        /// Street address of the user
         /// </summary>
-        public string EmailAddress { get; set; }
+        public string Address { get; set; }
+
+        /// <summary>
+        /// City of the user
+        /// </summary>
+        public string City { get; set; }
+
+        /// <summary>
+        /// State of the user
+        /// </summary>
+        public string State { get; set; }
+
+        /// <summary>
+        /// Zip code of the user
+        /// </summary>
+        public int ZipCode { get; set; }
+
+        /// <summary>
+        /// Home phone number of the user
+        /// </summary>
+        public string HomePhone { get; set; }
+
+        /// <summary>
+        /// Cell phone number of the user
+        /// </summary>
+        public string CellPhone { get; set; }
+
+        /// <summary>
+        /// Pay rate of the user
+        /// </summary>
+        public int PayRate { get; set; }
+
+        /// <summary>
+        /// Job description of the user
+        /// </summary>
+        public string JobDescription { get; set; }
 
         /// <summary>
         /// Flag indicating the user is active

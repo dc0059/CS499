@@ -61,11 +61,56 @@ namespace CS499.TCMS.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid street address!.
+        /// </summary>
+        internal static string InvalidAddress {
+            get {
+                return ResourceManager.GetString("InvalidAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid vehicle brand!.
+        /// </summary>
+        internal static string InvalidBrand {
+            get {
+                return ResourceManager.GetString("InvalidBrand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid city name!.
+        /// </summary>
+        internal static string InvalidCity {
+            get {
+                return ResourceManager.GetString("InvalidCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid description!.
+        /// </summary>
+        internal static string InvalidDescription {
+            get {
+                return ResourceManager.GetString("InvalidDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid email address!.
         /// </summary>
         internal static string InvalidEmailAddress {
             get {
                 return ResourceManager.GetString("InvalidEmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid vehicle model!.
+        /// </summary>
+        internal static string InvalidModel {
+            get {
+                return ResourceManager.GetString("InvalidModel", resourceCulture);
             }
         }
         
@@ -79,11 +124,56 @@ namespace CS499.TCMS.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid pay value!.
+        /// </summary>
+        internal static string InvalidPay {
+            get {
+                return ResourceManager.GetString("InvalidPay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid phone number!.
+        /// </summary>
+        internal static string InvalidPhone {
+            get {
+                return ResourceManager.GetString("InvalidPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid state name!.
+        /// </summary>
+        internal static string InvalidState {
+            get {
+                return ResourceManager.GetString("InvalidState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid username!.
         /// </summary>
         internal static string InvalidUserName {
             get {
                 return ResourceManager.GetString("InvalidUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid vehicle type!.
+        /// </summary>
+        internal static string InvalidVehicleType {
+            get {
+                return ResourceManager.GetString("InvalidVehicleType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid zip code!.
+        /// </summary>
+        internal static string InvalidZip {
+            get {
+                return ResourceManager.GetString("InvalidZip", resourceCulture);
             }
         }
     }
