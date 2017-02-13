@@ -28,10 +28,12 @@ namespace CS499.TCMS.Model
         /// <param name="homePhone">home phone number of the user</param>
         /// <param name="cellPhone">cell phone number of the user</param>
         /// <param name="payRate">pay rate of the user</param>
+        /// <param name="jobID">identifier of the user's current job</param>
+        /// <param name="homeStore">store the user is assigned to</param>
         /// <param name="jobDescription">job description of the user</param>
         /// <param name="isActive">flag indicating an active user</param>
         public User(long id, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
-            string homePhone, string cellPhone, int payRate, string jobDescription, bool isActive)
+            string homePhone, string cellPhone, int payRate, long jobID, string homeStore, string jobDescription, bool isActive)
         {
             this.ID = id;
             this.UserName = userName;
@@ -45,6 +47,8 @@ namespace CS499.TCMS.Model
             this.HomePhone = homePhone;
             this.CellPhone = cellPhone;
             this.PayRate = payRate;
+            this.JobID = jobID;
+            this.HomeStore = homeStore;
             this.JobDescription = jobDescription;
             this.IsActive = isActive;
         }
@@ -112,6 +116,10 @@ namespace CS499.TCMS.Model
                     error = this.ValidatePayRate();
                     break;
 
+                case "HomeStore":
+                    error = this.ValidateHomeStore();
+                    break;
+
                 case "JobDescription":
                     error = this.ValidateJobDescription();
                     break;
@@ -126,21 +134,12 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Validate the last name
+        /// Validate the username
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateLastName()
+        private string ValidateUserName()
         {
-            return IsEmpty(this.LastName) ? Messages.InvalidName : null;
-        }
-
-        /// <summary>
-        /// Validate the middle name
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateMiddleName()
-        {
-            return IsEmpty(this.MiddleName) ? Messages.InvalidName : null;
+            return IsEmpty(this.UserName) ? Messages.InvalidUserName : null;
         }
 
         /// <summary>
@@ -153,12 +152,21 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Validate the username
+        /// Validate the middle name
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateUserName()
+        private string ValidateMiddleName()
         {
-            return IsEmpty(this.UserName) ? Messages.InvalidUserName : null;
+            return IsEmpty(this.MiddleName) ? Messages.InvalidName : null;
+        }
+
+        /// <summary>
+        /// Validate the last name
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateLastName()
+        {
+            return IsEmpty(this.LastName) ? Messages.InvalidName : null;
         }
 
         /// <summary>
@@ -216,16 +224,25 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Validate the last name
+        /// Validate the pay rate
         /// </summary>
         /// <returns>string for the error</returns>
         private string ValidatePayRate()
         {
-            return IsEmpty(this.LastName) ? Messages.InvalidPay : null;
+            return IsEmpty(this.LastName) ? Messages.InvalidValue : null;
         }
 
         /// <summary>
-        /// Validate the last name
+        /// Validate the home store
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateHomeStore()
+        {
+            return IsEmpty(this.LastName) ? Messages.InvalidStore : null;
+        }
+
+        /// <summary>
+        /// Validate the job description
         /// </summary>
         /// <returns>string for the error</returns>
         private string ValidateJobDescription()
@@ -327,6 +344,7 @@ namespace CS499.TCMS.Model
             "HomePhone",
             "CellPhone",
             "PayRate",
+            "HomeStore",
             "JobDescription"
         };
 
@@ -389,6 +407,16 @@ namespace CS499.TCMS.Model
         /// Pay rate of the user
         /// </summary>
         public int PayRate { get; set; }
+
+        /// <summary>
+        /// Identifier of the user's current job
+        /// </summary>
+        public long JobID { get; set; }
+
+        /// <summary>
+        /// Store location the user is assigned to
+        /// </summary>
+        public string HomeStore { get; set; }
 
         /// <summary>
         /// Job description of the user
