@@ -165,6 +165,9 @@
   <data name="InvalidVehicleType" xml:space="preserve">
     <value>Invalid vehicle type!</value>
   </data>
+  <data name="InvalidYear" xml:space="preserve">
+    <value>Invalid year!</value>
+  </data>
   <data name="InvalidZip" xml:space="preserve">
     <value>Invalid zip code!</value>
   </data>

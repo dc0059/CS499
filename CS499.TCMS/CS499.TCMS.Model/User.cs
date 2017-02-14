@@ -28,6 +28,7 @@ namespace CS499.TCMS.Model
         /// <param name="homePhone">home phone number of the user</param>
         /// <param name="cellPhone">cell phone number of the user</param>
         /// <param name="payRate">pay rate of the user</param>
+        /// <param name="serviceTime">time the user has been employed</param>
         /// <param name="jobID">identifier of the user's current job</param>
         /// <param name="homeStore">store the user is assigned to</param>
         /// <param name="jobDescription">job description of the user</param>
@@ -478,6 +479,5 @@ namespace CS499.TCMS.Model
         }
 
         #endregion
-
     }
 }

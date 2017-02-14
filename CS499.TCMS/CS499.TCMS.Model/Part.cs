@@ -6,32 +6,23 @@ using System.Text.RegularExpressions;
 namespace CS499.TCMS.Model
 {
     /// <summary>
-    /// Holds all relevant data for a vehicle
+    /// Holds all relevant data for maintenance parts
     /// </summary>
-    public class Equipment : IModel
+    public class Part : IModel
     {
         #region Constructor
 
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        /// <param name="id">unique identifier</param>
-        /// <param name="brand">brand name of the vehicle</param>
-        /// <param name="year">year of the vehicle</param>
-        /// <param name="model">model of the vehicle</param>
-        /// <param name="vehicleType">type of vehicle</param>
-        public Equipment(long equipmentID, string brand, int year, string model, string vehicleType)
+        public Part(long partID, long partNumber, string partDescription, int quantity, string unitMeasurement)
         {
-            this.EquipmentID = equipmentID;
-            this.Brand = brand;
-            this.Year = year;
-            this.Model = model;
-            this.VehicleType = vehicleType;
+            this.PartID = partID;
+            this.PartNumber = partNumber;
+            this.PartDescription = partDescription;
+            this.Quantity = quantity;
+            this.UnitMeasurement = unitMeasurement;
         }
         #endregion
 
         #region Methods
-
         /// <summary>
         /// Get validation errors
         /// </summary>
@@ -44,58 +35,64 @@ namespace CS499.TCMS.Model
             string error = null;
             switch (propertyName)
             {
-                case "Brand":
-                    error = this.ValidateBrand();
+                case "PartNumber":
+                    error = this.ValidatePartNumber();
                     break;
-                case "Year":
-                    error = this.ValidateYear();
+                case "PartDescription":
+                    error = this.ValidatePartDescription();
                     break;
-                case "Model":
-                    error = this.ValidateModel();
+                case "Quantity":
+                    error = this.ValidateQuantity();
                     break;
-                case "VehicleType":
-                    error = this.ValidateVehicleType();
+                case "UnitMeasurement":
+                    error = this.ValidateUnitMeasurement();
                     break;
                 default:
-                    Debug.Fail("Unexpected property being validated on Vehicle: " + propertyName);
+                    Debug.Fail("Unexpected property being validated on MaintenanceRecordDetails: " + propertyName);
                     break;
             }
             return error;
         }
 
         /// <summary>
-        /// Validate the brand name
+        /// Validate the part number
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateBrand()
+        private string ValidatePartNumber()
         {
-            return IsEmpty(this.Brand) ? Messages.InvalidBrand : null;
+            if (this.PartNumber < 0)
+                return Messages.InvalidID;
+            else
+                return null;
         }
 
         /// <summary>
-        /// Validate the model name
+        /// Validate the part description
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateModel()
+        private string ValidatePartDescription()
         {
-            return IsEmpty(this.Model) ? Messages.InvalidModel : null;
+            return IsEmpty(this.PartDescription) ? Messages.InvalidDescription : null;
         }
 
-        private string ValidateYear()
+        /// <summary>
+        /// Validate the quantity
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateQuantity()
         {
-            if (!IsValidYear(this.Year))
-                return Messages.InvalidYear;
+            if (this.Quantity < 0)
+                return Messages.InvalidValue;
             return null;
-
         }
 
         /// <summary>
-        /// Validate the vehicle type
+        /// Validate the unit of measurement
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateVehicleType()
+        private string ValidateUnitMeasurement()
         {
-            return IsEmpty(this.VehicleType) ? Messages.InvalidVehicleType : null;
+            return null;
         }
 
         /// <summary>
@@ -106,14 +103,6 @@ namespace CS499.TCMS.Model
         private bool IsEmpty(string value)
         {
             return string.IsNullOrEmpty(value);
-        }
-
-        private bool IsValidYear(int year)
-        {
-            if (year < 0)
-                return false;
-            string pattern = @"[0-9]{4}";
-            return Regex.IsMatch(year.ToString(), pattern);
         }
         #endregion
 
@@ -137,11 +126,11 @@ namespace CS499.TCMS.Model
         {
             get
             {
-                return this.EquipmentID;
+                return this.PartID;
             }
             set
             {
-                this.EquipmentID = value;
+                this.PartID = value;
             }
         }
 
@@ -169,32 +158,33 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
-            "Brand",
-            "Year",
-            "Model",
-            "VehicleType"
+            "PartID",
+            "PartNumber",
+            "PartDescription",
+            "Quantity",
+            "UnitMeasurement"
         };
 
         /// <summary>
         /// Unique identifier
         /// </summary>
-        public long EquipmentID { get; set; }
+        public long PartID { get; set; }
         /// <summary>
-        /// Brand name of the vehicle
+        /// Number associated with part, not related to identifier
         /// </summary>
-        public string Brand { get; set; }
+        public long PartNumber { get; set; }
         /// <summary>
-        /// Year of the vehicle
+        /// Summary description of the part
         /// </summary>
-        public int Year { get; set; }
+        public string PartDescription { get; set; }
         /// <summary>
-        /// Model of the vehicle
+        /// Quantity of the part
         /// </summary>
-        public string Model { get; set; }
+        public int Quantity { get; set; }
         /// <summary>
-        /// Type of vehicle
+        /// The unit of measurement associated with the part
         /// </summary>
-        public string VehicleType { get; set; }
+        public string UnitMeasurement { get; set; }
 
         string IDataErrorInfo.Error
         {

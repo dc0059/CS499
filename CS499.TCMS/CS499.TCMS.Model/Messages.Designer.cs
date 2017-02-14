@@ -205,6 +205,15 @@ namespace CS499.TCMS.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid year!.
+        /// </summary>
+        internal static string InvalidYear {
+            get {
+                return ResourceManager.GetString("InvalidYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid zip code!.
         /// </summary>
         internal static string InvalidZip {

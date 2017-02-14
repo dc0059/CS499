@@ -23,7 +23,7 @@ namespace CS499.TCMS.Model
         /// <param name="destinationAddress">address of the company receiving the shipment</param>
         /// <param name="truckID">identifier of the vehicle associated with this shipment</param>
         /// <param name="manifestID">identifier of the shipment manifest</param>
-        /// <param name="purchaseID">identifier of the purchase</param>
+        /// <param name="purchaseID">identifier of the purchase order</param>
         /// <param name="shippingCost">total cost of the shipment</param>
         public Shipment(long shipmentID, string shipmentType, string sourceCompany, string sourceAddress, string destinationCompany, string destinationAddress, long truckID,
             long manifestID, long purchaseID, double shippingCost)
