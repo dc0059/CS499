@@ -21,12 +21,12 @@ namespace CS499.TCMS.Model
         /// <param name="sourceAddress">address of the company sending the shipment</param>
         /// <param name="destinationCompany">name of the company receiving the shipment</param>
         /// <param name="destinationAddress">address of the company receiving the shipment</param>
-        /// <param name="truckID">identifier of the vehicle associated with this shipment</param>
+        /// <param name="vehicleID">identifier for the vehicle carrying shipment</param>
         /// <param name="manifestID">identifier of the shipment manifest</param>
         /// <param name="purchaseID">identifier of the purchase order</param>
         /// <param name="shippingCost">total cost of the shipment</param>
-        public Shipment(long shipmentID, string shipmentType, string sourceCompany, string sourceAddress, string destinationCompany, string destinationAddress, long truckID,
-            long manifestID, long purchaseID, double shippingCost)
+        public Shipment(long shipmentID, string shipmentType, string sourceCompany, string sourceAddress, string destinationCompany, string destinationAddress, long vehicleID,
+            DateTime departureTime, long manifestID, long purchaseID, double shippingCost)
         {
             this.ShipmentID = shipmentID;
             this.ShipmentType = shipmentType;
@@ -34,7 +34,8 @@ namespace CS499.TCMS.Model
             this.SourceAddress = sourceAddress;
             this.DestinationCompany = destinationCompany;
             this.DestinationAddress = destinationAddress;
-            this.TruckID = truckID;
+            this.VehicleID = vehicleID;
+            this.DepartureTime = departureTime;
             this.ManifestID = manifestID;
             this.PurchaseID = purchaseID;
             this.ShippingCost = shippingCost;
@@ -69,6 +70,21 @@ namespace CS499.TCMS.Model
                     break;
                 case "DestinationAddress":
                     error = this.ValidateSourceAddress();
+                    break;
+                case "VehicleID":
+                    error = this.ValidateVehicleID();
+                    break;
+                case "DepartureTime":
+                    error = this.ValidateDepartureTime();
+                    break;
+                case "ManifestID":
+                    error = this.ValidateManifestID();
+                    break;
+                case "PurchaseID":
+                    error = this.ValidatePurchaseID();
+                    break;
+                case "ShippingCost":
+                    error = this.ValidateShippingCost();
                     break;
                 default:
                     Debug.Fail("Unexpected property being validated on Shipment: " + propertyName);
@@ -120,6 +136,41 @@ namespace CS499.TCMS.Model
         private string ValidateDestinationAddress()
         {
             return IsEmpty(this.DestinationAddress) ? Messages.InvalidAddress : null;
+        }
+
+        private string ValidateVehicleID()
+        {
+            if (this.VehicleID < 0)
+                return Messages.InvalidID;
+            return null;
+        }
+
+        private string ValidateDepartureTime()
+        {
+            if (this.DepartureTime.CompareTo(DateTime.Now) > 0)
+                return Messages.InvalidDate;
+            return null;
+        }
+
+        private string ValidateManifestID()
+        {
+            if (this.ManifestID < 0)
+                return Messages.InvalidID;
+            return null;
+        }
+
+        private string ValidatePurchaseID()
+        {
+            if (this.PurchaseID < 0)
+                return Messages.InvalidID;
+            return null;
+        }
+
+        private string ValidateShippingCost()
+        {
+            if (this.ShippingCost < 0.0)
+                return Messages.InvalidValue;
+            return null;
         }
 
         /// <summary>
@@ -190,49 +241,54 @@ namespace CS499.TCMS.Model
             "SourceAddress",
             "DestinationCompany",
             "DestinationAddress",
+            "VehicleID",
+            "DepartureTime",
+            "ManifestID",
+            "PurchaseID",
             "ShippingCost"
         };
 
         /// <summary>
         /// unique identifier
         /// </summary>
-        long ShipmentID { get; set; }
+        public long ShipmentID { get; set; }
         /// <summary>
-        /// unique identifier
+        /// Incoming or outgoing shipment
         /// </summary>
-        string ShipmentType { get; set; }
+        public string ShipmentType { get; set; }
         /// <summary>
-        /// unique identifier
+        /// Name of the company sending out the shipment
         /// </summary>
-        string SourceCompany { get; set; }
+        public string SourceCompany { get; set; }
         /// <summary>
-        /// unique identifier
+        /// Address of the company sending out the shipment
         /// </summary>
-        string SourceAddress { get; set; }
+        public string SourceAddress { get; set; }
         /// <summary>
-        /// unique identifier
+        /// Name of the company receiving the shipment
         /// </summary>
-        string DestinationCompany { get; set; }
+        public string DestinationCompany { get; set; }
         /// <summary>
-        /// unique identifier
+        /// Address of the company receiving the shipment
         /// </summary>
-        string DestinationAddress { get; set; }
+        public string DestinationAddress { get; set; }
         /// <summary>
-        /// unique identifier
+        /// Identifier for the vehicle carrying the shipment
         /// </summary>
-        long TruckID { get; set; }
+        public long VehicleID { get; set; }
+        public DateTime DepartureTime { get; set; }
         /// <summary>
-        /// unique identifier
+        /// Identifier for the shipment manifest
         /// </summary>
-        long ManifestID { get; set; }
+        public long ManifestID { get; set; }
         /// <summary>
-        /// unique identifier
+        /// Identifier for the purchase order
         /// </summary>
-        long PurchaseID { get; set; }
+        public long PurchaseID { get; set; }
         /// <summary>
-        /// unique identifier
+        /// Total cost of the shipment
         /// </summary>
-        double ShippingCost { get; set; }
+        public double ShippingCost { get; set; }
 
         string IDataErrorInfo.Error
         {

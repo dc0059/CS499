@@ -20,13 +20,17 @@ namespace CS499.TCMS.Model
         /// <param name="year">year of the vehicle</param>
         /// <param name="model">model of the vehicle</param>
         /// <param name="vehicleType">type of vehicle</param>
-        public Equipment(long equipmentID, string brand, int year, string model, string vehicleType)
+        /// <param name="partsList">list of parts used by the vehicle</param>
+        /// <param name="recordsList">list of maintenance records associated with the vehicle</param>
+        public Equipment(long equipmentID, string brand, int year, string model, string vehicleType, BindingList<Part> partsList, BindingList<MaintenanceRecord> recordsList)
         {
             this.EquipmentID = equipmentID;
             this.Brand = brand;
             this.Year = year;
             this.Model = model;
             this.VehicleType = vehicleType;
+            this.PartsList = partsList;
+            this.RecordsList = recordsList;
         }
         #endregion
 
@@ -81,12 +85,15 @@ namespace CS499.TCMS.Model
             return IsEmpty(this.Model) ? Messages.InvalidModel : null;
         }
 
+        /// <summary>
+        /// Validate the year
+        /// </summary>
+        /// <returns>string for the error</returns>
         private string ValidateYear()
         {
             if (!IsValidYear(this.Year))
                 return Messages.InvalidYear;
             return null;
-
         }
 
         /// <summary>
@@ -108,10 +115,16 @@ namespace CS499.TCMS.Model
             return string.IsNullOrEmpty(value);
         }
 
+        /// <summary>
+        /// Check to make sure the year is in the correct format
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns>bool value if the value is in the correct format</returns>
         private bool IsValidYear(int year)
         {
             if (year < 0)
                 return false;
+            // Year pattern must be exactly 4 digits
             string pattern = @"[0-9]{4}";
             return Regex.IsMatch(year.ToString(), pattern);
         }
@@ -195,6 +208,14 @@ namespace CS499.TCMS.Model
         /// Type of vehicle
         /// </summary>
         public string VehicleType { get; set; }
+        /// <summary>
+        /// List of parts used by vehicle
+        /// </summary>
+        public BindingList<Part> PartsList { get; set; }
+        /// <summary>
+        /// List of maintenance records associated with the vehicle
+        /// </summary>
+        public BindingList<MaintenanceRecord> RecordsList { get; set; }
 
         string IDataErrorInfo.Error
         {

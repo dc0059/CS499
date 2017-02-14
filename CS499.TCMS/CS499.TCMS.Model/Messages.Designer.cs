@@ -97,6 +97,15 @@ namespace CS499.TCMS.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid date!.
+        /// </summary>
+        internal static string InvalidDate {
+            get {
+                return ResourceManager.GetString("InvalidDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid description!.
         /// </summary>
         internal static string InvalidDescription {
@@ -174,6 +183,15 @@ namespace CS499.TCMS.Model {
         internal static string InvalidStore {
             get {
                 return ResourceManager.GetString("InvalidStore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid unit of measurement!.
+        /// </summary>
+        internal static string InvalidUnit {
+            get {
+                return ResourceManager.GetString("InvalidUnit", resourceCulture);
             }
         }
         

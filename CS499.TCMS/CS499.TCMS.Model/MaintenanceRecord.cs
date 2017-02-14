@@ -15,13 +15,15 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="truckID">identifier of the truck associated with this maintenance record</param>
         /// <param name="maintenanceID">unique identifier</param>
+        /// <param name="equipmentID">identifier of the truck associated with this maintenance record</param>
+        /// <param name="maintenanceDate">date the maintenance was performed</param>
         /// <param name="maintenanceDescription">summary description of the maintenance performed</param>
-        public MaintenanceRecord(long truckID, long maintenanceID, string maintenanceDescription)
+        public MaintenanceRecord(long maintenanceID, long equipmentID, DateTime maintenanceDate, string maintenanceDescription)
         {
-            this.TruckID = truckID;
             this.MaintenanceID = maintenanceID;
+            this.EquipmentID = equipmentID;
+            this.MaintenanceDate = maintenanceDate;
             this.MaintenanceDescription = maintenanceDescription;
         }
         #endregion
@@ -40,6 +42,12 @@ namespace CS499.TCMS.Model
             string error = null;
             switch (propertyName)
             {
+                case "EquipmentID":
+                    error = this.ValidateEquipmentID();
+                    break;
+                case "MaintenanceDate":
+                    error = this.ValidateMaintenanceDate();
+                    break;
                 case "MaintenanceDescription":
                     error = this.ValidateMaintenanceDescription();
                     break;
@@ -48,6 +56,28 @@ namespace CS499.TCMS.Model
                     break;
             }
             return error;
+        }
+
+        /// <summary>
+        /// Validate the maintenance ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateEquipmentID()
+        {
+            if (this.MaintenanceID < 0)
+                return Messages.InvalidID;
+            return null;
+        }
+
+        /// <summary>
+        /// Validate the date of maintenance
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateMaintenanceDate()
+        {
+            if (this.MaintenanceDate.CompareTo(DateTime.Now) > 0)
+                return Messages.InvalidDate;
+            return null;
         }
 
         /// <summary>
@@ -122,17 +152,23 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
+            "EquipmentID",
+            "MaintenanceDate",
             "MaintenanceDescription"
         };
 
         /// <summary>
-        /// Identifier of the truck asssociated with this maintenance record
-        /// </summary>
-        public long TruckID { get; set; }
-        /// <summary>
         /// Unique identifier
         /// </summary>
         public long MaintenanceID { get; set; }
+        /// <summary>
+        /// Identifier of the truck asssociated with this maintenance record
+        /// </summary>
+        public long EquipmentID { get; set; }
+        /// <summary>
+        /// Date the maintenance was performed
+        /// </summary>
+        public DateTime MaintenanceDate { get; set; }
         /// <summary>
         /// Summary description of the maintenance performed
         /// </summary>

@@ -27,14 +27,14 @@ namespace CS499.TCMS.Model
         /// <param name="zipCode">zipCode of the user</param>
         /// <param name="homePhone">home phone number of the user</param>
         /// <param name="cellPhone">cell phone number of the user</param>
+        /// <param name="email">email address of the user</param>
         /// <param name="payRate">pay rate of the user</param>
-        /// <param name="serviceTime">time the user has been employed</param>
         /// <param name="jobID">identifier of the user's current job</param>
         /// <param name="homeStore">store the user is assigned to</param>
         /// <param name="jobDescription">job description of the user</param>
         /// <param name="isActive">flag indicating an active user</param>
         public User(long id, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
-            string homePhone, string cellPhone, double payRate, long jobID, string homeStore, string jobDescription, bool isActive)
+            string homePhone, string cellPhone, string email, double payRate, long jobID, string homeStore, string jobDescription, bool isActive)
         {
             this.ID = id;
             this.UserName = userName;
@@ -47,6 +47,7 @@ namespace CS499.TCMS.Model
             this.ZipCode = zipCode;
             this.HomePhone = homePhone;
             this.CellPhone = cellPhone;
+            this.EmailAddress = email;
             this.PayRate = payRate;
             this.JobID = jobID;
             this.HomeStore = homeStore;
@@ -100,6 +101,9 @@ namespace CS499.TCMS.Model
                     break;
                 case "CellPhone":
                     error = this.ValidateCellPhone();
+                    break;
+                case "EmailAddress":
+                    error = this.ValidateEmail();
                     break;
                 case "PayRate":
                     error = this.ValidatePayRate();
@@ -217,6 +221,17 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
+        /// Validate the email address
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateEmail()
+        {
+            if (!IsValidEmailAddress(this.EmailAddress))
+                return Messages.InvalidEmailAddress;
+            return null;
+        }
+
+        /// <summary>
         /// Validate the pay rate
         /// </summary>
         /// <returns>string for the error</returns>
@@ -277,7 +292,7 @@ namespace CS499.TCMS.Model
             if (zip < 0)
                 return false;
             // Zip code pattern must be exactly 5 digits
-            string pattern = @"[0-9]{5}";
+            string pattern = @"^[0-9]{5}$";
             return Regex.IsMatch(zip.ToString(), pattern);
         }
 
@@ -291,7 +306,7 @@ namespace CS499.TCMS.Model
             if (this.IsEmpty(number))
                 return false;
             // Phone number pattern (123)-456-7890
-            string pattern = @"\([0-9]{3}\)-[0-9]{3}-[0-9]{4}";
+            string pattern = @"^\([0-9]{3}\)-[0-9]{3}-[0-9]{4}$";
             return Regex.IsMatch(number, pattern);
         }
         
@@ -374,6 +389,7 @@ namespace CS499.TCMS.Model
             "ZipCode",
             "HomePhone",
             "CellPhone",
+            "EmailAddress",
             "PayRate",
             "JobID",
             "HomeStore",
@@ -434,6 +450,11 @@ namespace CS499.TCMS.Model
         /// Cell phone number of the user
         /// </summary>
         public string CellPhone { get; set; }
+
+        /// <summary>
+        /// Email address of the user
+        /// </summary>
+        public string EmailAddress { get; set; }
 
         /// <summary>
         /// Pay rate of the user

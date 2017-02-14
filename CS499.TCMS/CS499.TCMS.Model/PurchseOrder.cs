@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 namespace CS499.TCMS.Model
 {
     /// <summary>
-    /// Holds all relevant data for maintenance parts
+    /// Holds all relevant data for the purchase order
     /// </summary>
     public class PurchaseOrder : IModel
     {

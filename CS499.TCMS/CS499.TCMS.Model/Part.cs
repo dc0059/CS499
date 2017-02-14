@@ -12,6 +12,14 @@ namespace CS499.TCMS.Model
     {
         #region Constructor
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="partID">unique identifier</param>
+        /// <param name="partNumber">number of the part</param>
+        /// <param name="partDescription">summary description of the part</param>
+        /// <param name="quantity">quantity of the part</param>
+        /// <param name="unitMeasurement">the unit of measurement associated with the part</param>
         public Part(long partID, long partNumber, string partDescription, int quantity, string unitMeasurement)
         {
             this.PartID = partID;
@@ -92,7 +100,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateUnitMeasurement()
         {
-            return null;
+            return IsEmpty(this.UnitMeasurement) ? Messages.InvalidUnit : null;
         }
 
         /// <summary>

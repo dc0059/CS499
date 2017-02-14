@@ -129,6 +129,9 @@
   <data name="InvalidCompany" xml:space="preserve">
     <value>Invalid company!</value>
   </data>
+  <data name="InvalidDate" xml:space="preserve">
+    <value>Invalid date!</value>
+  </data>
   <data name="InvalidDescription" xml:space="preserve">
     <value>Invalid description!</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="InvalidStore" xml:space="preserve">
     <value>Invalid store location!</value>
+  </data>
+  <data name="InvalidUnit" xml:space="preserve">
+    <value>Invalid unit of measurement!</value>
   </data>
   <data name="InvalidUserName" xml:space="preserve">
     <value>Invalid username!</value>
