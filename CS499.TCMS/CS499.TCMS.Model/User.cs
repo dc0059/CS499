@@ -33,7 +33,7 @@ namespace CS499.TCMS.Model
         /// <param name="jobDescription">job description of the user</param>
         /// <param name="isActive">flag indicating an active user</param>
         public User(long id, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
-            string homePhone, string cellPhone, int payRate, long jobID, string homeStore, string jobDescription, bool isActive)
+            string homePhone, string cellPhone, double payRate, long jobID, string homeStore, string jobDescription, bool isActive)
         {
             this.ID = id;
             this.UserName = userName;
@@ -64,10 +64,8 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error found if any where found</returns>
         private string GetValidationError(string propertyName)
         {
-
             if (Array.IndexOf(ValidatedProperties, propertyName) < 0)
                 return null;
-
             string error = null;
 
             switch (propertyName)
@@ -75,62 +73,50 @@ namespace CS499.TCMS.Model
                 case "UserName":
                     error = this.ValidateUserName();
                     break;
-
                 case "FirstName":
                     error = this.ValidateFirstName();
                     break;
-
                 case "MiddleName":
                     error = this.ValidateMiddleName();
                     break;
-
                 case "LastName":
                     error = this.ValidateLastName();
                     break;
-
                 case "Address":
                     error = this.ValidateAddress();
                     break;
-
                 case "City":
                     error = this.ValidateCity();
                     break;
-
                 case "State":
                     error = this.ValidateState();
                     break;
-
                 case "ZipCode":
                     error = this.ValidateZipCode();
                     break;
-
                 case "HomePhone":
                     error = this.ValidateHomePhone();
                     break;
-
                 case "CellPhone":
                     error = this.ValidateCellPhone();
                     break;
-
                 case "PayRate":
                     error = this.ValidatePayRate();
                     break;
-
+                case "JobID":
+                    error = this.ValidateJobID();
+                    break;
                 case "HomeStore":
                     error = this.ValidateHomeStore();
                     break;
-
                 case "JobDescription":
                     error = this.ValidateJobDescription();
                     break;
-
                 default:
                     Debug.Fail("Unexpected property being validated on User: " + propertyName);
                     break;
             }
-
             return error;
-
         }
 
         /// <summary>
@@ -175,7 +161,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateAddress()
         {
-            return IsEmpty(this.LastName) ? Messages.InvalidAddress : null;
+            return IsEmpty(this.Address) ? Messages.InvalidAddress : null;
         }
 
         /// <summary>
@@ -184,7 +170,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateCity()
         {
-            return IsEmpty(this.LastName) ? Messages.InvalidCity : null;
+            return IsEmpty(this.City) ? Messages.InvalidCity : null;
         }
 
         /// <summary>
@@ -193,7 +179,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateState()
         {
-            return IsEmpty(this.LastName) ? Messages.InvalidState : null;
+            return IsEmpty(this.State) ? Messages.InvalidState : null;
         }
 
         /// <summary>
@@ -202,7 +188,9 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateZipCode()
         {
-            return IsEmpty(this.LastName) ? Messages.InvalidZip : null;
+            if (!IsValidZipCode(this.ZipCode))
+                return Messages.InvalidPhone;
+            return null;
         }
 
         /// <summary>
@@ -211,7 +199,9 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateHomePhone()
         {
-            return IsEmpty(this.LastName) ? Messages.InvalidPhone : null;
+            if (!IsValidPhoneNumber(this.HomePhone))
+                return Messages.InvalidPhone;
+            return null;
         }
 
         /// <summary>
@@ -220,7 +210,9 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateCellPhone()
         {
-            return IsEmpty(this.LastName) ? Messages.InvalidPhone : null;
+            if (!IsValidPhoneNumber(this.CellPhone))
+                return Messages.InvalidPhone;
+            return null;
         }
 
         /// <summary>
@@ -229,7 +221,20 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidatePayRate()
         {
-            return IsEmpty(this.LastName) ? Messages.InvalidValue : null;
+            if (this.PayRate < 0.0)
+                return Messages.InvalidValue;
+            return null;
+        }
+
+        /// <summary>
+        /// Validate the job ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateJobID()
+        {
+            if (this.JobID < 0)
+                return Messages.InvalidID;
+            return null;
         }
 
         /// <summary>
@@ -238,7 +243,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateHomeStore()
         {
-            return IsEmpty(this.LastName) ? Messages.InvalidStore : null;
+            return IsEmpty(this.HomeStore) ? Messages.InvalidStore : null;
         }
 
         /// <summary>
@@ -247,7 +252,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateJobDescription()
         {
-            return IsEmpty(this.LastName) ? Messages.InvalidDescription : null;
+            return IsEmpty(this.JobDescription) ? Messages.InvalidDescription : null;
         }
 
         /// <summary>
@@ -260,6 +265,34 @@ namespace CS499.TCMS.Model
         {
             return string.IsNullOrEmpty(value);
         }
+
+        /// <summary>
+        /// Checks a zip code for a valid pattern
+        /// </summary>
+        /// <param name="zip">integer for the zip code</param>
+        /// <returns></returns>
+        private bool IsValidZipCode(int zip)
+        {
+            if (zip < 0)
+                return false;
+            // Zip code pattern must be exactly 5 digits
+            string pattern = @"[0-9]{5}";
+            return Regex.IsMatch(zip.ToString(), pattern);
+        }
+
+        /// <summary>
+        /// Checks a phone number for a valid pattern
+        /// </summary>
+        /// <param name="number">string for the phone number</param>
+        /// <returns>bool value indicating if the phone number is valid</returns>
+        private bool IsValidPhoneNumber(string number)
+        {
+            if (this.IsEmpty(number))
+                return false;
+            // Phone number pattern (123)-456-7890
+            string pattern = @"\([0-9]{3}\)-[0-9]{3}-[0-9]{4}";
+            return Regex.IsMatch(number, pattern);
+        }
         
         /// <summary>
         /// Validates an email address
@@ -268,10 +301,8 @@ namespace CS499.TCMS.Model
         /// <returns>bool value indicating if the email is valid</returns>
         private bool IsValidEmailAddress(string email)
         {
-
             if (this.IsEmpty(email))
                 return false;
-
 
             // This regex pattern came from: http://haacked.com/archive/2007/08/21/i-knew-how-to-validate-an-email-address-until-i.aspx
             string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
@@ -323,7 +354,6 @@ namespace CS499.TCMS.Model
                         return false;
                     }
                 }
-
                 return true;
             }
         }
@@ -344,6 +374,7 @@ namespace CS499.TCMS.Model
             "HomePhone",
             "CellPhone",
             "PayRate",
+            "JobID",
             "HomeStore",
             "JobDescription"
         };
@@ -406,7 +437,7 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Pay rate of the user
         /// </summary>
-        public int PayRate { get; set; }
+        public double PayRate { get; set; }
 
         /// <summary>
         /// Identifier of the user's current job

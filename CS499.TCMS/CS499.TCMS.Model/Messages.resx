@@ -135,6 +135,9 @@
   <data name="InvalidEmailAddress" xml:space="preserve">
     <value>Invalid email address!</value>
   </data>
+  <data name="InvalidID" xml:space="preserve">
+    <value>Invalid ID number!</value>
+  </data>
   <data name="InvalidModel" xml:space="preserve">
     <value>Invalid vehicle model!</value>
   </data>

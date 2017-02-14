@@ -115,6 +115,15 @@ namespace CS499.TCMS.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid ID number!.
+        /// </summary>
+        internal static string InvalidID {
+            get {
+                return ResourceManager.GetString("InvalidID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid vehicle model!.
         /// </summary>
         internal static string InvalidModel {

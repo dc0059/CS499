@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 namespace CS499.TCMS.Model
 {
     /// <summary>
-    /// Holds all relevant data for a vehicle
+    /// Holds all relevant data for maintenance record details
     /// </summary>
     public class MaintenanceRecordDetails : IModel
     {
@@ -41,6 +41,9 @@ namespace CS499.TCMS.Model
             string error = null;
             switch (propertyName)
             {
+                case "EmployeeID":
+                    error = this.ValidateEmployeeID();
+                    break;
                 case "RepairDescription":
                     error = this.ValidateRepairDescription();
                     break;
@@ -49,6 +52,18 @@ namespace CS499.TCMS.Model
                     break;
             }
             return error;
+        }
+
+        /// <summary>
+        /// Validate the employee ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateEmployeeID()
+        {
+            if (this.EmployeeID < 0)
+                return Messages.InvalidID;
+            else
+                return null;
         }
 
         /// <summary>
@@ -123,6 +138,7 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
+            "EmployeeID",
             "RepairDescription"
         };
 

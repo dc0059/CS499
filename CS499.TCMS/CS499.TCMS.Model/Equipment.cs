@@ -8,7 +8,7 @@ namespace CS499.TCMS.Model
     /// <summary>
     /// Holds all relevant data for a vehicle
     /// </summary>
-    public class Vehicle : IModel
+    public class Equipment : IModel
     {
         #region Constructor
 
@@ -20,7 +20,7 @@ namespace CS499.TCMS.Model
         /// <param name="year">year of the vehicle</param>
         /// <param name="model">model of the vehicle</param>
         /// <param name="vehicleType">type of vehicle</param>
-        public Vehicle(long id, string brand, int year, string model, string vehicleType)
+        public Equipment(long id, string brand, int year, string model, string vehicleType)
         {
             this.ID = id;
             this.Brand = brand;
