@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace CS499.TCMS.Model
 {
@@ -22,7 +23,7 @@ namespace CS499.TCMS.Model
         /// <param name="vehicleType">type of vehicle</param>
         /// <param name="partsList">list of parts used by the vehicle</param>
         /// <param name="recordsList">list of maintenance records associated with the vehicle</param>
-        public Equipment(long equipmentID, string brand, int year, string model, string vehicleType, BindingList<Part> partsList, BindingList<MaintenanceRecord> recordsList)
+        public Equipment(long equipmentID, string brand, int year, string model, string vehicleType, List<Part> partsList, List<MaintenanceRecord> recordsList)
         {
             this.EquipmentID = equipmentID;
             this.Brand = brand;
@@ -211,11 +212,11 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// List of parts used by vehicle
         /// </summary>
-        public BindingList<Part> PartsList { get; set; }
+        public List<Part> PartsList { get; set; }
         /// <summary>
         /// List of maintenance records associated with the vehicle
         /// </summary>
-        public BindingList<MaintenanceRecord> RecordsList { get; set; }
+        public List<MaintenanceRecord> RecordsList { get; set; }
 
         string IDataErrorInfo.Error
         {

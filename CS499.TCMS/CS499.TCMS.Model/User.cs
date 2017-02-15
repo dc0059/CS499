@@ -34,7 +34,7 @@ namespace CS499.TCMS.Model
         /// <param name="jobDescription">job description of the user</param>
         /// <param name="isActive">flag indicating an active user</param>
         public User(long id, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
-            string homePhone, string cellPhone, string email, double payRate, long jobID, string homeStore, string jobDescription, bool isActive)
+            int homePhone, int cellPhone, string email, double payRate, long jobID, string homeStore, string jobDescription, bool isActive)
         {
             this.ID = id;
             this.UserName = userName;
@@ -301,13 +301,13 @@ namespace CS499.TCMS.Model
         /// </summary>
         /// <param name="number">string for the phone number</param>
         /// <returns>bool value indicating if the phone number is valid</returns>
-        private bool IsValidPhoneNumber(string number)
+        private bool IsValidPhoneNumber(int number)
         {
-            if (this.IsEmpty(number))
+            if (number < 0)
                 return false;
-            // Phone number pattern (123)-456-7890
-            string pattern = @"^\([0-9]{3}\)-[0-9]{3}-[0-9]{4}$";
-            return Regex.IsMatch(number, pattern);
+            // Phone number pattern must have 10 digits (###) ###-####
+            string pattern = @"^[0-9]{10}$";
+            return Regex.IsMatch(number.ToString(), pattern);
         }
         
         /// <summary>
@@ -444,12 +444,12 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Home phone number of the user
         /// </summary>
-        public string HomePhone { get; set; }
+        public int HomePhone { get; set; }
 
         /// <summary>
         /// Cell phone number of the user
         /// </summary>
-        public string CellPhone { get; set; }
+        public int CellPhone { get; set; }
 
         /// <summary>
         /// Email address of the user

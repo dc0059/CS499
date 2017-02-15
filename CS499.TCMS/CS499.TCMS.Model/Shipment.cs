@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace CS499.TCMS.Model
 {
@@ -22,11 +23,13 @@ namespace CS499.TCMS.Model
         /// <param name="destinationCompany">name of the company receiving the shipment</param>
         /// <param name="destinationAddress">address of the company receiving the shipment</param>
         /// <param name="vehicleID">identifier for the vehicle carrying shipment</param>
+        /// <param name="departureTime">time the shipment was sent out</param>
+        /// <param name="drivers">list of drivers assigned to the shipment</param>
         /// <param name="manifestID">identifier of the shipment manifest</param>
         /// <param name="purchaseID">identifier of the purchase order</param>
         /// <param name="shippingCost">total cost of the shipment</param>
         public Shipment(long shipmentID, string shipmentType, string sourceCompany, string sourceAddress, string destinationCompany, string destinationAddress, long vehicleID,
-            DateTime departureTime, long manifestID, long purchaseID, double shippingCost)
+            DateTime departureTime, List<User> drivers, long manifestID, long purchaseID, double shippingCost)
         {
             this.ShipmentID = shipmentID;
             this.ShipmentType = shipmentType;
@@ -36,6 +39,7 @@ namespace CS499.TCMS.Model
             this.DestinationAddress = destinationAddress;
             this.VehicleID = vehicleID;
             this.DepartureTime = departureTime;
+            this.Drivers = drivers;
             this.ManifestID = manifestID;
             this.PurchaseID = purchaseID;
             this.ShippingCost = shippingCost;
@@ -276,7 +280,14 @@ namespace CS499.TCMS.Model
         /// Identifier for the vehicle carrying the shipment
         /// </summary>
         public long VehicleID { get; set; }
+        /// <summary>
+        /// Time the shipment was sent out
+        /// </summary>
         public DateTime DepartureTime { get; set; }
+        /// <summary>
+        /// List of drivers assigned to the shipment
+        /// </summary>
+        public List<User> Drivers { get; set; }
         /// <summary>
         /// Identifier for the shipment manifest
         /// </summary>
