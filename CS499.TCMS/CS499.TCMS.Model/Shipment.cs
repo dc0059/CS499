@@ -24,12 +24,14 @@ namespace CS499.TCMS.Model
         /// <param name="destinationAddress">address of the company receiving the shipment</param>
         /// <param name="vehicleID">identifier for the vehicle carrying shipment</param>
         /// <param name="departureTime">time the shipment was sent out</param>
+        /// <param name="eta">estimated time of arrival</param>
+        /// <param name="arrived">flag indicating the shipment has arrived</param>
         /// <param name="drivers">list of drivers assigned to the shipment</param>
         /// <param name="manifestID">identifier of the shipment manifest</param>
         /// <param name="purchaseID">identifier of the purchase order</param>
         /// <param name="shippingCost">total cost of the shipment</param>
         public Shipment(long shipmentID, string shipmentType, string sourceCompany, string sourceAddress, string destinationCompany, string destinationAddress, long vehicleID,
-            DateTime departureTime, List<User> drivers, long manifestID, long purchaseID, double shippingCost)
+            DateTime departureTime, DateTime eta, bool arrived, List<User> drivers, long manifestID, long purchaseID, double shippingCost)
         {
             this.ShipmentID = shipmentID;
             this.ShipmentType = shipmentType;
@@ -39,6 +41,8 @@ namespace CS499.TCMS.Model
             this.DestinationAddress = destinationAddress;
             this.VehicleID = vehicleID;
             this.DepartureTime = departureTime;
+            this.ETA = eta;
+            this.Arrived = arrived;
             this.Drivers = drivers;
             this.ManifestID = manifestID;
             this.PurchaseID = purchaseID;
@@ -284,6 +288,14 @@ namespace CS499.TCMS.Model
         /// Time the shipment was sent out
         /// </summary>
         public DateTime DepartureTime { get; set; }
+        /// <summary>
+        /// Estimated time of arrival
+        /// </summary>
+        public DateTime ETA { get; set; }
+        /// <summary>
+        /// Flag indicating the shipment arrived
+        /// </summary>
+        public bool Arrived { get; set; }
         /// <summary>
         /// List of drivers assigned to the shipment
         /// </summary>

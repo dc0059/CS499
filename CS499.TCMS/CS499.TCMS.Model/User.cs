@@ -29,12 +29,13 @@ namespace CS499.TCMS.Model
         /// <param name="cellPhone">cell phone number of the user</param>
         /// <param name="email">email address of the user</param>
         /// <param name="payRate">pay rate of the user</param>
+        /// <param name="serviceTime">Time the user has worked at the company</param>
         /// <param name="jobID">identifier of the user's current job</param>
         /// <param name="homeStore">store the user is assigned to</param>
         /// <param name="jobDescription">job description of the user</param>
         /// <param name="isActive">flag indicating an active user</param>
         public User(long id, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
-            int homePhone, int cellPhone, string email, double payRate, long jobID, string homeStore, string jobDescription, bool isActive)
+            int homePhone, int cellPhone, string email, double payRate, DateTime serviceTime, long jobID, string homeStore, string jobDescription, bool isActive)
         {
             this.ID = id;
             this.UserName = userName;
@@ -49,6 +50,7 @@ namespace CS499.TCMS.Model
             this.CellPhone = cellPhone;
             this.EmailAddress = email;
             this.PayRate = payRate;
+            this.ServiceTime = serviceTime;
             this.JobID = jobID;
             this.HomeStore = homeStore;
             this.JobDescription = jobDescription;
@@ -291,7 +293,7 @@ namespace CS499.TCMS.Model
         {
             if (zip < 0)
                 return false;
-            // Zip code pattern must be exactly 5 digits
+            // Zip code pattern must have exactly 5 digits
             string pattern = @"^[0-9]{5}$";
             return Regex.IsMatch(zip.ToString(), pattern);
         }
@@ -305,7 +307,7 @@ namespace CS499.TCMS.Model
         {
             if (number < 0)
                 return false;
-            // Phone number pattern must have 10 digits (###) ###-####
+            // Phone number must have exactly 10 digits
             string pattern = @"^[0-9]{10}$";
             return Regex.IsMatch(number.ToString(), pattern);
         }
@@ -460,6 +462,11 @@ namespace CS499.TCMS.Model
         /// Pay rate of the user
         /// </summary>
         public double PayRate { get; set; }
+
+        /// <summary>
+        /// Time the user has worked at the company
+        /// </summary>
+        public DateTime ServiceTime { get; set; }
 
         /// <summary>
         /// Identifier of the user's current job
