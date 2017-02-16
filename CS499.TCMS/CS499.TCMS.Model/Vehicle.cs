@@ -2,14 +2,13 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
 
 namespace CS499.TCMS.Model
 {
     /// <summary>
     /// Holds all relevant data for a vehicle
     /// </summary>
-    public class Equipment : IModel
+    public class Vehicle : IModel
     {
         #region Constructor
 
@@ -21,17 +20,13 @@ namespace CS499.TCMS.Model
         /// <param name="year">year of the vehicle</param>
         /// <param name="model">model of the vehicle</param>
         /// <param name="vehicleType">type of vehicle</param>
-        /// <param name="partsList">list of parts used by the vehicle</param>
-        /// <param name="recordsList">list of maintenance records associated with the vehicle</param>
-        public Equipment(long equipmentID, string brand, int year, string model, string vehicleType, List<Part> partsList, List<MaintenanceRecord> recordsList)
+        public Vehicle(long vehicleID, string brand, int year, string model, string vehicleType)
         {
-            this.EquipmentID = equipmentID;
+            this.VehicleID = vehicleID;
             this.Brand = brand;
             this.Year = year;
             this.Model = model;
             this.VehicleType = vehicleType;
-            this.PartsList = partsList;
-            this.RecordsList = recordsList;
         }
         #endregion
 
@@ -49,6 +44,9 @@ namespace CS499.TCMS.Model
             string error = null;
             switch (propertyName)
             {
+                case "VehicleID":
+                    error = this.ValidateVehicleID();
+                    break;
                 case "Brand":
                     error = this.ValidateBrand();
                     break;
@@ -66,6 +64,17 @@ namespace CS499.TCMS.Model
                     break;
             }
             return error;
+        }
+
+        /// <summary>
+        /// Validate the equipment ID
+        /// </summary>
+        /// <returns></returns>
+        private string ValidateVehicleID()
+        {
+            if (this.VehicleID < 0)
+                return Messages.InvalidID;
+            return null;
         }
 
         /// <summary>
@@ -126,7 +135,7 @@ namespace CS499.TCMS.Model
             if (year < 0)
                 return false;
             // Year pattern must be exactly 4 digits
-            string pattern = @"[0-9]{4}";
+            string pattern = @"^[0-9]{4}$";
             return Regex.IsMatch(year.ToString(), pattern);
         }
         #endregion
@@ -151,11 +160,11 @@ namespace CS499.TCMS.Model
         {
             get
             {
-                return this.EquipmentID;
+                return this.VehicleID;
             }
             set
             {
-                this.EquipmentID = value;
+                this.VehicleID = value;
             }
         }
 
@@ -183,6 +192,7 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
+            "VehicleID",
             "Brand",
             "Year",
             "Model",
@@ -192,7 +202,7 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Unique identifier
         /// </summary>
-        public long EquipmentID { get; set; }
+        public long VehicleID { get; set; }
         /// <summary>
         /// Brand name of the vehicle
         /// </summary>
@@ -209,14 +219,6 @@ namespace CS499.TCMS.Model
         /// Type of vehicle
         /// </summary>
         public string VehicleType { get; set; }
-        /// <summary>
-        /// List of parts used by vehicle
-        /// </summary>
-        public List<Part> PartsList { get; set; }
-        /// <summary>
-        /// List of maintenance records associated with the vehicle
-        /// </summary>
-        public List<MaintenanceRecord> RecordsList { get; set; }
 
         string IDataErrorInfo.Error
         {

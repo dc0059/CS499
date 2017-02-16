@@ -12,11 +12,19 @@ namespace CS499.TCMS.Model
     {
         #region Constructor
 
-        public PurchaseOrder(long orderID, long orderNumber, string destination)
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="orderID">unique identifier</param>
+        /// <param name="orderNumber">number associated with the order, not related to identifier</param>
+        /// <param name="sourceID">identifier of the source company</param>
+        /// <param name="destinationID">identifier of the destination company</param>
+        public PurchaseOrder(long orderID, long orderNumber, long sourceID, long destinationID)
         {
             this.OrderID = orderID;
             this.OrderNumber = orderNumber;
-            this.Destination = destination;
+            this.SourceID = sourceID;
+            this.DestinationID = destinationID;
         }
         #endregion
 
@@ -33,17 +41,34 @@ namespace CS499.TCMS.Model
             string error = null;
             switch (propertyName)
             {
+                case "OrderID":
+                    error = this.ValidateOrderID();
+                    break;
                 case "OrderNumber":
                     error = this.ValidateOrderNumber();
                     break;
-                case "Destination":
-                    error = this.ValidateDestination();
+                case "SourceID":
+                    error = this.ValidateSourceID();
+                    break;
+                case "DestinationID":
+                    error = this.ValidateDestinationID();
                     break;
                 default:
                     Debug.Fail("Unexpected property being validated on MaintenanceRecordDetails: " + propertyName);
                     break;
             }
             return error;
+        }
+
+        /// <summary>
+        /// Validate the order ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateOrderID()
+        {
+            if (this.OrderID < 0)
+                return Messages.InvalidID;
+            return null;
         }
 
         /// <summary>
@@ -59,12 +84,25 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Validate the order destination
+        /// Validate the source ID
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateDestination()
+        private string ValidateSourceID()
         {
-            return IsEmpty(this.Destination) ? Messages.InvalidCompany : null;
+            if (this.SourceID < 0)
+                return Messages.InvalidID;
+            return null;
+        }
+
+        /// <summary>
+        /// Validate the destination ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateDestinationID()
+        {
+            if (this.DestinationID < 0)
+                return Messages.InvalidID;
+            return null;
         }
 
         /// <summary>
@@ -130,8 +168,10 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
+            "OrderID",
             "OrderNumber",
-            "Destination",
+            "SourceID",
+            "DestinationID"
         };
 
         /// <summary>
@@ -139,13 +179,17 @@ namespace CS499.TCMS.Model
         /// </summary>
         public long OrderID { get; set; }
         /// <summary>
-        /// Number associated with part, not related to identifier
+        /// Number associated with order, not related to identifier
         /// </summary>
         public long OrderNumber { get; set; }
         /// <summary>
-        /// Summary description of the part
+        /// Identifier of the source company
         /// </summary>
-        public string Destination { get; set; }
+        public long SourceID { get; set; }
+        /// <summary>
+        /// Identifier of the destination company
+        /// </summary>
+        public long DestinationID { get; set; }
 
         string IDataErrorInfo.Error
         {

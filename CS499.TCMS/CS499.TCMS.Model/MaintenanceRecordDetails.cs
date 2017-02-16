@@ -15,13 +15,15 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="repairID">unique identifier</param>
-        /// <param name="employeeID">identifier of the employee associated with this maintenance record</param>
+        /// <param name="detailID">unique identifier</param>
+        /// <param name="recordID">identifier of the maintenance record associated with this detail</param>
+        /// <param name="employeeID">identifier of the employee associated with this detail</param>
         /// <param name="repairDescription">summary description of the repairs performed</param>
         public MaintenanceRecordDetails
-            (long repairID, long employeeID, string repairDescription)
+            (long detailID, long recordID, long employeeID, string repairDescription)
         {
-            this.RepairID = repairID;
+            this.DetailID = detailID;
+            this.RecordID = recordID;
             this.EmployeeID = employeeID;
             this.RepairDescription = repairDescription;
         }
@@ -41,6 +43,12 @@ namespace CS499.TCMS.Model
             string error = null;
             switch (propertyName)
             {
+                case "DetailID":
+                    error = this.ValidateDetailID();
+                    break;
+                case "RecordID":
+                    error = this.ValidateRecordID();
+                    break;
                 case "EmployeeID":
                     error = this.ValidateEmployeeID();
                     break;
@@ -54,6 +62,27 @@ namespace CS499.TCMS.Model
             return error;
         }
 
+        /// <summary>
+        /// Validate the detail ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateDetailID()
+        {
+            if (this.DetailID < 0)
+                return Messages.InvalidID;
+            return null;
+        }
+
+        /// <summary>
+        /// Validate the maintenance record ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateRecordID()
+        {
+            if (this.RecordID < 0)
+                return Messages.InvalidID;
+            return null;
+        }
         /// <summary>
         /// Validate the employee ID
         /// </summary>
@@ -106,11 +135,11 @@ namespace CS499.TCMS.Model
         {
             get
             {
-                return this.RepairID;
+                return this.DetailID;
             }
             set
             {
-                this.RepairID = value;
+                this.DetailID = value;
             }
         }
 
@@ -138,6 +167,8 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
+            "DetailID",
+            "RecordID",
             "EmployeeID",
             "RepairDescription"
         };
@@ -145,9 +176,13 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Unique identifier
         /// </summary>
-        public long RepairID { get; set; }
+        public long DetailID { get; set; }
         /// <summary>
-        /// Identifier of the employee associated with this maintenance record
+        /// Identifier of the maintenance record associated with this detail
+        /// </summary>
+        public long RecordID { get; set; }
+        /// <summary>
+        /// Identifier of the employee associated with this detail
         /// </summary>
         public long EmployeeID { get; set; }
         /// <summary>

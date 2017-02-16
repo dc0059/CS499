@@ -29,13 +29,13 @@ namespace CS499.TCMS.Model
         /// <param name="cellPhone">cell phone number of the user</param>
         /// <param name="email">email address of the user</param>
         /// <param name="payRate">pay rate of the user</param>
-        /// <param name="serviceTime">Time the user has worked at the company</param>
+        /// <param name="employmentDate">Date the user started working at the company</param>
         /// <param name="jobID">identifier of the user's current job</param>
         /// <param name="homeStore">store the user is assigned to</param>
         /// <param name="jobDescription">job description of the user</param>
         /// <param name="isActive">flag indicating an active user</param>
         public User(long id, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
-            int homePhone, int cellPhone, string email, double payRate, DateTime serviceTime, long jobID, string homeStore, string jobDescription, bool isActive)
+            int homePhone, int cellPhone, string email, double payRate, DateTime employmentDate, long jobID, string homeStore, string jobDescription, bool isActive)
         {
             this.ID = id;
             this.UserName = userName;
@@ -50,7 +50,7 @@ namespace CS499.TCMS.Model
             this.CellPhone = cellPhone;
             this.EmailAddress = email;
             this.PayRate = payRate;
-            this.ServiceTime = serviceTime;
+            this.EmploymentDate = employmentDate;
             this.JobID = jobID;
             this.HomeStore = homeStore;
             this.JobDescription = jobDescription;
@@ -74,6 +74,9 @@ namespace CS499.TCMS.Model
 
             switch (propertyName)
             {
+                case "ID":
+                    error = this.ValidateID();
+                    break;
                 case "UserName":
                     error = this.ValidateUserName();
                     break;
@@ -110,6 +113,9 @@ namespace CS499.TCMS.Model
                 case "PayRate":
                     error = this.ValidatePayRate();
                     break;
+                case "EmploymentDate":
+                    error = this.ValidateEmploymentDate();
+                    break;
                 case "JobID":
                     error = this.ValidateJobID();
                     break;
@@ -124,6 +130,17 @@ namespace CS499.TCMS.Model
                     break;
             }
             return error;
+        }
+
+        /// <summary>
+        /// Validate the user ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateID()
+        {
+            if (this.ID < 0)
+                return Messages.InvalidID;
+            return null;
         }
 
         /// <summary>
@@ -196,7 +213,7 @@ namespace CS499.TCMS.Model
         private string ValidateZipCode()
         {
             if (!IsValidZipCode(this.ZipCode))
-                return Messages.InvalidPhone;
+                return Messages.InvalidZip;
             return null;
         }
 
@@ -245,7 +262,18 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Validate the job ID
+        /// Validate the employment date
+        /// </summary>
+        /// <returns></returns>
+        private string ValidateEmploymentDate()
+        {
+            if (this.EmploymentDate.CompareTo(DateTime.Now) > 0)
+                return Messages.InvalidDate;
+            return null;
+        }
+
+        /// <summary>
+        /// Validate the job ID, can't be negative
         /// </summary>
         /// <returns>string for the error</returns>
         private string ValidateJobID()
@@ -381,6 +409,7 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
+            "ID",
             "UserName",
             "FirstName",
             "MiddleName",
@@ -393,6 +422,7 @@ namespace CS499.TCMS.Model
             "CellPhone",
             "EmailAddress",
             "PayRate",
+            "EmploymentDate",
             "JobID",
             "HomeStore",
             "JobDescription"
@@ -466,7 +496,7 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Time the user has worked at the company
         /// </summary>
-        public DateTime ServiceTime { get; set; }
+        public DateTime EmploymentDate { get; set; }
 
         /// <summary>
         /// Identifier of the user's current job

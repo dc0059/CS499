@@ -8,25 +8,27 @@ namespace CS499.TCMS.Model
     /// <summary>
     /// Holds all relevant data for maintenance parts
     /// </summary>
-    public class Part : IModel
+    public class MaintenancePart : IModel
     {
         #region Constructor
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="partID">unique identifier</param>
+        /// <param name="mainPartID">unique identifier</param>
         /// <param name="partNumber">number of the part</param>
         /// <param name="partDescription">summary description of the part</param>
         /// <param name="quantity">quantity of the part</param>
         /// <param name="unitMeasurement">the unit of measurement associated with the part</param>
-        public Part(long partID, long partNumber, string partDescription, int quantity, string unitMeasurement)
+        /// <param name="detailID">identifier of the maintenance record detail</param>
+        public MaintenancePart(long mainPartID, long mainPartNumber, string partDescription, int quantity, string unitMeasurement, long detailID)
         {
-            this.PartID = partID;
-            this.PartNumber = partNumber;
+            this.PartID = mainPartID;
+            this.PartNumber = mainPartNumber;
             this.PartDescription = partDescription;
             this.Quantity = quantity;
             this.UnitMeasurement = unitMeasurement;
+            this.DetailID = detailID;
         }
         #endregion
 
@@ -43,6 +45,9 @@ namespace CS499.TCMS.Model
             string error = null;
             switch (propertyName)
             {
+                case "PartID":
+                    error = this.ValidatePartID();
+                    break;
                 case "PartNumber":
                     error = this.ValidatePartNumber();
                     break;
@@ -60,6 +65,18 @@ namespace CS499.TCMS.Model
                     break;
             }
             return error;
+        }
+
+        /// <summary>
+        /// Validate the part ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidatePartID()
+        {
+            if (this.PartID < 0)
+                return Messages.InvalidID;
+            else
+                return null;
         }
 
         /// <summary>
@@ -101,6 +118,18 @@ namespace CS499.TCMS.Model
         private string ValidateUnitMeasurement()
         {
             return IsEmpty(this.UnitMeasurement) ? Messages.InvalidUnit : null;
+        }
+
+        /// <summary>
+        /// Validate the detail ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateDetailID()
+        {
+            if (this.DetailID < 0)
+                return Messages.InvalidID;
+            else
+                return null;
         }
 
         /// <summary>
@@ -170,7 +199,8 @@ namespace CS499.TCMS.Model
             "PartNumber",
             "PartDescription",
             "Quantity",
-            "UnitMeasurement"
+            "UnitMeasurement",
+            "DetailID"
         };
 
         /// <summary>
@@ -193,6 +223,10 @@ namespace CS499.TCMS.Model
         /// The unit of measurement associated with the part
         /// </summary>
         public string UnitMeasurement { get; set; }
+        /// <summary>
+        /// Identifier of the maintenance record detail
+        /// </summary>
+        public long DetailID { get; set; }
 
         string IDataErrorInfo.Error
         {

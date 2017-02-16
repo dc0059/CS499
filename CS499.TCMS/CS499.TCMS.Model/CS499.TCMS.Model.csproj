@@ -46,7 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Equipment.cs" />
+    <Compile Include="BusinessPartner.cs" />
+    <Compile Include="Vehicle.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="MaintenanceRecord.cs" />
     <Compile Include="MaintenanceRecordDetails.cs" />
@@ -55,12 +56,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Part.cs" />
+    <Compile Include="MaintenancePart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PurchseOrder.cs" />
-    <Compile Include="Shipment.cs" />
+    <Compile Include="PurchaseOrder.cs" />
+    <Compile Include="Manifest.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="Vehicle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

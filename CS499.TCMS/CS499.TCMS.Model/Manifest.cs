@@ -9,7 +9,7 @@ namespace CS499.TCMS.Model
     /// <summary>
     /// Holds all relevant data for a shipment
     /// </summary>
-    public class Shipment : IModel
+    public class Manifest : IModel
     {
         #region Constructor
 
@@ -26,12 +26,10 @@ namespace CS499.TCMS.Model
         /// <param name="departureTime">time the shipment was sent out</param>
         /// <param name="eta">estimated time of arrival</param>
         /// <param name="arrived">flag indicating the shipment has arrived</param>
-        /// <param name="drivers">list of drivers assigned to the shipment</param>
         /// <param name="manifestID">identifier of the shipment manifest</param>
-        /// <param name="purchaseID">identifier of the purchase order</param>
         /// <param name="shippingCost">total cost of the shipment</param>
-        public Shipment(long shipmentID, string shipmentType, string sourceCompany, string sourceAddress, string destinationCompany, string destinationAddress, long vehicleID,
-            DateTime departureTime, DateTime eta, bool arrived, List<User> drivers, long manifestID, long purchaseID, double shippingCost)
+        public Manifest(long shipmentID, string shipmentType, string sourceCompany, string sourceAddress, string destinationCompany, string destinationAddress, long vehicleID,
+            DateTime departureTime, DateTime eta, bool arrived, long manifestID, double shippingCost)
         {
             this.ShipmentID = shipmentID;
             this.ShipmentType = shipmentType;
@@ -43,9 +41,7 @@ namespace CS499.TCMS.Model
             this.DepartureTime = departureTime;
             this.ETA = eta;
             this.Arrived = arrived;
-            this.Drivers = drivers;
             this.ManifestID = manifestID;
-            this.PurchaseID = purchaseID;
             this.ShippingCost = shippingCost;
         }
         #endregion
@@ -87,9 +83,6 @@ namespace CS499.TCMS.Model
                     break;
                 case "ManifestID":
                     error = this.ValidateManifestID();
-                    break;
-                case "PurchaseID":
-                    error = this.ValidatePurchaseID();
                     break;
                 case "ShippingCost":
                     error = this.ValidateShippingCost();
@@ -163,13 +156,6 @@ namespace CS499.TCMS.Model
         private string ValidateManifestID()
         {
             if (this.ManifestID < 0)
-                return Messages.InvalidID;
-            return null;
-        }
-
-        private string ValidatePurchaseID()
-        {
-            if (this.PurchaseID < 0)
                 return Messages.InvalidID;
             return null;
         }
@@ -252,7 +238,6 @@ namespace CS499.TCMS.Model
             "VehicleID",
             "DepartureTime",
             "ManifestID",
-            "PurchaseID",
             "ShippingCost"
         };
 
@@ -297,17 +282,9 @@ namespace CS499.TCMS.Model
         /// </summary>
         public bool Arrived { get; set; }
         /// <summary>
-        /// List of drivers assigned to the shipment
-        /// </summary>
-        public List<User> Drivers { get; set; }
-        /// <summary>
         /// Identifier for the shipment manifest
         /// </summary>
         public long ManifestID { get; set; }
-        /// <summary>
-        /// Identifier for the purchase order
-        /// </summary>
-        public long PurchaseID { get; set; }
         /// <summary>
         /// Total cost of the shipment
         /// </summary>
