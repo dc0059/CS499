@@ -17,7 +17,7 @@ namespace CS499.TCMS.Model
         /// </summary>
         /// <param name="maintenanceID">unique identifier</param>
         /// <param name="equipmentID">identifier of the vehicle associated with this maintenance record</param>
-        /// <param name="maintenanceDate">date the maintenance was performed</param>
+        /// <param name="maintenanceDate">date of the most recent maintenance</param>
         /// <param name="maintenanceDescription">summary description of the maintenance performed</param>
         public MaintenanceRecord(long maintenanceID, long equipmentID, DateTime maintenanceDate, string maintenanceDescription)
         {

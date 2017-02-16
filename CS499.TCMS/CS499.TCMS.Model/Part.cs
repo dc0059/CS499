@@ -5,28 +5,27 @@ using System.Text.RegularExpressions;
 
 namespace CS499.TCMS.Model
 {
-    /// <summary>
-    /// Holds all relevant data for the purchase order
-    /// </summary>
-    public class PurchaseOrder : IModel
+    public class Part : IModel
     {
         #region Constructor
-
+        
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="orderID">unique identifier</param>
-        /// <param name="orderNumber">number associated with the order, not related to identifier</param>
-        /// <param name="sourceID">identifier of the source company</param>
-        /// <param name="destinationID">identifier of the destination company</param>
-        /// <param name="manifestID">identifier of the shipping manifest this purchase order belongs to</param>
-        public PurchaseOrder(long orderID, long orderNumber, long sourceID, long destinationID, long manifestID)
+        /// <param name="partID">unique identifier</param>
+        /// <param name="description">description of the item</param>
+        /// <param name="partNumber">number of the item, not related to the identifier</param>
+        /// <param name="price">price per unit of the item</param>
+        /// <param name="weight">weight of the item</param>
+        /// <param name="quantity">quantity of the item in stock</param>
+        public Part(long partID, string description, int partNumber, double price, string weight, int quantity)
         {
-            this.OrderID = orderID;
-            this.OrderNumber = orderNumber;
-            this.SourceID = sourceID;
-            this.DestinationID = destinationID;
-            this.ManifestID = manifestID;
+            this.PartID = partID;
+            this.PartDescription = description;
+            this.PartNumber = partNumber;
+            this.PartPrice = price;
+            this.PartWeight = weight;
+            this.QuantityInStock = quantity;
         }
         #endregion
 
@@ -43,81 +42,90 @@ namespace CS499.TCMS.Model
             string error = null;
             switch (propertyName)
             {
-                case "OrderID":
-                    error = this.ValidateOrderID();
+                case "PartID":
+                    error = this.ValidatePartID();
                     break;
-                case "OrderNumber":
-                    error = this.ValidateOrderNumber();
+                case "PartNumber":
+                    error = this.ValidatePartNumber();
                     break;
-                case "SourceID":
-                    error = this.ValidateSourceID();
+                case "PartDescription":
+                    error = this.ValidatePartDescription();
                     break;
-                case "DestinationID":
-                    error = this.ValidateDestinationID();
+                case "PartPrice":
+                    error = this.ValidatePartPrice();
                     break;
-                case "ManifestID":
-                    error = this.ValidateManifestID();
+                case "PartWeight":
+                    error = this.ValidatePartWeight();
+                    break;
+                case "QuantityInStock":
+                    error = this.ValidateQuantityInStock();
                     break;
                 default:
-                    Debug.Fail("Unexpected property being validated on PurchaseOrder: " + propertyName);
+                    Debug.Fail("Unexpected property being validated on Part: " + propertyName);
                     break;
             }
             return error;
         }
 
         /// <summary>
-        /// Validate the order ID
+        /// Validate the part ID
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateOrderID()
+        private string ValidatePartID()
         {
-            if (this.OrderID < 0)
+            if (this.PartID < 0)
                 return Messages.InvalidID;
             return null;
         }
 
         /// <summary>
-        /// Validate the order number
+        /// Validate the part number
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateOrderNumber()
+        private string ValidatePartNumber()
         {
-            if (this.OrderNumber < 0)
-                return Messages.InvalidID;
-            else
-                return null;
-        }
-
-        /// <summary>
-        /// Validate the source ID
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateSourceID()
-        {
-            if (this.SourceID < 0)
+            if (this.PartNumber < 0)
                 return Messages.InvalidID;
             return null;
         }
 
         /// <summary>
-        /// Validate the destination ID
+        /// Validate the part description
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateDestinationID()
+        private string ValidatePartDescription()
         {
-            if (this.DestinationID < 0)
-                return Messages.InvalidID;
+            return IsEmpty(this.PartDescription) ? Messages.InvalidDescription : null;
+        }
+
+        /// <summary>
+        /// Validate the part price
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidatePartPrice()
+        {
+            if (this.PartPrice < 0.0)
+                return Messages.InvalidValue;
             return null;
         }
 
         /// <summary>
-        /// Validate the manifest ID
+        /// Validate the part weight
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateManifestID()
+        private string ValidatePartWeight()
         {
-            if (this.ManifestID < 0)
-                return Messages.InvalidID;
+            return IsEmpty(this.PartWeight) ? Messages.InvalidValue : null;
+        }
+
+        /// <summary>
+        /// Validate the quantity in stock
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateQuantityInStock()
+        {
+            if (this.QuantityInStock < 0)
+                return Messages.InvalidValue;
             return null;
         }
 
@@ -152,11 +160,11 @@ namespace CS499.TCMS.Model
         {
             get
             {
-                return this.OrderID;
+                return this.PartID;
             }
             set
             {
-                this.OrderID = value;
+                this.PartID = value;
             }
         }
 
@@ -184,33 +192,43 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
-            "OrderID",
-            "OrderNumber",
-            "SourceID",
-            "DestinationID",
-            "ManifestID"
+            "PartID",
+            "PartDescription",
+            "PartNumber",
+            "PartPrice",
+            "PartWeight",
+            "QuantityInStock"
         };
 
         /// <summary>
         /// Unique identifier
         /// </summary>
-        public long OrderID { get; set; }
+        public long PartID { get; set; }
+
         /// <summary>
-        /// Number associated with order, not related to identifier
+        /// Description of the item
         /// </summary>
-        public long OrderNumber { get; set; }
+        public string PartDescription { get; set; }
+
         /// <summary>
-        /// Identifier of the source company
+        /// Number of the item, not related to the identifier
         /// </summary>
-        public long SourceID { get; set; }
+        public long PartNumber { get; set; }
+
         /// <summary>
-        /// Identifier of the destination company
+        /// Price per unit of the item
         /// </summary>
-        public long DestinationID { get; set; }
+        public double PartPrice { get; set; }
+
         /// <summary>
-        /// Identifier of the shipping manifest this purchase order belongs to
+        /// Weight of the item
         /// </summary>
-        public long ManifestID { get; set; }
+        public string PartWeight { get; set; }
+
+        /// <summary>
+        /// Quantity of the item in stock
+        /// </summary>
+        public int QuantityInStock { get; set; }
 
         string IDataErrorInfo.Error
         {

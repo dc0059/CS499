@@ -19,8 +19,8 @@ namespace CS499.TCMS.Model
         /// <param name="partNumber">number of the part</param>
         /// <param name="partDescription">summary description of the part</param>
         /// <param name="quantity">quantity of the part</param>
-        /// <param name="unitMeasurement">the unit of measurement associated with the part</param>
-        /// <param name="detailID">identifier of the maintenance record detail</param>
+        /// <param name="unitMeasurement">the unit of measurement for the part</param>
+        /// <param name="detailID">identifier of the maintenance record detail the maintenance part is part of</param>
         public MaintenancePart(long mainPartID, long mainPartNumber, string partDescription, int quantity, string unitMeasurement, long detailID)
         {
             this.PartID = mainPartID;
@@ -61,7 +61,7 @@ namespace CS499.TCMS.Model
                     error = this.ValidateUnitMeasurement();
                     break;
                 default:
-                    Debug.Fail("Unexpected property being validated on MaintenanceRecordDetails: " + propertyName);
+                    Debug.Fail("Unexpected property being validated on MaintenancePart: " + propertyName);
                     break;
             }
             return error;

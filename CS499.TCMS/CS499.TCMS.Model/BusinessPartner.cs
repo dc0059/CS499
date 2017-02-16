@@ -73,7 +73,7 @@ namespace CS499.TCMS.Model
                     error = this.ValidatePhone();
                     break;
                 default:
-                    Debug.Fail("Unexpected property being validated on User: " + propertyName);
+                    Debug.Fail("Unexpected property being validated on BusinessPartner: " + propertyName);
                     break;
             }
             return error;
@@ -96,7 +96,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateCompanyName()
         {
-            return IsEmpty(this.CompanyName) ? Messages.InvalidUserName : null;
+            return IsEmpty(this.CompanyName) ? Messages.InvalidCompany : null;
         }
 
         /// <summary>
@@ -185,22 +185,6 @@ namespace CS499.TCMS.Model
             // Phone number must have exactly 10 digits
             string pattern = @"^[0-9]{10}$";
             return Regex.IsMatch(number.ToString(), pattern);
-        }
-
-        /// <summary>
-        /// Validates an email address
-        /// </summary>
-        /// <param name="email">string for the email</param>
-        /// <returns>bool value indicating if the email is valid</returns>
-        private bool IsValidEmailAddress(string email)
-        {
-            if (this.IsEmpty(email))
-                return false;
-
-            // This regex pattern came from: http://haacked.com/archive/2007/08/21/i-knew-how-to-validate-an-email-address-until-i.aspx
-            string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
-
-            return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
         }
 
         #endregion

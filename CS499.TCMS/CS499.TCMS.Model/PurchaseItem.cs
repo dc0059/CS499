@@ -5,29 +5,23 @@ using System.Text.RegularExpressions;
 
 namespace CS499.TCMS.Model
 {
-    /// <summary>
-    /// Holds all relevant data for the purchase order
-    /// </summary>
-    public class PurchaseOrder : IModel
+    public class PurchaseItem : IModel
     {
         #region Constructor
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="orderID">unique identifier</param>
-        /// <param name="orderNumber">number associated with the order, not related to identifier</param>
-        /// <param name="sourceID">identifier of the source company</param>
-        /// <param name="destinationID">identifier of the destination company</param>
-        /// <param name="manifestID">identifier of the shipping manifest this purchase order belongs to</param>
-        public PurchaseOrder(long orderID, long orderNumber, long sourceID, long destinationID, long manifestID)
+        /// <param name="itemID">unique identifier</param>
+        /// <param name="orderID">identifier of the purchase order this item is part of</param>
+        /// <param name="quantity">quantity of the item</param>
+        public PurchaseItem (long itemID, long orderID, int quantity)
         {
+            this.ItemID = itemID;
             this.OrderID = orderID;
-            this.OrderNumber = orderNumber;
-            this.SourceID = sourceID;
-            this.DestinationID = destinationID;
-            this.ManifestID = manifestID;
+            this.Quantity = quantity;
         }
+
         #endregion
 
         #region Methods
@@ -43,26 +37,33 @@ namespace CS499.TCMS.Model
             string error = null;
             switch (propertyName)
             {
+                case "ItemID":
+                    error = this.ValidateItemID();
+                    break;
                 case "OrderID":
                     error = this.ValidateOrderID();
                     break;
-                case "OrderNumber":
-                    error = this.ValidateOrderNumber();
-                    break;
-                case "SourceID":
-                    error = this.ValidateSourceID();
-                    break;
-                case "DestinationID":
-                    error = this.ValidateDestinationID();
-                    break;
-                case "ManifestID":
-                    error = this.ValidateManifestID();
+                case "Quantity":
+                    error = this.ValidateQuantity();
                     break;
                 default:
-                    Debug.Fail("Unexpected property being validated on PurchaseOrder: " + propertyName);
+                    Debug.Fail("Unexpected property being validated on PurchaseItem: " + propertyName);
                     break;
             }
             return error;
+        }
+
+
+
+        /// <summary>
+        /// Validate the purchase item ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateItemID()
+        {
+            if (this.ItemID < 0)
+                return Messages.InvalidID;
+            return null;
         }
 
         /// <summary>
@@ -77,48 +78,15 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Validate the order number
+        /// Validate the quantity
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateOrderNumber()
+        private string ValidateQuantity()
         {
-            if (this.OrderNumber < 0)
-                return Messages.InvalidID;
+            if (this.Quantity <= 0)
+                return Messages.InvalidValue;
             else
                 return null;
-        }
-
-        /// <summary>
-        /// Validate the source ID
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateSourceID()
-        {
-            if (this.SourceID < 0)
-                return Messages.InvalidID;
-            return null;
-        }
-
-        /// <summary>
-        /// Validate the destination ID
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateDestinationID()
-        {
-            if (this.DestinationID < 0)
-                return Messages.InvalidID;
-            return null;
-        }
-
-        /// <summary>
-        /// Validate the manifest ID
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateManifestID()
-        {
-            if (this.ManifestID < 0)
-                return Messages.InvalidID;
-            return null;
         }
 
         /// <summary>
@@ -152,11 +120,11 @@ namespace CS499.TCMS.Model
         {
             get
             {
-                return this.OrderID;
+                return this.ItemID;
             }
             set
             {
-                this.OrderID = value;
+                this.ItemID = value;
             }
         }
 
@@ -184,33 +152,23 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
+            "ItemID",
             "OrderID",
-            "OrderNumber",
-            "SourceID",
-            "DestinationID",
-            "ManifestID"
+            "Quantity"
         };
 
         /// <summary>
         /// Unique identifier
         /// </summary>
+        public long ItemID { get; set; }
+        /// <summary>
+        /// Identifier of the purchase order this item is part of
+        /// </summary>
         public long OrderID { get; set; }
         /// <summary>
-        /// Number associated with order, not related to identifier
+        /// Quantity of the item
         /// </summary>
-        public long OrderNumber { get; set; }
-        /// <summary>
-        /// Identifier of the source company
-        /// </summary>
-        public long SourceID { get; set; }
-        /// <summary>
-        /// Identifier of the destination company
-        /// </summary>
-        public long DestinationID { get; set; }
-        /// <summary>
-        /// Identifier of the shipping manifest this purchase order belongs to
-        /// </summary>
-        public long ManifestID { get; set; }
+        public int Quantity { get; set; }
 
         string IDataErrorInfo.Error
         {

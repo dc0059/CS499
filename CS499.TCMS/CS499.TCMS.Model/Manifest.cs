@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace CS499.TCMS.Model
 {
     /// <summary>
-    /// Holds all relevant data for a shipment
+    /// Holds all relevant data for a shipping manifest
     /// </summary>
     public class Manifest : IModel
     {
@@ -16,32 +16,21 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="shipmentID">unique identifier</param>
-        /// <param name="shipmentType">incoming or outgoing shipment</param>
-        /// <param name="sourceCompany">name of the company sending the shipment</param>
-        /// <param name="sourceAddress">address of the company sending the shipment</param>
-        /// <param name="destinationCompany">name of the company receiving the shipment</param>
-        /// <param name="destinationAddress">address of the company receiving the shipment</param>
-        /// <param name="vehicleID">identifier for the vehicle carrying shipment</param>
-        /// <param name="departureTime">time the shipment was sent out</param>
+        /// <param name="manifestID">unique identifier</param>
+        /// <param name="shipmentType">type of shipment, incoming or outgoing</param>
+        /// <param name="vehicleID">identifier of the vehicle transporting this shipment</param>
+        /// <param name="departureTime">date and time the shipment was sent out</param>
         /// <param name="eta">estimated time of arrival</param>
-        /// <param name="arrived">flag indicating the shipment has arrived</param>
-        /// <param name="manifestID">identifier of the shipment manifest</param>
+        /// <param name="arrived">flag indicating the shipment arrived at its destination</param>
         /// <param name="shippingCost">total cost of the shipment</param>
-        public Manifest(long shipmentID, string shipmentType, string sourceCompany, string sourceAddress, string destinationCompany, string destinationAddress, long vehicleID,
-            DateTime departureTime, DateTime eta, bool arrived, long manifestID, double shippingCost)
+        public Manifest(long manifestID, string shipmentType, long vehicleID, DateTime departureTime, DateTime eta, bool arrived, double shippingCost)
         {
-            this.ShipmentID = shipmentID;
+            this.ManifestID = manifestID;
             this.ShipmentType = shipmentType;
-            this.SourceCompany = sourceCompany;
-            this.SourceAddress = sourceAddress;
-            this.DestinationCompany = destinationCompany;
-            this.DestinationAddress = destinationAddress;
             this.VehicleID = vehicleID;
             this.DepartureTime = departureTime;
             this.ETA = eta;
             this.Arrived = arrived;
-            this.ManifestID = manifestID;
             this.ShippingCost = shippingCost;
         }
         #endregion
@@ -60,20 +49,11 @@ namespace CS499.TCMS.Model
             string error = null;
             switch (propertyName)
             {
+                case "ManifestID":
+                    error = this.ValidateManifestID();
+                    break;
                 case "ShipmentType":
                     error = this.ValidateShipmentType();
-                    break;
-                case "SourceCompany":
-                    error = this.ValidateSourceCompany();
-                    break;
-                case "SourceAddress":
-                    error = this.ValidateSourceAddress();
-                    break;
-                case "DestinationCompany":
-                    error = this.ValidateSourceCompany();
-                    break;
-                case "DestinationAddress":
-                    error = this.ValidateSourceAddress();
                     break;
                 case "VehicleID":
                     error = this.ValidateVehicleID();
@@ -81,17 +61,28 @@ namespace CS499.TCMS.Model
                 case "DepartureTime":
                     error = this.ValidateDepartureTime();
                     break;
-                case "ManifestID":
-                    error = this.ValidateManifestID();
+                case "ETA":
+                    error = this.ValidateETA();
                     break;
                 case "ShippingCost":
                     error = this.ValidateShippingCost();
                     break;
                 default:
-                    Debug.Fail("Unexpected property being validated on Shipment: " + propertyName);
+                    Debug.Fail("Unexpected property being validated on Manifest: " + propertyName);
                     break;
             }
             return error;
+        }
+
+        /// <summary>
+        /// Validate the manifest ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateManifestID()
+        {
+            if (this.ManifestID < 0)
+                return Messages.InvalidID;
+            return null;
         }
 
         /// <summary>
@@ -104,41 +95,9 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Validate the source company
+        /// Validate the vehicle ID
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateSourceCompany()
-        {
-            return IsEmpty(this.SourceCompany) ? Messages.InvalidCompany : null;
-        }
-
-        /// <summary>
-        /// Validate the source address
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateSourceAddress()
-        {
-            return IsEmpty(this.SourceAddress) ? Messages.InvalidAddress : null;
-        }
-
-        /// <summary>
-        /// Validate the source company
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateDestinationCompany()
-        {
-            return IsEmpty(this.DestinationCompany) ? Messages.InvalidCompany : null;
-        }
-
-        /// <summary>
-        /// Validate the source address
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateDestinationAddress()
-        {
-            return IsEmpty(this.DestinationAddress) ? Messages.InvalidAddress : null;
-        }
-
         private string ValidateVehicleID()
         {
             if (this.VehicleID < 0)
@@ -146,6 +105,10 @@ namespace CS499.TCMS.Model
             return null;
         }
 
+        /// <summary>
+        /// Validate the departure time
+        /// </summary>
+        /// <returns>string for the error</returns>
         private string ValidateDepartureTime()
         {
             if (this.DepartureTime.CompareTo(DateTime.Now) > 0)
@@ -153,16 +116,24 @@ namespace CS499.TCMS.Model
             return null;
         }
 
-        private string ValidateManifestID()
+        /// <summary>
+        /// Validate the ETA
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateETA()
         {
-            if (this.ManifestID < 0)
-                return Messages.InvalidID;
+            if (this.ETA.CompareTo(this.DepartureTime) < 0)
+                return Messages.InvalidDate;
             return null;
         }
 
+        /// <summary>
+        /// Validate the shipping cost
+        /// </summary>
+        /// <returns>string for the error</returns>
         private string ValidateShippingCost()
         {
-            if (this.ShippingCost < 0.0)
+            if (this.ManifestID < 0.0)
                 return Messages.InvalidValue;
             return null;
         }
@@ -198,11 +169,11 @@ namespace CS499.TCMS.Model
         {
             get
             {
-                return this.ShipmentID;
+                return this.ManifestID;
             }
             set
             {
-                this.ShipmentID = value;
+                this.ManifestID = value;
             }
         }
 
@@ -230,47 +201,28 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
+            "ManifestID",
             "ShipmentType",
-            "SourceCompany",
-            "SourceAddress",
-            "DestinationCompany",
-            "DestinationAddress",
             "VehicleID",
             "DepartureTime",
-            "ManifestID",
+            "ETA",
             "ShippingCost"
         };
 
         /// <summary>
-        /// unique identifier
+        /// Unique identifier
         /// </summary>
-        public long ShipmentID { get; set; }
+        public long ManifestID { get; set; }
         /// <summary>
-        /// Incoming or outgoing shipment
+        /// Type of shipment, incoming or outgoing
         /// </summary>
         public string ShipmentType { get; set; }
         /// <summary>
-        /// Name of the company sending out the shipment
-        /// </summary>
-        public string SourceCompany { get; set; }
-        /// <summary>
-        /// Address of the company sending out the shipment
-        /// </summary>
-        public string SourceAddress { get; set; }
-        /// <summary>
-        /// Name of the company receiving the shipment
-        /// </summary>
-        public string DestinationCompany { get; set; }
-        /// <summary>
-        /// Address of the company receiving the shipment
-        /// </summary>
-        public string DestinationAddress { get; set; }
-        /// <summary>
-        /// Identifier for the vehicle carrying the shipment
+        /// Identifier of the vehicle transporting the shipment
         /// </summary>
         public long VehicleID { get; set; }
         /// <summary>
-        /// Time the shipment was sent out
+        /// Date and time the shipment was sent out
         /// </summary>
         public DateTime DepartureTime { get; set; }
         /// <summary>
@@ -278,13 +230,9 @@ namespace CS499.TCMS.Model
         /// </summary>
         public DateTime ETA { get; set; }
         /// <summary>
-        /// Flag indicating the shipment arrived
+        /// Flag indicating the shipment arrived at its destination
         /// </summary>
         public bool Arrived { get; set; }
-        /// <summary>
-        /// Identifier for the shipment manifest
-        /// </summary>
-        public long ManifestID { get; set; }
         /// <summary>
         /// Total cost of the shipment
         /// </summary>
