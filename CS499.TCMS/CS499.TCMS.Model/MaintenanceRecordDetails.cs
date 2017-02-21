@@ -20,16 +20,14 @@ namespace CS499.TCMS.Model
         /// <param name="employeeID">identifier of the employee associated with this detail</param>
         /// <param name="repairDescription">summary description of the repairs performed</param>
         /// <param name="repairDate">date the repair was performed</param>
-        /// <param name="repairCost">total cost of the repairs</param>
         public MaintenanceRecordDetails
-            (long detailID, long recordID, long employeeID, string repairDescription, DateTime repairDate, double repairCost)
+            (long detailID, long recordID, long employeeID, string repairDescription, DateTime repairDate)
         {
             this.DetailID = detailID;
             this.RecordID = recordID;
             this.EmployeeID = employeeID;
             this.RepairDescription = repairDescription;
             this.RepairDate = repairDate;
-            this.RepairCost = repairCost;
         }
         #endregion
 
@@ -61,9 +59,6 @@ namespace CS499.TCMS.Model
                     break;
                 case "RepairDate":
                     error = this.ValidateRepairDate();
-                    break;
-                case "RepairCost":
-                    error = this.ValidateRepairCost();
                     break;
                 default:
                     Debug.Fail("Unexpected property being validated on MaintenanceRecordDetails: " + propertyName);
@@ -114,18 +109,6 @@ namespace CS499.TCMS.Model
         {
             if (this.RepairDate.CompareTo(DateTime.Now) > 0)
                 return Messages.InvalidDate;
-            else
-                return null;
-        }
-
-        /// <summary>
-        /// Validate the repair cost
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateRepairCost()
-        {
-            if (this.RepairCost < 0.0)
-                return Messages.InvalidValue;
             else
                 return null;
         }
@@ -206,8 +189,7 @@ namespace CS499.TCMS.Model
             "RecordID",
             "EmployeeID",
             "RepairDescription",
-            "RepairDate",
-            "RepairCost"
+            "RepairDate"
         };
 
         /// <summary>
@@ -230,10 +212,6 @@ namespace CS499.TCMS.Model
         /// Date the repair was performed
         /// </summary>
         public DateTime RepairDate { get; set; }
-        /// <summary>
-        /// Total cost of the repairs
-        /// </summary>
-        public double RepairCost { get; set; }
 
         string IDataErrorInfo.Error
         {
