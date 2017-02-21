@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 namespace CS499.TCMS.Model
 {
     /// <summary>
-    /// Holds all relevant data for a vehicle
+    /// Holds all relevant data for a maintenance record
     /// </summary>
     public class MaintenanceRecord : IModel
     {

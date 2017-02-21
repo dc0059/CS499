@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="BusinessPartner.cs" />
     <Compile Include="Part.cs" />
+    <Compile Include="Payroll.cs" />
     <Compile Include="PurchaseItem.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="IModel.cs" />

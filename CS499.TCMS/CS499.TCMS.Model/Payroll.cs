@@ -6,23 +6,25 @@ using System.Text.RegularExpressions;
 namespace CS499.TCMS.Model
 {
     /// <summary>
-    /// Holds all relevant data for maintenance parts
+    /// Holds all relevant data for an employee payroll
     /// </summary>
-    public class MaintenancePart : IModel
+    public class Payroll : IModel
     {
         #region Constructor
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="mainPartID">unique identifier</param>
-        /// <param name="quantity">quantity of the part</param>
-        /// <param name="detailID">identifier of the maintenance record detail the maintenance part is part of</param>
-        public MaintenancePart(long mainPartID, int quantity, long detailID)
+        /// <param name="payrollID">unique identifier</param>
+        /// <param name="employeeID">identifier of the employee associated with this payment</param>
+        /// <param name="paymentDate">date the payment was made</param>
+        /// <param name="payment">amount of the payment</param>
+        public Payroll(long payrollID, long employeeID, DateTime paymentDate, double payment)
         {
-            this.PartID = mainPartID;
-            this.Quantity = quantity;
-            this.DetailID = detailID;
+            this.PayrollID = payrollID;
+            this.EmployeeID = employeeID;
+            this.PaymentDate = paymentDate;
+            this.Payment = payment;
         }
         #endregion
 
@@ -39,55 +41,67 @@ namespace CS499.TCMS.Model
             string error = null;
             switch (propertyName)
             {
-                case "PartID":
-                    error = this.ValidatePartID();
+                case "PayrollID":
+                    error = this.ValidatePayrollID();
                     break;
-                case "Quantity":
-                    error = this.ValidateQuantity();
+                case "EmployeeID":
+                    error = this.ValidateEmployeeID();
                     break;
-                case "DetailID":
-                    error = this.ValidateDetailID();
+                case "PaymentDate":
+                    error = this.ValidatePaymentDate();
+                    break;
+                case "Payment":
+                    error = this.ValidatePayment();
                     break;
                 default:
-                    Debug.Fail("Unexpected property being validated on MaintenancePart: " + propertyName);
+                    Debug.Fail("Unexpected property being validated on Payroll: " + propertyName);
                     break;
             }
             return error;
         }
 
         /// <summary>
-        /// Validate the part ID
+        /// Validate the payroll ID
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidatePartID()
+        private string ValidatePayrollID()
         {
-            if (this.PartID < 0)
+            if (this.PayrollID < 0)
                 return Messages.InvalidID;
-            else
-                return null;
-        }
-
-        /// <summary>
-        /// Validate the quantity
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateQuantity()
-        {
-            if (this.Quantity < 0)
-                return Messages.InvalidValue;
             return null;
         }
 
         /// <summary>
-        /// Validate the detail ID
+        /// Validate the employee ID
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateDetailID()
+        private string ValidateEmployeeID()
         {
-            if (this.DetailID < 0)
+            if (this.EmployeeID < 0)
                 return Messages.InvalidID;
-            else
-                return null;
+            return null;
+        }
+
+        /// <summary>
+        /// Validate the payment date
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidatePaymentDate()
+        {
+            if (this.PaymentDate.CompareTo(DateTime.Now) > 0)
+                return Messages.InvalidDate;
+            return null;
+        }
+
+        /// <summary>
+        /// Validate the payment amount
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidatePayment()
+        {
+            if (this.Payment < 0.0)
+                return Messages.InvalidValue;
+            return null;
         }
 
         /// <summary>
@@ -121,11 +135,11 @@ namespace CS499.TCMS.Model
         {
             get
             {
-                return this.PartID;
+                return this.PayrollID;
             }
             set
             {
-                this.PartID = value;
+                this.PayrollID = value;
             }
         }
 
@@ -153,19 +167,28 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
-            "PartID",
-            "Quantity",
-            "DetailID"
+            "PayrollID",
+            "EmployeeID",
+            "PaymentDate",
+            "Payment"
         };
 
         /// <summary>
         /// Unique identifier
         /// </summary>
-        public long PartID { get; set; }public int Quantity { get; set; }
+        public long PayrollID { get; set; }
         /// <summary>
-        /// The unit of measurement associated with the part
+        /// Identifier of the employee associated with this payment
         /// </summary>
-        public long DetailID { get; set; }
+        public long EmployeeID { get; set; }
+        /// <summary>
+        /// Date the payment was made
+        /// </summary>
+        public DateTime PaymentDate { get; set; }
+        /// <summary>
+        /// Amount of the payment
+        /// </summary>
+        public double Payment { get; set; }
 
         string IDataErrorInfo.Error
         {

@@ -5,6 +5,9 @@ using System.Text.RegularExpressions;
 
 namespace CS499.TCMS.Model
 {
+    /// <summary>
+    /// Holds all relevant data for an inventory part
+    /// </summary>
     public class Part : IModel
     {
         #region Constructor
