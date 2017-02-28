@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\James\Source\Repos\CS499\CS499.TCMS\CS499.TCMS.VIEW\obj\Debug\
+C:\Source\Repos\CS399\CS499.TCMS\CS499.TCMS.VIEW\obj\Debug\
 CS499.TCMS.View
 none
 false
 DEBUG;TRACE
-C:\Users\James\Source\Repos\CS499\CS499.TCMS\CS499.TCMS.VIEW\App.xaml
+C:\Source\Repos\CS399\CS499.TCMS\CS499.TCMS.VIEW\App.xaml
 5453417256
 
-19-846316509
-23-549902458
+19-1228739768
+23-1073926258
 MainWindow.xaml;Resources\Icons.xaml;Resources\IconsNonShared.xaml;Resources\WindowResources.xaml;Views\SplashScreenView.xaml;
 
 True

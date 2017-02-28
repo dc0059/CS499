@@ -16,15 +16,15 @@ namespace CS499.TCMS.Model
         /// Default constructor
         /// </summary>
         /// <param name="detailID">unique identifier</param>
-        /// <param name="recordID">identifier of the maintenance record associated with this detail</param>
+        /// <param name="maintenanceID">identifier of the maintenance record associated with this detail</param>
         /// <param name="employeeID">identifier of the employee associated with this detail</param>
         /// <param name="repairDescription">summary description of the repairs performed</param>
         /// <param name="repairDate">date the repair was performed</param>
         public MaintenanceRecordDetails
-            (long detailID, long recordID, long employeeID, string repairDescription, DateTime repairDate)
+            (long detailID, long maintenanceID, long employeeID, string repairDescription, DateTime repairDate)
         {
             this.DetailID = detailID;
-            this.RecordID = recordID;
+            this.MaintenanceID = maintenanceID;
             this.EmployeeID = employeeID;
             this.RepairDescription = repairDescription;
             this.RepairDate = repairDate;
@@ -48,8 +48,8 @@ namespace CS499.TCMS.Model
                 case "DetailID":
                     error = this.ValidateDetailID();
                     break;
-                case "RecordID":
-                    error = this.ValidateRecordID();
+                case "MaintenanceID":
+                    error = this.ValidateMaintenanceID();
                     break;
                 case "EmployeeID":
                     error = this.ValidateEmployeeID();
@@ -82,9 +82,9 @@ namespace CS499.TCMS.Model
         /// Validate the maintenance record ID
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateRecordID()
+        private string ValidateMaintenanceID()
         {
-            if (this.RecordID < 0)
+            if (this.MaintenanceID < 0)
                 return Messages.InvalidID;
             return null;
         }
@@ -186,7 +186,7 @@ namespace CS499.TCMS.Model
         static readonly string[] ValidatedProperties =
         {
             "DetailID",
-            "RecordID",
+            "MaintenanceID",
             "EmployeeID",
             "RepairDescription",
             "RepairDate"
@@ -199,7 +199,7 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Identifier of the maintenance record associated with this detail
         /// </summary>
-        public long RecordID { get; set; }
+        public long MaintenanceID { get; set; }
         /// <summary>
         /// Identifier of the employee associated with this detail
         /// </summary>

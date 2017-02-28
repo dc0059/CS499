@@ -16,7 +16,7 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="id">unique identifier</param>
+        /// <param name="employeeID">unique identifier</param>
         /// <param name="userName">username associated to user</param>
         /// <param name="firstName">first name of the user</param>
         /// <param name="middleName">middle name of the user</param>
@@ -34,10 +34,10 @@ namespace CS499.TCMS.Model
         /// <param name="homeStore">store the user is assigned to</param>
         /// <param name="jobDescription">job description of the user</param>
         /// <param name="isActive">flag indicating an active user</param>
-        public User(long id, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
+        public User(long employeeID, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
             int homePhone, int cellPhone, string email, double payRate, DateTime employmentDate, long jobID, string homeStore, string jobDescription, bool isActive)
         {
-            this.ID = id;
+            this.EmployeeID = employeeID;
             this.UserName = userName;
             this.FirstName = firstName;
             this.MiddleName = middleName;
@@ -74,7 +74,7 @@ namespace CS499.TCMS.Model
 
             switch (propertyName)
             {
-                case "ID":
+                case "EmployeeID":
                     error = this.ValidateID();
                     break;
                 case "UserName":
@@ -138,7 +138,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateID()
         {
-            if (this.ID < 0)
+            if (this.EmployeeID < 0)
                 return Messages.InvalidID;
             return null;
         }
@@ -323,7 +323,7 @@ namespace CS499.TCMS.Model
                 return false;
             // Zip code pattern must have exactly 5 digits
             string pattern = @"^[0-9]{5}$";
-            return Regex.IsMatch(zip.ToString(), pattern);
+            return Regex.IsMatch(zip.ToString(), pattern, RegexOptions.IgnoreCase);
         }
 
         /// <summary>
@@ -337,7 +337,7 @@ namespace CS499.TCMS.Model
                 return false;
             // Phone number must have exactly 10 digits
             string pattern = @"^[0-9]{10}$";
-            return Regex.IsMatch(number.ToString(), pattern);
+            return Regex.IsMatch(number.ToString(), pattern, RegexOptions.IgnoreCase);
         }
         
         /// <summary>
@@ -378,11 +378,11 @@ namespace CS499.TCMS.Model
         {
             get
             {
-                return this.ID;
+                return this.EmployeeID;
             }
             set
             {
-                this.ID = value;
+                this.EmployeeID = value;
             }
         }
 
@@ -409,7 +409,7 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
-            "ID",
+            "EmployeeID",
             "UserName",
             "FirstName",
             "MiddleName",
@@ -431,7 +431,7 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Unique indentifier
         /// </summary>
-        public long ID { get; set; }
+        public long EmployeeID { get; set; }
 
         /// <summary>
         /// Username associated to a single user

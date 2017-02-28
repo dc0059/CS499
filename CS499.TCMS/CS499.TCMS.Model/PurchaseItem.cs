@@ -15,11 +15,13 @@ namespace CS499.TCMS.Model
         /// <param name="itemID">unique identifier</param>
         /// <param name="orderID">identifier of the purchase order this item is part of</param>
         /// <param name="quantity">quantity of the item</param>
-        public PurchaseItem (long itemID, long orderID, int quantity)
+        /// <param name="partID">identifier of the part this item is associated with</param>
+        public PurchaseItem (long itemID, long orderID, int quantity, long partID)
         {
             this.ItemID = itemID;
             this.OrderID = orderID;
             this.Quantity = quantity;
+            this.PartID = partID;
         }
 
         #endregion
@@ -45,6 +47,9 @@ namespace CS499.TCMS.Model
                     break;
                 case "Quantity":
                     error = this.ValidateQuantity();
+                    break;
+                case "PartID":
+                    error = this.ValidatePartID();
                     break;
                 default:
                     Debug.Fail("Unexpected property being validated on PurchaseItem: " + propertyName);
@@ -87,6 +92,17 @@ namespace CS499.TCMS.Model
                 return Messages.InvalidValue;
             else
                 return null;
+        }
+
+        /// <summary>
+        /// Validate the part ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidatePartID()
+        {
+            if (this.PartID < 0)
+                return Messages.InvalidID;
+            return null;
         }
 
         /// <summary>
@@ -154,7 +170,8 @@ namespace CS499.TCMS.Model
         {
             "ItemID",
             "OrderID",
-            "Quantity"
+            "Quantity",
+            "PartID"
         };
 
         /// <summary>
@@ -169,6 +186,10 @@ namespace CS499.TCMS.Model
         /// Quantity of the item
         /// </summary>
         public int Quantity { get; set; }
+        /// <summary>
+        /// Identifier of the part this item is associated with
+        /// </summary>
+        public long PartID { get; set; }
 
         string IDataErrorInfo.Error
         {

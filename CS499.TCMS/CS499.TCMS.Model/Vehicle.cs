@@ -20,13 +20,15 @@ namespace CS499.TCMS.Model
         /// <param name="year">year of the vehicle</param>
         /// <param name="model">model of the vehicle</param>
         /// <param name="vehicleType">type of vehicle</param>
-        public Vehicle(long vehicleID, string brand, int year, string model, string vehicleType)
+        /// <param name="capacity">weight capacity of the vehicle</param>
+        public Vehicle(long vehicleID, string brand, int year, string model, string vehicleType, int capacity)
         {
             this.VehicleID = vehicleID;
             this.Brand = brand;
             this.Year = year;
             this.Model = model;
             this.VehicleType = vehicleType;
+            this.Capacity = capacity;
         }
         #endregion
 
@@ -58,6 +60,9 @@ namespace CS499.TCMS.Model
                     break;
                 case "VehicleType":
                     error = this.ValidateVehicleType();
+                    break;
+                case "Capacity":
+                    error = this.ValidateCapacity();
                     break;
                 default:
                     Debug.Fail("Unexpected property being validated on Vehicle: " + propertyName);
@@ -138,6 +143,17 @@ namespace CS499.TCMS.Model
             string pattern = @"^[0-9]{4}$";
             return Regex.IsMatch(year.ToString(), pattern);
         }
+
+        /// <summary>
+        /// Validate the capacity
+        /// </summary>
+        /// <returns></returns>
+        private string ValidateCapacity()
+        {
+            if (this.Capacity < 0)
+                return Messages.InvalidID;
+            return null;
+        }
         #endregion
 
         #region Properties
@@ -196,7 +212,8 @@ namespace CS499.TCMS.Model
             "Brand",
             "Year",
             "Model",
-            "VehicleType"
+            "VehicleType",
+            "Capacity"
         };
 
         /// <summary>
@@ -219,6 +236,10 @@ namespace CS499.TCMS.Model
         /// Type of vehicle
         /// </summary>
         public string VehicleType { get; set; }
+        /// <summary>
+        /// Weight capacity of the vehicle
+        /// </summary>
+        public int Capacity { get; set; }
 
         string IDataErrorInfo.Error
         {
