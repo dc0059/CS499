@@ -16,13 +16,13 @@ namespace CS499.TCMS.Model
         /// Default constructor
         /// </summary>
         /// <param name="maintenanceID">unique identifier</param>
-        /// <param name="equipmentID">identifier of the vehicle associated with this maintenance record</param>
+        /// <param name="vehicleID">identifier of the vehicle associated with this maintenance record</param>
         /// <param name="maintenanceDate">date of the most recent maintenance</param>
         /// <param name="maintenanceDescription">summary description of the maintenance performed</param>
-        public MaintenanceRecord(long maintenanceID, long equipmentID, DateTime maintenanceDate, string maintenanceDescription)
+        public MaintenanceRecord(long maintenanceID, long vehicleID, DateTime maintenanceDate, string maintenanceDescription)
         {
             this.MaintenanceID = maintenanceID;
-            this.EquipmentID = equipmentID;
+            this.VehicleID = vehicleID;
             this.MaintenanceDate = maintenanceDate;
             this.MaintenanceDescription = maintenanceDescription;
         }
@@ -45,8 +45,8 @@ namespace CS499.TCMS.Model
                 case "MaintenanceID":
                     error = this.ValidateMaintenanceID();
                     break;
-                case "EquipmentID":
-                    error = this.ValidateEquipmentID();
+                case "VehicleID":
+                    error = this.ValidateVehicleID();
                     break;
                 case "MaintenanceDate":
                     error = this.ValidateMaintenanceDate();
@@ -73,12 +73,12 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Validate the equipment ID
+        /// Validate the vehicle ID
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateEquipmentID()
+        private string ValidateVehicleID()
         {
-            if (this.MaintenanceID < 0)
+            if (this.VehicleID < 0)
                 return Messages.InvalidID;
             return null;
         }
@@ -167,7 +167,7 @@ namespace CS499.TCMS.Model
         static readonly string[] ValidatedProperties =
         {
             "MaintenanceID",
-            "EquipmentID",
+            "VehicleID",
             "MaintenanceDate",
             "MaintenanceDescription"
         };
@@ -179,7 +179,7 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Identifier of the vehicle asssociated with this maintenance record
         /// </summary>
-        public long EquipmentID { get; set; }
+        public long VehicleID { get; set; }
         /// <summary>
         /// Date the maintenance was performed
         /// </summary>

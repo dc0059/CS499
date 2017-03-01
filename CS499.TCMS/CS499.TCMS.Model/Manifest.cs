@@ -23,7 +23,8 @@ namespace CS499.TCMS.Model
         /// <param name="eta">estimated time of arrival</param>
         /// <param name="arrived">flag indicating the shipment arrived at its destination</param>
         /// <param name="shippingCost">total cost of the shipment</param>
-        public Manifest(long manifestID, string shipmentType, long vehicleID, DateTime departureTime, DateTime eta, bool arrived, double shippingCost)
+        /// <param name="employeeID">identifier of the employee assigned to this manifest</param>
+        public Manifest(long manifestID, string shipmentType, long vehicleID, DateTime departureTime, DateTime eta, bool arrived, double shippingCost, long employeeID)
         {
             this.ManifestID = manifestID;
             this.ShipmentType = shipmentType;
@@ -32,6 +33,7 @@ namespace CS499.TCMS.Model
             this.ETA = eta;
             this.Arrived = arrived;
             this.ShippingCost = shippingCost;
+            this.EmployeeID = employeeID;
         }
         #endregion
 
@@ -66,6 +68,9 @@ namespace CS499.TCMS.Model
                     break;
                 case "ShippingCost":
                     error = this.ValidateShippingCost();
+                    break;
+                case "EmployeeID":
+                    error = this.ValidateEmployeeID();
                     break;
                 default:
                     Debug.Fail("Unexpected property being validated on Manifest: " + propertyName);
@@ -139,6 +144,17 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
+        /// Validate the employee ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateEmployeeID()
+        {
+            if (this.EmployeeID < 0)
+                return Messages.InvalidID;
+            return null;
+        }
+
+        /// <summary>
         /// Check to make sure the string is not null or empty
         /// </summary>
         /// <param name="value">string value to test</param>
@@ -206,7 +222,8 @@ namespace CS499.TCMS.Model
             "VehicleID",
             "DepartureTime",
             "ETA",
-            "ShippingCost"
+            "ShippingCost",
+            "EmployeeID"
         };
 
         /// <summary>
@@ -237,6 +254,10 @@ namespace CS499.TCMS.Model
         /// Total cost of the shipment
         /// </summary>
         public double ShippingCost { get; set; }
+        /// <summary>
+        /// Identifier of the employee assigned to this manifest
+        /// </summary>
+        public long EmployeeID { get; set; }
 
         string IDataErrorInfo.Error
         {

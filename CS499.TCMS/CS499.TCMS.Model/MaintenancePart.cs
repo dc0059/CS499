@@ -17,12 +17,13 @@ namespace CS499.TCMS.Model
         /// </summary>
         /// <param name="mainPartID">unique identifier</param>
         /// <param name="quantity">quantity of the part</param>
-        /// <param name="detailID">identifier of the maintenance record detail the maintenance part is part of</param>
-        public MaintenancePart(long mainPartID, int quantity, long detailID)
+        /// <param name="maintenanceID">identifier of the maintenance record the maintenance part is part of</param>
+        public MaintenancePart(long mainPartID, int quantity, long maintenanceID, long partID)
         {
-            this.PartID = mainPartID;
+            this.MaintenancePartID = mainPartID;
             this.Quantity = quantity;
-            this.DetailID = detailID;
+            this.MaintenanceID = maintenanceID;
+            this.PartID = partID;
         }
         #endregion
 
@@ -39,14 +40,17 @@ namespace CS499.TCMS.Model
             string error = null;
             switch (propertyName)
             {
-                case "PartID":
-                    error = this.ValidatePartID();
+                case "MaintenancePartID":
+                    error = this.ValidateMaintenancePartID();
                     break;
                 case "Quantity":
                     error = this.ValidateQuantity();
                     break;
-                case "DetailID":
-                    error = this.ValidateDetailID();
+                case "MaintenanceID":
+                    error = this.ValidateMaintenanceID();
+                    break;
+                case "PartID":
+                    error = this.ValidatePartID();
                     break;
                 default:
                     Debug.Fail("Unexpected property being validated on MaintenancePart: " + propertyName);
@@ -56,12 +60,12 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Validate the part ID
+        /// Validate the maintenance part ID
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidatePartID()
+        private string ValidateMaintenancePartID()
         {
-            if (this.PartID < 0)
+            if (this.MaintenancePartID < 0)
                 return Messages.InvalidID;
             else
                 return null;
@@ -79,12 +83,24 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Validate the detail ID
+        /// Validate the maintenance ID
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateDetailID()
+        private string ValidateMaintenanceID()
         {
-            if (this.DetailID < 0)
+            if (this.MaintenanceID < 0)
+                return Messages.InvalidID;
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// Validate the part ID
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidatePartID()
+        {
+            if (this.PartID < 0)
                 return Messages.InvalidID;
             else
                 return null;
@@ -121,11 +137,11 @@ namespace CS499.TCMS.Model
         {
             get
             {
-                return this.PartID;
+                return this.MaintenancePartID;
             }
             set
             {
-                this.PartID = value;
+                this.MaintenancePartID = value;
             }
         }
 
@@ -153,19 +169,28 @@ namespace CS499.TCMS.Model
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
-            "PartID",
+            "MaintenancePartID",
             "Quantity",
-            "DetailID"
+            "DetailID",
+            "PartID"
         };
 
         /// <summary>
         /// Unique identifier
         /// </summary>
-        public long PartID { get; set; }public int Quantity { get; set; }
+        public long MaintenancePartID { get; set; }
         /// <summary>
-        /// The unit of measurement associated with the part
+        /// 
         /// </summary>
-        public long DetailID { get; set; }
+        public int Quantity { get; set; }
+        /// <summary>
+        /// Identifier of the maintenance record associate
+        /// </summary>
+        public long MaintenanceID { get; set; }
+        /// <summary>
+        /// Identifier of the part this maintenance part is associated with
+        /// </summary>
+        public long PartID { get; set; }
 
         string IDataErrorInfo.Error
         {
