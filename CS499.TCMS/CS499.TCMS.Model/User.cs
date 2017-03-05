@@ -35,7 +35,7 @@ namespace CS499.TCMS.Model
         /// <param name="jobDescription">job description of the user</param>
         /// <param name="isActive">flag indicating an active user</param>
         public User(long employeeID, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
-            int homePhone, int cellPhone, string email, double payRate, DateTime employmentDate, long jobID, string homeStore, string jobDescription, bool isActive)
+            long homePhone, long cellPhone, string email, double payRate, DateTime employmentDate, long jobID, string homeStore, string jobDescription, bool isActive)
         {
             this.EmployeeID = employeeID;
             this.UserName = userName;
@@ -331,7 +331,7 @@ namespace CS499.TCMS.Model
         /// </summary>
         /// <param name="number">string for the phone number</param>
         /// <returns>bool value indicating if the phone number is valid</returns>
-        private bool IsValidPhoneNumber(int number)
+        private bool IsValidPhoneNumber(long number)
         {
             if (number < 0)
                 return false;
@@ -476,12 +476,12 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Home phone number of the user
         /// </summary>
-        public int HomePhone { get; set; }
+        public long HomePhone { get; set; }
 
         /// <summary>
         /// Cell phone number of the user
         /// </summary>
-        public int CellPhone { get; set; }
+        public long CellPhone { get; set; }
 
         /// <summary>
         /// Email address of the user

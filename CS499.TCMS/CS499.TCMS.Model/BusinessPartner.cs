@@ -23,7 +23,7 @@ namespace CS499.TCMS.Model
         /// <param name="state">state of the company</param>
         /// <param name="zipCode">zipCode of the company</param>
         /// <param name="phoneNumber">phone number of the company</param>
-        public BusinessPartner(long companyID, string companyName, string address, string city, string state, int zipCode, int phoneNumber)
+        public BusinessPartner(long companyID, string companyName, string address, string city, string state, int zipCode, long phoneNumber)
         {
             this.CompanyID = companyID;
             this.CompanyName = companyName;
@@ -178,7 +178,7 @@ namespace CS499.TCMS.Model
         /// </summary>
         /// <param name="number">string for the phone number</param>
         /// <returns>bool value indicating if the phone number is valid</returns>
-        private bool IsValidPhoneNumber(int number)
+        private bool IsValidPhoneNumber(long number)
         {
             if (number < 0)
                 return false;
@@ -282,7 +282,7 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Phone number of the company
         /// </summary>
-        public int PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
         /// <summary>
         /// Error message for the who class (not implemented)

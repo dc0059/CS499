@@ -171,7 +171,7 @@ namespace CS499.TCMS.Model
         {
             "MaintenancePartID",
             "Quantity",
-            "DetailID",
+            "MaintenanceID",
             "PartID"
         };
 

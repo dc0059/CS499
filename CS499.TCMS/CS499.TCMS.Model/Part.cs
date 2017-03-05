@@ -19,9 +19,9 @@ namespace CS499.TCMS.Model
         /// <param name="description">description of the item</param>
         /// <param name="partNumber">number of the item, not related to the identifier</param>
         /// <param name="price">price per unit of the item</param>
-        /// <param name="weight">weight of the item</param>
+        /// <param name="weight">weight of the item in pounds</param>
         /// <param name="quantity">quantity of the item in stock</param>
-        public Part(long partID, string description, int partNumber, double price, string weight, int quantity)
+        public Part(long partID, string description, int partNumber, double price, double weight, int quantity)
         {
             this.PartID = partID;
             this.PartDescription = description;
@@ -118,7 +118,9 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidatePartWeight()
         {
-            return IsEmpty(this.PartWeight) ? Messages.InvalidValue : null;
+            if (this.PartWeight < 0.0)
+                return Messages.InvalidValue;
+            return null;
         }
 
         /// <summary>
@@ -224,9 +226,9 @@ namespace CS499.TCMS.Model
         public double PartPrice { get; set; }
 
         /// <summary>
-        /// Weight of the item
+        /// Weight of the item in pounds
         /// </summary>
-        public string PartWeight { get; set; }
+        public double PartWeight { get; set; }
 
         /// <summary>
         /// Quantity of the item in stock
