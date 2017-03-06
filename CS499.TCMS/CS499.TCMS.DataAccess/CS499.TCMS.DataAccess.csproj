@@ -46,15 +46,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="IRepositoryInterface.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="iModel.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="iRepositoryBase.cs" />
+    <Compile Include="iUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryFactory.cs" />
+    <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CS499.TCMS.Model\CS499.TCMS.Model.csproj">
+      <Project>{ad3f15b6-221f-4aba-87b8-e56dfdfca540}</Project>
+      <Name>CS499.TCMS.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ToolKit.Data\ToolKit.Data.csproj">
+      <Project>{8dcf6f85-9567-4a67-b3b9-3b8cfe189c7d}</Project>
+      <Name>ToolKit.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
