@@ -76,7 +76,7 @@ namespace CS499.TCMS.DataAccess
         /// Delete user
         /// </summary>
         /// <param name="model">user model</param>
-        void IRepository<Model.User>.Delete(Model.User model)
+        void IRepository<User>.Delete(User model)
         {
 
             // create query definition
