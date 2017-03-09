@@ -124,6 +124,15 @@ namespace CS499.TCMS.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid hashing key!.
+        /// </summary>
+        internal static string InvalidHashKey {
+            get {
+                return ResourceManager.GetString("InvalidHashKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid ID number!.
         /// </summary>
         internal static string InvalidID {
@@ -147,6 +156,15 @@ namespace CS499.TCMS.Model {
         internal static string InvalidName {
             get {
                 return ResourceManager.GetString("InvalidName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid passphrase!.
+        /// </summary>
+        internal static string InvalidPassphrase {
+            get {
+                return ResourceManager.GetString("InvalidPassphrase", resourceCulture);
             }
         }
         
