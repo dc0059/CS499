@@ -14,3 +14,12 @@ C:\Source\Repos\CS399\CS499.TCMS\CS499.TCMS.Model\bin\Debug\log4net.xml
 C:\Source\Repos\CS399\CS499.TCMS\CS499.TCMS.Model\obj\Debug\CS499.TCMS.Model.dll
 C:\Source\Repos\CS399\CS499.TCMS\CS499.TCMS.Model\obj\Debug\CS499.TCMS.Model.pdb
 C:\Source\Repos\CS399\CS499.TCMS\CS499.TCMS.Model\obj\Debug\CS499.TCMS.Model.csprojResolveAssemblyReference.cache
+C:\Users\James\Desktop\CS 499\CS499\CS499.TCMS\CS499.TCMS.Model\bin\Debug\CS499.TCMS.Model.dll
+C:\Users\James\Desktop\CS 499\CS499\CS499.TCMS\CS499.TCMS.Model\bin\Debug\CS499.TCMS.Model.pdb
+C:\Users\James\Desktop\CS 499\CS499\CS499.TCMS\CS499.TCMS.Model\bin\Debug\log4net.dll
+C:\Users\James\Desktop\CS 499\CS499\CS499.TCMS\CS499.TCMS.Model\bin\Debug\log4net.xml
+C:\Users\James\Desktop\CS 499\CS499\CS499.TCMS\CS499.TCMS.Model\obj\Debug\CS499.TCMS.Model.csprojResolveAssemblyReference.cache
+C:\Users\James\Desktop\CS 499\CS499\CS499.TCMS\CS499.TCMS.Model\obj\Debug\CS499.TCMS.Model.Messages.resources
+C:\Users\James\Desktop\CS 499\CS499\CS499.TCMS\CS499.TCMS.Model\obj\Debug\CS499.TCMS.Model.csproj.GenerateResource.Cache
+C:\Users\James\Desktop\CS 499\CS499\CS499.TCMS\CS499.TCMS.Model\obj\Debug\CS499.TCMS.Model.dll
+C:\Users\James\Desktop\CS 499\CS499\CS499.TCMS\CS499.TCMS.Model\obj\Debug\CS499.TCMS.Model.pdb

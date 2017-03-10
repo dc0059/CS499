@@ -25,7 +25,7 @@ namespace CS499.TCMS.DataAccess
         /// Generic method to get all objects in the list
         /// </summary>
         /// <returns>a list of all objects</returns>
-        IEnumerator<T> getAll();
+        IEnumerable<T> getAll();
 
 
         /// <summary>

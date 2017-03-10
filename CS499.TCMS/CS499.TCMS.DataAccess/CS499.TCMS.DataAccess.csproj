@@ -47,13 +47,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums.cs" />
-    <Compile Include="iModel.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="iRepositoryBase.cs" />
-    <Compile Include="iUserRepository.cs" />
+    <Compile Include="IRepositoryBase.cs" />
+    <Compile Include="Model IRepositories\IBusinessPartnerRepository.cs" />
+    <Compile Include="Model IRepositories\IMaintenancePartRepository.cs" />
+    <Compile Include="Model IRepositories\IMaintenanceRecordDetailsRepository.cs" />
+    <Compile Include="Model IRepositories\IMaintenanceRecordRepository.cs" />
+    <Compile Include="Model IRepositories\IManifestRepository.cs" />
+    <Compile Include="Model IRepositories\IPartRepository.cs" />
+    <Compile Include="Model IRepositories\IPayrollRepository.cs" />
+    <Compile Include="Model IRepositories\IPurchaseItemRepository.cs" />
+    <Compile Include="Model IRepositories\IPurchaseOrderRepository.cs" />
+    <Compile Include="Model IRepositories\IUserRepository.cs" />
+    <Compile Include="Model IRepositories\IVehicleRepository.cs" />
+    <Compile Include="Model Repositories\BusinessPartnerRepository.cs" />
+    <Compile Include="Model Repositories\MaintenancePartRepository.cs" />
+    <Compile Include="Model Repositories\MaintenanceRecordDetailsRepository.cs" />
+    <Compile Include="Model Repositories\MaintenanceRecordRepository.cs" />
+    <Compile Include="Model Repositories\ManifestRepository.cs" />
+    <Compile Include="Model Repositories\PartRepository.cs" />
+    <Compile Include="Model Repositories\PayrollRepository.cs" />
+    <Compile Include="Model Repositories\PurchaseItemRepository.cs" />
+    <Compile Include="Model Repositories\PurchaseOrderRepository.cs" />
+    <Compile Include="Model Repositories\VehicleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryFactory.cs" />
-    <Compile Include="UserRepository.cs" />
+    <Compile Include="Model Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

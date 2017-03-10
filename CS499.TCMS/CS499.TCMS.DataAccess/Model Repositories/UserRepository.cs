@@ -29,48 +29,7 @@ namespace CS499.TCMS.DataAccess
 
         #region Methods
 
-        /// <summary>
-        /// Get all users by the notification type
-        /// </summary>
-        /// <param name="type">notification type</param>
-        /// <returns>Enumerator to traverse the collection of models</returns>
-        IEnumerable<User> IUserRepository.GetUsersByNotification(Enums.NotificationTypes type)
-        {
-
-            // create query definition
-            QueryDefinition definition = new QueryDefinition()
-            {
-                CommandText = "SELECT users.UserID, users.UserName, users.EmailAddress " +
-                              "FROM notifications notifications INNER JOIN users users ON (notifications.UserID = users.UserID) " +
-                              string.Format("WHERE notifications.{0} = ? ", type.ToString()) +
-                              "ORDER BY users.UserName",
-                cType = CommandType.Text,
-                Database = "database_name",
-                Type = ConnectionType.MySQL
-            };
-
-            // create parameter definition
-            definition.Parameters.Add(new ParameterDefinition()
-            {
-                Direction = ParameterDirection.Input,
-                Name = "P_Type",
-                Type = DbType.Int32,
-                Value = 1
-            });
-
-            return this.Database.ExecuteListQuery<User>(definition, Map);
-
-        }
-
-        /// <summary>
-        /// Get user from active directory
-        /// </summary>
-        /// <param name="userName">string for the username</param>
-        /// <returns>user model</returns>
-        User IUserRepository.GetUserFromAD(string userName)
-        {
-            return this.Map(UserInfo.GetUser(userName));
-        }
+ 
 
         /// <summary>
         /// Delete user
@@ -136,7 +95,7 @@ namespace CS499.TCMS.DataAccess
         /// Get all users
         /// </summary>
         /// <returns>Enumerator to traverse the collection of models</returns>
-        IEnumerable<User> IRepository<User>.GetAll()
+        IEnumerable<User> IRepository<User>.getAll()
         {
 
             // create query definition
@@ -159,7 +118,7 @@ namespace CS499.TCMS.DataAccess
         /// </summary>
         /// <param name="id">unique identifier</param>
         /// <returns>user model</returns>
-        User IRepository<User>.GetSingle(object id)
+        User IRepository<User>.getSingle(object id)
         {
 
             // Create query definition
@@ -312,6 +271,9 @@ namespace CS499.TCMS.DataAccess
                 user.SamAccountName,
                 user.EmailAddress);
         }
+
+
+
 
         #endregion
 

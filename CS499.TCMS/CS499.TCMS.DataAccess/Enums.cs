@@ -11,12 +11,24 @@ namespace CS499.TCMS.DataAccess
         /// <summary>
         /// This will be the enum for the notification tpyes
         /// </summary>
-        public enum NotificationTypes
+        public enum JobType
         {
             Ticket = 0,
             OutOfStock,
             FruAuthorization,
             MmaAuthorization
+        }
+
+        public enum TruckMaxCapacity
+        {
+            class1 = 0,
+            class2,
+            class3,
+            class4,
+            class5,
+            class6,
+            class7,
+            class8
         }
 
         /// <summary>
