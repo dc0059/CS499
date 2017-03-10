@@ -34,8 +34,11 @@ namespace CS499.TCMS.Model
         /// <param name="homeStore">store the user is assigned to</param>
         /// <param name="jobDescription">job description of the user</param>
         /// <param name="isActive">flag indicating an active user</param>
+        /// <param name="hashKey">hashed password</param>
+        /// <param name="passphrase">passphrase used to encrypt password</param>
         public User(long employeeID, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
-            long homePhone, long cellPhone, string email, double payRate, DateTime employmentDate, long jobID, string homeStore, string jobDescription, bool isActive)
+            long homePhone, long cellPhone, string email, double payRate, DateTime employmentDate, long jobID, string homeStore, string jobDescription, bool isActive,
+            string hashKey, string passphrase)
         {
             this.EmployeeID = employeeID;
             this.UserName = userName;
@@ -55,6 +58,8 @@ namespace CS499.TCMS.Model
             this.HomeStore = homeStore;
             this.JobDescription = jobDescription;
             this.IsActive = isActive;
+            this.HashKey = hashKey;
+            this.Passphrase = passphrase;
         }
 
         #endregion
@@ -124,6 +129,12 @@ namespace CS499.TCMS.Model
                     break;
                 case "JobDescription":
                     error = this.ValidateJobDescription();
+                    break;
+                case "HashKey":
+                    error = this.ValidateHashKey();
+                    break;
+                case "Passphrase":
+                    error = this.ValidatePassphrase();
                     break;
                 default:
                     Debug.Fail("Unexpected property being validated on User: " + propertyName);
@@ -302,6 +313,24 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
+        /// Validate the hash key
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateHashKey()
+        {
+            return IsEmpty(this.HashKey) ? Messages.InvalidHashKey : null;
+        }
+
+        /// <summary>
+        /// Validate the passphrase
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidatePassphrase()
+        {
+            return IsEmpty(this.Passphrase) ? Messages.InvalidPassphrase : null;
+        }
+
+        /// <summary>
         /// Check to make sure the value is not null 
         /// or empty
         /// </summary>
@@ -425,7 +454,9 @@ namespace CS499.TCMS.Model
             "EmploymentDate",
             "JobID",
             "HomeStore",
-            "JobDescription"
+            "JobDescription",
+            "HashKey",
+            "Passphrase"
         };
 
         /// <summary>
@@ -517,6 +548,16 @@ namespace CS499.TCMS.Model
         /// Flag indicating the user is active
         /// </summary>
         public bool IsActive { get; set; }
+
+        /// <summary>
+        /// Hashed password
+        /// </summary>
+        public string HashKey { get; set; }
+
+        /// <summary>
+        /// Passphrase used to encrypt password
+        /// </summary>
+        public string Passphrase { get; set; }
 
         /// <summary>
         /// Error message for the who class (not implemented)

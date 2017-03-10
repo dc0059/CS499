@@ -138,6 +138,9 @@
   <data name="InvalidEmailAddress" xml:space="preserve">
     <value>Invalid email address!</value>
   </data>
+  <data name="InvalidHashKey" xml:space="preserve">
+    <value>Invalid hashing key!</value>
+  </data>
   <data name="InvalidID" xml:space="preserve">
     <value>Invalid ID number!</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="InvalidName" xml:space="preserve">
     <value>Invalid name!</value>
+  </data>
+  <data name="InvalidPassphrase" xml:space="preserve">
+    <value>Invalid passphrase!</value>
   </data>
   <data name="InvalidPhone" xml:space="preserve">
     <value>Invalid phone number!</value>

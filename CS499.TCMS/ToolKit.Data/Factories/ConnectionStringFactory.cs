@@ -41,7 +41,7 @@ namespace ToolKit.Data.Factories
         /// <returns>connection string</returns>
         private static string GetMySQLConnectionString(string database)
         {
-            return @"Server=localhost;Database=" + database + @";uid=username;pwd=password;Pooling=True";
+            return @"Server=68.186.187.139;Database=" + database + @";uid=cs499;pwd=TCMS499;Pooling=True";
         }
 
 
