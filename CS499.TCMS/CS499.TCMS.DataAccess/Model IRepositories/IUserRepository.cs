@@ -21,7 +21,7 @@ namespace CS499.TCMS.DataAccess
         User getSingle(String firstName, String lastName);
         User getSingle(DateTime mostConvenient);
 
-        IEnumerable<User> getSingle(int JobAssignment);
+        IEnumerable<User> getUsersByJobAssignment(int JobAssignment);
 
         IEnumerable<User> getUsersByAccessLevel(long AccessLevel);
 

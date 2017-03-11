@@ -10,7 +10,7 @@ namespace CS499.TCMS.Model
     /// </summary>
     public class BusinessPartner : IModel
     {
-
+ 
         #region Constructor
 
         /// <summary>

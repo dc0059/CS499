@@ -176,14 +176,17 @@ namespace CS499.TCMS.Model
         /// Unique identifier
         /// </summary>
         public long MaintenanceID { get; set; }
+
         /// <summary>
         /// Identifier of the vehicle asssociated with this maintenance record
         /// </summary>
         public long VehicleID { get; set; }
+
         /// <summary>
         /// Date the maintenance was performed
         /// </summary>
         public DateTime MaintenanceDate { get; set; }
+
         /// <summary>
         /// Summary description of the maintenance performed
         /// </summary>

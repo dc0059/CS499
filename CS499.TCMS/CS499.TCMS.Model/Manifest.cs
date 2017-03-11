@@ -230,30 +230,37 @@ namespace CS499.TCMS.Model
         /// Unique identifier
         /// </summary>
         public long ManifestID { get; set; }
+
         /// <summary>
         /// Type of shipment, incoming or outgoing
         /// </summary>
         public string ShipmentType { get; set; }
+
         /// <summary>
         /// Identifier of the vehicle transporting the shipment
         /// </summary>
         public long VehicleID { get; set; }
+
         /// <summary>
         /// Date and time the shipment was sent out
         /// </summary>
         public DateTime DepartureTime { get; set; }
+
         /// <summary>
         /// Estimated time of arrival
         /// </summary>
         public DateTime ETA { get; set; }
+
         /// <summary>
         /// Flag indicating the shipment arrived at its destination
         /// </summary>
         public bool Arrived { get; set; }
+
         /// <summary>
         /// Total cost of the shipment
         /// </summary>
         public double ShippingCost { get; set; }
+
         /// <summary>
         /// Identifier of the employee assigned to this manifest
         /// </summary>

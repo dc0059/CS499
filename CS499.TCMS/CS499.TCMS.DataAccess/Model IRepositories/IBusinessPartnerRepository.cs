@@ -9,5 +9,12 @@ namespace CS499.TCMS.DataAccess.Model_IRepositories
 {
     interface IBusinessPartnerRepository : IRepository<BusinessPartner>
     {
+
+        User getSingle(String name);
+        User getSingle(long ID);
+
+        IEnumerable<BusinessPartner> getPartnersByZipCode(Payroll minimum);
+        
+
     }
 }

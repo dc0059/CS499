@@ -220,22 +220,27 @@ namespace CS499.TCMS.Model
         /// Unique identifier
         /// </summary>
         public long VehicleID { get; set; }
+
         /// <summary>
         /// Brand name of the vehicle
         /// </summary>
         public string Brand { get; set; }
+
         /// <summary>
         /// Year of the vehicle
         /// </summary>
         public int Year { get; set; }
+
         /// <summary>
         /// Model of the vehicle
         /// </summary>
         public string Model { get; set; }
+
         /// <summary>
         /// Type of vehicle
         /// </summary>
         public string VehicleType { get; set; }
+
         /// <summary>
         /// Weight capacity of the vehicle
         /// </summary>

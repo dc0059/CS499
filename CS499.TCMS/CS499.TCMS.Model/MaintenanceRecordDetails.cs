@@ -30,7 +30,7 @@ namespace CS499.TCMS.Model
             this.RepairDate = repairDate;
         }
         #endregion
-
+         
         #region Methods
 
         /// <summary>
@@ -196,18 +196,22 @@ namespace CS499.TCMS.Model
         /// Unique identifier
         /// </summary>
         public long DetailID { get; set; }
+
         /// <summary>
         /// Identifier of the maintenance record associated with this detail
         /// </summary>
         public long MaintenanceID { get; set; }
+
         /// <summary>
         /// Identifier of the employee associated with this detail
         /// </summary>
         public long EmployeeID { get; set; }
+
         /// <summary>
         /// Summary description of the repairs performed
         /// </summary>
         public string RepairDescription { get; set; }
+
         /// <summary>
         /// Date the repair was performed
         /// </summary>

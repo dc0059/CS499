@@ -29,7 +29,7 @@ namespace CS499.TCMS.Model
             this.ManifestID = manifestID;
         }
         #endregion
-
+         
         #region Methods
         /// <summary>
         /// Get validation errors

@@ -144,7 +144,7 @@ namespace CS499.TCMS.Model
             return string.IsNullOrEmpty(value);
         }
         #endregion
-
+ 
         #region Properties
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace CS499.TCMS.Model
             "PartWeight",
             "QuantityInStock"
         };
-
+         
         /// <summary>
         /// Unique identifier
         /// </summary>

@@ -177,14 +177,17 @@ namespace CS499.TCMS.Model
         /// Unique identifier
         /// </summary>
         public long PayrollID { get; set; }
+
         /// <summary>
         /// Identifier of the employee associated with this payment
         /// </summary>
         public long EmployeeID { get; set; }
+
         /// <summary>
         /// Date the payment was made
         /// </summary>
         public DateTime PaymentDate { get; set; }
+
         /// <summary>
         /// Amount of the payment
         /// </summary>

@@ -179,14 +179,17 @@ namespace CS499.TCMS.Model
         /// Unique identifier
         /// </summary>
         public long MaintenancePartID { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public int Quantity { get; set; }
+
         /// <summary>
         /// Identifier of the maintenance record associate
         /// </summary>
         public long MaintenanceID { get; set; }
+
         /// <summary>
         /// Identifier of the part this maintenance part is associated with
         /// </summary>
