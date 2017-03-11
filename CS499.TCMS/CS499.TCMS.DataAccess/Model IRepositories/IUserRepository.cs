@@ -30,12 +30,12 @@ namespace CS499.TCMS.DataAccess
         IEnumerable<User> getUsersByHomeStore(String HomeStore);
 
         /// <summary>
-        /// Generic Method that returns a collection of users that started working on a date between the given parameters
+        /// Method that returns a collection of users that started working on a date between the given parameters
         /// </summary>
         /// <param name="earliestDate">Earliest Date in the range</param>
         /// <param name="mostRecentDate">Most recent Date in the range</param>
         /// <returns>a collection of users that started working on a date between the given parameters</returns>        
-        IEnumerable<User> getUsersByTimeWorked(DateTime earliestDate, DateTime mostRecentDate);
+        IEnumerable<User> getUsersByTimeWorked(DateTime earliestDate, DateTime LastestDate);
 
         //IEnumerable getAll();
         #endregion

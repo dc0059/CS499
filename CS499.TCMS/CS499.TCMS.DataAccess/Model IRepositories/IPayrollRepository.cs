@@ -9,5 +9,11 @@ namespace CS499.TCMS.DataAccess.Model_IRepositories
 {
     interface IPayrollRepository : IRepository<Payroll>
     {
+        Payroll getSingle(long PayrollID);
+
+        IEnumerable<Payroll> getStubsByEmployee(long EmployeeID);
+        IEnumerable<Payroll> getStubsByDate(DateTime date);
+
+        void Delete(long PayrollID);
     }
 }

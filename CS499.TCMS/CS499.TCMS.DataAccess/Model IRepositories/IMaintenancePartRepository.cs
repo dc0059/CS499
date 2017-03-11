@@ -9,6 +9,13 @@ namespace CS499.TCMS.DataAccess.Model_IRepositories
 {
     interface IMaintenancePartRepository : IRepository<MaintenancePart>
     {
-        
+        MaintenancePart getSingle(long MaintenancePartID);
+
+        IEnumerable<MaintenancePart> getPartByMaintenanceRecord(long RecordID);
+        IEnumerable<MaintenancePart> getPartByPart(long PartID);
+
+        void Delete(long MaintenancePartID);
+        void DeleteByMaintenanceRecord(long RecordID);
+        void DeleteByPart(long PartID);
     }
 }
