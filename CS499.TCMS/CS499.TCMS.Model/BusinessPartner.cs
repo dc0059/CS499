@@ -23,7 +23,7 @@ namespace CS499.TCMS.Model
         /// <param name="state">state of the company</param>
         /// <param name="zipCode">zipCode of the company</param>
         /// <param name="phoneNumber">phone number of the company</param>
-        public BusinessPartner(long companyID, string companyName, string address, string city, string state, int zipCode, long phoneNumber)
+        public BusinessPartner(long companyID, string companyName, string address, string city, string state, int zipCode, string phoneNumber)
         {
             this.CompanyID = companyID;
             this.CompanyName = companyName;
@@ -174,17 +174,16 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Checks a phone number for a valid pattern
+        /// Checks a phone number for a valid pattern (10 digits long, does not start with 0)
         /// </summary>
         /// <param name="number">string for the phone number</param>
         /// <returns>bool value indicating if the phone number is valid</returns>
-        private bool IsValidPhoneNumber(long number)
+        private bool IsValidPhoneNumber(string number)
         {
-            if (number < 0)
+            if (this.IsEmpty(number))
                 return false;
-            // Phone number must have exactly 10 digits
-            string pattern = @"^[0-9]{10}$";
-            return Regex.IsMatch(number.ToString(), pattern);
+            string pattern = @"^[1-9]{1}[0-9]{9}$";
+            return Regex.IsMatch(number, pattern);
         }
 
         #endregion
@@ -282,7 +281,7 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Phone number of the company
         /// </summary>
-        public long PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Error message for the who class (not implemented)

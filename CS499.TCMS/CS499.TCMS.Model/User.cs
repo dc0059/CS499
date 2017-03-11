@@ -37,7 +37,7 @@ namespace CS499.TCMS.Model
         /// <param name="hashKey">hashed password</param>
         /// <param name="passphrase">passphrase used to encrypt password</param>
         public User(long employeeID, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
-            long homePhone, long cellPhone, string email, double payRate, DateTime employmentDate, long jobID, string homeStore, string jobDescription, bool isActive,
+            string homePhone, string cellPhone, string email, double payRate, DateTime employmentDate, long jobID, string homeStore, string jobDescription, bool isActive,
             string hashKey, string passphrase)
         {
             this.EmployeeID = employeeID;
@@ -356,17 +356,17 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Checks a phone number for a valid pattern
+        /// Checks a phone number for a valid pattern (10 digits long, does not start with 0)
         /// </summary>
         /// <param name="number">string for the phone number</param>
         /// <returns>bool value indicating if the phone number is valid</returns>
-        private bool IsValidPhoneNumber(long number)
+        private bool IsValidPhoneNumber(string number)
         {
-            if (number < 0)
+            if (this.IsEmpty(number))
                 return false;
             // Phone number must have exactly 10 digits
-            string pattern = @"^[0-9]{10}$";
-            return Regex.IsMatch(number.ToString(), pattern, RegexOptions.IgnoreCase);
+            string pattern = @"^[1-9]{1}[0-9]{9}$";
+            return Regex.IsMatch(number, pattern, RegexOptions.IgnoreCase);
         }
         
         /// <summary>
@@ -507,12 +507,12 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Home phone number of the user
         /// </summary>
-        public long HomePhone { get; set; }
+        public string HomePhone { get; set; }
 
         /// <summary>
         /// Cell phone number of the user
         /// </summary>
-        public long CellPhone { get; set; }
+        public string CellPhone { get; set; }
 
         /// <summary>
         /// Email address of the user
