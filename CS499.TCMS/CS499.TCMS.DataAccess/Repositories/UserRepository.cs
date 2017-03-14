@@ -146,6 +146,52 @@ namespace CS499.TCMS.DataAccess
         }
 
         /// <summary>
+        /// Retrieve a single record using the user's first, middle, and last name as the search parameters
+        /// </summary>
+        /// <param name="firstname">user's first name</param>
+        /// <param name = "middlename">user's middle name</param>
+        /// <param name = "lastname">user's last name</param>
+        User IUserRepository.getSingleByName(String firstname, String middlename, String lastname)
+        {
+            //Create query definition
+            QueryDefinition definition = new QueryDefinition()
+            {
+                CommandText = "SELECT EmployeeID, UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, " +
+                              "EmailAddress, PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
+                              "FROM user " +
+                              "WHERE FirstName = ? AND MiddleName = ? AND LastName = ?",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            //create parameter definition
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_FirstName",
+                Type = DbType.String,
+                Value = firstname
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_MiddleName",
+                Type = DbType.String,
+                Value = middlename
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastName",
+                Type = DbType.String,
+                Value = lastname
+            });
+
+            return this.Database.ExecuteSingleQuery<User>(definition, Map);
+        }
+
+        /// <summary>
         /// Insert user
         /// </summary>
         /// <param name="model">user model</param>

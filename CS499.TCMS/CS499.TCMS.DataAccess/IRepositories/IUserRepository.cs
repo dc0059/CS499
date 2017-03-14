@@ -16,8 +16,7 @@ namespace CS499.TCMS.DataAccess
 
         #region Methods
 
-        //User getSingle(String name);
-       // User getSingle(String firstName, String lastName);
+        User getSingleByName(String firstname, String middlename, String lastname);
         //User getSingle(DateTime mostConvenient);
 
         //IEnumerable<User> getUsersByJobAssignment(int JobAssignment);
@@ -36,7 +35,6 @@ namespace CS499.TCMS.DataAccess
         /// <returns>a collection of users that started working on a date between the given parameters</returns>        
         //IEnumerable<User> getUsersByTimeWorked(DateTime earliestDate, DateTime LastestDate);
 
-        //IEnumerable getAll();
         #endregion
 
     }

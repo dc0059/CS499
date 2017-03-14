@@ -74,5 +74,17 @@ namespace CS499.TCMS.DataAccessUnitTests
 
             userRepository.Update(updateUser);
         }
+
+        [TestMethod]
+        public void UserGetSingleNameTest()
+        {
+
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IUserRepository userRepository = factory.Create<IUserRepository>();
+
+            User returnUser = userRepository.getSingleByName("Zach", "Taylor", "Johnson");
+
+            Assert.IsTrue(returnUser.IsValid);
+        }
     }
 }
