@@ -11,8 +11,8 @@ namespace CS499.TCMS.ModelUnitTest
         [TestMethod]
         public void UserModelTest()
         {
-            User testUser = new User(123456, "jadams63", "James", "William", "Adams", "495 Trevor Lane", "Macon", "GA", 31201, 7063156775, 7063156775,
-                "jwadams@gmail.com", 30000.00, new DateTime(2012, 6, 18), 1234, "Store A", "Technician", true);
+            User testUser = new User(123456, "jadams63", "James", "William", "Adams", "495 Trevor Lane", "Macon", "GA", 31201, "7063156775", "7063156775",
+                "jwadams@gmail.com", 30000.00, new DateTime(2012, 6, 18), 1234, "Store A", "Technician", true, "stuff", "otherstuff");
             Assert.IsTrue(testUser.IsValid);
         }
 
@@ -75,7 +75,7 @@ namespace CS499.TCMS.ModelUnitTest
         [TestMethod]
         public void BusinessPartnerModelTest()
         {
-            BusinessPartner testPartner = new BusinessPartner(496, "Company A", "123 Main Street", "Nashville", "TN", 48293, 4125550122);
+            BusinessPartner testPartner = new BusinessPartner(496, "Company A", "123 Main Street", "Nashville", "TN", 48293, "4125550122");
             Assert.IsTrue(testPartner.IsValid);
         }
 

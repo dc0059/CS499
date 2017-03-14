@@ -50,13 +50,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="DataAccessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CS499.TCMS.DataAccess\CS499.TCMS.DataAccess.csproj">
       <Project>{b72dd45c-376d-46dc-84f8-61d5af59818a}</Project>
       <Name>CS499.TCMS.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CS499.TCMS.Model\CS499.TCMS.Model.csproj">
+      <Project>{ad3f15b6-221f-4aba-87b8-e56dfdfca540}</Project>
+      <Name>CS499.TCMS.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

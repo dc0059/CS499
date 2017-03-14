@@ -45,7 +45,7 @@ namespace CS499.TCMS.DataAccess
         /// Generic method to delete the object
         /// </summary>
         /// <param name="model">the object to be deleted</param>
-        void DeleteList(IEnumerable<T> ModelsToDelete);
+        //void DeleteList(IEnumerable<T> ModelsToDelete);
 
         /// <summary>
         /// Generic method to insert a new object
