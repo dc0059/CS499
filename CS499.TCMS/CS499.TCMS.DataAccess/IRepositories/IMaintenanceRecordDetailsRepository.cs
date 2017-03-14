@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CS499.TCMS.Model;
 
-namespace CS499.TCMS.DataAccess.Model_IRepositories
+namespace CS499.TCMS.DataAccess.IRepositories
 {
     interface IMaintenanceRecordDetailsRepository : IRepository<MaintenanceRecordDetails>
     {

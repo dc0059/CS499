@@ -7,18 +7,7 @@ namespace CS499.TCMS.DataAccess
     /// </summary>
     public static class Enums
     {
-
-        /// <summary>
-        /// This will be the enum for the notification tpyes
-        /// </summary>
-        public enum JobType
-        {
-            Ticket = 0,
-            OutOfStock,
-            FruAuthorization,
-            MmaAuthorization
-        }
-
+                
         public enum TruckMaxCapacity
         {
             class1 = 0,

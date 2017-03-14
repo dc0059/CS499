@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CS499.TCMS.DataAccess.Model_IRepositories;
+using CS499.TCMS.DataAccess.IRepositories;
 
-namespace CS499.TCMS.DataAccess.Model_Repositories
+namespace CS499.TCMS.DataAccess.Repositories
 {
     class PartRepository : IPartRepository
     {
