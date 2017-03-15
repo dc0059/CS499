@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DataAccess_User_Tests.cs" />
+    <Compile Include="DataAccess_Vehicle_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

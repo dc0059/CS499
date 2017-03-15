@@ -7,7 +7,7 @@ using CS499.TCMS.Model;
 
 namespace CS499.TCMS.DataAccess.IRepositories
 {
-    interface IBusinessPartnerRepository : IRepository<BusinessPartner>
+    interface IBusinessPartnerRepository : IRepository<BusinessPartner>, IRepositoryBase
     {
 
         BusinessPartner getSingle(string PartnerName);

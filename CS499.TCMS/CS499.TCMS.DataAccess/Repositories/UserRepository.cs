@@ -601,6 +601,87 @@ namespace CS499.TCMS.DataAccess
         }
 
         /// <summary>
+        /// Get a list of users by ZipCode
+        /// </summary>
+        /// <param name="zip">zip code to search for</param>
+        /// <returns>List of user models</returns>
+        public IEnumerable<User> getUsersByZipCode(int zip)
+        {
+            // create query definition
+            QueryDefinition definition = new QueryDefinition()
+            {
+                CommandText = "SELECT EmployeeID, UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, " +
+                              "EmailAddress, PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
+                              "FROM user " +
+                              "WHERE ZipCode = ? ",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_ZipCode",
+                Type = DbType.Int32,
+                Value = zip
+            });
+
+            return this.Database.ExecuteListQuery<User>(definition, Map);
+        }
+
+        public IEnumerable<User> getUsersByHomeStore(string HomeStore)
+        {
+            // create query definition
+            QueryDefinition definition = new QueryDefinition()
+            {
+                CommandText = "SELECT EmployeeID, UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, " +
+                              "EmailAddress, PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
+                              "FROM user " +
+                              "WHERE HomeStore = ? ",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_HomeStore",
+                Type = DbType.String,
+                Value = HomeStore
+            });
+
+            return this.Database.ExecuteListQuery<User>(definition, Map);
+        }
+
+        public User getUserByUserName(string username)
+        {
+            // Create query definition
+            QueryDefinition definition = new QueryDefinition()
+            {
+                CommandText = "SELECT EmployeeID, UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, " +
+                              "EmailAddress, PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
+                              "FROM user " +
+                              "WHERE UserName = ?",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            // create parameter definition
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_UserName",
+                Type = DbType.String,
+                Value = username
+            });
+
+            return this.Database.ExecuteSingleQuery<User>(definition, Map);
+        }
+
+        /// <summary>
         /// Map the UserPrincipal to the user model
         /// </summary>
         /// <param name="user">UserPrincipal</param>

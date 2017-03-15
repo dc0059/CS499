@@ -17,6 +17,8 @@ namespace CS499.TCMS.DataAccess
         #region Methods
 
         User getSingleByName(String firstname, String middlename, String lastname);
+
+        User getUserByUserName(String username);
         //User getSingle(DateTime mostConvenient);
 
         IEnumerable<User> getUsersByJobAssignment(int JobAssignment);
@@ -28,11 +30,9 @@ namespace CS499.TCMS.DataAccess
         /// <param name="newHash">new password hash</param>
         void updatePassword(User model, String newHash);
 
-        //IEnumerable<User> getUsersByAccessLevel(long AccessLevel);
+        IEnumerable<User> getUsersByZipCode(int zip);
 
-        //IEnumerable<User> getUsersByZipCode(int zip);
-
-        //IEnumerable<User> getUsersByHomeStore(String HomeStore);
+        IEnumerable<User> getUsersByHomeStore(String HomeStore);
 
         /// <summary>
         /// Method that returns a collection of users that started working on a date between the given parameters
