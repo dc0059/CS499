@@ -19,7 +19,14 @@ namespace CS499.TCMS.DataAccess
         User getSingleByName(String firstname, String middlename, String lastname);
         //User getSingle(DateTime mostConvenient);
 
-        //IEnumerable<User> getUsersByJobAssignment(int JobAssignment);
+        IEnumerable<User> getUsersByJobAssignment(int JobAssignment);
+
+        /// <summary>
+        /// Change the user's password
+        /// </summary>
+        /// <param name="model">user model</param>
+        /// <param name="newHash">new password hash</param>
+        void updatePassword(User model, String newHash);
 
         //IEnumerable<User> getUsersByAccessLevel(long AccessLevel);
 
