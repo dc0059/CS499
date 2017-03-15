@@ -10,8 +10,8 @@ namespace CS499.TCMS.DataAccess.IRepositories
     interface IBusinessPartnerRepository : IRepository<BusinessPartner>
     {
 
-        User getSingle(string PartnerName);
-        User getSingle(long PartnerID);
+        BusinessPartner getSingle(string PartnerName);
+        BusinessPartner getSingle(long PartnerID);
 
         IEnumerable<BusinessPartner> getPartnersByZipCode(int Zip);
         IEnumerable<BusinessPartner> getPartnersByState(string State);
