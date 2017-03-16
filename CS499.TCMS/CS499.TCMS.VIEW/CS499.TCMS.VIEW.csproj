@@ -86,6 +86,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interfaces\IChanges.cs" />
+    <Compile Include="Interfaces\IKeyCommand.cs" />
+    <Compile Include="Interfaces\IKeyPressed.cs" />
+    <Compile Include="Interfaces\ITaskManager.cs" />
     <Compile Include="Models\AssemblyInformation.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -97,8 +101,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\ContentIdHelper.cs" />
     <Compile Include="Services\CoreAssembly.cs" />
     <Compile Include="Services\SplashScreenService.cs" />
+    <Compile Include="Services\TaskManagerStatusEventArgs.cs" />
+    <Compile Include="Services\UIContext.cs" />
+    <Compile Include="ViewModels\AllUserViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="Views\SplashScreenView.xaml.cs">
       <DependentUpon>SplashScreenView.xaml</DependentUpon>
     </Compile>
@@ -172,9 +183,7 @@
       <Name>CS499.TCMS.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />
   </ItemGroup>
