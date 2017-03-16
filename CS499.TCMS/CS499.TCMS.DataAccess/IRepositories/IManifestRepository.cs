@@ -16,7 +16,7 @@ namespace CS499.TCMS.DataAccess.IRepositories
         IEnumerable<Manifest> getAllByEmployee(long EmployeeID);
         IEnumerable<Manifest> getAllByIncOrOut(string type);
 
-        Manifest Delete(long ManifestID);
-        Manifest DeleteByEmployee(long EmployeeID);
+        void Delete(long ManifestID);
+        void DeleteByEmployee(long EmployeeID);
     }
 }
