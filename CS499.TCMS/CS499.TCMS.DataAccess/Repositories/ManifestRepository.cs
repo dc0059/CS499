@@ -281,7 +281,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Value = id
             });
 
-            return this.Database.ExecuteListQuery<Manifest>(definition, Map);
+            return this.Database.ExecuteSingleQuery<Manifest>(definition, Map);
         }
 
 
@@ -312,7 +312,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Value = ManifestID
             });
 
-            return this.Database.ExecuteListQuery<Manifest>(definition, Map);
+            return this.Database.ExecuteSingleQuery<Manifest>(definition, Map);
         }
 
 
