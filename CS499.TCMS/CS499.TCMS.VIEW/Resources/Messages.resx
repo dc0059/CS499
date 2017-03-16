@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ContentId" xml:space="preserve">
+    <value>{0}{1}</value>
+  </data>
   <data name="LoginFailPassword" xml:space="preserve">
     <value>Failed to authenticate username ({0}). Please enter a valid password.</value>
   </data>
@@ -182,5 +185,17 @@
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>An unexpected error occurred while {0}.{1}Please contact support with the following error ID: {2}</value>
+  </data>
+  <data name="UserDisplayName" xml:space="preserve">
+    <value>User: {0}</value>
+  </data>
+  <data name="UserDisplayToolTip" xml:space="preserve">
+    <value>User: {0}</value>
+  </data>
+  <data name="UserSaveError" xml:space="preserve">
+    <value>Failed to save user ({0}) because it already exists.</value>
+  </data>
+  <data name="UserSaving" xml:space="preserve">
+    <value>Saving user... Please wait.</value>
   </data>
 </root>

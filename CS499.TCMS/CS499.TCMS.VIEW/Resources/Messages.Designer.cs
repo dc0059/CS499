@@ -61,6 +61,15 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}{1}.
+        /// </summary>
+        internal static string ContentId {
+            get {
+                return ResourceManager.GetString("ContentId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to authenticate username ({0}). Please enter a valid password..
         /// </summary>
         internal static string LoginFailPassword {
@@ -255,6 +264,42 @@ namespace CS499.TCMS.View.Resources {
         internal static string UnexpectedError {
             get {
                 return ResourceManager.GetString("UnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User: {0}.
+        /// </summary>
+        internal static string UserDisplayName {
+            get {
+                return ResourceManager.GetString("UserDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User: {0}.
+        /// </summary>
+        internal static string UserDisplayToolTip {
+            get {
+                return ResourceManager.GetString("UserDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to save user ({0}) because it already exists..
+        /// </summary>
+        internal static string UserSaveError {
+            get {
+                return ResourceManager.GetString("UserSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving user... Please wait..
+        /// </summary>
+        internal static string UserSaving {
+            get {
+                return ResourceManager.GetString("UserSaving", resourceCulture);
             }
         }
     }
