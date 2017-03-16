@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using CS499.TCMS.Model;
 
-namespace CS499.TCMS.DataAccess.IRepositories
+namespace CS499.TCMS.DataAccess
 {
-    interface IPayrollRepository : IRepository<Payroll>
+    public interface IPayrollRepository : IRepository<Payroll>, IRepositoryBase
     {
-        Payroll getSingle(long PayrollID);
+        //Payroll getSingle(long PayrollID);
 
         IEnumerable<Payroll> getStubsByEmployee(long EmployeeID);
         IEnumerable<Payroll> getStubsByDate(DateTime date);
