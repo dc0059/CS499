@@ -1,0 +1,164 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CS499.TCMS.Model;
+using CS499.TCMS.DataAccess;
+
+namespace CS499.TCMS.DataAccessUnitTests
+{
+    [TestClass]
+    public class DataAccess_Vehicle_Tests
+    {
+        [TestMethod]
+        public void VehicleInsertTest()
+        {
+            Vehicle testVehicle = new Vehicle(12345, "Mercedes-Benz", 2004, "Actros", "Class 5", 17500);
+
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
+
+            vehicleRepository.Insert(testVehicle);
+        }
+
+        [TestMethod]
+        public void VehicleGetSingleTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
+
+            Vehicle returnVehicle = vehicleRepository.getSingle(12345);
+
+            Assert.IsTrue(returnVehicle.IsValid);
+            System.Diagnostics.Debug.Print(returnVehicle.VehicleID.ToString());
+            System.Diagnostics.Debug.Print(returnVehicle.Brand);
+            System.Diagnostics.Debug.Print(returnVehicle.Year.ToString());
+            System.Diagnostics.Debug.Print(returnVehicle.Model);
+            System.Diagnostics.Debug.Print(returnVehicle.VehicleType);
+            System.Diagnostics.Debug.Print(returnVehicle.Capacity.ToString());
+        }
+
+        [TestMethod]
+        public void VehicleGetAllTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
+
+            foreach (Vehicle x in vehicleRepository.getAll())
+            {
+                Assert.IsTrue(x.IsValid);
+                System.Diagnostics.Debug.Print(x.VehicleID.ToString());
+                System.Diagnostics.Debug.Print(x.Brand);
+                System.Diagnostics.Debug.Print(x.Year.ToString());
+                System.Diagnostics.Debug.Print(x.Model);
+                System.Diagnostics.Debug.Print(x.VehicleType);
+                System.Diagnostics.Debug.Print(x.Capacity.ToString());
+            }
+        }
+
+        [TestMethod]
+        public void VehicleDeleteTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
+
+            Vehicle delVehicle = vehicleRepository.getSingle(12345);
+
+            vehicleRepository.Delete(delVehicle);
+        }
+
+        [TestMethod]
+        public void VehicleUpdateTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
+
+            Vehicle updateVehicle = new Vehicle(12347, "Chevy", 2016, "Thing", "Class 3", 9000);
+
+            vehicleRepository.Update(updateVehicle);
+        }
+
+        [TestMethod]
+        public void VehicleGetAllBySpecsTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
+
+            foreach (Vehicle x in vehicleRepository.getVehiclesBySpecs("Mercedes-Benz", "Actros", 2004))
+            {
+                Assert.IsTrue(x.IsValid);
+                System.Diagnostics.Debug.Print(x.VehicleID.ToString());
+                System.Diagnostics.Debug.Print(x.Brand);
+                System.Diagnostics.Debug.Print(x.Year.ToString());
+                System.Diagnostics.Debug.Print(x.Model);
+                System.Diagnostics.Debug.Print(x.VehicleType);
+                System.Diagnostics.Debug.Print(x.Capacity.ToString());
+            }
+        }
+
+        [TestMethod]
+        public void VehicleGetAllByVehicleTypeTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
+
+            foreach (Vehicle x in vehicleRepository.getVehiclesByType("Class 5"))
+            {
+                Assert.IsTrue(x.IsValid);
+                System.Diagnostics.Debug.Print(x.VehicleID.ToString());
+                System.Diagnostics.Debug.Print(x.Brand);
+                System.Diagnostics.Debug.Print(x.Year.ToString());
+                System.Diagnostics.Debug.Print(x.Model);
+                System.Diagnostics.Debug.Print(x.VehicleType);
+                System.Diagnostics.Debug.Print(x.Capacity.ToString());
+            }
+        }
+
+        [TestMethod]
+        public void VehicleGetAllByVehicleCapacityTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
+
+            foreach (Vehicle x in vehicleRepository.getVehiclesByCapacity(17500))
+            {
+                Assert.IsTrue(x.IsValid);
+                System.Diagnostics.Debug.Print(x.VehicleID.ToString());
+                System.Diagnostics.Debug.Print(x.Brand);
+                System.Diagnostics.Debug.Print(x.Year.ToString());
+                System.Diagnostics.Debug.Print(x.Model);
+                System.Diagnostics.Debug.Print(x.VehicleType);
+                System.Diagnostics.Debug.Print(x.Capacity.ToString());
+            }
+        }
+
+        [TestMethod]
+        public void VehicleDeleteBySpecsTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
+
+            vehicleRepository.DeleteBySpecs("Mercedes-Benz", "Actros", 2004);
+        }
+
+        [TestMethod]
+        public void VehicleDeleteByTypeTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
+
+            vehicleRepository.DeleteByType("Class 5");
+        }
+
+        [TestMethod]
+        public void VehicleDeleteByCapacityTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
+
+            vehicleRepository.DeleteByCapacity(17500);
+        }
+    }
+}

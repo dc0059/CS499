@@ -27,7 +27,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
             IUserRepository userRepository = factory.Create<IUserRepository>();
 
-            User returnUser = userRepository.getSingle(123456);
+            User returnUser = userRepository.getSingle(123464);
 
             Assert.IsTrue(returnUser.IsValid);
         }
@@ -58,7 +58,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
             IUserRepository userRepository = factory.Create<IUserRepository>();
 
-            User delUser = userRepository.getSingle(123459);
+            User delUser = userRepository.getSingle(123472);
 
             userRepository.Delete(delUser);
         }
@@ -85,6 +85,36 @@ namespace CS499.TCMS.DataAccessUnitTests
             User returnUser = userRepository.getSingleByName("Zach", "Taylor", "Johnson");
 
             Assert.IsTrue(returnUser.IsValid);
+        }
+
+        [TestMethod]
+        public void GetUserByJobAssignTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IUserRepository userRepository = factory.Create<IUserRepository>();
+
+            User testUser1 = new User(123456, "jadams63", "James", "William", "Adams", "495 Trevor Lane", "Macon", "GA", 31201, "7063156775", "7063156775",
+               "jwadams@gmail.com", 30000.00, new DateTime(2012, 6, 18), 1233, "Store A", "Technician", true, "stuff", "other stuff");
+
+            userRepository.Insert(testUser1);
+
+            foreach (User x in userRepository.getUsersByJobAssignment(1234))
+            {
+                Assert.IsTrue(x.IsValid);
+                System.Diagnostics.Debug.Print(x.JobID.ToString());
+            }
+        }
+
+        [TestMethod]
+        public void GetUserByUserNameTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            IUserRepository userRepository = factory.Create<IUserRepository>();
+
+            User returnUser = userRepository.getUserByUserName("Johnsza");
+
+            Assert.IsTrue(returnUser.IsValid);
+            System.Diagnostics.Debug.Print(returnUser.UserName);
         }
     }
 }
