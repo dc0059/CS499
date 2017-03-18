@@ -65,6 +65,9 @@
     <Compile Include="Repositories\MaintenanceRecordRepository.cs" />
     <Compile Include="Repositories\ManifestRepository.cs" />
     <Compile Include="Repositories\PartRepository.cs" />
+    <Compile Include="Repositories\PayrollRepository.cs" />
+    <Compile Include="Repositories\PurchaseItemRepository.cs" />
+    <Compile Include="Repositories\PurchaseOrderRepository.cs" />
     <Compile Include="Repositories\VehicleRepository.cs" />
     <Compile Include="RepositoryFactory.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

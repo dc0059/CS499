@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using CS499.TCMS.Model;
 
-namespace CS499.TCMS.DataAccess.IRepositories
+namespace CS499.TCMS.DataAccess
 {
-    interface IPurchaseOrderRepository : IRepository<PurchaseOrder>
+    public interface IPurchaseOrderRepository : IRepository<PurchaseOrder>, IRepositoryBase
     {
-        PurchaseOrder getSingle(long OrderID);
+        //PurchaseOrder getSingle(long OrderID);
 
         IEnumerable<PurchaseOrder> getOrderByNumber(long OrderNum);
         IEnumerable<PurchaseOrder> getOrderBySource(long SourceCompany);
