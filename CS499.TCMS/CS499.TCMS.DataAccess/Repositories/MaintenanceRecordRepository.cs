@@ -30,8 +30,8 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "DELETE FROM maintenanceRecord " +
-                              "WHERE EmployeeID = ?",
+                CommandText = "DELETE FROM maintenancerecord " +
+                              "WHERE MaintenanceID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -60,8 +60,8 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "DELETE FROM maintenanceRecord " +
-                              "WHERE RecordID = ?",
+                CommandText = "DELETE FROM maintenancerecord " +
+                              "WHERE MaintenanceID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -71,7 +71,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
-                Name = "P_RecordID",
+                Name = "P_MaintenanceID",
                 Type = DbType.Int64,
                 Value = RecordID
             });
@@ -103,7 +103,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
-                Name = "P_MaintenanceDateEarliest",
+                Name = "P_Earliest",
                 Type = DbType.DateTime,
                 Value = Earliest
             });
@@ -111,7 +111,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
-                Name = "P_MaintenanceDateLatest",
+                Name = "P_Latest",
                 Type = DbType.DateTime,
                 Value = Latest
             });
@@ -130,7 +130,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "DELETE FROM maintenanceRecord " +
+                CommandText = "DELETE FROM maintenancerecord " +
                               "WHERE VehicleID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -206,7 +206,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT MaintenanceID, VehicleID, MaintenanceDate, MaintenanceDescription " +
-                              "FROM maintenanceRecord " +
+                              "FROM maintenancerecord " +
                               "ORDER BY MaintenanceID",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -229,10 +229,10 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT MaintenanceID, VehicleID, MaintenanceDate, MaintenanceDescription " +
-                              "FROM maintenanceRecord " +
+                              "FROM maintenancerecord " +
                               "WHERE MaintenanceDate => ? " +
                               "AND MaintenanceDate <= ? " +
-                              "ORDER BY MaintenanceID",
+                              "ORDER BY MaintenanceDate",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -268,7 +268,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT MaintenanceID, VehicleID, MaintenanceDate, MaintenanceDescription " +
-                              "FROM maintenanceRecord " +
+                              "FROM maintenancerecord " +
                               "WHERE VehicleID = ? ",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -299,7 +299,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT MaintenanceID, VehicleID, MaintenanceDate, MaintenanceDescription " +
-                              "FROM maintenanceRecord " +
+                              "FROM maintenancerecord " +
                               "WHERE VehicleID = ? " +
                               "AND MaintenanceDate => ? " +
                               "AND MaintenanceDate <= ? " +
@@ -345,7 +345,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT MaintenanceID, VehicleID, MaintenanceDate, MaintenanceDescription " +
-                              "FROM maintenanceRecord " +
+                              "FROM maintenancerecord " +
                               "WHERE MaintenanceID = ? ",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -376,7 +376,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT MaintenanceID, VehicleID, MaintenanceDate, MaintenanceDescription " +
-                              "FROM maintenanceRecord " +
+                              "FROM maintenancerecord " +
                               "WHERE MaintenanceID = ? ",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -405,7 +405,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO maintenanceRecord (MaintenanceID, VehicleID, MaintenanceDate, MaintenanceDescription) " +
+                CommandText = "INSERT INTO maintenancerecord (MaintenanceID, VehicleID, MaintenanceDate, MaintenanceDescription) " +
                               "VALUES (?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -457,7 +457,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "UPDATE maintenanceRecord " +
+                CommandText = "UPDATE maintenancerecord " +
                               "SET VehicleID = ?, MaintenanceDate = ?, MaintenanceDescription = ?, " +
                               "WHERE MaintenanceID = ?",
                 cType = CommandType.Text,
@@ -465,13 +465,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Type = ConnectionType.MySQL
             };
             // create parameter definition
-            definition.Parameters.Add(new ParameterDefinition()
-            {
-                Direction = ParameterDirection.Input,
-                Name = "P_MaintenanceID",
-                Type = DbType.Int64,
-                Value = model.MaintenanceID
-            });
+
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
@@ -493,7 +487,13 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Type = DbType.String,
                 Value = model.MaintenanceID
             });
-
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_MaintenanceID",
+                Type = DbType.Int64,
+                Value = model.MaintenanceID
+            });
             this.Database.ExecuteModQuery(definition);
         }
 

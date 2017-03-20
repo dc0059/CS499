@@ -31,7 +31,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "DELETE FROM manifests " +
+                CommandText = "DELETE FROM manifest " +
                               "WHERE ManifestID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -60,7 +60,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "DELETE FROM manifests " +
+                CommandText = "DELETE FROM manifest " +
                               "WHERE ManifestID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -89,8 +89,8 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "DELETE FROM manifests " +
-                              "WHERE ManifestID = ?",
+                CommandText = "DELETE FROM manifest " +
+                              "WHERE EmployeeID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -100,7 +100,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
-                Name = "P_ManifestID",
+                Name = "P_EmployeeID",
                 Type = DbType.Int64,
                 Value = EmployeeID
             });
@@ -118,7 +118,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, MiddleName, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
+                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
                               "FROM manifest " +
                               "ORDER BY ManifestID",
                 cType = CommandType.Text,
@@ -140,7 +140,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, MiddleName, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
+                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
                               "FROM manifest " +
                               "WHERE EmployeeID = ? ",
                 cType = CommandType.Text,
@@ -171,7 +171,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, MiddleName, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
+                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
                               "FROM manifest " +
                               "WHERE ShipmentType = ? ",
                 cType = CommandType.Text,
@@ -202,7 +202,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, MiddleName, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
+                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
                               "FROM manifest " +
                               "WHERE ETA = ? ",
                 cType = CommandType.Text,
@@ -214,7 +214,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
-                Name = "P_ShipmentType",
+                Name = "P_ArrivalDate",
                 Type = DbType.DateTime,
                 Value = ArrivalDate
             });
@@ -233,9 +233,10 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, MiddleName, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
+                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
                               "FROM manifest " +
-                              "WHERE DepartureTime = ? ",
+                              "WHERE DepartureTime = ? " +
+                              "ORDER BY VehicleID",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -264,9 +265,9 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, MiddleName, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
+                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
                               "FROM manifest " +
-                              "WHERE EmployeeID = ? ",
+                              "WHERE ManifestID = ? ",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -295,7 +296,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, MiddleName, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
+                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
                               "FROM manifest " +
                               "WHERE ManifestID = ? ",
                 cType = CommandType.Text,
@@ -401,8 +402,8 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "UPDATE user " +
-                              "SET ManifestID = ?, ShipmentType = ?, VehicleID = ?, DepartureTime = ?, ETA = ?, Arrived = ?, ShippingCost = ?, EmployeeID = ? " +
+                CommandText = "UPDATE manifest " +
+                              "SET ShipmentType = ?, VehicleID = ?, DepartureTime = ?, ETA = ?, Arrived = ?, ShippingCost = ?, EmployeeID = ? " +
                               "WHERE ManifestID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -410,13 +411,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             };
 
             // create parameter definition
-            definition.Parameters.Add(new ParameterDefinition()
-            {
-                Direction = ParameterDirection.Input,
-                Name = "P_Manifest",
-                Type = DbType.Int64,
-                Value = model.ManifestID
-            });
+
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
@@ -466,7 +461,13 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Type = DbType.Int64,
                 Value = model.EmployeeID
             });
-
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_Manifest",
+                Type = DbType.Int64,
+                Value = model.ManifestID
+            });
             this.Database.ExecuteModQuery(definition);
         }
 
