@@ -176,7 +176,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// Get all BusinessPartners in the Database
         /// </summary>
         /// <returns>Collection of each unique BusinessPartner Object</returns>
-        IEnumerable<BusinessPartner> IRepository<BusinessPartner>.getAll()
+        IEnumerable<BusinessPartner> IRepository<BusinessPartner>.GetAll()
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -227,7 +227,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="id">long Integer Representing Partner ID</param>
         /// <returns>Business Partner Object matching Partner's ID</returns>
-        BusinessPartner IRepository<BusinessPartner>.getSingle(object id)
+        BusinessPartner IRepository<BusinessPartner>.GetSingle(object id)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
