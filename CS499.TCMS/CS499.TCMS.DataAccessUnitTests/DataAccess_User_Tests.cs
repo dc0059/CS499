@@ -6,7 +6,7 @@ using CS499.TCMS.DataAccess;
 namespace CS499.TCMS.DataAccessUnitTests
 {
     [TestClass]
-    public class DataAccessTest
+    public class DataAccess_User_Test
     {
         [TestMethod]
         public void UserInsertTest()

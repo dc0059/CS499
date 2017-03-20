@@ -19,12 +19,14 @@ namespace CS499.TCMS.Model
         /// <param name="employeeID">identifier of the employee associated with this payment</param>
         /// <param name="paymentDate">date the payment was made</param>
         /// <param name="payment">amount of the payment</param>
-        public Payroll(long payrollID, long employeeID, DateTime paymentDate, double payment)
+        /// <param name="hoursWorked">hours worked during this pay period</param>
+        public Payroll(long payrollID, long employeeID, DateTime paymentDate, double payment, double hoursWorked)
         {
             this.PayrollID = payrollID;
             this.EmployeeID = employeeID;
             this.PaymentDate = paymentDate;
             this.Payment = payment;
+            this.HoursWorked = hoursWorked;
         }
         #endregion
 
@@ -52,6 +54,9 @@ namespace CS499.TCMS.Model
                     break;
                 case "Payment":
                     error = this.ValidatePayment();
+                    break;
+                case "HoursWorked":
+                    error = this.ValidateHoursWorked();
                     break;
                 default:
                     Debug.Fail("Unexpected property being validated on Payroll: " + propertyName);
@@ -100,6 +105,17 @@ namespace CS499.TCMS.Model
         private string ValidatePayment()
         {
             if (this.Payment < 0.0)
+                return Messages.InvalidValue;
+            return null;
+        }
+
+        /// <summary>
+        /// Validate the payment amount
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidateHoursWorked()
+        {
+            if (this.HoursWorked < 0.0)
                 return Messages.InvalidValue;
             return null;
         }
@@ -170,7 +186,8 @@ namespace CS499.TCMS.Model
             "PayrollID",
             "EmployeeID",
             "PaymentDate",
-            "Payment"
+            "Payment",
+            "HoursWorked"
         };
 
         /// <summary>
@@ -192,6 +209,11 @@ namespace CS499.TCMS.Model
         /// Amount of the payment
         /// </summary>
         public double Payment { get; set; }
+
+        /// <summary>
+        /// Hours worked for this pay period
+        /// </summary>
+        public double HoursWorked { get; set; }
 
         string IDataErrorInfo.Error
         {

@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using CS499.TCMS.Model;
 
-namespace CS499.TCMS.DataAccess.IRepositories
+namespace CS499.TCMS.DataAccess
 {
-    interface IPartRepository : IRepository<Part>
+    public interface IPartRepository : IRepository<Part>, IRepositoryBase
     {
-        Part getSingle(long PartID);
+        //Part getSingle(long PartID);
 
         IEnumerable<Part> getPartsByNumber(long PartNum);
 
