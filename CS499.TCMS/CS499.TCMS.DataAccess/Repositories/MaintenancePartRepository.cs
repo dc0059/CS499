@@ -46,6 +46,36 @@ namespace CS499.TCMS.DataAccess.Repositories
             });
 
             this.Database.ExecuteModQuery(definition);
+
+            // Create query definition
+            definition = new QueryDefinition()
+            {
+                CommandText = "UPDATE maintenancepart_log " +
+                              "SET DeletedBy = ? " +
+                              "WHERE MaintenancePartID = ? " +
+                              "AND ModifiedStatus = 'D'",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            // create parameter definition            
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_User",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_ID",
+                Type = DbType.Int64,
+                Value = model.MaintenancePartID
+            });
+
+            this.Database.ExecuteModQuery(definition);
         }
 
 
@@ -287,11 +317,14 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// <param name="model"></param>
         void IRepository<MaintenancePart>.Insert(MaintenancePart model)
         {
+
+            long id;
+            
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO maintenancepart (MaintenancePartID, Quantity, MaintenanceRecordID, PartID) " +
-                              "VALUES (?, ?, ?, ?)", 
+                CommandText = "INSERT INTO maintenancepart (MaintenancePartID, Quantity, MaintenanceRecordID, PartID, CreatedBy, LastModifiedBy) " +
+                              "VALUES (?, ?, ?, ?,?,?)", 
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -326,7 +359,23 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Type = DbType.Int64,
                 Value = model.PartID
             });
-            this.Database.ExecuteModQuery(definition);
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_CreatedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            this.Database.ExecuteModQuery(definition, out id);
+
+            model.MaintenancePartID = id;
         }
 
 

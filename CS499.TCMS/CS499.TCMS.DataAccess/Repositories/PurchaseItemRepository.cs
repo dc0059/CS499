@@ -43,6 +43,36 @@ namespace CS499.TCMS.DataAccess
             });
 
             this.Database.ExecuteModQuery(definition);
+
+            // Create query definition
+            definition = new QueryDefinition()
+            {
+                CommandText = "UPDATE purchaseitems_log " +
+                              "SET DeletedBy = ? " +
+                              "WHERE ItemID = ? " +
+                              "AND ModifiedStatus = 'D'",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            // create parameter definition            
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_User",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_ID",
+                Type = DbType.Int64,
+                Value = model.ItemID
+            });
+
+            this.Database.ExecuteModQuery(definition);
         }
 
         public void Delete(long ItemID)
@@ -217,11 +247,14 @@ namespace CS499.TCMS.DataAccess
 
         public void Insert(PurchaseItem model)
         {
+
+            long id;
+
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO purchaseitems (OrderID, Quantity, PartID) " +
-                              "VALUES (?,?,?)",
+                CommandText = "INSERT INTO purchaseitems (OrderID, Quantity, PartID, CreatedBy, LastModifiedBy) " +
+                              "VALUES (?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -248,8 +281,24 @@ namespace CS499.TCMS.DataAccess
                 Type = DbType.Int64,
                 Value = model.PartID
             });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_CreatedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
 
-            this.Database.ExecuteModQuery(definition);
+            this.Database.ExecuteModQuery(definition, out id);
+
+            model.ItemID = id;
         }
 
         public void Update(PurchaseItem model)

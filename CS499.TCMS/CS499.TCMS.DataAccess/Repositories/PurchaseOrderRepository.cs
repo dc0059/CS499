@@ -43,6 +43,36 @@ namespace CS499.TCMS.DataAccess
             });
 
             this.Database.ExecuteModQuery(definition);
+
+            // Create query definition
+            definition = new QueryDefinition()
+            {
+                CommandText = "UPDATE purchaseorder_log " +
+                              "SET DeletedBy = ? " +
+                              "WHERE OrderID = ? " +
+                              "AND ModifiedStatus = 'D'",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            // create parameter definition            
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_User",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_ID",
+                Type = DbType.Int64,
+                Value = model.OrderID
+            });
+
+            this.Database.ExecuteModQuery(definition);
         }
 
         public void DeleteByDest(long DestComp)
@@ -293,11 +323,14 @@ namespace CS499.TCMS.DataAccess
 
         public void Insert(PurchaseOrder model)
         {
+
+            long id;
+
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO purchaseorder (OrderNumber, SourceID, DestinationID, ManifestID) " +
-                              "VALUES (?,?,?,?)",
+                CommandText = "INSERT INTO purchaseorder (OrderNumber, SourceID, DestinationID, ManifestID, CreatedBy, LastModifiedBy) " +
+                              "VALUES (?,?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -331,8 +364,24 @@ namespace CS499.TCMS.DataAccess
                 Type = DbType.Int64,
                 Value = model.ManifestID
             });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_CreatedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
 
-            this.Database.ExecuteModQuery(definition);
+            this.Database.ExecuteModQuery(definition, out id);
+
+            model.OrderID = id;
         }
 
         public void Update(PurchaseOrder model)

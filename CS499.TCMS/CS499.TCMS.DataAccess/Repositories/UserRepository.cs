@@ -58,14 +58,14 @@ namespace CS499.TCMS.DataAccess
             this.Database.ExecuteModQuery(definition);
 
             // Create query definition
-            /*definition = new QueryDefinition()
+            definition = new QueryDefinition()
             {
-                CommandText = "UPDATE users_log " +
+                CommandText = "UPDATE user_log " +
                               "SET DeletedBy = ? " +
-                              "WHERE UserID = ? " +
+                              "WHERE EmployeeID = ? " +
                               "AND ModifiedStatus = 'D'",
                 cType = CommandType.Text,
-                Database = "database_name",
+                Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
             };
 
@@ -85,7 +85,7 @@ namespace CS499.TCMS.DataAccess
                 Value = model.EmployeeID
             });
 
-            this.Database.ExecuteModQuery(definition);*/
+            this.Database.ExecuteModQuery(definition);
 
         }
 
@@ -228,25 +228,19 @@ namespace CS499.TCMS.DataAccess
         void IRepository<User>.Insert(User model)
         {
 
+            long id;
+
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "INSERT INTO user (UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, EmailAddress, " +
-                              "PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase) " +
-                              "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                              "PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase, CreatedBy, LastModifiedBy) " +
+                              "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
             };
 
-            // create parameter definition
-            /*definition.Parameters.Add(new ParameterDefinition()
-            {
-                Direction = ParameterDirection.Input,
-                Name = "EmployeeID",
-                Type = DbType.Int64,
-                Value = model.EmployeeID
-            });*/
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
@@ -380,8 +374,24 @@ namespace CS499.TCMS.DataAccess
                 Type = DbType.String,
                 Value = model.Passphrase
             });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_CreatedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
 
-            this.Database.ExecuteModQuery(definition);
+            this.Database.ExecuteModQuery(definition, out id);
+
+            model.EmployeeID = id;
 
         }
 
@@ -398,7 +408,7 @@ namespace CS499.TCMS.DataAccess
                 CommandText = "UPDATE user " +
                               "SET UserName = ?, FirstName = ?, MiddleName = ?, LastName = ?, Address = ?, City = ?, State = ?, ZipCode = ?, " +
                               "HomePhone = ?, CellPhone = ?, EmailAddress = ?, PayRate = ?, EmploymentDate = ?, JobID = ?, HomeStore = ?, " +
-                              "JobDescription = ?, IsActive = ? " +
+                              "JobDescription = ?, IsActive = ?, HashKey = ?, Passphrase = ? " +
                               "WHERE EmployeeID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -524,6 +534,20 @@ namespace CS499.TCMS.DataAccess
                 Name = "P_IsActive",
                 Type = DbType.Boolean,
                 Value = model.IsActive
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_HashKey",
+                Type = DbType.String,
+                Value = model.HashKey
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_Passphrase",
+                Type = DbType.String,
+                Value = model.Passphrase
             });
             definition.Parameters.Add(new ParameterDefinition()
             {
