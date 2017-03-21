@@ -326,14 +326,14 @@ namespace CS499.TCMS.DataAccess
             this.Database.ExecuteModQuery(definition);
 
             // Create query definition
-            /*definition = new QueryDefinition()
+            definition = new QueryDefinition()
             {
-                CommandText = "UPDATE users_log " +
+                CommandText = "UPDATE vehicle_log " +
                               "SET DeletedBy = ? " +
-                              "WHERE UserID = ? " +
+                              "WHERE VehicleID = ? " +
                               "AND ModifiedStatus = 'D'",
                 cType = CommandType.Text,
-                Database = "database_name",
+                Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
             };
 
@@ -350,32 +350,28 @@ namespace CS499.TCMS.DataAccess
                 Direction = ParameterDirection.Input,
                 Name = "P_ID",
                 Type = DbType.Int64,
-                Value = model.EmployeeID
+                Value = model.VehicleID
             });
 
-            this.Database.ExecuteModQuery(definition);*/
+            this.Database.ExecuteModQuery(definition);
         }
 
         public void Insert(Vehicle model)
         {
+
+            long id;
+            
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO vehicle (Brand, Year, Model, VehicleType, Capacity) " +
-                              "VALUES (?,?,?,?,?)",
+                CommandText = "INSERT INTO vehicle (Brand, Year, Model, VehicleType, Capacity, CreatedBy, LastModifiedBy) " +
+                              "VALUES (?,?,?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
             };
 
-            // create parameter definition
-            /*definition.Parameters.Add(new ParameterDefinition()
-            {
-                Direction = ParameterDirection.Input,
-                Name = "P_VehicleID",
-                Type = DbType.Int64,
-                Value = model.VehicleID
-            });*/
+            //define parameters
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
@@ -411,8 +407,24 @@ namespace CS499.TCMS.DataAccess
                 Type = DbType.Int16,
                 Value = model.Capacity
             });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_CreatedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
 
-            this.Database.ExecuteModQuery(definition);
+            this.Database.ExecuteModQuery(definition, out id);
+
+            model.VehicleID = id;
         }
 
         protected override Vehicle Map(IDataReader reader)

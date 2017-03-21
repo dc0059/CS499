@@ -43,14 +43,14 @@ namespace CS499.TCMS.DataAccess
             this.Database.ExecuteModQuery(definition);
 
             // Create query definition
-            /*definition = new QueryDefinition()
+            definition = new QueryDefinition()
             {
-                CommandText = "UPDATE users_log " +
+                CommandText = "UPDATE payroll_log " +
                               "SET DeletedBy = ? " +
-                              "WHERE UserID = ? " +
+                              "WHERE PayrollID = ? " +
                               "AND ModifiedStatus = 'D'",
                 cType = CommandType.Text,
-                Database = "database_name",
+                Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
             };
 
@@ -67,10 +67,10 @@ namespace CS499.TCMS.DataAccess
                 Direction = ParameterDirection.Input,
                 Name = "P_ID",
                 Type = DbType.Int64,
-                Value = model.EmployeeID
+                Value = model.PayrollID
             });
 
-            this.Database.ExecuteModQuery(definition);*/
+            this.Database.ExecuteModQuery(definition);
         }
 
         public void Delete(long PayrollID)
@@ -227,11 +227,14 @@ namespace CS499.TCMS.DataAccess
 
         public void Insert(Payroll model)
         {
+
+            long id;
+
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO payroll (EmployeeID, PaymentDate, Payment) " +
-                              "VALUES (?,?,?)",
+                CommandText = "INSERT INTO payroll (EmployeeID, PaymentDate, Payment, CreatedBy, LastModifiedBy) " +
+                              "VALUES (?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -259,8 +262,24 @@ namespace CS499.TCMS.DataAccess
                 Type = DbType.Double,
                 Value = model.Payment
             });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_CreatedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
 
-            this.Database.ExecuteModQuery(definition);
+            this.Database.ExecuteModQuery(definition, out id);
+
+            model.PayrollID = id;
         }
 
         public void Update(Payroll model)

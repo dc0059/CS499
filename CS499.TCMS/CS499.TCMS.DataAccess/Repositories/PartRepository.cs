@@ -44,14 +44,14 @@ namespace CS499.TCMS.DataAccess
             this.Database.ExecuteModQuery(definition);
 
             // Create query definition
-            /*definition = new QueryDefinition()
+            definition = new QueryDefinition()
             {
-                CommandText = "UPDATE users_log " +
+                CommandText = "UPDATE parts_log " +
                               "SET DeletedBy = ? " +
-                              "WHERE UserID = ? " +
+                              "WHERE PartID = ? " +
                               "AND ModifiedStatus = 'D'",
                 cType = CommandType.Text,
-                Database = "database_name",
+                Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
             };
 
@@ -68,10 +68,10 @@ namespace CS499.TCMS.DataAccess
                 Direction = ParameterDirection.Input,
                 Name = "P_ID",
                 Type = DbType.Int64,
-                Value = model.EmployeeID
+                Value = model.PartID
             });
 
-            this.Database.ExecuteModQuery(definition);*/
+            this.Database.ExecuteModQuery(definition);
         }
 
         public void Delete(long PartID)
@@ -198,11 +198,14 @@ namespace CS499.TCMS.DataAccess
 
         public void Insert(Part model)
         {
+
+            long id;
+            
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO parts (PartDescription, PartNumber, PartPrice, PartWeight, QuantityInStock) " +
-                              "VALUES (?,?,?,?,?)",
+                CommandText = "INSERT INTO parts (PartDescription, PartNumber, PartPrice, PartWeight, QuantityInStock, CreatedBy, LastModifiedBy) " +
+                              "VALUES (?,?,?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -243,8 +246,24 @@ namespace CS499.TCMS.DataAccess
                 Type = DbType.Int16,
                 Value = model.QuantityInStock
             });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_CreatedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
 
-            this.Database.ExecuteModQuery(definition);
+            this.Database.ExecuteModQuery(definition, out id);
+
+            model.PartID = id;
         }
 
         public void Update(Part model)

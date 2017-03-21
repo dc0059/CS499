@@ -20,6 +20,13 @@ namespace CS499.TCMS.DataAccess
             class8
         }
 
+        public enum JobIDs
+        {
+            CEO = 0,
+            CFO = 1,
+
+        }
+
         /// <summary>
         /// Get the humanized names for the enum
         /// </summary>
