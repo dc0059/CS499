@@ -130,6 +130,30 @@ namespace CS499.TCMS.Model
         {
             return string.IsNullOrEmpty(value);
         }
+
+        public override string ToString()
+        {
+            return string.Format("Order #{0} from {1} to {2}", this.OrderNumber, this.SourceID, this.DestinationID);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is PurchaseOrder)
+            {
+                PurchaseOrder other = obj as PurchaseOrder;
+                return this.OrderID.Equals(other.OrderID) &&
+                    this.OrderNumber.Equals(other.OrderNumber) &&
+                    this.SourceID.Equals(other.SourceID) &&
+                    this.DestinationID.Equals(other.DestinationID) &&
+                    this.ManifestID.Equals(other.ManifestID);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         #endregion
 
         #region Properties

@@ -163,6 +163,32 @@ namespace CS499.TCMS.Model
         {
             return string.IsNullOrEmpty(value);
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0} Manifest #{1}", this.ShipmentType, this.ManifestID);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is Manifest)
+            {
+                Manifest other = obj as Manifest;
+                return this.ManifestID.Equals(other.ManifestID) &&
+                    this.ShipmentType.Equals(other.ShipmentType) &&
+                    this.ShippingCost.Equals(other.ShippingCost) &&
+                    this.DepartureTime.Equals(other.DepartureTime) &&
+                    this.ETA.Equals(other.ETA) &&
+                    this.EmployeeID.Equals(other.EmployeeID) &&
+                    this.VehicleID.Equals(other.VehicleID);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         #endregion
 
         #region Properties

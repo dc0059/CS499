@@ -37,7 +37,7 @@ namespace CS499.TCMS.Model
         /// <param name="hashKey">hashed password</param>
         /// <param name="passphrase">passphrase used to encrypt password</param>
         public User(long employeeID, string userName, string firstName, string middleName, string lastName, string address, string city, string state, int zipCode,
-            string homePhone, string cellPhone, string email, double payRate, DateTime employmentDate, long jobID, string homeStore, string jobDescription, bool isActive,
+            string homePhone, string cellPhone, string email, double payRate, DateTime employmentDate, Enums.AccessLevel accessLevel, string homeStore, string jobDescription, bool isActive,
             string hashKey, string passphrase)
         {
             this.EmployeeID = employeeID;
@@ -54,7 +54,7 @@ namespace CS499.TCMS.Model
             this.EmailAddress = email;
             this.PayRate = payRate;
             this.EmploymentDate = employmentDate;
-            this.JobID = jobID;
+            this.AccessLevel = accessLevel;
             this.HomeStore = homeStore;
             this.JobDescription = jobDescription;
             this.IsActive = isActive;
@@ -120,9 +120,6 @@ namespace CS499.TCMS.Model
                     break;
                 case "EmploymentDate":
                     error = this.ValidateEmploymentDate();
-                    break;
-                case "JobID":
-                    error = this.ValidateJobID();
                     break;
                 case "HomeStore":
                     error = this.ValidateHomeStore();
@@ -284,17 +281,6 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
-        /// Validate the job ID, can't be negative
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateJobID()
-        {
-            if (this.JobID < 0)
-                return Messages.InvalidID;
-            return null;
-        }
-
-        /// <summary>
         /// Validate the home store
         /// </summary>
         /// <returns>string for the error</returns>
@@ -385,6 +371,43 @@ namespace CS499.TCMS.Model
             return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
         }
 
+        public override string ToString()
+        {
+            return string.Format("{0} {1}", this.FirstName, this.LastName);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is User)
+            {
+                User other = obj as User;
+                return this.EmployeeID.Equals(other.EmployeeID) &&
+                    this.UserName.Equals(other.UserName) &&
+                    this.FirstName.Equals(other.FirstName) &&
+                    this.MiddleName.Equals(other.MiddleName) &&
+                    this.LastName.Equals(other.LastName) &&
+                    this.Address.Equals(other.Address) &&
+                    this.City.Equals(other.City) &&
+                    this.State.Equals(other.State) &&
+                    this.ZipCode.Equals(other.ZipCode) &&
+                    this.HomePhone.Equals(other.HomePhone) &&
+                    this.CellPhone.Equals(other.CellPhone) &&
+                    this.EmailAddress.Equals(other.EmailAddress) &&
+                    this.PayRate.Equals(other.PayRate) &&
+                    this.EmploymentDate.Equals(other.EmploymentDate) &&
+                    this.AccessLevel.Equals(other.AccessLevel) &&
+                    this.HomeStore.Equals(other.HomeStore) &&
+                    this.JobDescription.Equals(other.JobDescription) &&
+                    this.Passphrase.Equals(other.Passphrase) &&
+                    this.HashKey.Equals(other.HashKey);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         #endregion
 
         #region Properties
@@ -452,7 +475,6 @@ namespace CS499.TCMS.Model
             "EmailAddress",
             "PayRate",
             "EmploymentDate",
-            "JobID",
             "HomeStore",
             "JobDescription",
             "HashKey",
@@ -532,7 +554,7 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Identifier of the user's current job
         /// </summary>
-        public long JobID { get; set; }
+        public Enums.AccessLevel AccessLevel { get; set; }
 
         /// <summary>
         /// Store location the user is assigned to

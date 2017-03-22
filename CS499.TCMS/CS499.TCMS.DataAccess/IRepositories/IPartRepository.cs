@@ -9,7 +9,6 @@ namespace CS499.TCMS.DataAccess
 {
     public interface IPartRepository : IRepository<Part>, IRepositoryBase
     {
-        //Part getSingle(long PartID);
 
         IEnumerable<Part> getPartsByNumber(long PartNum);
 

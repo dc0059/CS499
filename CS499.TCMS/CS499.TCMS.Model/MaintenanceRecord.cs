@@ -112,6 +112,29 @@ namespace CS499.TCMS.Model
         {
             return string.IsNullOrEmpty(value);
         }
+
+        public override string ToString()
+        {
+            return string.Format("Maintenance #{0} for Vehicle #{1}", this.MaintenanceID, this.VehicleID);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is MaintenanceRecord)
+            {
+                MaintenanceRecord other = obj as MaintenanceRecord;
+                return this.MaintenanceID.Equals(other.MaintenanceID) &&
+                    this.MaintenanceDate.Equals(other.MaintenanceDate) &&
+                    this.MaintenanceDescription.Equals(other.MaintenanceDescription) &&
+                    this.VehicleID.Equals(other.VehicleID);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         #endregion
 
         #region Properties

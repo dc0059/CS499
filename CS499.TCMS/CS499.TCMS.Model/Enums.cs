@@ -1,5 +1,5 @@
 ﻿using System;
-namespace CS499.TCMS.DataAccess
+namespace CS499.TCMS.Model
 {
 
     /// <summary>
@@ -20,10 +20,12 @@ namespace CS499.TCMS.DataAccess
             class8
         }
 
-        public enum JobIDs
+        public enum AccessLevel
         {
-            CEO = 0,
-            CFO = 1,
+            Full = 0,
+            ShippingData,
+            MaintenanceData,
+            DriverData
 
         }
 

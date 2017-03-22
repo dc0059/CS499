@@ -129,6 +129,30 @@ namespace CS499.TCMS.Model
         {
             return string.IsNullOrEmpty(value);
         }
+
+        public override string ToString()
+        {
+            return string.Format("Pay stub #{0} for Employee #{1}", this.PayrollID, this.EmployeeID);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is Payroll)
+            {
+                Payroll other = obj as Payroll;
+                return this.PayrollID.Equals(other.PayrollID) &&
+                    this.EmployeeID.Equals(other.EmployeeID) &&
+                    this.PaymentDate.Equals(other.PaymentDate) &&
+                    this.Payment.Equals(other.Payment) &&
+                    this.HoursWorked.Equals(other.HoursWorked);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         #endregion
 
         #region Properties

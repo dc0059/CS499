@@ -114,6 +114,29 @@ namespace CS499.TCMS.Model
         {
             return string.IsNullOrEmpty(value);
         }
+
+        public override string ToString()
+        {
+            return string.Format("Item #{0} for Order #{1}", this.ItemID, this.OrderID);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is PurchaseItem)
+            {
+                PurchaseItem other = obj as PurchaseItem;
+                return this.ItemID.Equals(other.ItemID) &&
+                    this.OrderID.Equals(other.OrderID) &&
+                    this.Quantity.Equals(other.Quantity) &&
+                    this.PartID.Equals(other.PartID);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         #endregion
 
         #region Properties

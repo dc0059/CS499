@@ -359,21 +359,14 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO user (ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID, " +
-                "CreatedBy, LastModifiedBy) " +
-                              "VALUES (?,?,?,?,?,?,?,?,?,?)",
+                CommandText = "INSERT INTO user (ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID, " +
+                              "CreatedBy, LastModifiedBy) " +
+                              "VALUES (?,?,?,?,?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
             };
 
-            definition.Parameters.Add(new ParameterDefinition()
-            {
-                Direction = ParameterDirection.Input,
-                Name = "P_ManifestID",
-                Type = DbType.Int64,
-                Value = model.ManifestID
-            });
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,

@@ -404,22 +404,14 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO maintenancerecorddetails (DetailID, MaintenanceID, EmployeeID, RepairDescription, RepairDate, " +
+                CommandText = "INSERT INTO maintenancerecorddetails (MaintenanceID, EmployeeID, RepairDescription, RepairDate, " +
                 "CreatedBy, LastModifiedBy) " +
-                              "VALUES (?,?,?,?,?,?,?)",
+                              "VALUES (?,?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
             };
 
-            // create parameter definition
-            definition.Parameters.Add(new ParameterDefinition()
-            {
-                Direction = ParameterDirection.Input,
-                Name = "P_DetailID",
-                Type = DbType.Int64,
-                Value = model.DetailID
-            });
             // create parameter definition
             definition.Parameters.Add(new ParameterDefinition()
             {

@@ -154,6 +154,31 @@ namespace CS499.TCMS.Model
                 return Messages.InvalidID;
             return null;
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0} {1} {2}", this.Year, this.Brand, this.Model);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is Vehicle)
+            {
+                Vehicle other = obj as Vehicle;
+                return this.VehicleID.Equals(other.VehicleID) &&
+                    this.Brand.Equals(other.Brand) &&
+                    this.Year.Equals(other.Year) &&
+                    this.Model.Equals(other.Model) &&
+                    this.VehicleType.Equals(other.VehicleType) &&
+                    this.Capacity.Equals(other.Capacity);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         #endregion
 
         #region Properties
