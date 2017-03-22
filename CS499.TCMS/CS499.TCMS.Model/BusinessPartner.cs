@@ -186,6 +186,32 @@ namespace CS499.TCMS.Model
             return Regex.IsMatch(number, pattern);
         }
 
+        public override string ToString()
+        {
+            return string.Format("{0}", this.CompanyName);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is BusinessPartner)
+            {
+                BusinessPartner other = obj as BusinessPartner;
+                return this.CompanyID.Equals(other.CompanyID) &&
+                    this.CompanyName.Equals(other.CompanyName) &&
+                    this.Address.Equals(other.Address) &&
+                    this.City.Equals(other.City) &&
+                    this.State.Equals(other.State) &&
+                    this.ZipCode.Equals(other.ZipCode) &&
+                    this.PhoneNumber.Equals(other.PhoneNumber);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         #endregion
 
         #region Properties

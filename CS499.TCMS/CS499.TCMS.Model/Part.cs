@@ -143,8 +143,33 @@ namespace CS499.TCMS.Model
         {
             return string.IsNullOrEmpty(value);
         }
+
+        public override string ToString()
+        {
+            return string.Format("Part #{0}: {1}", this.PartNumber, this.PartDescription);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is Part)
+            {
+                Part other = obj as Part;
+                return this.PartID.Equals(other.PartID) &&
+                    this.PartNumber.Equals(other.PartNumber) &&
+                    this.PartPrice.Equals(other.PartPrice) &&
+                    this.PartWeight.Equals(other.PartWeight) &&
+                    this.PartDescription.Equals(other.PartDescription) &&
+                    this.QuantityInStock.Equals(other.QuantityInStock);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         #endregion
- 
+
         #region Properties
 
         /// <summary>
