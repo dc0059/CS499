@@ -22,8 +22,10 @@ namespace CS499.TCMS.DataAccess
 
         public enum JobIDs
         {
-            CEO = 0,
-            CFO = 1,
+            Full = 0,
+            ShippingData,
+            MaintenanceData,
+            DriverData
 
         }
 

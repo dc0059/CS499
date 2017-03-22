@@ -377,20 +377,12 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO businesspartners (CompanyID, CompanyName, Address, City, State, ZipCode, PhoneNumber, CreatedBy, LastModifiedBy) " +
-                              "VALUES (?,?,?,?,?,?,?,?,?)",
+                CommandText = "INSERT INTO businesspartners (CompanyName, Address, City, State, ZipCode, PhoneNumber, CreatedBy, LastModifiedBy) " +
+                              "VALUES (?,?,?,?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
             };
-
-            definition.Parameters.Add(new ParameterDefinition()
-            {
-                Direction = ParameterDirection.Input,
-                Name = "P_CompanyID",
-                Type = DbType.Int64,
-                Value = model.CompanyID
-            });
 
             definition.Parameters.Add(new ParameterDefinition()
             {
@@ -406,6 +398,14 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Name = "P_Address",
                 Type = DbType.String,
                 Value = model.Address
+            });
+
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_City",
+                Type = DbType.String,
+                Value = model.City
             });
 
             definition.Parameters.Add(new ParameterDefinition()

@@ -191,11 +191,6 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteSingleQuery<Part>(definition, Map);
         }
 
-        //public Part getSingle(long PartID)
-        //{
-            //throw new NotImplementedException();
-        //}
-
         public void Insert(Part model)
         {
 
