@@ -21,7 +21,7 @@ namespace CS499.TCMS.Model
         /// <param name="model">model of the vehicle</param>
         /// <param name="vehicleType">type of vehicle</param>
         /// <param name="capacity">weight capacity of the vehicle</param>
-        public Vehicle(long vehicleID, string brand, int year, string model, string vehicleType, int capacity)
+        public Vehicle(long vehicleID, string brand, int year, string model, Enums.TruckMaxCapacity vehicleType, int capacity)
         {
             this.VehicleID = vehicleID;
             this.Brand = brand;
@@ -57,9 +57,6 @@ namespace CS499.TCMS.Model
                     break;
                 case "Model":
                     error = this.ValidateModel();
-                    break;
-                case "VehicleType":
-                    error = this.ValidateVehicleType();
                     break;
                 case "Capacity":
                     error = this.ValidateCapacity();
@@ -109,15 +106,6 @@ namespace CS499.TCMS.Model
             if (!IsValidYear(this.Year))
                 return Messages.InvalidYear;
             return null;
-        }
-
-        /// <summary>
-        /// Validate the vehicle type
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateVehicleType()
-        {
-            return IsEmpty(this.VehicleType) ? Messages.InvalidVehicleType : null;
         }
 
         /// <summary>
@@ -237,7 +225,6 @@ namespace CS499.TCMS.Model
             "Brand",
             "Year",
             "Model",
-            "VehicleType",
             "Capacity"
         };
 
@@ -264,7 +251,7 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Type of vehicle
         /// </summary>
-        public string VehicleType { get; set; }
+        public Enums.TruckMaxCapacity VehicleType { get; set; }
 
         /// <summary>
         /// Weight capacity of the vehicle
