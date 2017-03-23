@@ -9,12 +9,12 @@ namespace CS499.TCMS.DataAccess
 {
     public interface IPurchaseOrderRepository : IRepository<PurchaseOrder>, IRepositoryBase
     {
-        //PurchaseOrder getSingle(long OrderID);
+        //PurchaseOrder GetSingle(long OrderID);
 
-        IEnumerable<PurchaseOrder> getOrderByNumber(long OrderNum);
-        IEnumerable<PurchaseOrder> getOrderBySource(long SourceCompany);
-        IEnumerable<PurchaseOrder> getOrderByDestination(long DestCompany);
-        IEnumerable<PurchaseOrder> getOrderByManifest(long ManifestID);
+        IEnumerable<PurchaseOrder> GetOrderByNumber(long OrderNum);
+        IEnumerable<PurchaseOrder> GetOrderBySource(long SourceCompany);
+        IEnumerable<PurchaseOrder> GetOrderByDestination(long DestCompany);
+        IEnumerable<PurchaseOrder> GetOrderByManifest(long ManifestID);
 
         void DeleteByNumber(long OrderNum);
         void DeleteBySource(long SourceComp);

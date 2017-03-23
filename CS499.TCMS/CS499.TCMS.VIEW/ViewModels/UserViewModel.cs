@@ -1,4 +1,4 @@
-﻿using CS499.TCMS.DataAccess;
+﻿using CS499.TCMS.DataAccess.IRepositories;
 using CS499.TCMS.Model;
 using CS499.TCMS.View.Interfaces;
 using CS499.TCMS.View.Resources;
@@ -33,6 +33,7 @@ namespace CS499.TCMS.View.ViewModels
             this.TaskManager = TaskManager;
             this.IsNew = isNew;
             this.IsSelected = true;
+            this.HasChanges = false;
             this.ContentId = model.EmployeeID.GetContentId(this.DisplayName);
         }
 
@@ -63,13 +64,7 @@ namespace CS499.TCMS.View.ViewModels
             },
             TaskCreationOptions.LongRunning),
             Messages.UserSaving,
-            () =>
-            {
-
-                // request to remove from parent workspace
-                this.CloseCommand.Execute(this);
-
-            },
+            () => {},
             Messages.MainWindowInitialStatus,
             UIContext.Current,
             "Saving user",
@@ -114,6 +109,15 @@ namespace CS499.TCMS.View.ViewModels
 
         }
 
+        /// <summary>
+        /// Execute close command
+        /// </summary>
+        private void Back()
+        {
+            // request to remove from parent workspace
+            this.CloseCommand.Execute(this);
+        }
+
         #endregion
 
         #region Properties
@@ -134,7 +138,7 @@ namespace CS499.TCMS.View.ViewModels
         private IUserRepository userRepository;
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public long EmployeeID
         {
@@ -153,12 +157,13 @@ namespace CS499.TCMS.View.ViewModels
                 Model.EmployeeID = value;
 
                 base.OnPropertyChanged("EmployeeID");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public string UserName
         {
@@ -177,12 +182,13 @@ namespace CS499.TCMS.View.ViewModels
                 Model.UserName = value;
 
                 base.OnPropertyChanged("UserName");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public string FirstName
         {
@@ -201,12 +207,13 @@ namespace CS499.TCMS.View.ViewModels
                 Model.FirstName = value;
 
                 base.OnPropertyChanged("FirstName");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public string MiddleName
         {
@@ -225,12 +232,13 @@ namespace CS499.TCMS.View.ViewModels
                 Model.MiddleName = value;
 
                 base.OnPropertyChanged("MiddleName");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public string LastName
         {
@@ -249,12 +257,13 @@ namespace CS499.TCMS.View.ViewModels
                 Model.LastName = value;
 
                 base.OnPropertyChanged("LastName");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public string Address
         {
@@ -273,12 +282,13 @@ namespace CS499.TCMS.View.ViewModels
                 Model.Address = value;
 
                 base.OnPropertyChanged("Address");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public string State
         {
@@ -297,12 +307,13 @@ namespace CS499.TCMS.View.ViewModels
                 Model.State = value;
 
                 base.OnPropertyChanged("State");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public int ZipCode
         {
@@ -321,14 +332,15 @@ namespace CS499.TCMS.View.ViewModels
                 Model.ZipCode = value;
 
                 base.OnPropertyChanged("ZipCode");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
-        public long HomePhone
+        public string HomePhone
         {
             get
             {
@@ -345,14 +357,15 @@ namespace CS499.TCMS.View.ViewModels
                 Model.HomePhone = value;
 
                 base.OnPropertyChanged("HomePhone");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
-        public long CellPhone
+        public string CellPhone
         {
             get
             {
@@ -369,12 +382,13 @@ namespace CS499.TCMS.View.ViewModels
                 Model.CellPhone = value;
 
                 base.OnPropertyChanged("CellPhone");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public string EmailAddress
         {
@@ -393,12 +407,13 @@ namespace CS499.TCMS.View.ViewModels
                 Model.EmailAddress = value;
 
                 base.OnPropertyChanged("EmailAddress");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public double PayRate
         {
@@ -417,12 +432,13 @@ namespace CS499.TCMS.View.ViewModels
                 Model.PayRate = value;
 
                 base.OnPropertyChanged("PayRate");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public DateTime EmploymentDate
         {
@@ -441,36 +457,38 @@ namespace CS499.TCMS.View.ViewModels
                 Model.EmploymentDate = value;
 
                 base.OnPropertyChanged("EmploymentDate");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
-        public long JobID
+        public Enums.AccessLevel JobID
         {
             get
             {
-                return Model.JobID;
+                return Model.AccessLevel;
             }
             set
             {
 
-                if (Model.JobID == value)
+                if (Model.AccessLevel == value)
                 {
                     return;
                 }
 
-                Model.JobID = value;
+                Model.AccessLevel = value;
 
                 base.OnPropertyChanged("JobID");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public string HomeStore
         {
@@ -489,12 +507,13 @@ namespace CS499.TCMS.View.ViewModels
                 Model.HomeStore = value;
 
                 base.OnPropertyChanged("HomeStore");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public string JobDescription
         {
@@ -513,12 +532,13 @@ namespace CS499.TCMS.View.ViewModels
                 Model.JobDescription = value;
 
                 base.OnPropertyChanged("JobDescription");
+                this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="CS499.TCMS.DataAccess.Models.User"/>
+        /// <see cref="DataAccess.Models.User"/>
         /// </summary>
         public bool IsActive
         {
@@ -537,6 +557,7 @@ namespace CS499.TCMS.View.ViewModels
                 Model.IsActive = value;
 
                 base.OnPropertyChanged("IsActive");
+                this.HasChanges = true;
 
             }
         }
@@ -638,6 +659,30 @@ namespace CS499.TCMS.View.ViewModels
                 }
 
                 return _commandSave;
+            }
+        }
+
+
+        private ICommand _commandBack;
+
+        /// <summary>
+        /// Go back to the previous tab
+        /// </summary>
+        public ICommand CommandBack
+        {
+            get
+            {
+
+                if ( _commandBack == null)
+                {
+                     _commandBack = new RelayCommand(param =>
+                        {
+                            this.Back();
+                        },
+                        param => !this.HasChanges);
+                }
+
+                return  _commandBack;
             }
         }
 

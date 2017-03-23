@@ -128,7 +128,7 @@ namespace CS499.TCMS.DataAccess
             this.Database.ExecuteModQuery(definition);*/
         }
 
-        public IEnumerable<Part> getAll()
+        public IEnumerable<Part> GetAll()
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -144,7 +144,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<Part>(definition, Map);
         }
 
-        public IEnumerable<Part> getPartsByAvailability()
+        public IEnumerable<Part> GetPartsByAvailability()
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -161,12 +161,12 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<Part>(definition, Map);
         }
 
-        public IEnumerable<Part> getPartsByNumber(long PartNum)
+        public IEnumerable<Part> GetPartsByNumber(long PartNum)
         {
             throw new NotImplementedException();
         }
 
-        public Part getSingle(object id)
+        public Part GetSingle(object id)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -191,6 +191,14 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteSingleQuery<Part>(definition, Map);
         }
 
+<<<<<<< Updated upstream
+=======
+        //public Part GetSingle(long PartID)
+        //{
+            //throw new NotImplementedException();
+        //}
+
+>>>>>>> Stashed changes
         public void Insert(Part model)
         {
 

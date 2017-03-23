@@ -171,7 +171,7 @@ namespace CS499.TCMS.DataAccess
             this.Database.ExecuteModQuery(definition);
         }
 
-        public IEnumerable<PurchaseOrder> getAll()
+        public IEnumerable<PurchaseOrder> GetAll()
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -187,7 +187,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<PurchaseOrder>(definition, Map);
         }
 
-        public IEnumerable<PurchaseOrder> getOrderByDestination(long DestCompany)
+        public IEnumerable<PurchaseOrder> GetOrderByDestination(long DestCompany)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -213,7 +213,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<PurchaseOrder>(definition, Map);
         }
 
-        public IEnumerable<PurchaseOrder> getOrderByManifest(long ManifestID)
+        public IEnumerable<PurchaseOrder> GetOrderByManifest(long ManifestID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -239,7 +239,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<PurchaseOrder>(definition, Map);
         }
 
-        public IEnumerable<PurchaseOrder> getOrderByNumber(long OrderNum)
+        public IEnumerable<PurchaseOrder> GetOrderByNumber(long OrderNum)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -265,7 +265,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<PurchaseOrder>(definition, Map);
         }
 
-        public IEnumerable<PurchaseOrder> getOrderBySource(long SourceCompany)
+        public IEnumerable<PurchaseOrder> GetOrderBySource(long SourceCompany)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -291,7 +291,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<PurchaseOrder>(definition, Map);
         }
 
-        public PurchaseOrder getSingle(object id)
+        public PurchaseOrder GetSingle(object id)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -316,7 +316,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteSingleQuery<PurchaseOrder>(definition, Map);
         }
 
-        /*public PurchaseOrder getSingle(long OrderID)
+        /*public PurchaseOrder GetSingle(long OrderID)
         {
             throw new NotImplementedException();
         }*/

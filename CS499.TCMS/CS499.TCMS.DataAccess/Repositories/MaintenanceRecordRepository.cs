@@ -230,7 +230,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// Returns a collection of every unique Maintenance Record in the database
         /// </summary>
         /// <returns></returns>
-        IEnumerable<MaintenanceRecord> IRepository<MaintenanceRecord>.getAll()
+        IEnumerable<MaintenanceRecord> IRepository<MaintenanceRecord>.GetAll()
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -253,7 +253,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// <param name="Earliest"></param>
         /// <param name="Latest"></param>
         /// <returns></returns>
-        IEnumerable<MaintenanceRecord> IMaintenanceRecordRepository.getRecordsByDate(DateTime Earliest, DateTime Latest)
+        IEnumerable<MaintenanceRecord> IMaintenanceRecordRepository.GetRecordsByDate(DateTime Earliest, DateTime Latest)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -292,7 +292,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="VehicleID"></param>
         /// <returns></returns>
-        IEnumerable<MaintenanceRecord> IMaintenanceRecordRepository.getRecordsByVehicle(long VehicleID)
+        IEnumerable<MaintenanceRecord> IMaintenanceRecordRepository.GetRecordsByVehicle(long VehicleID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -323,7 +323,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// <param name="Earliest"></param>
         /// <param name="Latest"></param>
         /// <returns></returns>
-        IEnumerable<MaintenanceRecord> IMaintenanceRecordRepository.getRecordsByVehicleAndDate(long VehicleID, DateTime Earliest, DateTime Latest)
+        IEnumerable<MaintenanceRecord> IMaintenanceRecordRepository.GetRecordsByVehicleAndDate(long VehicleID, DateTime Earliest, DateTime Latest)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -369,7 +369,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        MaintenanceRecord IRepository<MaintenanceRecord>.getSingle(object id)
+        MaintenanceRecord IRepository<MaintenanceRecord>.GetSingle(object id)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -400,7 +400,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        MaintenanceRecord IMaintenanceRecordRepository.getSingle(long RecordID)
+        MaintenanceRecord IMaintenanceRecordRepository.GetSingle(long RecordID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()

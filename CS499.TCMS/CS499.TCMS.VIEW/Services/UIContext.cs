@@ -17,7 +17,7 @@ namespace CS499.TCMS.View.Services
         public static void InitializeContext()
         {
 
-            if (Current != null)
+            if (_current != null)
             {
                 return;
             }
@@ -42,8 +42,22 @@ namespace CS499.TCMS.View.Services
         /// </summary>
         public static TaskScheduler Current
         {
-            get { return _current; }
-            set { _current = value; }
+            get
+            {
+
+                if (_current == null)
+                {
+                    InitializeContext();
+                }
+
+                return _current;
+
+            }
+            set
+            {
+                _current = value;
+            }
+
         }
 
         #endregion

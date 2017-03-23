@@ -26,7 +26,7 @@ namespace CS499.TCMS.DataAccess
         #endregion
 
         #region Methods
-        public IEnumerable<Vehicle> getVehiclesBySpecs(string Brand = null, string Model = null, int Year = 2000)
+        public IEnumerable<Vehicle> GetVehiclesBySpecs(string Brand = null, string Model = null, int Year = 2000)
         {
             //Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -65,7 +65,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<Vehicle>(definition, Map);
         }
 
-        public IEnumerable<Vehicle> getVehiclesByType(string VehicleType)
+        public IEnumerable<Vehicle> GetVehiclesByType(string VehicleType)
         {
             //Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -90,7 +90,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<Vehicle>(definition, Map);
         }
 
-        public IEnumerable<Vehicle> getVehiclesByCapacity(int CapacityClass)
+        public IEnumerable<Vehicle> GetVehiclesByCapacity(int CapacityClass)
         {
             //Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -201,7 +201,7 @@ namespace CS499.TCMS.DataAccess
             this.Database.ExecuteModQuery(definition);
         }
 
-        public Vehicle getSingle(object id)
+        public Vehicle GetSingle(object id)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -226,7 +226,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteSingleQuery<Vehicle>(definition, Map);
         }
 
-        public IEnumerable<Vehicle> getAll()
+        public IEnumerable<Vehicle> GetAll()
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()

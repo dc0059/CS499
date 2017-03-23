@@ -147,7 +147,7 @@ namespace CS499.TCMS.DataAccess
             this.Database.ExecuteModQuery(definition);
         }
 
-        public IEnumerable<PurchaseItem> getAll()
+        public IEnumerable<PurchaseItem> GetAll()
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -163,7 +163,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<PurchaseItem>(definition, Map);
         }
 
-        public IEnumerable<PurchaseItem> getItemsByOrderID(long OrderID)
+        public IEnumerable<PurchaseItem> GetItemsByOrderID(long OrderID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -189,7 +189,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<PurchaseItem>(definition, Map);
         }
 
-        public IEnumerable<PurchaseItem> getItemsByPart(long PartID)
+        public IEnumerable<PurchaseItem> GetItemsByPart(long PartID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -215,7 +215,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<PurchaseItem>(definition, Map);
         }
 
-        public PurchaseItem getSingle(object id)
+        public PurchaseItem GetSingle(object id)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -240,7 +240,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteSingleQuery<PurchaseItem>(definition, Map);
         }
 
-        /*public PurchaseItem getSingle(long ItemID)
+        /*public PurchaseItem GetSingle(long ItemID)
         {
             throw new NotImplementedException();
         }*/

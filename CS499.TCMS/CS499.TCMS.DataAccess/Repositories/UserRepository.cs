@@ -4,8 +4,9 @@ using System.Data;
 //using System.DirectoryServices.AccountManagement;
 using ToolKit.Data;
 using CS499.TCMS.Model;
+using CS499.TCMS.DataAccess.IRepositories;
 
-namespace CS499.TCMS.DataAccess
+namespace CS499.TCMS.DataAccess.Repositories
 {
     /// <summary>
     /// This class will handle all the CRUD operations for the users
@@ -93,7 +94,7 @@ namespace CS499.TCMS.DataAccess
         /// Get all users
         /// </summary>
         /// <returns>Enumerator to traverse the collection of models</returns>
-        IEnumerable<User> IRepository<User>.getAll()
+        IEnumerable<User> IRepository<User>.GetAll()
         {
 
             // create query definition
@@ -117,7 +118,7 @@ namespace CS499.TCMS.DataAccess
         /// </summary>
         /// <param name="JobAssignment">unique identifier</param>
         /// <returns>List of user models</returns>
-        IEnumerable<User> IUserRepository.getUsersByJobAssignment(int JobAssignment)
+        IEnumerable<User> IUserRepository.GetUsersByJobAssignment(int JobAssignment)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -147,7 +148,7 @@ namespace CS499.TCMS.DataAccess
         /// </summary>
         /// <param name="id">unique identifier</param>
         /// <returns>user model</returns>
-        User IRepository<User>.getSingle(object id)
+        User IRepository<User>.GetSingle(object id)
         {
 
             // Create query definition
@@ -181,7 +182,7 @@ namespace CS499.TCMS.DataAccess
         /// <param name="firstname">user's first name</param>
         /// <param name = "middlename">user's middle name</param>
         /// <param name = "lastname">user's last name</param>
-        User IUserRepository.getSingleByName(String firstname, String middlename, String lastname)
+        User IUserRepository.GetSingleByName(String firstname, String middlename, String lastname)
         {
             //Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -629,7 +630,7 @@ namespace CS499.TCMS.DataAccess
         /// </summary>
         /// <param name="zip">zip code to search for</param>
         /// <returns>List of user models</returns>
-        public IEnumerable<User> getUsersByZipCode(int zip)
+        public IEnumerable<User> GetUsersByZipCode(int zip)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -654,7 +655,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<User>(definition, Map);
         }
 
-        public IEnumerable<User> getUsersByHomeStore(string HomeStore)
+        public IEnumerable<User> GetUsersByHomeStore(string HomeStore)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -679,7 +680,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<User>(definition, Map);
         }
 
-        public User getUserByUserName(string username)
+        public User GetUserByUserName(string username)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()

@@ -127,7 +127,7 @@ namespace CS499.TCMS.DataAccess
             this.Database.ExecuteModQuery(definition);*/
         }
 
-        public IEnumerable<Payroll> getAll()
+        public IEnumerable<Payroll> GetAll()
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -143,7 +143,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<Payroll>(definition, Map);
         }
 
-        public Payroll getSingle(object id)
+        public Payroll GetSingle(object id)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -168,12 +168,12 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteSingleQuery<Payroll>(definition, Map);
         }
 
-        /*public Payroll getSingle(long PayrollID)
+        /*public Payroll GetSingle(long PayrollID)
         {
             throw new NotImplementedException();
         }*/
 
-        public IEnumerable<Payroll> getStubsByDate(DateTime date)
+        public IEnumerable<Payroll> GetStubsByDate(DateTime date)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -199,7 +199,7 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteListQuery<Payroll>(definition, Map);
         }
 
-        public IEnumerable<Payroll> getStubsByEmployee(long EmployeeID)
+        public IEnumerable<Payroll> GetStubsByEmployee(long EmployeeID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -333,7 +333,8 @@ namespace CS499.TCMS.DataAccess
             return new Payroll(reader.GetValueOrDefault<Int64>("PaymentId"),
                 reader.GetValueOrDefault<Int64>("EmployeeID"),
                 reader.GetValueOrDefault<DateTime>("PaymentDate"),
-                reader.GetValueOrDefault<double>("Payment"));
+                reader.GetValueOrDefault<double>("Payment"),
+                reader.GetValueOrDefault<double>("HoursWorked"));
         }
 
         #endregion

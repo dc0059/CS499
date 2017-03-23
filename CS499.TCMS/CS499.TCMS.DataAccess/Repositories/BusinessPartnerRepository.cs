@@ -223,7 +223,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         }
 
 
-        IEnumerable<BusinessPartner> IBusinessPartnerRepository.getPartnersByState(string State)
+        IEnumerable<BusinessPartner> IBusinessPartnerRepository.GetPartnersByState(string State)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -248,7 +248,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         }
 
 
-        IEnumerable<BusinessPartner> IBusinessPartnerRepository.getPartnersByZipCode(int Zip)
+        IEnumerable<BusinessPartner> IBusinessPartnerRepository.GetPartnersByZipCode(int Zip)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -309,7 +309,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="id">Integer Representing Partner ID</param>
         /// <returns>Business Partner Object matching Partner's ID</returns>
-        BusinessPartner IBusinessPartnerRepository.getSingle(long PartnerID)
+        BusinessPartner IBusinessPartnerRepository.GetSingle(long PartnerID)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -340,7 +340,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="PartnerName"></param>
         /// <returns>Business Partner Object with matching name field</returns>
-        BusinessPartner IBusinessPartnerRepository.getSingle(string PartnerName)
+        BusinessPartner IBusinessPartnerRepository.GetSingle(string PartnerName)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()

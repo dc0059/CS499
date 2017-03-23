@@ -14,18 +14,18 @@ namespace CS499.TCMS.DataAccess
     {
         
         /// <summary>
-        /// Generic method to get the specific object by its ID
+        /// Generic method to Get the specific object by its ID
         /// </summary>
         /// <param name="id">unique identifier</param>
         /// <returns>the object based on the ID or null if its not found</returns>
-        T getSingle(object id);
+        T GetSingle(object id);
 
 
         /// <summary>
-        /// Generic method to get all objects in the list
+        /// Generic method to Get all objects in the list
         /// </summary>
         /// <returns>a list of all objects</returns>
-        IEnumerable<T> getAll();
+        IEnumerable<T> GetAll();
 
 
         /// <summary>

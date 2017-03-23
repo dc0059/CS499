@@ -117,8 +117,59 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllBusinessPartnerDeleteError" xml:space="preserve">
+    <value>Failed to delete business partner. Please contact support.</value>
+  </data>
+  <data name="AllBusinessPartnerDeleting" xml:space="preserve">
+    <value>Deleting business partner... Please wait.</value>
+  </data>
+  <data name="AllBusinessPartnerDisplayName" xml:space="preserve">
+    <value>Business Partners</value>
+  </data>
+  <data name="AllBusinessPartnerDisplayToolTip" xml:space="preserve">
+    <value>Click here to modify business partners.</value>
+  </data>
+  <data name="AllBusinessPartnerLoadError" xml:space="preserve">
+    <value>Failed to load business partners. Please contact support.</value>
+  </data>
+  <data name="AllBusinessPartnerLoading" xml:space="preserve">
+    <value>Loading business partners... Please wait.</value>
+  </data>
+  <data name="AllUserDeleteError" xml:space="preserve">
+    <value>Failed to delete user ({0}). Please contact support.</value>
+  </data>
+  <data name="AllUserDeleting" xml:space="preserve">
+    <value>Deleting user... Please wait.</value>
+  </data>
+  <data name="AllUserDisplayName" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="AllUserDisplayToolTip" xml:space="preserve">
+    <value>Click here to modify users.</value>
+  </data>
+  <data name="AllUserLoadError" xml:space="preserve">
+    <value>Failed to load users. Please contact support.</value>
+  </data>
+  <data name="AllUserLoading" xml:space="preserve">
+    <value>Loading users... Please wait.</value>
+  </data>
+  <data name="BusinessPartnerDisplayName" xml:space="preserve">
+    <value>Business Partner: {0}</value>
+  </data>
+  <data name="BusinessPartnerSaveError" xml:space="preserve">
+    <value>Failed to save business partner ({0}) because it already exists.</value>
+  </data>
+  <data name="BusinessPartnerSaving" xml:space="preserve">
+    <value>Saving business partner... Please wait.</value>
+  </data>
   <data name="ContentId" xml:space="preserve">
     <value>{0}{1}</value>
+  </data>
+  <data name="DatabaseConnectionError" xml:space="preserve">
+    <value>Failed to connect to the database. Please contact support.</value>
+  </data>
+  <data name="DeleteMessage" xml:space="preserve">
+    <value>Are you sure you want to delete {0} ({1})?</value>
   </data>
   <data name="LoginFailPassword" xml:space="preserve">
     <value>Failed to authenticate username ({0}). Please enter a valid password.</value>
@@ -145,10 +196,10 @@
     <value>Please wait for background task to complete before closing or logging out of the application.</value>
   </data>
   <data name="MainWindowDisplayName" xml:space="preserve">
-    <value>KBT - {0}</value>
+    <value>TCMS - {0}</value>
   </data>
   <data name="MainWindowDisplayNameLoggedIn" xml:space="preserve">
-    <value>KBT - {0} - ({1})</value>
+    <value>TCMS - {0} - ({1})</value>
   </data>
   <data name="MainWindowHelpTooltip" xml:space="preserve">
     <value>Click here to see the Help Menu.</value>
@@ -168,6 +219,9 @@
   <data name="MainWindowViewModelCheckForChanges" xml:space="preserve">
     <value>One or more unsaved changes were found. Are you sure you want to continue without saving?</value>
   </data>
+  <data name="SearchWatermark" xml:space="preserve">
+    <value>Search by any column.</value>
+  </data>
   <data name="ThemeDisplayName" xml:space="preserve">
     <value>Theme</value>
   </data>
@@ -181,7 +235,7 @@
     <value>Saving theme... Please wait.</value>
   </data>
   <data name="TitleApp" xml:space="preserve">
-    <value>KBT</value>
+    <value>TCMS</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>An unexpected error occurred while {0}.{1}Please contact support with the following error ID: {2}</value>

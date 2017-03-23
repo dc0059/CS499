@@ -61,11 +61,164 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to delete business partner. Please contact support..
+        /// </summary>
+        internal static string AllBusinessPartnerDeleteError {
+            get {
+                return ResourceManager.GetString("AllBusinessPartnerDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting business partner... Please wait..
+        /// </summary>
+        internal static string AllBusinessPartnerDeleting {
+            get {
+                return ResourceManager.GetString("AllBusinessPartnerDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Business Partners.
+        /// </summary>
+        internal static string AllBusinessPartnerDisplayName {
+            get {
+                return ResourceManager.GetString("AllBusinessPartnerDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to modify business partners..
+        /// </summary>
+        internal static string AllBusinessPartnerDisplayToolTip {
+            get {
+                return ResourceManager.GetString("AllBusinessPartnerDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load business partners. Please contact support..
+        /// </summary>
+        internal static string AllBusinessPartnerLoadError {
+            get {
+                return ResourceManager.GetString("AllBusinessPartnerLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading business partners... Please wait..
+        /// </summary>
+        internal static string AllBusinessPartnerLoading {
+            get {
+                return ResourceManager.GetString("AllBusinessPartnerLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to delete user ({0}). Please contact support..
+        /// </summary>
+        internal static string AllUserDeleteError {
+            get {
+                return ResourceManager.GetString("AllUserDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting user... Please wait..
+        /// </summary>
+        internal static string AllUserDeleting {
+            get {
+                return ResourceManager.GetString("AllUserDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        internal static string AllUserDisplayName {
+            get {
+                return ResourceManager.GetString("AllUserDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to modify users..
+        /// </summary>
+        internal static string AllUserDisplayToolTip {
+            get {
+                return ResourceManager.GetString("AllUserDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load users. Please contact support..
+        /// </summary>
+        internal static string AllUserLoadError {
+            get {
+                return ResourceManager.GetString("AllUserLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading users... Please wait..
+        /// </summary>
+        internal static string AllUserLoading {
+            get {
+                return ResourceManager.GetString("AllUserLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Business Partner: {0}.
+        /// </summary>
+        internal static string BusinessPartnerDisplayName {
+            get {
+                return ResourceManager.GetString("BusinessPartnerDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to save business partner ({0}) because it already exists..
+        /// </summary>
+        internal static string BusinessPartnerSaveError {
+            get {
+                return ResourceManager.GetString("BusinessPartnerSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving business partner... Please wait..
+        /// </summary>
+        internal static string BusinessPartnerSaving {
+            get {
+                return ResourceManager.GetString("BusinessPartnerSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}{1}.
         /// </summary>
         internal static string ContentId {
             get {
                 return ResourceManager.GetString("ContentId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to connect to the database. Please contact support..
+        /// </summary>
+        internal static string DatabaseConnectionError {
+            get {
+                return ResourceManager.GetString("DatabaseConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete {0} ({1})?.
+        /// </summary>
+        internal static string DeleteMessage {
+            get {
+                return ResourceManager.GetString("DeleteMessage", resourceCulture);
             }
         }
         
@@ -142,7 +295,7 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to KBT - {0}.
+        ///   Looks up a localized string similar to TCMS - {0}.
         /// </summary>
         internal static string MainWindowDisplayName {
             get {
@@ -151,7 +304,7 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to KBT - {0} - ({1}).
+        ///   Looks up a localized string similar to TCMS - {0} - ({1}).
         /// </summary>
         internal static string MainWindowDisplayNameLoggedIn {
             get {
@@ -214,6 +367,15 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search by any column..
+        /// </summary>
+        internal static string SearchWatermark {
+            get {
+                return ResourceManager.GetString("SearchWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Theme.
         /// </summary>
         internal static string ThemeDisplayName {
@@ -250,7 +412,7 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to KBT.
+        ///   Looks up a localized string similar to TCMS.
         /// </summary>
         internal static string TitleApp {
             get {

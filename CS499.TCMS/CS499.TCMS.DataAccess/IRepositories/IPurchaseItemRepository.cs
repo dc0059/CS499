@@ -9,10 +9,10 @@ namespace CS499.TCMS.DataAccess
 {
     public interface IPurchaseItemRepository : IRepository<PurchaseItem>, IRepositoryBase
     {
-        //PurchaseItem getSingle(long ItemID);
+        //PurchaseItem GetSingle(long ItemID);
 
-        IEnumerable<PurchaseItem> getItemsByOrderID(long OrderID);
-        IEnumerable<PurchaseItem> getItemsByPart(long PartID);
+        IEnumerable<PurchaseItem> GetItemsByOrderID(long OrderID);
+        IEnumerable<PurchaseItem> GetItemsByPart(long PartID);
 
         void Delete(long ItemID);
         void DeleteItemsByOrderID(long OrderID);

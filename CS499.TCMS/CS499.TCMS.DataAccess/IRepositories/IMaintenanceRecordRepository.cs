@@ -9,11 +9,11 @@ namespace CS499.TCMS.DataAccess.IRepositories
 {
     interface IMaintenanceRecordRepository : IRepository<MaintenanceRecord>
     {
-        MaintenanceRecord getSingle(long RecordID);
+        MaintenanceRecord GetSingle(long RecordID);
 
-        IEnumerable<MaintenanceRecord> getRecordsByVehicle(long VehicleID);
-        IEnumerable<MaintenanceRecord> getRecordsByVehicleAndDate(long VehicleID, DateTime Earliest, DateTime Latest);
-        IEnumerable<MaintenanceRecord> getRecordsByDate(DateTime Earliest, DateTime Latest);
+        IEnumerable<MaintenanceRecord> GetRecordsByVehicle(long VehicleID);
+        IEnumerable<MaintenanceRecord> GetRecordsByVehicleAndDate(long VehicleID, DateTime Earliest, DateTime Latest);
+        IEnumerable<MaintenanceRecord> GetRecordsByDate(DateTime Earliest, DateTime Latest);
 
         void Delete(long RecordID);
         void DeleteByVehicle(long VehicleID);

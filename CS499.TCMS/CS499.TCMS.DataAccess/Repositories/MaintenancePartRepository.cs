@@ -170,7 +170,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// Returns collection of every unique Maintenance Part obj in database
         /// </summary>
         /// <returns></returns>
-        IEnumerable<MaintenancePart> IRepository<MaintenancePart>.getAll()
+        IEnumerable<MaintenancePart> IRepository<MaintenancePart>.GetAll()
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -192,7 +192,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="RecordID"></param>
         /// <returns></returns>
-        IEnumerable<MaintenancePart> IMaintenancePartRepository.getPartByMaintenanceRecord(long RecordID)
+        IEnumerable<MaintenancePart> IMaintenancePartRepository.GetPartByMaintenanceRecord(long RecordID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -223,7 +223,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="PartID"></param>
         /// <returns></returns>
-        IEnumerable<MaintenancePart> IMaintenancePartRepository.getPartByPart(long PartID)
+        IEnumerable<MaintenancePart> IMaintenancePartRepository.GetPartByPart(long PartID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -254,7 +254,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        MaintenancePart IRepository<MaintenancePart>.getSingle(object id)
+        MaintenancePart IRepository<MaintenancePart>.GetSingle(object id)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -285,7 +285,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="MaintenancePartID"></param>
         /// <returns></returns>
-        MaintenancePart IMaintenancePartRepository.getSingle(long MaintenancePartID)
+        MaintenancePart IMaintenancePartRepository.GetSingle(long MaintenancePartID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()

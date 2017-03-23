@@ -40,11 +40,11 @@ namespace CS499.TCMS.DataAccess
         public TInterface Create<TInterface>() where TInterface : class, IRepositoryBase
         {
 
-            // get types for the repository
+            // Get types for the repository
             Type interfaceType = typeof(TInterface);
             Type concreteType = null;
 
-            // get the concrete repository class that implements TInterface
+            // Get the concrete repository class that implements TInterface
             concreteType = this.GetConcreteType(interfaceType);
 
             // create new concrete instance of the class

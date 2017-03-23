@@ -9,12 +9,12 @@ namespace CS499.TCMS.DataAccess.IRepositories
 {
     interface IManifestRepository : IRepository<Manifest>
     {
-        Manifest getSingle(long ManifestID);
+        Manifest GetSingle(long ManifestID);
 
-        IEnumerable<Manifest> getManifestByDepartureDate(DateTime DepartureTime);
-        IEnumerable<Manifest> getManifestByArrivalDate(DateTime ArrivalDate);
-        IEnumerable<Manifest> getAllByEmployee(long EmployeeID);
-        IEnumerable<Manifest> getAllByIncOrOut(string type);
+        IEnumerable<Manifest> GetManifestByDepartureDate(DateTime DepartureTime);
+        IEnumerable<Manifest> GetManifestByArrivalDate(DateTime ArrivalDate);
+        IEnumerable<Manifest> GetAllByEmployee(long EmployeeID);
+        IEnumerable<Manifest> GetAllByIncOrOut(string type);
 
         void Delete(long ManifestID);
         void DeleteByEmployee(long EmployeeID);

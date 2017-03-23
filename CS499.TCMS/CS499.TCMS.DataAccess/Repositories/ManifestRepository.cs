@@ -143,7 +143,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// Returns a collection of every unique Manifest
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Manifest> IRepository<Manifest>.getAll()
+        IEnumerable<Manifest> IRepository<Manifest>.GetAll()
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -165,7 +165,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="EmployeeID">ID of employee</param>
         /// <returns>collection of Manifests belonging to the argument employeeID</returns>
-        IEnumerable<Manifest> IManifestRepository.getAllByEmployee(long EmployeeID)
+        IEnumerable<Manifest> IManifestRepository.GetAllByEmployee(long EmployeeID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -196,7 +196,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="type">values 'incoming' or 'outgoing'</param>
         /// <returns>collection of manifests of the same shipment type</returns>
-        IEnumerable<Manifest> IManifestRepository.getAllByIncOrOut(string type)
+        IEnumerable<Manifest> IManifestRepository.GetAllByIncOrOut(string type)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -227,7 +227,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="ArrivalDate">DateTime object specifying search date</param>
         /// <returns>collection of manifests arriving on argument date</returns>
-        IEnumerable<Manifest> IManifestRepository.getManifestByArrivalDate(DateTime ArrivalDate)
+        IEnumerable<Manifest> IManifestRepository.GetManifestByArrivalDate(DateTime ArrivalDate)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -258,7 +258,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="DepartureTime">DateTime object of departure date</param>
         /// <returns></returns>
-        IEnumerable<Manifest> IManifestRepository.getManifestByDepartureDate(DateTime DepartureTime)
+        IEnumerable<Manifest> IManifestRepository.GetManifestByDepartureDate(DateTime DepartureTime)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -290,7 +290,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Manifest IRepository<Manifest>.getSingle(object id)
+        Manifest IRepository<Manifest>.GetSingle(object id)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -321,7 +321,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="ManifestID"></param>
         /// <returns>manifest object form Database with given manifestID</returns>
-        Manifest IManifestRepository.getSingle(long ManifestID)
+        Manifest IManifestRepository.GetSingle(long ManifestID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()

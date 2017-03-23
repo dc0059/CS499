@@ -747,10 +747,32 @@
         <Path Width="25.3333" Height="28.5" Canvas.Left="25.1849" Canvas.Top="23.3542" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 35.8724,37.6042L 39.0391,40.7708L 50.5182,51.8542L 40.2266,51.8542L 25.1849,37.6041L 40.2266,23.3542L 50.5182,23.3542L 39.0391,34.4375L 35.8724,37.6042 Z "/>
     </Canvas>
 
+    <Canvas x:Key="appbar_chevron_left_double" Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+        <Canvas Width="76" Height="76" Canvas.Left="0" Canvas.Top="0">
+            <Viewbox Width="56.327" Height="28.5" Canvas.Left="10.3849" Canvas.Top="22.4542">
+                <Canvas Width="56.327" Height="28.5">
+                    <Path Width="25.3333" Height="28.5" Canvas.Left="9.53674e-007" Canvas.Top="0" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 10.6875,14.25L 13.8542,17.4167L 25.3333,28.5L 15.0417,28.5L 9.53674e-007,14.25L 15.0417,0L 25.3333,0L 13.8542,11.0833L 10.6875,14.25 Z "/>
+                    <Path Width="25.3333" Height="28.5" Canvas.Left="30.9937" Canvas.Top="3.8147e-006" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 41.6812,14.25L 44.8478,17.4167L 56.327,28.5L 46.0353,28.5L 30.9937,14.25L 46.0353,3.8147e-006L 56.327,3.8147e-006L 44.8478,11.0833L 41.6812,14.25 Z "/>
+                </Canvas>
+            </Viewbox>
+        </Canvas>
+    </Canvas>
+
     <Canvas x:Key="appbar_chevron_right" Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
         <Path Width="25.3333" Height="28.5" Canvas.Left="25.1849" Canvas.Top="23.3542" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 39.8307,37.6042L 36.6641,34.4375L 25.1849,23.3542L 35.4766,23.3542L 50.5182,37.6042L 35.4766,51.8542L 25.1849,51.8542L 36.6641,40.7708L 39.8307,37.6042 Z "/>
     </Canvas>
 
+    <Canvas x:Key="appbar_chevron_right_double" Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+        <Canvas Width="76" Height="76" Canvas.Left="0" Canvas.Top="0">
+            <Viewbox Width="56.3126" Height="28.5" Canvas.Left="10.3937" Canvas.Top="22.45">
+                <Canvas Width="56.3126" Height="28.5">
+                    <Path Width="25.3333" Height="28.5" Canvas.Left="1.90735e-006" Canvas.Top="0" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 14.6458,14.25L 11.4792,11.0833L 1.90735e-006,0L 10.2917,3.8147e-006L 25.3333,14.25L 10.2917,28.5L 1.90735e-006,28.5L 11.4792,17.4167L 14.6458,14.25 Z "/>
+                    <Path Width="25.3333" Height="28.5" Canvas.Left="30.9793" Canvas.Top="0" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 45.6251,14.25L 42.4585,11.0833L 30.9793,0L 41.271,3.8147e-006L 56.3126,14.25L 41.271,28.5L 30.9793,28.5L 42.4585,17.4167L 45.6251,14.25 Z "/>
+                </Canvas>
+            </Viewbox>
+        </Canvas>
+    </Canvas>
+    
     <Canvas x:Key="appbar_chevron_up" Width="76" Height="76" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
         <Path Width="28.5" Height="25.3333" Canvas.Left="23.6016" Canvas.Top="24.9375" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 37.8516,35.625L 34.6849,38.7917L 23.6016,50.2708L 23.6016,39.9792L 37.8516,24.9375L 52.1016,39.9792L 52.1016,50.2708L 41.0182,38.7917L 37.8516,35.625 Z "/>
     </Canvas>

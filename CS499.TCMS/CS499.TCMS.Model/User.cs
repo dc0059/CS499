@@ -65,7 +65,7 @@ namespace CS499.TCMS.Model
         #endregion
          
         #region Methods
-
+                
         /// <summary>
         /// Get validation errors
         /// </summary>
