@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using ToolKit.Data;
 using CS499.TCMS.Model;
 using System.Data;
+using CS499.TCMS.DataAccess.IRepositories;
 
-namespace CS499.TCMS.DataAccess
+namespace CS499.TCMS.DataAccess.Repositories
 {
     class PurchaseItemRepository : GenericRepository<PurchaseItem>, IPurchaseItemRepository
     {
@@ -307,7 +308,7 @@ namespace CS499.TCMS.DataAccess
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE purchaseitems " +
-                              "SET OrderID, Quantity, PartID " +
+                              "SET OrderID, Quantity, PartID, LastModifiedBy = ? " +
                               "WHERE ItemID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -339,6 +340,13 @@ namespace CS499.TCMS.DataAccess
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
                 Name = "P_ItemID",
                 Type = DbType.Int64,
                 Value = model.ItemID
@@ -349,10 +357,10 @@ namespace CS499.TCMS.DataAccess
 
         protected override PurchaseItem Map(IDataReader reader)
         {
-            return new PurchaseItem(reader.GetValueOrDefault<Int64>("ItemID"),
-                reader.GetValueOrDefault<Int64>("OrderID"),
-                reader.GetValueOrDefault<Int16>("Quantity"),
-                reader.GetValueOrDefault<Int64>("PartID"));
+            return new PurchaseItem(reader.GetValueOrDefault<long>("ItemID"),
+                reader.GetValueOrDefault<long>("OrderID"),
+                reader.GetValueOrDefault<int>("Quantity"),
+                reader.GetValueOrDefault<long>("PartID"));
         }
 
         #endregion

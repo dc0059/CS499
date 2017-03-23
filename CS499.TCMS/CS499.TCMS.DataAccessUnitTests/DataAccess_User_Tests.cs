@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CS499.TCMS.Model;
+using CS499.TCMS.DataAccess.IRepositories;
 using CS499.TCMS.DataAccess;
 
 namespace CS499.TCMS.DataAccessUnitTests

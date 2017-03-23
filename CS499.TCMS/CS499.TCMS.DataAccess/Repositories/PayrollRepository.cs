@@ -7,8 +7,9 @@ using CS499.TCMS.DataAccess;
 using ToolKit.Data;
 using CS499.TCMS.Model;
 using System.Data;
+using CS499.TCMS.DataAccess.IRepositories;
 
-namespace CS499.TCMS.DataAccess
+namespace CS499.TCMS.DataAccess.Repositories
 {
     class PayrollRepository : GenericRepository<Payroll>, IPayrollRepository
     {
@@ -288,7 +289,7 @@ namespace CS499.TCMS.DataAccess
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE payroll " +
-                              "SET EmployeeID = ?, PaymentDate = ?, Payment = ? " +
+                              "SET EmployeeID = ?, PaymentDate = ?, Payment = ?, LastModifiedBy = ? " +
                               "WHERE PaymentID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -320,6 +321,13 @@ namespace CS499.TCMS.DataAccess
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
                 Name = "P_PayrollID",
                 Type = DbType.Int64,
                 Value = model.PayrollID
@@ -330,8 +338,8 @@ namespace CS499.TCMS.DataAccess
 
         protected override Payroll Map(IDataReader reader)
         {
-            return new Payroll(reader.GetValueOrDefault<Int64>("PaymentId"),
-                reader.GetValueOrDefault<Int64>("EmployeeID"),
+            return new Payroll(reader.GetValueOrDefault<long>("PaymentId"),
+                reader.GetValueOrDefault<long>("EmployeeID"),
                 reader.GetValueOrDefault<DateTime>("PaymentDate"),
                 reader.GetValueOrDefault<double>("Payment"),
                 reader.GetValueOrDefault<double>("HoursWorked"));

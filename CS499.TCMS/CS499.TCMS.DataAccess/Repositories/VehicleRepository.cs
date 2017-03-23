@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using CS499.TCMS.Model;
 using ToolKit.Data;
 using System.Data;
+using CS499.TCMS.DataAccess.IRepositories;
 
-namespace CS499.TCMS.DataAccess
+namespace CS499.TCMS.DataAccess.Repositories
 {
     internal class VehicleRepository : GenericRepository<Vehicle>, IVehicleRepository
     {
@@ -248,7 +249,7 @@ namespace CS499.TCMS.DataAccess
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE vehicle " +
-                              "SET Brand = ?, Year = ?, Model = ?, VehicleType = ?, Capacity = ? " +
+                              "SET Brand = ?, Year = ?, Model = ?, VehicleType = ?, Capacity = ?, LastModifiedBy = ? " +
                               "WHERE VehicleID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -290,6 +291,13 @@ namespace CS499.TCMS.DataAccess
                 Name = "P_Capacity",
                 Type = DbType.Int16,
                 Value = model.Capacity
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
             });
             definition.Parameters.Add(new ParameterDefinition()
             {
@@ -429,12 +437,12 @@ namespace CS499.TCMS.DataAccess
 
         protected override Vehicle Map(IDataReader reader)
         {
-            return new Vehicle(reader.GetValueOrDefault<Int64>("VehicleID"),
+            return new Vehicle(reader.GetValueOrDefault<long>("VehicleID"),
                 reader.GetValueOrDefault<string>("Brand"),
-                reader.GetValueOrDefault<Int16>("Year"),
+                reader.GetValueOrDefault<int>("Year"),
                 reader.GetValueOrDefault<string>("Model"),
-                reader.GetValueOrDefault<string>("VehicleType"),
-                reader.GetValueOrDefault<Int16>("Capacity"));
+                (Enums.TruckMaxCapacity)reader.GetValueOrDefault<int>("VehicleType"),
+                reader.GetValueOrDefault<int>("Capacity"));
         }
 
         #endregion

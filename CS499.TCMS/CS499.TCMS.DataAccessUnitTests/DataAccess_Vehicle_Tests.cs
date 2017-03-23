@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CS499.TCMS.Model;
 using CS499.TCMS.DataAccess;
+using CS499.TCMS.DataAccess.IRepositories;
 
 namespace CS499.TCMS.DataAccessUnitTests
 {

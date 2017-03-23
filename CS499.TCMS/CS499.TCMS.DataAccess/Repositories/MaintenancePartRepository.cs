@@ -382,7 +382,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE maintenancepart " +
-                              "SET Quantity = ?, MaintenanceRecordID = ?, PartID = ? " +
+                              "SET Quantity = ?, MaintenanceRecordID = ?, PartID = ?, LastModifiedBy = ? " +
                               "WHERE MaintenancePartID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -410,6 +410,14 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Name = "P_PartID",
                 Type = DbType.Int64,
                 Value = model.PartID
+            });
+
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
             });
 
             // create parameter definition
