@@ -1,0 +1,332 @@
+﻿<UserControl x:Class="CS499.TCMS.View.Views.UserView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+			 xmlns:local="clr-namespace:CS499.TCMS.View.Views"             
+			 mc:Ignorable="d" 
+			 d:DesignHeight="300" d:DesignWidth="300">
+	<Border BorderBrush="{DynamicResource AccentColorBrush}"
+			BorderThickness="1"
+			Margin="5">
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>                
+			</Grid.RowDefinitions>
+
+            <Grid Grid.Column="0"
+                  Grid.Row="0"
+                  Grid.ColumnSpan="2">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Width="50"
+                        Height="50"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource MetroCircleButtonStyle}"
+                        Background="{DynamicResource AccentColorBrush}"
+                        ToolTip="Back"
+                        Command="{Binding CommandBack}"
+                        Content="{iconPacks:PackIconModern Kind=ArrowLeft, Height=26, Width=26}"/>
+                <Button Width="50"
+                        Height="50"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource MetroCircleButtonStyle}"
+                        Background="{DynamicResource AccentColorBrush}"
+                        ToolTip="Save"
+                        Command="{Binding CommandSave}"
+                        Content="{iconPacks:PackIconModern Kind=Save, Height=26, Width=26}"/>
+            </Grid>
+            
+			<ScrollViewer Grid.Row="1" 
+						  VerticalScrollBarVisibility="Auto"
+						  CanContentScroll="True"
+						  Margin="5">
+				<StackPanel Orientation="Vertical">
+
+					<Expander Header="User Information"
+							  IsExpanded="True"
+							  Margin="5">
+
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Employee ID:"
+									   Grid.Column="0"
+									   Grid.Row="0"/>
+							<TextBox Text="{Binding EmployeeID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+									 IsReadOnly="True"
+									 Grid.Column="1"
+									 Grid.Row="0"
+									 Margin="0, 10, 0, 10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Username:"
+									   Grid.Column="0"
+									   Grid.Row="1"/>
+							<TextBox Text="{Binding UserName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									 Controls:TextBoxHelper.Watermark="Enter username"
+									 Controls:TextBoxHelper.ClearTextButton="True"                                 
+									 Grid.Column="1"
+									 Grid.Row="1"
+									 Margin="0, 10, 0, 10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="First Name:"
+									   Grid.Column="0"
+									   Grid.Row="2"/>
+							<TextBox Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									 Controls:TextBoxHelper.Watermark="Enter first name"
+									 Controls:TextBoxHelper.ClearTextButton="True"                                 
+									 Grid.Column="1"
+									 Grid.Row="2"
+									 Margin="0, 10, 0, 10"/>
+						   <TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Middle Name:"
+									   Grid.Column="0"
+									   Grid.Row="3"/>
+							<TextBox Text="{Binding MiddleName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									 Controls:TextBoxHelper.Watermark="Enter middle name"
+									 Controls:TextBoxHelper.ClearTextButton="True"                                 
+									 Grid.Column="1"
+									 Grid.Row="3"
+									 Margin="0, 10, 0, 10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Last Name:"
+									   Grid.Column="0"
+									   Grid.Row="4"/>
+							<TextBox Text="{Binding LastName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									 Controls:TextBoxHelper.Watermark="Enter last name"
+									 Controls:TextBoxHelper.ClearTextButton="True"                                 
+									 Grid.Column="1"
+									 Grid.Row="4"
+									 Margin="0, 10, 0, 10"/>
+                            <TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Is Active:"
+									   Grid.Column="0"
+									   Grid.Row="5"/>
+                            <CheckBox IsChecked="{Binding IsActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Grid.Column="1"
+									  Grid.Row="5"
+                                      Margin="0, 10, 0, 10"/>
+
+
+                        </Grid>
+
+					</Expander>
+					<Expander Header="Contact Information"
+							  IsExpanded="false"
+							  Margin="5">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Address:"
+									   Grid.Column="0"
+									   Grid.Row="0"/>
+							<TextBox Text="{Binding Address, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									 Controls:TextBoxHelper.Watermark="Enter address"
+									 Controls:TextBoxHelper.ClearTextButton="True"
+									 Grid.Column="1"
+									 Grid.Row="0"
+									 Margin="0, 10, 0, 10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="City:"
+									   Grid.Column="0"
+									   Grid.Row="1"/>
+							<TextBox Text="{Binding City, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									 Controls:TextBoxHelper.Watermark="Enter city"
+									 Controls:TextBoxHelper.ClearTextButton="True"                                 
+									 Grid.Column="1"
+									 Grid.Row="1"
+									 Margin="0, 10, 0, 10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="State:"
+									   Grid.Column="0"
+									   Grid.Row="2"/>
+							<TextBox Text="{Binding State, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									 Controls:TextBoxHelper.Watermark="Enter state"
+									 Controls:TextBoxHelper.ClearTextButton="True"                                 
+									 Grid.Column="1"
+									 Grid.Row="2"
+									 Margin="0, 10, 0, 10"/>                            
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Zip Code:"
+									   Grid.Column="0"
+									   Grid.Row="3"/>
+							<TextBox Text="{Binding ZipCode, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									 Controls:TextBoxHelper.Watermark="Enter zip code"
+									 Controls:TextBoxHelper.ClearTextButton="True"                                 
+									 Grid.Column="1"
+									 Grid.Row="3"
+									 Margin="0, 10, 0, 10"
+									 MaxLength="5"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Home Phone:"
+									   Grid.Column="0"
+									   Grid.Row="4"/>
+							<TextBox Text="{Binding HomePhone, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, Converter={StaticResource StringToPhoneConverter}}"
+									 Controls:TextBoxHelper.Watermark="Enter home phone"
+									 Controls:TextBoxHelper.ClearTextButton="True"                                 
+									 Grid.Column="1"
+									 Grid.Row="4"
+									 Margin="0, 10, 0, 10"
+									 MaxLength="10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Cell Phone:"
+									   Grid.Column="0"
+									   Grid.Row="5"/>
+							<TextBox Text="{Binding CellPhone, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, Converter={StaticResource StringToPhoneConverter}}"
+									 Controls:TextBoxHelper.Watermark="Enter cell phone"
+									 Controls:TextBoxHelper.ClearTextButton="True"                                 
+									 Grid.Column="1"
+									 Grid.Row="5"
+									 Margin="0, 10, 0, 10"
+									 MaxLength="10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Email Address:"
+									   Grid.Column="0"
+									   Grid.Row="6"/>
+							<TextBox Text="{Binding EmailAddress, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, Converter={StaticResource StringToPhoneConverter}}"
+									 Controls:TextBoxHelper.Watermark="Enter Email Address"
+									 Controls:TextBoxHelper.ClearTextButton="True"                                 
+									 Grid.Column="1"
+									 Grid.Row="6"
+									 Margin="0, 10, 0, 10"
+									 MaxLength="10"/>
+
+						</Grid>
+						
+					</Expander>
+					
+					<Expander Header="Employment Information"
+							  IsExpanded="False"
+							  Margin="5">
+
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Job ID:"
+									   Grid.Column="0"
+									   Grid.Row="0"/>
+							<TextBox Text="{Binding JobID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									 Controls:TextBoxHelper.Watermark="Enter job ID"
+									 Controls:TextBoxHelper.ClearTextButton="True"    
+									 Grid.Column="1"
+									 Grid.Row="0"
+									 Margin="0, 10, 0, 10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Job Description:"
+									   Grid.Column="0"
+									   Grid.Row="1"/>
+							<TextBox Text="{Binding Job Description, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									 Controls:TextBoxHelper.Watermark="Enter job description"
+									 Controls:TextBoxHelper.ClearTextButton="True"                                 
+									 Grid.Column="1"
+									 Grid.Row="1"
+									 Margin="0, 10, 0, 10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Home Store:"
+									   Grid.Column="0"
+									   Grid.Row="2"/>
+							<TextBox Text="{Binding HomeStore, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									 Controls:TextBoxHelper.Watermark="Enter home store"
+									 Controls:TextBoxHelper.ClearTextButton="True"                                 
+									 Grid.Column="1"
+									 Grid.Row="2"
+									 Margin="0, 10, 0, 10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Employment Date:"
+									   Grid.Column="0"
+									   Grid.Row="3"/>
+							<Controls:DateTimePicker SelectedDate="{Binding EmploymentDate, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+													 Controls:TextBoxHelper.Watermark="Select date"
+													 Controls:TextBoxHelper.ClearTextButton="True"                                 
+													 Grid.Column="1"
+													 Grid.Row="3"
+													 Margin="0, 10, 0, 10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Pay Rate:"
+									   Grid.Column="0"
+									   Grid.Row="4"/>
+							<Controls:NumericUpDown Value="{Binding PayRate, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+													Controls:TextBoxHelper.Watermark="Enter pay rate"
+													StringFormat="$00.00"
+													Grid.Column="1"
+													Grid.Row="4"
+													Margin="0, 10, 0, 10"/>
+
+
+						</Grid>
+
+					</Expander>
+					
+				</StackPanel>
+				
+			</ScrollViewer>
+
+		</Grid>
+	</Border>
+</UserControl>

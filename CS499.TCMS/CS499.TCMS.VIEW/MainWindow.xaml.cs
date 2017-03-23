@@ -1,6 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 
-namespace CS499.TCMS.VIEW
+namespace CS499.TCMS.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

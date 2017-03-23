@@ -7,7 +7,7 @@ using System.Windows.Threading;
 //Here is the once-per-application setup information
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
-namespace CS499.TCMS.VIEW
+namespace CS499.TCMS.View
 {
     /// <summary>
     /// Interaction logic for App.xaml
