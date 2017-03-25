@@ -26,7 +26,7 @@ namespace CS499.TCMS.ModelUnitTest
         [TestMethod]
         public void MaintenanceRecordModelTest()
         {
-            MaintenanceRecord testRecord = new MaintenanceRecord(12345, 1234, new DateTime(2008, 4, 12), "Stuff happened.", 960.00);
+            MaintenanceRecord testRecord = new MaintenanceRecord(12345, 1234, new DateTime(2008, 4, 12), "Stuff happened.");
             Assert.IsTrue(testRecord.IsValid);
         }
 
@@ -47,14 +47,14 @@ namespace CS499.TCMS.ModelUnitTest
         [TestMethod]
         public void ManifestModelTest()
         {
-            Manifest testManifest = new Manifest(12345, "Outgoing", 12345, new DateTime(2012, 10, 2), new DateTime(2012, 10, 4), true, 20000.00, 123456, false);
+            Manifest testManifest = new Manifest(12345, "Outgoing", 12345, new DateTime(2012, 10, 2), new DateTime(2012, 10, 4), true, 20000.00, 123456);
             Assert.IsTrue(testManifest.IsValid);
         }
 
         [TestMethod]
         public void PurchaseOrderModelTest()
         {
-            PurchaseOrder testOrder = new PurchaseOrder(12345, 123, 905, 438, 12345);
+            PurchaseOrder testOrder = new PurchaseOrder(12345, 123, 905, 438, 12345, false);
             Assert.IsTrue(testOrder.IsValid);
         }
 

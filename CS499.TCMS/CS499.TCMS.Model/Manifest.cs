@@ -24,9 +24,8 @@ namespace CS499.TCMS.Model
         /// <param name="arrived">flag indicating the shipment arrived at its destination</param>
         /// <param name="shippingCost">total cost of the shipment</param>
         /// <param name="employeeID">identifier of the employee assigned to this manifest</param>
-        /// <param name="paymentMade">flag indicating whether the payment has been made or received</param>
         public Manifest(long manifestID, string shipmentType, long vehicleID, DateTime departureTime, DateTime eta, bool arrived, double shippingCost,
-            long employeeID, bool paymentMade)
+            long employeeID)
         {
             this.ManifestID = manifestID;
             this.ShipmentType = shipmentType;
@@ -36,7 +35,6 @@ namespace CS499.TCMS.Model
             this.Arrived = arrived;
             this.ShippingCost = shippingCost;
             this.EmployeeID = employeeID;
-            this.PaymentMade = paymentMade;
         }
         #endregion
 
@@ -184,8 +182,7 @@ namespace CS499.TCMS.Model
                     this.ETA.Equals(other.ETA) &&
                     this.Arrived.Equals(other.Arrived) &&
                     this.EmployeeID.Equals(other.EmployeeID) &&
-                    this.VehicleID.Equals(other.VehicleID) &&
-                    this.PaymentMade.Equals(other.PaymentMade);
+                    this.VehicleID.Equals(other.VehicleID);
             }
             return false;
         }
@@ -296,11 +293,6 @@ namespace CS499.TCMS.Model
         /// Identifier of the employee assigned to this manifest
         /// </summary>
         public long EmployeeID { get; set; }
-
-        /// <summary>
-        /// Flag indicating whether payment has been made or received
-        /// </summary>
-        public bool PaymentMade { get; set; }
 
         string IDataErrorInfo.Error
         {

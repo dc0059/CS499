@@ -20,13 +20,15 @@ namespace CS499.TCMS.Model
         /// <param name="sourceID">identifier of the source company</param>
         /// <param name="destinationID">identifier of the destination company</param>
         /// <param name="manifestID">identifier of the shipping manifest this purchase order belongs to</param>
-        public PurchaseOrder(long orderID, long orderNumber, long sourceID, long destinationID, long manifestID)
+        /// <param name="paymentMade">flag indicating whether the payment has been made or received</param>
+        public PurchaseOrder(long orderID, long orderNumber, long sourceID, long destinationID, long manifestID, bool paymentMade)
         {
             this.OrderID = orderID;
             this.OrderNumber = orderNumber;
             this.SourceID = sourceID;
             this.DestinationID = destinationID;
             this.ManifestID = manifestID;
+            this.PaymentMade = paymentMade;
         }
         #endregion
          
@@ -145,7 +147,8 @@ namespace CS499.TCMS.Model
                     this.OrderNumber.Equals(other.OrderNumber) &&
                     this.SourceID.Equals(other.SourceID) &&
                     this.DestinationID.Equals(other.DestinationID) &&
-                    this.ManifestID.Equals(other.ManifestID);
+                    this.ManifestID.Equals(other.ManifestID) &&
+                    this.PaymentMade.Equals(other.PaymentMade);
             }
             return false;
         }
@@ -235,6 +238,11 @@ namespace CS499.TCMS.Model
         /// Identifier of the shipping manifest this purchase order belongs to
         /// </summary>
         public long ManifestID { get; set; }
+
+        /// <summary>
+        /// Flag indicating whether payment has been made or received
+        /// </summary>
+        public bool PaymentMade { get; set; }
 
         string IDataErrorInfo.Error
         {
