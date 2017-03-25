@@ -19,12 +19,15 @@ namespace CS499.TCMS.Model
         /// <param name="vehicleID">identifier of the vehicle associated with this maintenance record</param>
         /// <param name="maintenanceDate">date of the most recent maintenance</param>
         /// <param name="maintenanceDescription">summary description of the maintenance performed</param>
-        public MaintenanceRecord(long maintenanceID, long vehicleID, DateTime maintenanceDate, string maintenanceDescription)
+        /// <param name="maintenanceCost">total cost of the maintenance performed</param>
+        public MaintenanceRecord(long maintenanceID, long vehicleID, DateTime maintenanceDate, string maintenanceDescription,
+            double maintenanceCost)
         {
             this.MaintenanceID = maintenanceID;
             this.VehicleID = vehicleID;
             this.MaintenanceDate = maintenanceDate;
             this.MaintenanceDescription = maintenanceDescription;
+            this.MaintenanceCost = maintenanceCost;
         }
         #endregion
 
@@ -53,6 +56,9 @@ namespace CS499.TCMS.Model
                     break;
                 case "MaintenanceDescription":
                     error = this.ValidateMaintenanceDescription();
+                    break;
+                case "MaintenanceCost":
+                    error = this.ValidateMaintenanceCost();
                     break;
                 default:
                     Debug.Fail("Unexpected property being validated on MaintenanceRecord: " + propertyName);
@@ -103,6 +109,13 @@ namespace CS499.TCMS.Model
             return IsEmpty(this.MaintenanceDescription) ? Messages.InvalidDescription : null;
         }
 
+        private string ValidateMaintenanceCost()
+        {
+            if (this.MaintenanceCost < 0.0)
+                return Messages.InvalidValue;
+            return null;
+        }
+
         /// <summary>
         /// Check to make sure the string is not null or empty
         /// </summary>
@@ -126,7 +139,8 @@ namespace CS499.TCMS.Model
                 return this.MaintenanceID.Equals(other.MaintenanceID) &&
                     this.MaintenanceDate.Equals(other.MaintenanceDate) &&
                     this.MaintenanceDescription.Equals(other.MaintenanceDescription) &&
-                    this.VehicleID.Equals(other.VehicleID);
+                    this.VehicleID.Equals(other.VehicleID) &&
+                    this.MaintenanceCost.Equals(other.MaintenanceCost);
             }
             return false;
         }
@@ -192,7 +206,8 @@ namespace CS499.TCMS.Model
             "MaintenanceID",
             "VehicleID",
             "MaintenanceDate",
-            "MaintenanceDescription"
+            "MaintenanceDescription",
+            "MaintenanceCost"
         };
 
         /// <summary>
@@ -214,6 +229,11 @@ namespace CS499.TCMS.Model
         /// Summary description of the maintenance performed
         /// </summary>
         public string MaintenanceDescription { get; set; }
+
+        /// <summary>
+        /// Total cost of the maintenance performed
+        /// </summary>
+        public double MaintenanceCost { get; set; }
 
         string IDataErrorInfo.Error
         {

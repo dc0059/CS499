@@ -12,21 +12,21 @@ namespace CS499.TCMS.ModelUnitTest
         public void UserModelTest()
         {
             User testUser = new User(123456, "jadams63", "James", "William", "Adams", "495 Trevor Lane", "Macon", "GA", 31201, "7063156775", "7063156775",
-                "jwadams@gmail.com", 30000.00, new DateTime(2012, 6, 18), 1234, "Store A", "Technician", true, "stuff", "otherstuff");
+                "jwadams@gmail.com", 30000.00, new DateTime(2012, 6, 18), Enums.AccessLevel.MaintenanceData, "Store A", "Technician", true, "stuff", "otherstuff");
             Assert.IsTrue(testUser.IsValid);
         }
 
         [TestMethod]
         public void VehicleModelTest()
         {
-            Vehicle testVehicle = new Vehicle(12345, "Mercedes-Benz", 2004, "Actros", "Class 5", 17500);
+            Vehicle testVehicle = new Vehicle(12345, "Mercedes-Benz", 2004, "Actros", Enums.TruckMaxCapacity.class5, 17500);
             Assert.IsTrue(testVehicle.IsValid);
         }
 
         [TestMethod]
         public void MaintenanceRecordModelTest()
         {
-            MaintenanceRecord testRecord = new MaintenanceRecord(12345, 1234, new DateTime(2008, 4, 12), "Stuff happened.");
+            MaintenanceRecord testRecord = new MaintenanceRecord(12345, 1234, new DateTime(2008, 4, 12), "Stuff happened.", 960.00);
             Assert.IsTrue(testRecord.IsValid);
         }
 
@@ -47,7 +47,7 @@ namespace CS499.TCMS.ModelUnitTest
         [TestMethod]
         public void ManifestModelTest()
         {
-            Manifest testManifest = new Manifest(12345, "Outgoing", 12345, new DateTime(2012, 10, 2), new DateTime(2012, 10, 4), true, 20000.00, 123456);
+            Manifest testManifest = new Manifest(12345, "Outgoing", 12345, new DateTime(2012, 10, 2), new DateTime(2012, 10, 4), true, 20000.00, 123456, false);
             Assert.IsTrue(testManifest.IsValid);
         }
 
@@ -82,7 +82,7 @@ namespace CS499.TCMS.ModelUnitTest
         [TestMethod]
         public void PayrollModelTest()
         {
-            Payroll testPayroll = new Payroll(12345, 123456, new DateTime(2016, 11, 8), 3560.52);
+            Payroll testPayroll = new Payroll(12345, 123456, new DateTime(2016, 11, 8), 3560.52, 60.2);
             Assert.IsTrue(testPayroll.IsValid);
         }
     }
