@@ -336,11 +336,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             {
                 Direction = ParameterDirection.Input,
                 Name = "P_AccessLevel",
-<<<<<<< HEAD
                 Type = DbType.Int32,
-=======
-                Type = DbType.Int64,
->>>>>>> 5a3aaee2b133ddce34fd013aa48caeaf92ad2ec7
                 Value = model.AccessLevel
             });
             definition.Parameters.Add(new ParameterDefinition()
@@ -412,15 +408,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                 CommandText = "UPDATE user " +
                               "SET UserName = ?, FirstName = ?, MiddleName = ?, LastName = ?, Address = ?, City = ?, State = ?, ZipCode = ?, " +
                               "HomePhone = ?, CellPhone = ?, EmailAddress = ?, PayRate = ?, EmploymentDate = ?, AccessLevel = ?, HomeStore = ?, " +
-<<<<<<< Updated upstream
                               "JobDescription = ?, IsActive = ?, HashKey = ?, Passphrase = ?, LastModifiedBy = ? " +
-=======
-<<<<<<< HEAD
-                              "JobDescription = ?, IsActive = ?, HashKey = ?, Passphrase = ? " +
-=======
-                              "JobDescription = ?, IsActive = ?, HashKey = ?, Passphrase = ?, LastModifiedBy = ? " +
->>>>>>> 5a3aaee2b133ddce34fd013aa48caeaf92ad2ec7
->>>>>>> Stashed changes
                               "WHERE EmployeeID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -523,11 +511,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             {
                 Direction = ParameterDirection.Input,
                 Name = "P_AccessLevel",
-<<<<<<< HEAD
                 Type = DbType.Int32,
-=======
-                Type = DbType.Int64,
->>>>>>> 5a3aaee2b133ddce34fd013aa48caeaf92ad2ec7
                 Value = model.AccessLevel
             });
             definition.Parameters.Add(new ParameterDefinition()

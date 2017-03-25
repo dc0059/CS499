@@ -39,7 +39,7 @@ namespace CS499.TCMS.ViewUnitTest
         {
 
             // create new all payroll viewmodel
-            viewModel = new AllPayrollViewModel();
+            viewModel = new AllPayrollViewModel(dialog, taskManager, payrollRepository);
         }
 
         [TestMethod]
