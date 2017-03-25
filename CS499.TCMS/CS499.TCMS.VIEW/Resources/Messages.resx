@@ -135,6 +135,24 @@
   <data name="AllBusinessPartnerLoading" xml:space="preserve">
     <value>Loading business partners... Please wait.</value>
   </data>
+  <data name="AllPayrollDeleteError" xml:space="preserve">
+    <value>Failed to delete payroll. Please contact support.</value>
+  </data>
+  <data name="AllPayrollDeleting" xml:space="preserve">
+    <value>Deleting payroll... Please wait.</value>
+  </data>
+  <data name="AllPayrollDisplayName" xml:space="preserve">
+    <value>Payroll</value>
+  </data>
+  <data name="AllPayrollDisplayToolTip" xml:space="preserve">
+    <value>Click here to modify payroll.</value>
+  </data>
+  <data name="AllPayrollLoadError" xml:space="preserve">
+    <value>Failed to load payrolls. Please contact support.</value>
+  </data>
+  <data name="AllPayrollLoading" xml:space="preserve">
+    <value>Loading payrolls... Please wait.</value>
+  </data>
   <data name="AllUserDeleteError" xml:space="preserve">
     <value>Failed to delete user ({0}). Please contact support.</value>
   </data>
@@ -152,6 +170,18 @@
   </data>
   <data name="AllUserLoading" xml:space="preserve">
     <value>Loading users... Please wait.</value>
+  </data>
+  <data name="AppSettingsDisplayName" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="AppSettingsDisplayToolTip" xml:space="preserve">
+    <value>Click here to set application settings.</value>
+  </data>
+  <data name="AppSettingsFailedToOpenLog" xml:space="preserve">
+    <value>Failed to open log file.</value>
+  </data>
+  <data name="AssemblyInformationDisplayName" xml:space="preserve">
+    <value>About</value>
   </data>
   <data name="BusinessPartnerDisplayName" xml:space="preserve">
     <value>Business Partner: {0}</value>
@@ -171,11 +201,14 @@
   <data name="DeleteMessage" xml:space="preserve">
     <value>Are you sure you want to delete {0} ({1})?</value>
   </data>
+  <data name="HelpDocumentDowloadError" xml:space="preserve">
+    <value>Failed to download help document. Please contact support.</value>
+  </data>
   <data name="LoginFailPassword" xml:space="preserve">
     <value>Failed to authenticate username ({0}). Please enter a valid password.</value>
   </data>
   <data name="LoginFailUsername" xml:space="preserve">
-    <value>Username ({0}) was not found in the Active Directory. Please enter a valid username.</value>
+    <value>Username ({0}) was not found in the Database. Please enter a valid username.</value>
   </data>
   <data name="LoginLoadError" xml:space="preserve">
     <value>Username ({0}) not found. Please contact support.</value>
@@ -218,6 +251,18 @@
   </data>
   <data name="MainWindowViewModelCheckForChanges" xml:space="preserve">
     <value>One or more unsaved changes were found. Are you sure you want to continue without saving?</value>
+  </data>
+  <data name="PayrollDisplayName" xml:space="preserve">
+    <value>Payroll: {0}</value>
+  </data>
+  <data name="PayrollDisplayToolTip" xml:space="preserve">
+    <value>Payroll: {0}</value>
+  </data>
+  <data name="PayrollSaveError" xml:space="preserve">
+    <value>Failed to save payroll. Please contact support.</value>
+  </data>
+  <data name="PayrollSaving" xml:space="preserve">
+    <value>Saving payroll... Please wait.</value>
   </data>
   <data name="SearchWatermark" xml:space="preserve">
     <value>Search by any column.</value>

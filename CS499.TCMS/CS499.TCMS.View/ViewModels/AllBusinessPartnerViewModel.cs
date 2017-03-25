@@ -63,7 +63,7 @@ namespace CS499.TCMS.View.ViewModels
 
             List<BusinessPartner> ViewModels = null;
 
-            // start new task to get the session mappings from the database
+            // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 

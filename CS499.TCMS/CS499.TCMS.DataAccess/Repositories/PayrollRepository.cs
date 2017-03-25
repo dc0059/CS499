@@ -7,10 +7,11 @@ using CS499.TCMS.DataAccess;
 using ToolKit.Data;
 using CS499.TCMS.Model;
 using System.Data;
+using CS499.TCMS.DataAccess.IRepositories;
 
 namespace CS499.TCMS.DataAccess
 {
-    class PayrollRepository : GenericRepository<Payroll>, IPayrollRepository
+    internal class PayrollRepository : GenericRepository<Payroll>, IPayrollRepository
     {
         #region Constructor
         public PayrollRepository(IDatabase database) : base(database)

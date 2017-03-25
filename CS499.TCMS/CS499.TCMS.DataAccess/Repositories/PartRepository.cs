@@ -191,14 +191,12 @@ namespace CS499.TCMS.DataAccess
             return this.Database.ExecuteSingleQuery<Part>(definition, Map);
         }
 
-<<<<<<< Updated upstream
-=======
+
         //public Part GetSingle(long PartID)
         //{
             //throw new NotImplementedException();
         //}
 
->>>>>>> Stashed changes
         public void Insert(Part model)
         {
 

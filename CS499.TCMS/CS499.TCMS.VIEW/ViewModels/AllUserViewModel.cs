@@ -63,7 +63,7 @@ namespace CS499.TCMS.View.ViewModels
 
             List<User> ViewModels = null;
 
-            // start new task to get the session mappings from the database
+            // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
@@ -429,6 +429,9 @@ namespace CS499.TCMS.View.ViewModels
 
         private ICommand _commandSearch;
 
+        /// <summary>
+        /// Command to search the viewmodel collection for the search text
+        /// </summary>
         public ICommand CommandSearch
         {
             get

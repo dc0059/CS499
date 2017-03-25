@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CS499.TCMS.DataAccess;
 using CS499.TCMS.Model;
 using System.Diagnostics;
+using CS499.TCMS.DataAccess.IRepositories;
 
 namespace CS499.TCMS.ViewUnitTest.DummyClasses
 {
@@ -30,27 +31,27 @@ namespace CS499.TCMS.ViewUnitTest.DummyClasses
                 0, DateTime.Now, 0, string.Empty, string.Empty, false, string.Empty, string.Empty);
         }
 
-        User IUserRepository.getSingleByName(string firstname, string middlename, string lastname)
+        User IUserRepository.GetSingleByName(string firstname, string middlename, string lastname)
         {
             throw new NotImplementedException();
         }
 
-        User IUserRepository.getUserByUserName(string username)
+        User IUserRepository.GetUserByUserName(string username)
         {
             throw new NotImplementedException();
         }
 
-        IEnumerable<User> IUserRepository.getUsersByHomeStore(string HomeStore)
+        IEnumerable<User> IUserRepository.GetUsersByHomeStore(string HomeStore)
         {
             throw new NotImplementedException();
         }
 
-        IEnumerable<User> IUserRepository.getUsersByJobAssignment(int JobAssignment)
+        IEnumerable<User> IUserRepository.GetUsersByJobAssignment(int JobAssignment)
         {
             throw new NotImplementedException();
         }
 
-        IEnumerable<User> IUserRepository.getUsersByZipCode(int zip)
+        IEnumerable<User> IUserRepository.GetUsersByZipCode(int zip)
         {
             throw new NotImplementedException();
         }

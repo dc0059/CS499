@@ -115,6 +115,8 @@
     <Compile Include="Interfaces\IKeyPressed.cs" />
     <Compile Include="Interfaces\ITaskManager.cs" />
     <Compile Include="Models\AssemblyInformation.cs" />
+    <Compile Include="Models\ThemeType.cs" />
+    <Compile Include="Models\UserTheme.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -139,11 +141,17 @@
     <Compile Include="ViewModels\AllPayrollViewModel.cs" />
     <Compile Include="ViewModels\AllUserViewModel.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="ViewModels\AppSettingsViewModel.cs" />
+    <Compile Include="ViewModels\AssemblyInformationViewModel.cs" />
     <Compile Include="ViewModels\BusinessPartnerViewModel.cs" />
+    <Compile Include="ViewModels\CommandViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ObservableCollectionExtended.cs" />
     <Compile Include="ViewModels\PayrollViewModel.cs" />
+    <Compile Include="ViewModels\UserThemeViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\WorkspaceFactory.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="Views\AllMaintenanceRecordView.xaml.cs">
       <DependentUpon>AllMaintenanceRecordView.xaml</DependentUpon>

@@ -109,10 +109,22 @@ namespace CS499.TCMS.View.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("{0}TCMS\\tcms.log")]
+        [global::System.Configuration.DefaultSettingValueAttribute("{0}\\TCMS\\tcms.log")]
         public string LogFileLocation {
             get {
                 return ((string)(this["LogFileLocation"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("{0}\\TCMS\\user.theme")]
+        public string ThemeFileLocation {
+            get {
+                return ((string)(this["ThemeFileLocation"]));
+            }
+            set {
+                this["ThemeFileLocation"] = value;
             }
         }
     }

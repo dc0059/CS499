@@ -144,7 +144,7 @@ namespace CS499.TCMS.View.ViewModels
         private IBusinessPartnerRepository businessPartnerRepository;
 
         /// <summary>
-        /// <see cref="DataAccess.Models.BusinessPartner"/>
+        /// <see cref="BusinessPartner"/>
         /// </summary>
         public string CompanyName
         {
@@ -169,7 +169,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.BusinessPartner"/>
+        /// <see cref="BusinessPartner"/>
         /// </summary>
         public string Address
         {
@@ -194,7 +194,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.BusinessPartner"/>
+        /// <see cref="BusinessPartner"/>
         /// </summary>
         public string City
         {
@@ -219,7 +219,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.BusinessPartner"/>
+        /// <see cref="BusinessPartner"/>
         /// </summary>
         public string State
         {
@@ -244,7 +244,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.BusinessPartner"/>
+        /// <see cref="BusinessPartner"/>
         /// </summary>
         public int ZipCode
         {
@@ -269,7 +269,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.BusinessPartner"/>
+        /// <see cref="BusinessPartner"/>
         /// </summary>
         public string PhoneNumber
         {
@@ -294,7 +294,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Flag indicating this viewmodel is new
+        /// Flag indicating this ViewModel is new
         /// </summary>
         public override bool IsNew
         {
@@ -326,7 +326,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Display tooltip
+        /// Display tool tip
         /// </summary>
         public override string DisplayToolTip
         {
@@ -341,7 +341,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Flag indicating this viewmodel is selected in the UI
+        /// Flag indicating this ViewModel is selected in the UI
         /// </summary>
         public override bool IsSelected
         {
@@ -373,7 +373,7 @@ namespace CS499.TCMS.View.ViewModels
         private ICommand _commandSave;
 
         /// <summary>
-        /// Command to execute the save viewmodel
+        /// Command to execute the save ViewModel
         /// </summary>
         public ICommand CommandSave
         {

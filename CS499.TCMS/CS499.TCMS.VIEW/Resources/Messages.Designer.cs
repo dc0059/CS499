@@ -115,6 +115,60 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to delete payroll. Please contact support..
+        /// </summary>
+        internal static string AllPayrollDeleteError {
+            get {
+                return ResourceManager.GetString("AllPayrollDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting payroll... Please wait..
+        /// </summary>
+        internal static string AllPayrollDeleting {
+            get {
+                return ResourceManager.GetString("AllPayrollDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payroll.
+        /// </summary>
+        internal static string AllPayrollDisplayName {
+            get {
+                return ResourceManager.GetString("AllPayrollDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to modify payroll..
+        /// </summary>
+        internal static string AllPayrollDisplayToolTip {
+            get {
+                return ResourceManager.GetString("AllPayrollDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load payrolls. Please contact support..
+        /// </summary>
+        internal static string AllPayrollLoadError {
+            get {
+                return ResourceManager.GetString("AllPayrollLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading payrolls... Please wait..
+        /// </summary>
+        internal static string AllPayrollLoading {
+            get {
+                return ResourceManager.GetString("AllPayrollLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to delete user ({0}). Please contact support..
         /// </summary>
         internal static string AllUserDeleteError {
@@ -165,6 +219,42 @@ namespace CS499.TCMS.View.Resources {
         internal static string AllUserLoading {
             get {
                 return ResourceManager.GetString("AllUserLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string AppSettingsDisplayName {
+            get {
+                return ResourceManager.GetString("AppSettingsDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to set application settings..
+        /// </summary>
+        internal static string AppSettingsDisplayToolTip {
+            get {
+                return ResourceManager.GetString("AppSettingsDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to open log file..
+        /// </summary>
+        internal static string AppSettingsFailedToOpenLog {
+            get {
+                return ResourceManager.GetString("AppSettingsFailedToOpenLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string AssemblyInformationDisplayName {
+            get {
+                return ResourceManager.GetString("AssemblyInformationDisplayName", resourceCulture);
             }
         }
         
@@ -223,6 +313,15 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to download help document. Please contact support..
+        /// </summary>
+        internal static string HelpDocumentDowloadError {
+            get {
+                return ResourceManager.GetString("HelpDocumentDowloadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to authenticate username ({0}). Please enter a valid password..
         /// </summary>
         internal static string LoginFailPassword {
@@ -232,7 +331,7 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Username ({0}) was not found in the Active Directory. Please enter a valid username..
+        ///   Looks up a localized string similar to Username ({0}) was not found in the Database. Please enter a valid username..
         /// </summary>
         internal static string LoginFailUsername {
             get {
@@ -363,6 +462,42 @@ namespace CS499.TCMS.View.Resources {
         internal static string MainWindowViewModelCheckForChanges {
             get {
                 return ResourceManager.GetString("MainWindowViewModelCheckForChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payroll: {0}.
+        /// </summary>
+        internal static string PayrollDisplayName {
+            get {
+                return ResourceManager.GetString("PayrollDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payroll: {0}.
+        /// </summary>
+        internal static string PayrollDisplayToolTip {
+            get {
+                return ResourceManager.GetString("PayrollDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to save payroll. Please contact support..
+        /// </summary>
+        internal static string PayrollSaveError {
+            get {
+                return ResourceManager.GetString("PayrollSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving payroll... Please wait..
+        /// </summary>
+        internal static string PayrollSaving {
+            get {
+                return ResourceManager.GetString("PayrollSaving", resourceCulture);
             }
         }
         

@@ -7,7 +7,7 @@ using CS499.TCMS.Model;
 
 namespace CS499.TCMS.DataAccess.IRepositories
 {
-    interface IManifestRepository : IRepository<Manifest>
+    public interface IManifestRepository : IRepository<Manifest>
     {
         Manifest GetSingle(long ManifestID);
 

@@ -138,7 +138,7 @@ namespace CS499.TCMS.View.ViewModels
         private IUserRepository userRepository;
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public long EmployeeID
         {
@@ -163,7 +163,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public string UserName
         {
@@ -188,7 +188,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public string FirstName
         {
@@ -213,7 +213,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public string MiddleName
         {
@@ -238,7 +238,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public string LastName
         {
@@ -263,7 +263,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public string Address
         {
@@ -288,7 +288,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public string State
         {
@@ -313,7 +313,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public int ZipCode
         {
@@ -338,7 +338,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public string HomePhone
         {
@@ -363,7 +363,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public string CellPhone
         {
@@ -388,7 +388,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public string EmailAddress
         {
@@ -413,7 +413,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public double PayRate
         {
@@ -438,7 +438,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public DateTime EmploymentDate
         {
@@ -463,7 +463,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public Enums.AccessLevel JobID
         {
@@ -488,7 +488,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public string HomeStore
         {
@@ -513,7 +513,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public string JobDescription
         {
@@ -538,7 +538,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// <see cref="DataAccess.Models.User"/>
+        /// <see cref="User"/>
         /// </summary>
         public bool IsActive
         {

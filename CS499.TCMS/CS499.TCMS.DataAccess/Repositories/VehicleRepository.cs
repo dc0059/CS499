@@ -281,7 +281,7 @@ namespace CS499.TCMS.DataAccess
             {
                 Direction = ParameterDirection.Input,
                 Name = "P_VehicleType",
-                Type = DbType.String,
+                Type = DbType.Int32,
                 Value = model.VehicleType
             });
             definition.Parameters.Add(new ParameterDefinition()
@@ -397,7 +397,7 @@ namespace CS499.TCMS.DataAccess
             {
                 Direction = ParameterDirection.Input,
                 Name = "P_VehicleType",
-                Type = DbType.String,
+                Type = DbType.Int32,
                 Value = model.VehicleType
             });
             definition.Parameters.Add(new ParameterDefinition()
@@ -433,7 +433,7 @@ namespace CS499.TCMS.DataAccess
                 reader.GetValueOrDefault<string>("Brand"),
                 reader.GetValueOrDefault<Int16>("Year"),
                 reader.GetValueOrDefault<string>("Model"),
-                reader.GetValueOrDefault<string>("VehicleType"),
+                (Enums.TruckMaxCapacity)reader.GetValueOrDefault<int>("VehicleType"),
                 reader.GetValueOrDefault<Int16>("Capacity"));
         }
 

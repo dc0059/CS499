@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Windows;
 using System.Windows.Media;
@@ -63,7 +64,7 @@ namespace CS499.TCMS.View.Services
         /// <summary>
         /// Get the database name
         /// </summary>
-        /// <returns>production database name if not debugging, dev database name otherwise</returns>
+        /// <returns>production database name if not debugging, DEV database name otherwise</returns>
         public static string GetDatabaseName()
         {
             return IsDebug() ? Properties.Settings.Default.DevDatabase : Properties.Settings.Default.ProductionDatabase;
@@ -198,7 +199,7 @@ namespace CS499.TCMS.View.Services
         }
 
         /// <summary>
-        /// Checks for any deployement updates
+        /// Checks for any deployment updates
         /// </summary>
         /// <returns>flag indicating that updates are pending</returns>
         public static bool CheckForUpdate()
@@ -228,7 +229,7 @@ namespace CS499.TCMS.View.Services
         }
 
         /// <summary>
-        /// Change theme on Avalondock dockmanager
+        /// Change theme on AvalonDock <see cref="DockingManager"/>
         /// </summary>
         /// <param name="theme">Theme</param>
         public static void ChangeAvalonTheme(Theme theme)
@@ -260,6 +261,97 @@ namespace CS499.TCMS.View.Services
         }
 
         /// <summary>
+        /// Save user them settings
+        /// </summary>
+        /// <param name="theme">user theme</param>
+        public static void SaveUserTheme(UserTheme theme)
+        {
+
+            try
+            {
+
+                // get file name
+                string fileName = GetThemeFileLocation();
+
+                // create file and save theme
+                CreateBinaryFile(fileName, theme);
+
+            }
+            catch (Exception ex)
+            {
+
+                log.Error(ex.Message, ex);
+
+            }
+        }
+
+        /// <summary>
+        /// Create binary file
+        /// </summary>
+        /// <typeparam name="T">type</typeparam>
+        /// <param name="fileName">filename</param>
+        /// <param name="theme">theme</param>
+        private static void CreateBinaryFile<T>(string fileName, T theme) where T : class
+        {
+            using (Stream stream = File.Open(fileName, FileMode.Create))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, theme);
+            }
+        }
+
+        /// <summary>
+        /// Get user saved base color
+        /// </summary>
+        /// <returns>string for the base color</returns>
+        public static UserTheme GetUserTheme()
+        {
+
+            // default user theme
+            UserTheme defaultTheme = new UserTheme(0, CoreAssembly.CurrentUser(), Properties.Settings.Default.Theme, Properties.Settings.Default.Accent);
+
+            try
+            {
+
+                // get file name
+                string fileName = GetThemeFileLocation();
+
+                // check to see if the file exists
+                if (!File.Exists(fileName))
+                {
+                    return defaultTheme;
+                }
+
+                return GetBinaryFileValue<UserTheme>(fileName);
+
+            }
+            catch (Exception ex)
+            {
+
+                log.Error(ex.Message, ex);
+
+            }
+
+            return defaultTheme;
+
+        }
+
+        /// <summary>
+        /// Get binary file value
+        /// </summary>
+        /// <typeparam name="T">type</typeparam>
+        /// <param name="fileName">filename</param>
+        /// <returns>new deserialized object</returns>
+        private static T GetBinaryFileValue<T>(string fileName) where T : class
+        {
+            using (Stream stream = File.Open(fileName, FileMode.Open))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                return formatter.Deserialize(stream) as T;
+            }
+        }
+
+        /// <summary>
         /// Get the help document file path
         /// </summary>
         /// <returns>file path to the help document</returns>
@@ -279,7 +371,7 @@ namespace CS499.TCMS.View.Services
 
         /// <summary>
         /// Get a list of all loaded assemblies in the current
-        /// appdomain
+        /// <see cref="AppDomain"/>
         /// </summary>
         /// <returns>List of assemblies</returns>
         public static List<AssemblyInformation> GetLoadedAssemblies()
@@ -294,6 +386,15 @@ namespace CS499.TCMS.View.Services
             }
 
             return assemblies.OrderBy(a => a.Name).ToList();
+        }
+
+        /// <summary>
+        /// Get the file path location of the theme file
+        /// </summary>
+        /// <returns>Full path to the theme file</returns>
+        public static string GetThemeFileLocation()
+        {
+            return string.Format(Properties.Settings.Default.ThemeFileLocation, Path.GetTempPath());
         }
 
         #endregion

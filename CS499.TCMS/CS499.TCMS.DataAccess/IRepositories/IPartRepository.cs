@@ -9,10 +9,8 @@ namespace CS499.TCMS.DataAccess
 {
     public interface IPartRepository : IRepository<Part>, IRepositoryBase
     {
-<<<<<<< Updated upstream
-=======
+
         //Part GetSingle(long PartID);
->>>>>>> Stashed changes
 
         IEnumerable<Part> GetPartsByNumber(long PartNum);
 

@@ -6,6 +6,7 @@ using CS499.TCMS.View.Interfaces;
 using CS499.TCMS.View.Services;
 using CS499.TCMS.ViewUnitTest.DummyClasses;
 using CS499.TCMS.Model;
+using CS499.TCMS.DataAccess.IRepositories;
 
 namespace CS499.TCMS.ViewUnitTest
 {
@@ -24,7 +25,7 @@ namespace CS499.TCMS.ViewUnitTest
 
             // create new user model
             User model = new User(123456, "jadams63", "James", "William", "Adams", "495 Trevor Lane", "Macon", "GA", 31201, "7063156775", "7063156775",
-                "jwadams@gmail.com", 30000.00, new DateTime(2012, 6, 18), 1234, "Store A", "Technician", true, "stuff", "otherstuff");
+                "jwadams@gmail.com", 30000.00, new DateTime(2012, 6, 18), Enums.AccessLevel.Full, "Store A", "Technician", true, "stuff", "otherstuff");
 
             // create new user viewmodel
             UserViewModel viewModel = new UserViewModel(model, userRepository, taskManager, true);

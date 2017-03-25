@@ -1,5 +1,8 @@
-﻿using CS499.TCMS.View.Services;
+﻿using CS499.TCMS.View.Interfaces;
+using CS499.TCMS.View.Services;
+using CS499.TCMS.View.ViewModels;
 using CS499.TCMS.View.Views;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Windows;
 using System.Windows.Threading;
@@ -20,10 +23,11 @@ namespace CS499.TCMS.View
         /// </summary>
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+
         /// <summary>
-        /// Configure and startup application
+        /// Raises the <see cref="E:System.Windows.Application.Startup" /> event.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">A <see cref="T:System.Windows.StartupEventArgs" /> that contains the event data.</param>
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -45,32 +49,29 @@ namespace CS499.TCMS.View
             MainWindow window = new MainWindow();
 
             // create new instance of ViewModel
-            //var viewModel = new MainWindowViewModel();
-            //viewModel.Dialog = new DialogService(DialogCoordinator.Instance, viewModel);
+            var viewModel = new MainWindowViewModel();
+            viewModel.Dialog = new DialogService(DialogCoordinator.Instance, viewModel);
 
             // create task manager and subscribe to the change event
-            //TaskManager taskManager = new TaskManager(viewModel.Dialog);
-            //viewModel.TaskManager = taskManager;
-            //taskManager.OnTaskStatusChanged += viewModel.OnTaskStatusChanged;
-
-            // initialize UI context
-            //UIContext.InitializeContext();
-
+            ITaskManager taskManager = new TaskManager(viewModel.Dialog);
+            viewModel.TaskManager = taskManager;
+            taskManager.OnTaskStatusChanged += viewModel.OnTaskStatusChanged;
+                       
             // bind ViewModel to window
-            //window.DataContext = viewModel;
+            window.DataContext = viewModel;
 
             // add closing event handler
-            //window.Closing += viewModel.OnClosing;
-            //window.KeyDown += viewModel.OnKeyPress;
+            window.Closing += viewModel.OnClosing;
+            window.KeyDown += viewModel.OnKeyPress;
 
-            // close splash screen when the main window viewmodel is done loading all data
+            // close splash screen when the main window ViewModel is done loading all data
             SplashScreenService.CloseSplash();
 
             // show created window
             window.Show();
 
             // show login
-            //viewModel.Login();
+            viewModel.Login();
 
             // fixes an issue where the window was not focused after the splash screen closes
             window.Topmost = true;
@@ -102,7 +103,7 @@ namespace CS499.TCMS.View
             {
 
                 string title = string.Format("Fatal Non-UI Exception: {0}", Environment.MachineName);
-                string message = "A fatal exception has occured and the application must close. Please contact support with a screenshot of this message.";
+                string message = "A fatal exception has occurred and the application must close. Please contact support with a screen shot of this message.";
 
                 // log error
                 LogUnhandledException(e.ExceptionObject as Exception, title, message);
@@ -131,7 +132,7 @@ namespace CS499.TCMS.View
             {
 
                 string title = string.Format("Fatal UI Exception: {0}", Environment.MachineName);
-                string message = "A fatal exception has occured and the application must close. Please contact support with a screenshot of this message.";
+                string message = "A fatal exception has occurred and the application must close. Please contact support with a screen shot of this message.";
 
                 // log error
                 LogUnhandledException(e.Exception, title, message);
@@ -169,7 +170,7 @@ namespace CS499.TCMS.View
         /// <summary>
         /// Log application termination for log file parsing
         /// </summary>
-        /// <param name="e">exit event args</param>
+        /// <param name="e">The <see cref="ExitEventArgs"/></param>
         protected override void OnExit(ExitEventArgs e)
         {
 

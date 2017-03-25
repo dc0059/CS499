@@ -84,9 +84,12 @@
   <ItemGroup>
     <Compile Include="DummyClasses\DummyDialogCoordinator.cs" />
     <Compile Include="DummyClasses\DummyDialogService.cs" />
+    <Compile Include="DummyClasses\DummyPayrollRepository.cs" />
     <Compile Include="DummyClasses\DummyUserRepository.cs" />
     <Compile Include="PasswordServiceTest.cs" />
     <Compile Include="AllUserViewModelTest.cs" />
+    <Compile Include="PayrollViewModelTest.cs" />
+    <Compile Include="AllPayrollViewModelTest.cs" />
     <Compile Include="UserViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -101,7 +101,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT EmployeeID, UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, " +
-                              "EmailAddress, PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
+                              "EmailAddress, PayRate, EmploymentDate, AccessLevel, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
                               "FROM user " +
                               "ORDER BY EmployeeID",
                 cType = CommandType.Text,
@@ -114,7 +114,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         }
 
         /// <summary>
-        /// Get a list of users by JobID
+        /// Get a list of users by AccessLevel
         /// </summary>
         /// <param name="JobAssignment">unique identifier</param>
         /// <returns>List of user models</returns>
@@ -124,9 +124,9 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT EmployeeID, UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, " +
-                              "EmailAddress, PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
+                              "EmailAddress, PayRate, EmploymentDate, AccessLevel, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
                               "FROM user " +
-                              "WHERE JobID = ? ",
+                              "WHERE AccessLevel = ? ",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -135,7 +135,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
-                Name = "P_JobID",
+                Name = "P_AccessLevel",
                 Type = DbType.Int64,
                 Value = JobAssignment
             });
@@ -155,7 +155,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT EmployeeID, UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, " +
-                              "EmailAddress, PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
+                              "EmailAddress, PayRate, EmploymentDate, AccessLevel, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
                               "FROM user " +
                               "WHERE EmployeeID = ?",
                 cType = CommandType.Text,
@@ -188,7 +188,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT EmployeeID, UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, " +
-                              "EmailAddress, PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
+                              "EmailAddress, PayRate, EmploymentDate, AccessLevel, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
                               "FROM user " +
                               "WHERE FirstName = ? AND MiddleName = ? AND LastName = ?",
                 cType = CommandType.Text,
@@ -235,7 +235,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "INSERT INTO user (UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, EmailAddress, " +
-                              "PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase, CreatedBy, LastModifiedBy) " +
+                              "PayRate, EmploymentDate, AccessLevel, HomeStore, JobDescription, IsActive, HashKey, PassPhrase, CreatedBy, LastModifiedBy) " +
                               "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -336,9 +336,9 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
-                Name = "P_JobID",
-                Type = DbType.Int64,
-                Value = model.JobID
+                Name = "P_AccessLevel",
+                Type = DbType.Int32,
+                Value = model.AccessLevel
             });
             definition.Parameters.Add(new ParameterDefinition()
             {
@@ -408,7 +408,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             {
                 CommandText = "UPDATE user " +
                               "SET UserName = ?, FirstName = ?, MiddleName = ?, LastName = ?, Address = ?, City = ?, State = ?, ZipCode = ?, " +
-                              "HomePhone = ?, CellPhone = ?, EmailAddress = ?, PayRate = ?, EmploymentDate = ?, JobID = ?, HomeStore = ?, " +
+                              "HomePhone = ?, CellPhone = ?, EmailAddress = ?, PayRate = ?, EmploymentDate = ?, AccessLevel = ?, HomeStore = ?, " +
                               "JobDescription = ?, IsActive = ?, HashKey = ?, Passphrase = ? " +
                               "WHERE EmployeeID = ?",
                 cType = CommandType.Text,
@@ -511,9 +511,9 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
-                Name = "P_JobID",
-                Type = DbType.Int64,
-                Value = model.JobID
+                Name = "P_AccessLevel",
+                Type = DbType.Int32,
+                Value = model.AccessLevel
             });
             definition.Parameters.Add(new ParameterDefinition()
             {
@@ -617,7 +617,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                 reader.GetValueOrDefault<string>("EmailAddress"),
                 reader.GetValueOrDefault<Double>("PayRate"),
                 reader.GetValueOrDefault<DateTime>("EmploymentDate"),
-                reader.GetValueOrDefault<Int64>("JobID"),
+                (Enums.AccessLevel)reader.GetValueOrDefault<int>("AccessLevel"),
                 reader.GetValueOrDefault<string>("HomeStore"),
                 reader.GetValueOrDefault<string>("JobDescription"),
                 reader.GetValueOrDefault<Boolean>("IsActive"),
@@ -636,7 +636,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT EmployeeID, UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, " +
-                              "EmailAddress, PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
+                              "EmailAddress, PayRate, EmploymentDate, AccessLevel, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
                               "FROM user " +
                               "WHERE ZipCode = ? ",
                 cType = CommandType.Text,
@@ -661,7 +661,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT EmployeeID, UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, " +
-                              "EmailAddress, PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
+                              "EmailAddress, PayRate, EmploymentDate, AccessLevel, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
                               "FROM user " +
                               "WHERE HomeStore = ? ",
                 cType = CommandType.Text,
@@ -686,7 +686,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT EmployeeID, UserName, FirstName, MiddleName, LastName, Address, City, State, ZipCode, HomePhone, CellPhone, " +
-                              "EmailAddress, PayRate, EmploymentDate, JobID, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
+                              "EmailAddress, PayRate, EmploymentDate, AccessLevel, HomeStore, JobDescription, IsActive, HashKey, PassPhrase " +
                               "FROM user " +
                               "WHERE UserName = ?",
                 cType = CommandType.Text,

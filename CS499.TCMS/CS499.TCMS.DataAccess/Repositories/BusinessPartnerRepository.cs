@@ -11,7 +11,7 @@ using ToolKit.Data;
 
 namespace CS499.TCMS.DataAccess.Repositories
 {
-    class BusinessPartnerRepository : GenericRepository<BusinessPartner>, IBusinessPartnerRepository
+    internal class BusinessPartnerRepository : GenericRepository<BusinessPartner>, IBusinessPartnerRepository
     {
 
         #region Constructor
