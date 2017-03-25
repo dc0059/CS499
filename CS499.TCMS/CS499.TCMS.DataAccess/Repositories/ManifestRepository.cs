@@ -446,7 +446,8 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE manifest " +
-                              "SET ShipmentType = ?, VehicleID = ?, DepartureTime = ?, ETA = ?, Arrived = ?, ShippingCost = ?, EmployeeID = ? " +
+                              "SET ShipmentType = ?, VehicleID = ?, DepartureTime = ?, ETA = ?, Arrived = ?, ShippingCost = ?, EmployeeID = ?, " +
+                              "LastModifiedBy = ? " +
                               "WHERE ManifestID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -503,6 +504,13 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Name = "P_EmployeeID",
                 Type = DbType.Int64,
                 Value = model.EmployeeID
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
             });
             definition.Parameters.Add(new ParameterDefinition()
             {

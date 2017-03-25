@@ -499,7 +499,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE maintenancerecord " +
-                              "SET VehicleID = ?, MaintenanceDate = ?, MaintenanceDescription = ?, " +
+                              "SET VehicleID = ?, MaintenanceDate = ?, MaintenanceDescription = ?, LastModifiedBy = ? " +
                               "WHERE MaintenanceID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -527,6 +527,13 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Name = "P_MaintenanceDescription",
                 Type = DbType.String,
                 Value = model.MaintenanceID
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
             });
             definition.Parameters.Add(new ParameterDefinition()
             {

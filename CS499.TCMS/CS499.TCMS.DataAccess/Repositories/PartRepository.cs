@@ -7,8 +7,9 @@ using CS499.TCMS.DataAccess;
 using ToolKit.Data;
 using CS499.TCMS.Model;
 using System.Data;
+using CS499.TCMS.DataAccess.IRepositories;
 
-namespace CS499.TCMS.DataAccess
+namespace CS499.TCMS.DataAccess.Repositories
 {
     class PartRepository : GenericRepository<Part>, IPartRepository
     {
@@ -273,7 +274,7 @@ namespace CS499.TCMS.DataAccess
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE parts " +
-                              "SET PartDescription = ?, PartNumber = ?, PartPrice = ?, PartWeight = ?, QuantityInStock = ? " +
+                              "SET PartDescription = ?, PartNumber = ?, PartPrice = ?, PartWeight = ?, QuantityInStock = ?, LastModifiedBy = ? " +
                               "WHERE PartID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -319,6 +320,13 @@ namespace CS499.TCMS.DataAccess
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
                 Name = "P_PartID",
                 Type = DbType.Int64,
                 Value = model.PartID
@@ -329,12 +337,12 @@ namespace CS499.TCMS.DataAccess
 
         protected override Part Map(IDataReader reader)
         {
-            return new Part(reader.GetValueOrDefault<Int64>("PartID"),
+            return new Part(reader.GetValueOrDefault<long>("PartID"),
                reader.GetValueOrDefault<string>("PartDescription"),
-               reader.GetValueOrDefault<Int16>("PartNumber"),
+               reader.GetValueOrDefault<int>("PartNumber"),
                reader.GetValueOrDefault<double>("PartPrice"),
-               reader.GetValueOrDefault<Int16>("PartWeight"),
-               reader.GetValueOrDefault<Int16>("QuantityInStock"));
+               reader.GetValueOrDefault<int>("PartWeight"),
+               reader.GetValueOrDefault<int>("QuantityInStock"));
         }
 
         #endregion

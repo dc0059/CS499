@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-//using System.DirectoryServices.AccountManagement;
 using ToolKit.Data;
 using CS499.TCMS.Model;
 using CS499.TCMS.DataAccess.IRepositories;
@@ -409,7 +408,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                 CommandText = "UPDATE user " +
                               "SET UserName = ?, FirstName = ?, MiddleName = ?, LastName = ?, Address = ?, City = ?, State = ?, ZipCode = ?, " +
                               "HomePhone = ?, CellPhone = ?, EmailAddress = ?, PayRate = ?, EmploymentDate = ?, AccessLevel = ?, HomeStore = ?, " +
-                              "JobDescription = ?, IsActive = ?, HashKey = ?, Passphrase = ? " +
+                              "JobDescription = ?, IsActive = ?, HashKey = ?, Passphrase = ?, LastModifiedBy = ? " +
                               "WHERE EmployeeID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -553,6 +552,13 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
                 Name = "P_EmployeeID",
                 Type = DbType.Int64,
                 Value = model.EmployeeID
@@ -603,7 +609,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// <returns>new user model</returns>
         protected override User Map(IDataReader reader)
         {
-            return new User(reader.GetValueOrDefault<Int64>("EmployeeID"),
+            return new User(reader.GetValueOrDefault<long>("EmployeeID"),
                 reader.GetValueOrDefault<string>("UserName"),
                 reader.GetValueOrDefault<string>("FirstName"),
                 reader.GetValueOrDefault<string>("MiddleName"),
@@ -611,16 +617,16 @@ namespace CS499.TCMS.DataAccess.Repositories
                 reader.GetValueOrDefault<string>("Address"),
                 reader.GetValueOrDefault<string>("City"),
                 reader.GetValueOrDefault<string>("State"),
-                reader.GetValueOrDefault<Int32>("ZipCode"),
+                reader.GetValueOrDefault<int>("ZipCode"),
                 reader.GetValueOrDefault<string>("HomePhone"),
                 reader.GetValueOrDefault<string>("CellPhone"),
                 reader.GetValueOrDefault<string>("EmailAddress"),
-                reader.GetValueOrDefault<Double>("PayRate"),
+                reader.GetValueOrDefault<double>("PayRate"),
                 reader.GetValueOrDefault<DateTime>("EmploymentDate"),
                 (Enums.AccessLevel)reader.GetValueOrDefault<int>("AccessLevel"),
                 reader.GetValueOrDefault<string>("HomeStore"),
                 reader.GetValueOrDefault<string>("JobDescription"),
-                reader.GetValueOrDefault<Boolean>("IsActive"),
+                reader.GetValueOrDefault<bool>("IsActive"),
                 reader.GetValueOrDefault<string>("HashKey"),
                 reader.GetValueOrDefault<string>("PassPhrase"));
         }
@@ -705,21 +711,6 @@ namespace CS499.TCMS.DataAccess.Repositories
 
             return this.Database.ExecuteSingleQuery<User>(definition, Map);
         }
-
-        /// <summary>
-        /// Map the UserPrincipal to the user model
-        /// </summary>
-        /// <param name="user">UserPrincipal</param>
-        /// <returns>new user model</returns>
-        /*private User Map(UserPrincipal user)
-        {
-            return new User(0,
-                user.SamAccountName,
-                user.EmailAddress);
-        }*/
-
-
-
 
         #endregion
 

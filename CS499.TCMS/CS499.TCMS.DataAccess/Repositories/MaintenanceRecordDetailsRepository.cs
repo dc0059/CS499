@@ -476,7 +476,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE maintenancerecorddetails " +
-                              "MaintenanceID = ?, EmployeeID = ?, RepairDescription = ?, RepairDate = ?" +
+                              "MaintenanceID = ?, EmployeeID = ?, RepairDescription = ?, RepairDate = ?, LastModifiedBy = ? " +
                               "WHERE DetailID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -515,6 +515,13 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Name = "P_RepairDate",
                 Type = DbType.DateTime,
                 Value = model.RepairDate
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
             });
             // create parameter definition
             definition.Parameters.Add(new ParameterDefinition()

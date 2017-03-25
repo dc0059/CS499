@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CS499.TCMS.Model;
 
-namespace CS499.TCMS.DataAccess
+namespace CS499.TCMS.DataAccess.IRepositories
 {
     public interface IPurchaseOrderRepository : IRepository<PurchaseOrder>, IRepositoryBase
     {

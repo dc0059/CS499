@@ -7,8 +7,9 @@ using CS499.TCMS.DataAccess;
 using ToolKit.Data;
 using CS499.TCMS.Model;
 using System.Data;
+using CS499.TCMS.DataAccess.IRepositories;
 
-namespace CS499.TCMS.DataAccess
+namespace CS499.TCMS.DataAccess.Repositories
 {
     class PurchaseOrderRepository : GenericRepository<PurchaseOrder>, IPurchaseOrderRepository
     {
@@ -390,7 +391,7 @@ namespace CS499.TCMS.DataAccess
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE purchaseorder " +
-                              "SET OrderNumber = ?, SourceID = ?, DestinationID = ?, ManifestID = ? " +
+                              "SET OrderNumber = ?, SourceID = ?, DestinationID = ?, ManifestID = ?, LastModifiedBy = ? " +
                               "WHERE OrderID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -429,6 +430,13 @@ namespace CS499.TCMS.DataAccess
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
                 Name = "P_OrderID",
                 Type = DbType.Int64,
                 Value = model.OrderID
@@ -439,11 +447,11 @@ namespace CS499.TCMS.DataAccess
 
         protected override PurchaseOrder Map(IDataReader reader)
         {
-            return new PurchaseOrder(reader.GetValueOrDefault<Int64>("OrderID"),
-                reader.GetValueOrDefault<Int64>("OrderNumber"),
-                reader.GetValueOrDefault<Int64>("SourceID"),
-                reader.GetValueOrDefault<Int64>("DestinationID"),
-                reader.GetValueOrDefault<Int64>("ManifestID"));
+            return new PurchaseOrder(reader.GetValueOrDefault<long>("OrderID"),
+                reader.GetValueOrDefault<long>("OrderNumber"),
+                reader.GetValueOrDefault<long>("SourceID"),
+                reader.GetValueOrDefault<long>("DestinationID"),
+                reader.GetValueOrDefault<long>("ManifestID"));
         }
 
 
