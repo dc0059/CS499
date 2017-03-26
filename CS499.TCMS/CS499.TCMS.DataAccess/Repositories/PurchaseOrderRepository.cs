@@ -177,7 +177,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT OrderID, OrderNumber, SourceID, DestinationID, ManifestID " +
+                CommandText = "SELECT OrderID, OrderNumber, SourceID, DestinationID, ManifestID, PaymentMade " +
                               "FROM purchaseorder " +
                               "ORDER BY OrderID",
                 cType = CommandType.Text,
@@ -297,7 +297,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT OrderID, OrderNumber, SourceID, DestinationID, ManifestID " +
+                CommandText = "SELECT OrderID, OrderNumber, SourceID, DestinationID, ManifestID, PaymentMade " +
                               "FROM purchaseorder " +
                               "WHERE OrderID = ?",
                 cType = CommandType.Text,
@@ -330,8 +330,8 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO purchaseorder (OrderNumber, SourceID, DestinationID, ManifestID, CreatedBy, LastModifiedBy) " +
-                              "VALUES (?,?,?,?,?,?)",
+                CommandText = "INSERT INTO purchaseorder (OrderNumber, SourceID, DestinationID, ManifestID, PaymentMade, CreatedBy, LastModifiedBy) " +
+                              "VALUES (?,?,?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -364,6 +364,13 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Name = "P_ManifestID",
                 Type = DbType.Int64,
                 Value = model.ManifestID
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_PaymentMade",
+                Type = DbType.Boolean,
+                Value = model.PaymentMade
             });
             definition.Parameters.Add(new ParameterDefinition()
             {
@@ -451,7 +458,8 @@ namespace CS499.TCMS.DataAccess.Repositories
                 reader.GetValueOrDefault<long>("OrderNumber"),
                 reader.GetValueOrDefault<long>("SourceID"),
                 reader.GetValueOrDefault<long>("DestinationID"),
-                reader.GetValueOrDefault<long>("ManifestID"));
+                reader.GetValueOrDefault<long>("ManifestID"),
+                reader.GetValueOrDefault<bool>("PaymentMade"));
         }
 
 

@@ -18,19 +18,19 @@ namespace CS499.TCMS.DataAccessUnitTests
         {
             Part testPart = new Part(123456, "A part.", 13245, 25.00, 10, 200);
 
-            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IPartRepository partRepository = factory.Create<IPartRepository>();
 
-           partRepository.Insert(testPart);
+            partRepository.Insert(testPart);
         }
 
         [TestMethod]
         public void PartGetSingleTest()
         {
-            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IPartRepository partRepository = factory.Create<IPartRepository>();
 
-            Part returnPart = partRepository.getSingle(1);
+            Part returnPart = partRepository.GetSingle(1);
 
             Assert.IsTrue(returnPart.IsValid);
             System.Diagnostics.Debug.Print(returnPart.PartID.ToString());
@@ -44,10 +44,10 @@ namespace CS499.TCMS.DataAccessUnitTests
         [TestMethod]
         public void PartGetAllTest()
         {
-            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IPartRepository vehicleRepository = factory.Create<IPartRepository>();
 
-            foreach (Part x in vehicleRepository.getAll())
+            foreach (Part x in vehicleRepository.GetAll())
             {
                 Assert.IsTrue(x.IsValid);
                 System.Diagnostics.Debug.Print(x.PartID.ToString());
@@ -62,10 +62,10 @@ namespace CS499.TCMS.DataAccessUnitTests
         [TestMethod]
         public void PartDeleteTest()
         {
-            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IPartRepository partRepository = factory.Create<IPartRepository>();
 
-            Part delPart = partRepository.getSingle(3);
+            Part delPart = partRepository.GetSingle(1);
 
             partRepository.Delete(delPart);
         }
@@ -73,7 +73,7 @@ namespace CS499.TCMS.DataAccessUnitTests
         [TestMethod]
         public void PartUpdateTest()
         {
-            RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
+            RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IPartRepository partRepository = factory.Create<IPartRepository>();
 
             Part updatePart = new Part(1, "Z.Part", 12335, 15.50, 8.5, 3);
@@ -87,7 +87,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
             IPartRepository vehicleRepository = factory.Create<IPartRepository>();
 
-            foreach (Part x in vehicleRepository.getPartsByAvailability())
+            foreach (Part x in vehicleRepository.GetPartsByAvailability())
             {
                 Assert.IsTrue(x.IsValid);
                 System.Diagnostics.Debug.Print(x.PartID.ToString());

@@ -11,7 +11,7 @@ namespace CS499.TCMS.DataAccess.IRepositories
     {
 
         BusinessPartner GetSingle(string PartnerName);
-        BusinessPartner GetSingle(long PartnerID);
+        //BusinessPartner GetSingle(long PartnerID);
 
         IEnumerable<BusinessPartner> GetPartnersByZipCode(int Zip);
         IEnumerable<BusinessPartner> GetPartnersByState(string State);

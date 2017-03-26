@@ -211,8 +211,8 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT CompanyID, CompanyName, Address, City, State, ZipCode, PhoneNumber" +
-                              "FROM businessPartner " +
+                CommandText = "SELECT CompanyID, CompanyName, Address, City, State, ZipCode, PhoneNumber " +
+                              "FROM businesspartners " +
                               "ORDER BY CompanyID",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -283,7 +283,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT CompanyID, CompanyName, Address, City, State, ZipCode, PhoneNumber" +
+                CommandText = "SELECT CompanyID, CompanyName, Address, City, State, ZipCode, PhoneNumber " +
                               "FROM businesspartners " +
                               "WHERE CompanyID = ?",
                 cType = CommandType.Text,
@@ -295,7 +295,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
-                Name = "P_PartnerID",
+                Name = "P_CompanyID",
                 Type = DbType.Int64,
                 Value = id
             });
@@ -309,7 +309,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="id">Integer Representing Partner ID</param>
         /// <returns>Business Partner Object matching Partner's ID</returns>
-        BusinessPartner IBusinessPartnerRepository.GetSingle(long PartnerID)
+        /*BusinessPartner IBusinessPartnerRepository.GetSingle(long PartnerID)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -332,7 +332,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             });
             return this.Database.ExecuteSingleQuery<BusinessPartner>(definition, Map);
 
-        }
+        }*/
 
 
         /// <summary>
@@ -547,12 +547,12 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// <returns>new BusinessPartner model</returns>
         protected override BusinessPartner Map(IDataReader reader)
         {
-            return new BusinessPartner(reader.GetValueOrDefault<Int64>("CompanyID"),
+            return new BusinessPartner(reader.GetValueOrDefault<long>("CompanyID"),
                 reader.GetValueOrDefault<string>("CompanyName"),
                 reader.GetValueOrDefault<string>("Address"),
                 reader.GetValueOrDefault<string>("City"),
                 reader.GetValueOrDefault<string>("State"),
-                reader.GetValueOrDefault<Int32>("ZipCode"),
+                reader.GetValueOrDefault<int>("ZipCode"),
                 reader.GetValueOrDefault<string>("PhoneNumber"));
         }
 

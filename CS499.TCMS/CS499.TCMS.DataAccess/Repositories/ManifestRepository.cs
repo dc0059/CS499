@@ -297,7 +297,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             {
                 CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
                               "FROM manifest " +
-                              "WHERE ManifestID = ? ",
+                              "WHERE ManifestID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -321,7 +321,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="ManifestID"></param>
         /// <returns>manifest object form Database with given manifestID</returns>
-        Manifest IManifestRepository.GetSingle(long ManifestID)
+        /*Manifest IManifestRepository.GetSingle(long ManifestID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -344,7 +344,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             });
 
             return this.Database.ExecuteSingleQuery<Manifest>(definition, Map);
-        }
+        }*/
 
 
         /// <summary>
@@ -359,8 +359,8 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO user (ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID, " +
-                              "CreatedBy, LastModifiedBy) " +
+                CommandText = "INSERT INTO manifest (ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID, " +
+                              "CreatedBy, LastModifiedBy ) " +
                               "VALUES (?,?,?,?,?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -525,14 +525,14 @@ namespace CS499.TCMS.DataAccess.Repositories
 
         protected override Manifest Map(IDataReader reader)
         {
-            return new Manifest(reader.GetValueOrDefault<Int64>("ManifestID"),
+            return new Manifest(reader.GetValueOrDefault<long>("ManifestID"),
                 reader.GetValueOrDefault<string>("ShipmentType"),
-                reader.GetValueOrDefault<Int64>("VehicleID"),
+                reader.GetValueOrDefault<long>("VehicleID"),
                 reader.GetValueOrDefault<DateTime>("DepartureTime"),
                 reader.GetValueOrDefault<DateTime>("ETA"),
                 reader.GetValueOrDefault<bool>("Arrived"),
-                reader.GetValueOrDefault<Int64>("ShippingCost"),
-                reader.GetValueOrDefault<Int64>("EmployeeID"));
+                reader.GetValueOrDefault<double>("ShippingCost"),
+                reader.GetValueOrDefault<long>("EmployeeID"));
         }
     }
 
