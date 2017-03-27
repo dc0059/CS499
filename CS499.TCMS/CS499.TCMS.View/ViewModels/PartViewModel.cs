@@ -12,29 +12,33 @@ using System.Windows.Input;
 namespace CS499.TCMS.View.ViewModels
 {
     /// <summary>
-    /// This class will handle the maintenance of the payroll model
+    /// This class will handle the maintenance of the <see cref="Part"/> model
     /// </summary>
-    public class PayrollViewModel : WorkspaceViewModel, IDataErrorInfo, IChanges, IKeyCommand
+    /// <seealso cref="CS499.TCMS.View.ViewModels.WorkspaceViewModel" />
+    /// <seealso cref="System.ComponentModel.IDataErrorInfo" />
+    /// <seealso cref="CS499.TCMS.View.Interfaces.IChanges" />
+    /// <seealso cref="CS499.TCMS.View.Interfaces.IKeyCommand" />
+    public class PartViewModel : WorkspaceViewModel, IDataErrorInfo, IChanges, IKeyCommand
     {
 
         #region Constructor
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new instance of the <see cref="PartViewModel"/> class.
         /// </summary>
-        /// <param name="model">model for the payroll</param>
-        /// <param name="payrollRepository">repository for database operations</param>
+        /// <param name="model">model for the part</param>
+        /// <param name="partRepository">repository for database operations</param>
         /// <param name="taskManager">task manager to hold reference to running tasks</param>
-        /// <param name="isNew">flag indicating if this is a new payroll</param>
-        public PayrollViewModel(Payroll model, IPayrollRepository payrollRepository, ITaskManager taskManager, bool isNew)
+        /// <param name="isNew">flag indicating if this is a new part</param>
+        public PartViewModel(Part model, IPartRepository partRepository, ITaskManager taskManager, bool isNew)
         {
             this.Model = model;
-            this.payrollRepository = payrollRepository;
+            this.partRepository = partRepository;
             this.TaskManager = taskManager;
             this.IsNew = isNew;
             this.IsSelected = true;
             this.HasChanges = false;
-            this.ContentId = model.EmployeeID.GetContentId(this.DisplayName);
+            this.ContentId = model.PartID.GetContentId(this.DisplayName);
         }
 
         #endregion
@@ -42,7 +46,7 @@ namespace CS499.TCMS.View.ViewModels
         #region Methods
 
         /// <summary>
-        /// Save viewmodel
+        /// Save ViewModel
         /// </summary>
         private void Save()
         {
@@ -54,27 +58,27 @@ namespace CS499.TCMS.View.ViewModels
                 // insert new viewModel or update current viewModel
                 if (this.IsNew)
                 {
-                    this.payrollRepository.Insert(this.Model);
+                    this.partRepository.Insert(this.Model);
                 }
                 else
                 {
-                    this.payrollRepository.Update(this.Model);
+                    this.partRepository.Update(this.Model);
                 }
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.PayrollSaving,
-            () => {},
+            Messages.PartSaving,
+            () => { },
             Messages.MainWindowInitialStatus,
             UIContext.Current,
-            "Saving payroll",
-            Messages.PayrollSaveError,
+            "Saving part",
+            string.Format(Messages.PartSaveError, this.Model.ToString()),
             log,
             () =>
             {
-                // send load notification to the all payroll view model
-                this.MessengerInstance.Send<NotificationMessage<AllPayrollViewModel>>(
-                    new NotificationMessage<AllPayrollViewModel>(null, null));
+                // send load notification to the all part view model
+                this.MessengerInstance.Send<NotificationMessage<AllPartViewModel>>(
+                    new NotificationMessage<AllPartViewModel>(null, null));
 
             });
 
@@ -108,7 +112,7 @@ namespace CS499.TCMS.View.ViewModels
             }
 
         }
-    
+
         #endregion
 
         #region Properties
@@ -119,117 +123,157 @@ namespace CS499.TCMS.View.ViewModels
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// payroll model
+        /// part model
         /// </summary>
-        public Payroll Model;
+        public Part Model;
 
         /// <summary>
-        /// payroll repository
+        /// part repository
         /// </summary>
-        private IPayrollRepository payrollRepository;
+        private IPartRepository partRepository;
 
         /// <summary>
-        /// <see cref="Payroll"/>
+        /// Gets or sets the part description.
         /// </summary>
-        public long EmployeeID
+        /// <value>
+        /// The part description.
+        /// </value>
+        public string PartDescription
         {
             get
             {
-                return Model.EmployeeID;
+                return Model.PartDescription;
             }
             set
             {
 
-                if (Model.EmployeeID == value)
+                if (Model.PartDescription == value)
                 {
                     return;
                 }
 
-                Model.EmployeeID = value;
+                Model.PartDescription = value;
 
-                base.OnPropertyChanged("EmployeeID");
+                base.OnPropertyChanged("PartDescription");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="Payroll"/>
+        /// Gets or sets the part number.
         /// </summary>
-        public DateTime PaymentDate
+        /// <value>
+        /// The part number.
+        /// </value>
+        public long PartNumber
         {
             get
             {
-                return Model.PaymentDate;
+                return Model.PartNumber;
             }
             set
             {
 
-                if (Model.PaymentDate == value)
+                if (Model.PartNumber == value)
                 {
                     return;
                 }
 
-                Model.PaymentDate = value;
+                Model.PartNumber = value;
 
-                base.OnPropertyChanged("PaymentDate");
+                base.OnPropertyChanged("PartNumber");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="Payroll"/>
+        /// Gets or sets the part price.
         /// </summary>
-        public double Payment
+        /// <value>
+        /// The part price.
+        /// </value>
+        public double PartPrice
         {
             get
             {
-                return Model.Payment;
+                return Model.PartPrice;
             }
             set
             {
 
-                if (Model.Payment == value)
+                if (Model.PartPrice == value)
                 {
                     return;
                 }
 
-                Model.Payment = value;
+                Model.PartPrice = value;
 
-                base.OnPropertyChanged("Payment");
+                base.OnPropertyChanged("PartPrice");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="Payroll"/>
+        /// Gets or sets the part weight.
         /// </summary>
-        public double HoursWorked
+        /// <value>
+        /// The part weight.
+        /// </value>
+        public double PartWeight
         {
             get
             {
-                return Model.HoursWorked;
+                return Model.PartWeight;
             }
             set
             {
 
-                if (Model.HoursWorked == value)
+                if (Model.PartWeight == value)
                 {
                     return;
                 }
 
-                Model.HoursWorked = value;
+                Model.PartWeight = value;
 
-                base.OnPropertyChanged("HoursWorked");
+                base.OnPropertyChanged("PartWeight");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// Flag indicating this viewmodel is new
+        /// Gets or sets the quantity in stock.
+        /// </summary>
+        /// <value>
+        /// The quantity in stock.
+        /// </value>
+        public int QuantityInStock
+        {
+            get
+            {
+                return Model.QuantityInStock;
+            }
+            set
+            {
+
+                if (Model.QuantityInStock == value)
+                {
+                    return;
+                }
+
+                Model.QuantityInStock = value;
+
+                base.OnPropertyChanged("QuantityInStock");
+                this.HasChanges = true;
+
+            }
+        }
+
+        /// <summary>
+        /// Flag indicating this ViewModel is new
         /// </summary>
         public override bool IsNew
         {
@@ -251,7 +295,7 @@ namespace CS499.TCMS.View.ViewModels
             get
             {
                 string displayName = Model == null ? string.Empty : Model.ToString();
-                string msg = string.Format(Messages.PayrollDisplayName, this.IsNew ? "New" : displayName);
+                string msg = string.Format(Messages.PartDisplayName, this.IsNew ? "New" : displayName);
                 return msg;
             }
             protected set
@@ -261,7 +305,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Display tooltip
+        /// Display tool tip
         /// </summary>
         public override string DisplayToolTip
         {
@@ -276,7 +320,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Flag indicating this viewmodel is selected in the UI
+        /// Flag indicating this ViewModel is selected in the UI
         /// </summary>
         public override bool IsSelected
         {
@@ -308,7 +352,7 @@ namespace CS499.TCMS.View.ViewModels
         private ICommand _commandSave;
 
         /// <summary>
-        /// Command to execute the save viewmodel
+        /// Command to execute the save ViewModel
         /// </summary>
         public ICommand CommandSave
         {

@@ -13,6 +13,7 @@ namespace CS499.TCMS.ViewUnitTest
         {
             string passphrase;
             string password = "Password1";
+            string badPassword = "Badpassword1";
 
             string hashString = PasswordService.HashPassword(password, out passphrase);
 
@@ -23,18 +24,22 @@ namespace CS499.TCMS.ViewUnitTest
             // validate password hash
             Assert.IsTrue(PasswordService.ValidatePassword(password, passphrase, hashString));
 
+            // validate bad password
+            Assert.IsFalse(PasswordService.ValidatePassword(badPassword, passphrase, hashString));
+
         }
 
         [TestMethod]
-        private void CreatePasswordHashAndSaltForUser()
+        public void CreatePasswordHashAndSaltForUser()
         {
             string passphrase;
             string password = "Password1";
 
             string hashString = PasswordService.HashPassword(password, out passphrase);
 
-            Clipboard.SetText(string.Format("Passphrase: {0}{1}Hash: {2}", passphrase, Environment.NewLine, password));
+            Clipboard.SetText(string.Format("Passphrase: {0}{1}Hash: {2}", passphrase, Environment.NewLine, hashString));
 
         }
+
     }
 }

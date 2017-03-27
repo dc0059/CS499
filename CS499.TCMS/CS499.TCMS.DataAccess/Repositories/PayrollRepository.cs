@@ -133,7 +133,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT PaymentID, EmployeeID, PaymentDate, Payment " +
+                CommandText = "SELECT PayrollID, EmployeeID, PaymentDate, Payment, HoursWorked " +
                               "FROM payroll " +
                               "ORDER BY PayrollID",
                 cType = CommandType.Text,
@@ -149,9 +149,9 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT PaymentID, EmployeeID, PaymentDate, Payment " +
+                CommandText = "SELECT PayrollID, EmployeeID, PaymentDate, Payment, HoursWorked " +
                               "FROM payroll " +
-                              "WHERE PaymentID = ?",
+                              "WHERE PayrollID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -161,7 +161,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
-                Name = "P_PaymentID",
+                Name = "P_PayrollID",
                 Type = DbType.Int64,
                 Value = id
             });
@@ -179,7 +179,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT PaymentID, EmployeeID, PaymentDate, Payment " +
+                CommandText = "SELECT PayrollID, EmployeeID, PaymentDate, HoursWorked, Payment " +
                               "FROM payroll " +
                               "WHERE PaymentDate = ? " +
                               "ORDER BY PayrollID",
@@ -205,7 +205,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT PaymentID, EmployeeID, PaymentDate, Payment " +
+                CommandText = "SELECT PayrollID, EmployeeID, PaymentDate, HoursWorked, Payment " +
                               "FROM payroll " +
                               "WHERE EmployeeID = ? " +
                               "ORDER BY PayrollID",
@@ -234,8 +234,8 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO payroll (EmployeeID, PaymentDate, Payment, CreatedBy, LastModifiedBy) " +
-                              "VALUES (?,?,?,?,?)",
+                CommandText = "INSERT INTO payroll (EmployeeID, PaymentDate, Payment, HoursWorked, CreatedBy, LastModifiedBy) " +
+                              "VALUES (?,?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -262,6 +262,13 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Name = "P_Payment",
                 Type = DbType.Double,
                 Value = model.Payment
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_HoursWorked",
+                Type = DbType.Double,
+                Value = model.HoursWorked
             });
             definition.Parameters.Add(new ParameterDefinition()
             {
@@ -289,8 +296,8 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE payroll " +
-                              "SET EmployeeID = ?, PaymentDate = ?, Payment = ?, LastModifiedBy = ? " +
-                              "WHERE PaymentID = ?",
+                              "SET EmployeeID = ?, PaymentDate = ?, Payment = ?, HoursWorked, LastModifiedBy = ? " +
+                              "WHERE PayrollID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -321,6 +328,13 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
+                Name = "P_HoursWorked",
+                Type = DbType.Double,
+                Value = model.HoursWorked
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
                 Name = "P_LastModifiedBy",
                 Type = DbType.String,
                 Value = this.Database.UserName
@@ -338,7 +352,7 @@ namespace CS499.TCMS.DataAccess.Repositories
 
         protected override Payroll Map(IDataReader reader)
         {
-            return new Payroll(reader.GetValueOrDefault<long>("PaymentId"),
+            return new Payroll(reader.GetValueOrDefault<long>("PayrollID"),
                 reader.GetValueOrDefault<long>("EmployeeID"),
                 reader.GetValueOrDefault<DateTime>("PaymentDate"),
                 reader.GetValueOrDefault<double>("Payment"),

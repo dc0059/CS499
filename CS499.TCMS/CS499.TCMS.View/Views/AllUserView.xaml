@@ -142,8 +142,8 @@
                 <DataGridTextColumn Binding="{Binding EmploymentDate}"
                                     Header="Employment Date"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding JobID}"
-                                    Header="Job ID"
+                <DataGridTextColumn Binding="{Binding AccessLevel, Converter={StaticResource EnumToStringConverter}}"
+                                    Header="Access Level"
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding HomeStore}"
                                     Header="Home Store"

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CS499.TCMS.View.Views.AllPartView"
+﻿<UserControl x:Class="CS499.TCMS.View.Views.AllManifestView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -100,21 +100,27 @@
                                             Style="{StaticResource MetroDataGrid}">
 
             <local:DataGridScrollToSelectedItem.Columns>
-                <DataGridTextColumn Binding="{Binding PartDescription }"
-                                    Header="Part Description"
+                <DataGridTextColumn Binding="{Binding ManifestID}"
+                                    Header="Manifest ID"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PartNumber}"
-                                    Header="Part Number"
+                <DataGridTextColumn Binding="{Binding ShipmentType}"
+                                    Header="Shipment Type"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PartPrice, StringFormat=C2}"
-                                    Header="Part Price"
+                <DataGridTextColumn Binding="{Binding DepartureTime}"
+                                    Header="Departure Time"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PartWeight, StringFormat=N2}"
-                                    Header="Part Weight"
+                <DataGridTextColumn Binding="{Binding ETA}"
+                                    Header="ETA"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding QuantityInStock}"
-                                    Header="Quantity In Stock"
-                                    IsReadOnly="True"/>                
+                <DataGridTextColumn Binding="{Binding ShippingCost, StringFormat=C2}"
+                                    Header="Shipping Cost"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding VehicleID}"
+                                    Header="Vehicle ID"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding EmployeeID}"
+                                    Header="Employee ID"
+                                    IsReadOnly="True"/>
             </local:DataGridScrollToSelectedItem.Columns>
 
         </local:DataGridScrollToSelectedItem>

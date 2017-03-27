@@ -12,15 +12,19 @@ using System.Windows.Input;
 namespace CS499.TCMS.View.ViewModels
 {
     /// <summary>
-    /// This class will handle the maintenance of the user model
+    /// This class will handle the maintenance of the <see cref="User"/> model
     /// </summary>
+    /// <seealso cref="CS499.TCMS.View.ViewModels.WorkspaceViewModel" />
+    /// <seealso cref="System.ComponentModel.IDataErrorInfo" />
+    /// <seealso cref="CS499.TCMS.View.Interfaces.IChanges" />
+    /// <seealso cref="CS499.TCMS.View.Interfaces.IKeyCommand" />
     public class UserViewModel : WorkspaceViewModel, IDataErrorInfo, IChanges, IKeyCommand
     {
 
         #region Constructor
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new instance of the <see cref="UserViewModel"/> class.
         /// </summary>
         /// <param name="model">model for the user</param>
         /// <param name="userRepository">repository for database operations</param>
@@ -30,7 +34,7 @@ namespace CS499.TCMS.View.ViewModels
         {
             this.Model = model;
             this.userRepository = userRepository;
-            this.TaskManager = TaskManager;
+            this.TaskManager = taskManager;
             this.IsNew = isNew;
             this.IsSelected = true;
             this.HasChanges = false;
@@ -42,7 +46,7 @@ namespace CS499.TCMS.View.ViewModels
         #region Methods
 
         /// <summary>
-        /// Save viewmodel
+        /// Save ViewModel
         /// </summary>
         private void Save()
         {
@@ -109,15 +113,6 @@ namespace CS499.TCMS.View.ViewModels
 
         }
 
-        /// <summary>
-        /// Execute close command
-        /// </summary>
-        private void Back()
-        {
-            // request to remove from parent workspace
-            this.CloseCommand.Execute(this);
-        }
-
         #endregion
 
         #region Properties
@@ -136,6 +131,20 @@ namespace CS499.TCMS.View.ViewModels
         /// user repository
         /// </summary>
         private IUserRepository userRepository;
+
+        /// <summary>
+        /// Gets the access levels.
+        /// </summary>
+        /// <value>
+        /// The access levels.
+        /// </value>
+        public string[] AccessLevels
+        {
+            get
+            {
+                return Enums.GetHumanizedValues<Enums.AccessLevel>();
+            }
+        }
 
         /// <summary>
         /// <see cref="User"/>
@@ -282,6 +291,31 @@ namespace CS499.TCMS.View.ViewModels
                 Model.Address = value;
 
                 base.OnPropertyChanged("Address");
+                this.HasChanges = true;
+
+            }
+        }
+
+        /// <summary>
+        /// <see cref="User"/>
+        /// </summary>
+        public string City
+        {
+            get
+            {
+                return Model.City;
+            }
+            set
+            {
+
+                if (Model.City == value)
+                {
+                    return;
+                }
+
+                Model.City = value;
+
+                base.OnPropertyChanged("City");
                 this.HasChanges = true;
 
             }
@@ -465,7 +499,7 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// <see cref="User"/>
         /// </summary>
-        public Enums.AccessLevel JobID
+        public Enums.AccessLevel AccessLevel
         {
             get
             {
@@ -481,7 +515,7 @@ namespace CS499.TCMS.View.ViewModels
 
                 Model.AccessLevel = value;
 
-                base.OnPropertyChanged("JobID");
+                base.OnPropertyChanged("AccessLevel");
                 this.HasChanges = true;
 
             }
@@ -563,7 +597,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Flag indicating this viewmodel is new
+        /// Flag indicating this ViewModel is new
         /// </summary>
         public override bool IsNew
         {
@@ -595,7 +629,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Display tooltip
+        /// Display tool tip
         /// </summary>
         public override string DisplayToolTip
         {
@@ -610,7 +644,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Flag indicating this viewmodel is selected in the UI
+        /// Flag indicating this ViewModel is selected in the UI
         /// </summary>
         public override bool IsSelected
         {
@@ -642,7 +676,7 @@ namespace CS499.TCMS.View.ViewModels
         private ICommand _commandSave;
 
         /// <summary>
-        /// Command to execute the save viewmodel
+        /// Command to execute the save ViewModel
         /// </summary>
         public ICommand CommandSave
         {
@@ -661,31 +695,7 @@ namespace CS499.TCMS.View.ViewModels
                 return _commandSave;
             }
         }
-
-
-        private ICommand _commandBack;
-
-        /// <summary>
-        /// Go back to the previous tab
-        /// </summary>
-        public ICommand CommandBack
-        {
-            get
-            {
-
-                if ( _commandBack == null)
-                {
-                     _commandBack = new RelayCommand(param =>
-                        {
-                            this.Back();
-                        },
-                        param => !this.HasChanges);
-                }
-
-                return  _commandBack;
-            }
-        }
-
+              
         #endregion
 
     }

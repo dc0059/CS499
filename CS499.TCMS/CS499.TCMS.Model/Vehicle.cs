@@ -145,7 +145,7 @@ namespace CS499.TCMS.Model
 
         public override string ToString()
         {
-            return string.Format("{0} {1} {2}", this.Year, this.Brand, this.Model);
+            return string.Format("{0} ({1} {2} {3})", this.VehicleID, this.Year, this.Brand, this.Model);
         }
 
         public override bool Equals(object obj)

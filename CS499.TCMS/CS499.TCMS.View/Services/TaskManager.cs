@@ -11,7 +11,7 @@ using ToolKit.Data;
 namespace CS499.TCMS.View.Services
 {
     /// <summary>
-    /// This class will hold a list of running task that the main viewmodel can
+    /// This class will hold a list of running task that the main ViewModel can
     /// use to ensure the user does not close the application before the background process has completed
     /// </summary>
     public class TaskManager : ITaskManager

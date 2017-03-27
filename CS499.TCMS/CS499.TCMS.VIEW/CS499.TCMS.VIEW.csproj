@@ -138,18 +138,26 @@
     <Compile Include="Services\UIContext.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="ViewModels\AllBusinessPartnerViewModel.cs" />
+    <Compile Include="ViewModels\AllManifestViewModel.cs" />
+    <Compile Include="ViewModels\AllPartViewModel.cs" />
     <Compile Include="ViewModels\AllPayrollViewModel.cs" />
+    <Compile Include="ViewModels\AllPurchaseItemViewModel.cs" />
     <Compile Include="ViewModels\AllUserViewModel.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="ViewModels\AllVehicleViewModel.cs" />
     <Compile Include="ViewModels\AppSettingsViewModel.cs" />
     <Compile Include="ViewModels\AssemblyInformationViewModel.cs" />
     <Compile Include="ViewModels\BusinessPartnerViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ManifestViewModel.cs" />
     <Compile Include="ViewModels\ObservableCollectionExtended.cs" />
+    <Compile Include="ViewModels\PartViewModel.cs" />
     <Compile Include="ViewModels\PayrollViewModel.cs" />
+    <Compile Include="ViewModels\PurchaseItemViewModel.cs" />
     <Compile Include="ViewModels\UserThemeViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\VehicleViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WorkspaceFactory.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
@@ -164,6 +172,9 @@
     </Compile>
     <Compile Include="Views\AllMaintenanceRecordDetailView.xaml.cs">
       <DependentUpon>AllMaintenanceRecordDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AllManifestView.xaml.cs">
+      <DependentUpon>AllManifestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AllPartView.xaml.cs">
       <DependentUpon>AllPartView.xaml</DependentUpon>
@@ -182,6 +193,12 @@
     </Compile>
     <Compile Include="Views\AllVehicleView.xaml.cs">
       <DependentUpon>AllVehicleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AppSettingView.xaml.cs">
+      <DependentUpon>AppSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AssemblyInformationView.xaml.cs">
+      <DependentUpon>AssemblyInformationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BusinessPartnerView.xaml.cs">
       <DependentUpon>BusinessPartnerView.xaml</DependentUpon>
@@ -212,6 +229,9 @@
     </Compile>
     <Compile Include="Views\SplashScreenView.xaml.cs">
       <DependentUpon>SplashScreenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserThemeView.xaml.cs">
+      <DependentUpon>UserThemeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
@@ -264,6 +284,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AllManifestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AllPartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -285,6 +309,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AllVehicleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AppSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AssemblyInformationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -325,6 +357,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SplashScreenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserThemeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -376,8 +376,50 @@ namespace CS499.TCMS.View.ViewModels
                             new CommandViewModel(
                                 Messages.AllUserDisplayName,
                                 Messages.AllUserDisplayToolTip,
-                                new RelayCommand(param => this.ExecuteCommand(() => this.CreateDocument<AllUserViewModel>())),
-                                    "appbar_group"));
+                                new RelayCommand(param => this.ExecuteCommand(() => 
+                                this.CreateDocument<AllUserViewModel>(this.Dialog, this.TaskManager, this.userRepository))),
+                                    "People"));
+
+                    commandList.Add(
+                            new CommandViewModel(
+                                Messages.AllBusinessPartnerDisplayName,
+                                Messages.AllBusinessPartnerDisplayToolTip,
+                                new RelayCommand(param => this.ExecuteCommand(() =>
+                                this.CreateDocument<AllBusinessPartnerViewModel>(this.Dialog, this.TaskManager, Factory.Create<IBusinessPartnerRepository>()))),
+                                    "Group"));
+
+                    commandList.Add(
+                            new CommandViewModel(
+                                Messages.AllPayrollDisplayName,
+                                Messages.AllPayrollDisplayToolTip,
+                                new RelayCommand(param => this.ExecuteCommand(() =>
+                                this.CreateDocument<AllPayrollViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPayrollRepository>()))),
+                                    "Money"));
+
+                    commandList.Add(
+                            new CommandViewModel(
+                                Messages.AllVehicleDisplayName,
+                                Messages.AllVehicleDisplayToolTip,
+                                new RelayCommand(param => this.ExecuteCommand(() =>
+                                this.CreateDocument<AllVehicleViewModel>(this.Dialog, this.TaskManager, Factory.Create<IVehicleRepository>()))),
+                                    "Truck"));
+
+                    commandList.Add(
+                            new CommandViewModel(
+                                Messages.AllPartDisplayName,
+                                Messages.AllPartDisplayToolTip,
+                                new RelayCommand(param => this.ExecuteCommand(() =>
+                                this.CreateDocument<AllPartViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPartRepository>()))),
+                                    "Cart"));
+
+                    commandList.Add(
+                            new CommandViewModel(
+                                Messages.AllManifestDisplayName,
+                                Messages.AllManifestDisplayToolTip,
+                                new RelayCommand(param => this.ExecuteCommand(() =>
+                                this.CreateDocument<AllManifestViewModel>(this.Dialog, this.TaskManager, Factory.Create<IManifestRepository>(),
+                                Factory.Create<IVehicleRepository>(), Factory.Create<IUserRepository>()))),
+                                    "ListCheck"));
 
                     break;
                 case Enums.AccessLevel.ShippingData:
@@ -401,12 +443,17 @@ namespace CS499.TCMS.View.ViewModels
                     Messages.ThemeDisplayName,
                     Messages.ThemeDisplayToolTip,
                     new RelayCommand(param => this.ExecuteCommand(() => this.CreateThemeAnchorable())),
-                    "appbar_draw_paintbrush"));
+                    "DrawPaintbrush"));
+            commandList.Add(new CommandViewModel(
+                    Messages.AppSettingsDisplayName,
+                    Messages.AppSettingsDisplayToolTip,
+                    new RelayCommand(param => this.ExecuteCommand(() => this.CreateAppSettings())),
+                    "Settings"));
             commandList.Add(new CommandViewModel(
                     Messages.LogoutDisplayName,
                     Messages.LogoutDisplayToolTip,
                     new RelayCommand(param => this.ExecuteCommand(() => this.Logout())),
-                    "appbar_close"));
+                    "Close"));
 
             // set list of commands
             this.SetCommandList(commandList);
@@ -453,58 +500,83 @@ namespace CS499.TCMS.View.ViewModels
                 try
                 {
 
-                    // show login dialog
-                    LoginDialogData credentials = await this.Dialog.Dialog.ShowLoginAsync(
-                        this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginStart, settings);
-
-                    // close application if the user cancels
-                    if (credentials == null)
-                    {
-                        this.OnClosing(this, new CancelEventArgs());
-                        return;
-                    }
-
-                    string userName = credentials.Username;
-                    User user = await Task.Run(() => { return this.userRepository.GetUserByUserName(userName); });
-
-                    // validate username first
-                    if (user == null)
+                    if (!CoreAssembly.IsDebug())
                     {
 
-                        // show failure message
-                        await this.Dialog.Dialog.ShowMessageAsync(
-                            this.Dialog.ViewModel, Messages.TitleApp, string.Format(Messages.LoginFailUsername, userName));
+                        // show login dialog
+                        LoginDialogData credentials = await this.Dialog.Dialog.ShowLoginAsync(
+                            this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginStart, settings);
 
-                    }
-                    else
-                    {
+                        // close application if the user cancels
+                        if (credentials == null)
+                        {
+                            this.OnClosing(this, new CancelEventArgs());
+                            return;
+                        }
 
-                        // validate credentials
-                        if (PasswordService.ValidatePassword(credentials.Password, user.Passphrase, user.HashKey))
+                        string userName = credentials.Username;
+                        User user = await Task.Run(() => { return this.userRepository.GetUserByUserName(userName); });
+
+                        // validate username first
+                        if (user == null)
                         {
 
-                            // set current application user
-                            CoreAssembly.SetCurrentUser(credentials.Username);
-                            
-                            // show loading while changing the user time sheet is loading
-                            var controller = await this.Dialog.Dialog.ShowProgressAsync(this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginLoading);
-                            await Task.Delay(500);
-
-                            // create command list
-                            this.CreateCommands(user, controller);
-
-                            // set exit flag
-                            exit = true;                           
+                            // show failure message
+                            await this.Dialog.Dialog.ShowMessageAsync(
+                                this.Dialog.ViewModel, Messages.TitleApp, string.Format(Messages.LoginFailUsername, userName));
 
                         }
                         else
                         {
 
-                            // show failure message
-                            await this.Dialog.Dialog.ShowMessageAsync(
-                                this.Dialog.ViewModel, Messages.TitleApp, string.Format(Messages.LoginFailPassword, userName));
+                            // validate credentials
+                            if (PasswordService.ValidatePassword(credentials.Password, user.Passphrase, user.HashKey))
+                            {
 
-                        }
+                                // set current application user
+                                CoreAssembly.SetCurrentUser(credentials.Username);
+
+                                // show loading while changing the user time sheet is loading
+                                var controller = await this.Dialog.Dialog.ShowProgressAsync(this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginLoading);
+                                await Task.Delay(500);
+
+                                // create command list
+                                this.CreateCommands(user, controller);
+
+                                // set exit flag
+                                exit = true;
+
+                            }
+                            else
+                            {
+
+                                // show failure message
+                                await this.Dialog.Dialog.ShowMessageAsync(
+                                    this.Dialog.ViewModel, Messages.TitleApp, string.Format(Messages.LoginFailPassword, userName));
+
+                            }
+
+                        } 
+
+                    }
+                    else
+                    {
+
+                        // set current application user
+                        CoreAssembly.SetCurrentUser("dc0059");
+
+                        // show loading while changing the user time sheet is loading
+                        var controller = await this.Dialog.Dialog.ShowProgressAsync(this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginLoading);
+                        await Task.Delay(500);
+
+                        // create commands for debugging
+                        this.CreateCommands(new User(1, "dc0059", "Donal", "David", "Cavanaugh",
+                            "12345 some where dr.", "Huntsville", "Alabama", 35802, "1234567890",
+                            "1234567890", "dc0059@uah.edu", 50, DateTime.Now, Enums.AccessLevel.Full,
+                            "Uah", "The Man", true, string.Empty, string.Empty), controller);
+
+                        // set exit flag
+                        exit = true;
 
                     }
 
@@ -611,7 +683,7 @@ namespace CS499.TCMS.View.ViewModels
 
                 // load user theme settings
                 this.UserThemeViewModel =
-                    WorkspaceFactory.Create<UserThemeViewModel>(this.Dialog, this.TaskManager);
+                    WorkspaceFactory.Create<UserThemeViewModel>();
 
                 // add workspace
                 workspace = this.UserThemeViewModel;

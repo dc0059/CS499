@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="CS499.TCMS.View.Views.UserThemeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock VerticalAlignment="Center"
+                   Margin="5"
+                   Text="Base"
+                   Grid.Column="0"
+                   Grid.Row="0"/>
+        <ComboBox ItemsSource="{Binding Themes}"
+                  SelectedItem="{Binding CurrentTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                   
+                  Grid.Column="0"
+                  Grid.Row="1"
+                  Margin="0, 0, 0, 10"
+                  Style="{StaticResource ThemeTypeBaseStyle}"/>
+
+        <TextBlock VerticalAlignment="Center"
+                   Margin="5"
+                   Text="Accent"
+                   Grid.Column="0"
+                   Grid.Row="2"/>
+        <ComboBox ItemsSource="{Binding Accents}"
+                  SelectedItem="{Binding CurrentAccent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  Grid.Column="0"
+                  Grid.Row="3"
+                  Margin="0, 0, 0, 10" 
+                  Style="{StaticResource ThemeTypeAccentStyle}"/>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="0"
+                    Grid.Row="4"
+                    FlowDirection="RightToLeft">
+
+            <Button Width="50"
+                    Height="50"
+                    Style="{StaticResource MetroCircleButtonStyle}"
+                    Background="{DynamicResource AccentColorBrush}"
+                    ToolTip="Save and Set Theme"
+                    Command="{Binding SaveCommand}"             
+                    VerticalAlignment="Top"
+                    Content="{iconPacks:PackIconModern Kind=Save, Height=26, Width=26}"/>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

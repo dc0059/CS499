@@ -27,10 +27,10 @@
 			<Controls:Flyout Theme="Accent"
 							 Position="Left"
 							 Name="FlyoutMenu"
-							 Width="Auto"
+							 Width="Auto"                             
 							 IsOpen="{Binding IsMenuOpen, Mode=TwoWay}"
 							 IsAutoCloseEnabled="True"
-							 AutoCloseInterval="10000">
+							 AutoCloseInterval="30000">
 				<ContentControl
 					Content="{Binding Path=Commands}"
 					ContentTemplate="{StaticResource CommandsTemplate}"

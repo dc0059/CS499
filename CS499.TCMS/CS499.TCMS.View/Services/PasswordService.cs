@@ -31,7 +31,7 @@ namespace CS499.TCMS.View.Services
             passphrase = Convert.ToBase64String(salt);
 
             // hash password
-            byte[] hash = PWDTK.PasswordToHash(salt, passphrase, 10000);
+            byte[] hash = PWDTK.PasswordToHash(salt, password, 10000);
 
             return Convert.ToBase64String(hash);
 
@@ -54,7 +54,7 @@ namespace CS499.TCMS.View.Services
             byte[] hash = Convert.FromBase64String(userHash);
 
             // compare password to the hash
-            bool isValid = PWDTK.ComparePasswordToHash(salt, passphrase, hash, 10000);
+            bool isValid = PWDTK.ComparePasswordToHash(salt, password, hash, 10000);
 
             return isValid;
 

@@ -114,16 +114,7 @@ namespace CS499.TCMS.View.ViewModels
             }
 
         }
-
-        /// <summary>
-        /// Execute close command
-        /// </summary>
-        private void Back()
-        {
-            // request to remove from parent workspace
-            this.CloseCommand.Execute(this);
-        }
-
+      
         #endregion
 
         #region Properties
@@ -392,30 +383,7 @@ namespace CS499.TCMS.View.ViewModels
                 return _commandSave;
             }
         }
-
-        private ICommand _commandBack;
-
-        /// <summary>
-        /// Go back to the previous tab
-        /// </summary>
-        public ICommand CommandBack
-        {
-            get
-            {
-
-                if (_commandBack == null)
-                {
-                    _commandBack = new RelayCommand(param =>
-                    {
-                        this.Back();
-                    },
-                       param => !this.HasChanges);
-                }
-
-                return _commandBack;
-            }
-        }
-
+        
         #endregion
 
     }
