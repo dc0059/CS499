@@ -296,7 +296,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE payroll " +
-                              "SET EmployeeID = ?, PaymentDate = ?, Payment = ?, HoursWorked, LastModifiedBy = ? " +
+                              "SET EmployeeID = ?, PaymentDate = ?, Payment = ?, HoursWorked = ?, LastModifiedBy = ? " +
                               "WHERE PayrollID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
