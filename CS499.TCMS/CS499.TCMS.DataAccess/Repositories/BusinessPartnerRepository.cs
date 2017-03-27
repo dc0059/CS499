@@ -110,6 +110,36 @@ namespace CS499.TCMS.DataAccess.Repositories
             });
 
             this.Database.ExecuteModQuery(definition);
+
+            // Create query definition
+            definition = new QueryDefinition()
+            {
+                CommandText = "UPDATE businesspartners_log " +
+                              "SET DeletedBy = ? " +
+                              "WHERE CompanyID = ? " +
+                              "AND ModifiedStatus = 'D'",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            // create parameter definition            
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_User",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_ID",
+                Type = DbType.Int64,
+                Value = PartnerID
+            });
+
+            this.Database.ExecuteModQuery(definition);
         }
 
 
@@ -228,7 +258,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT CompanyID, CompanyName, Address, City, State, ZipCode, PhoneNumber" +
+                CommandText = "SELECT CompanyID, CompanyName, Address, City, State, ZipCode, PhoneNumber " +
                               "FROM businesspartners " +
                               "WHERE State = ? " +
                               "ORDER BY CompanyID",
@@ -241,7 +271,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             {
                 Direction = ParameterDirection.Input,
                 Name = "P_State",
-                Type = DbType.Int64,
+                Type = DbType.String,
                 Value = State
             });
             return this.Database.ExecuteListQuery<BusinessPartner>(definition, Map);
@@ -253,7 +283,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT CompanyID, CompanyName, Address, City, State, ZipCode, PhoneNumber" +
+                CommandText = "SELECT CompanyID, CompanyName, Address, City, State, ZipCode, PhoneNumber " +
                               "FROM businesspartners " +
                               "WHERE ZipCode = ? " +
                               "ORDER BY CompanyID",
@@ -265,7 +295,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
-                Name = "P_State",
+                Name = "P_ZipCode",
                 Type = DbType.Int64,
                 Value = Zip
             });

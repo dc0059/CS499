@@ -122,6 +122,36 @@ namespace CS499.TCMS.DataAccess.Repositories
             });
 
             this.Database.ExecuteModQuery(definition);
+
+            // Create query definition
+            definition = new QueryDefinition()
+            {
+                CommandText = "UPDATE purchaseitems_log " +
+                              "SET DeletedBy = ? " +
+                              "WHERE OrderID = ? " +
+                              "AND ModifiedStatus = 'D'",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            // create parameter definition            
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_User",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_ID",
+                Type = DbType.Int64,
+                Value = OrderID
+            });
+
+            this.Database.ExecuteModQuery(definition);
         }
 
         public void DeleteItemsByPartID(long PartID)
@@ -170,7 +200,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT ItemID, OrderID, Quantity, PartID " +
-                              "FROM purchasitems " +
+                              "FROM purchaseitems " +
                               "WHERE OrderID = ? " +
                               "ORDER BY ItemID",
                 cType = CommandType.Text,

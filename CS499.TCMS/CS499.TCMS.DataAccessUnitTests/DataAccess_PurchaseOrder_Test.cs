@@ -76,7 +76,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IPurchaseOrderRepository purchaseOrderRepo = factory.Create<IPurchaseOrderRepository>();
 
-            PurchaseOrder delOrder = purchaseOrderRepo.GetSingle(3);
+            PurchaseOrder delOrder = purchaseOrderRepo.GetSingle(4);
 
             purchaseOrderRepo.Delete(delOrder);
         }
