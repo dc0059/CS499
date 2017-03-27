@@ -179,7 +179,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT PaymentID, EmployeeID, PaymentDate, Payment " +
+                CommandText = "SELECT PayrollID, EmployeeID, PaymentDate, HoursWorked, Payment " +
                               "FROM payroll " +
                               "WHERE PaymentDate = ? " +
                               "ORDER BY PayrollID",
@@ -205,7 +205,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT PaymentID, EmployeeID, PaymentDate, Payment " +
+                CommandText = "SELECT PayrollID, EmployeeID, PaymentDate, HoursWorked, Payment " +
                               "FROM payroll " +
                               "WHERE EmployeeID = ? " +
                               "ORDER BY PayrollID",

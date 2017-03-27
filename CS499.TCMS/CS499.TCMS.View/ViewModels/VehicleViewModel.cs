@@ -12,29 +12,33 @@ using System.Windows.Input;
 namespace CS499.TCMS.View.ViewModels
 {
     /// <summary>
-    /// This class will handle the maintenance of the payroll model
+    /// This class will handle the maintenance of the <see cref="Vehicle"/> model
     /// </summary>
-    public class PayrollViewModel : WorkspaceViewModel, IDataErrorInfo, IChanges, IKeyCommand
+    /// <seealso cref="CS499.TCMS.View.ViewModels.WorkspaceViewModel" />
+    /// <seealso cref="System.ComponentModel.IDataErrorInfo" />
+    /// <seealso cref="CS499.TCMS.View.Interfaces.IChanges" />
+    /// <seealso cref="CS499.TCMS.View.Interfaces.IKeyCommand" />
+    public class VehicleViewModel : WorkspaceViewModel, IDataErrorInfo, IChanges, IKeyCommand
     {
 
         #region Constructor
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new instance of the <see cref="VehicleViewModel"/> class.
         /// </summary>
-        /// <param name="model">model for the payroll</param>
-        /// <param name="payrollRepository">repository for database operations</param>
+        /// <param name="model">model for the vehicle</param>
+        /// <param name="vehicleRepository">repository for database operations</param>
         /// <param name="taskManager">task manager to hold reference to running tasks</param>
-        /// <param name="isNew">flag indicating if this is a new payroll</param>
-        public PayrollViewModel(Payroll model, IPayrollRepository payrollRepository, ITaskManager taskManager, bool isNew)
+        /// <param name="isNew">flag indicating if this is a new vehicle</param>
+        public VehicleViewModel(Vehicle model, IVehicleRepository vehicleRepository, ITaskManager taskManager, bool isNew)
         {
             this.Model = model;
-            this.payrollRepository = payrollRepository;
+            this.vehicleRepository = vehicleRepository;
             this.TaskManager = taskManager;
             this.IsNew = isNew;
             this.IsSelected = true;
             this.HasChanges = false;
-            this.ContentId = model.EmployeeID.GetContentId(this.DisplayName);
+            this.ContentId = model.VehicleID.GetContentId(this.DisplayName);
         }
 
         #endregion
@@ -42,7 +46,7 @@ namespace CS499.TCMS.View.ViewModels
         #region Methods
 
         /// <summary>
-        /// Save viewmodel
+        /// Save ViewModel
         /// </summary>
         private void Save()
         {
@@ -54,27 +58,27 @@ namespace CS499.TCMS.View.ViewModels
                 // insert new viewModel or update current viewModel
                 if (this.IsNew)
                 {
-                    this.payrollRepository.Insert(this.Model);
+                    this.vehicleRepository.Insert(this.Model);
                 }
                 else
                 {
-                    this.payrollRepository.Update(this.Model);
+                    this.vehicleRepository.Update(this.Model);
                 }
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.PayrollSaving,
-            () => {},
+            Messages.VehicleSaving,
+            () => { },
             Messages.MainWindowInitialStatus,
             UIContext.Current,
-            "Saving payroll",
-            Messages.PayrollSaveError,
+            "Saving vehicle",
+            string.Format(Messages.VehicleSaveError, this.Model.ToString()),
             log,
             () =>
             {
-                // send load notification to the all payroll view model
-                this.MessengerInstance.Send<NotificationMessage<AllPayrollViewModel>>(
-                    new NotificationMessage<AllPayrollViewModel>(null, null));
+                // send load notification to the all vehicle view model
+                this.MessengerInstance.Send<NotificationMessage<AllVehicleViewModel>>(
+                    new NotificationMessage<AllVehicleViewModel>(null, null));
 
             });
 
@@ -92,7 +96,7 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Execute commands based on the key combination pressed
         /// </summary>
-        /// <param name="e">key event args</param>
+        /// <param name="e">key event Args</param>
         void IKeyCommand.SendKeys(KeyEventArgs e)
         {
 
@@ -108,7 +112,7 @@ namespace CS499.TCMS.View.ViewModels
             }
 
         }
-    
+
         #endregion
 
         #region Properties
@@ -119,117 +123,201 @@ namespace CS499.TCMS.View.ViewModels
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// payroll model
+        /// vehicle model
         /// </summary>
-        public Payroll Model;
+        public Vehicle Model;
 
         /// <summary>
-        /// payroll repository
+        /// vehicle repository
         /// </summary>
-        private IPayrollRepository payrollRepository;
+        private IVehicleRepository vehicleRepository;
 
         /// <summary>
-        /// <see cref="Payroll"/>
+        /// Gets the vehicle types.
         /// </summary>
-        public long EmployeeID
+        /// <value>
+        /// The vehicle types.
+        /// </value>
+        public string[] VehicleTypes
+        {
+
+            get
+            {
+                return Enums.GetHumanizedValues<Enums.TruckMaxCapacity>();
+            }
+
+        }
+
+        /// <summary>
+        /// Gets or sets the vehicle identifier.
+        /// </summary>
+        /// <value>
+        /// The vehicle identifier.
+        /// </value>
+        public long VehicleID
         {
             get
             {
-                return Model.EmployeeID;
+                return Model.VehicleID;
             }
             set
             {
 
-                if (Model.EmployeeID == value)
+                if (Model.VehicleID == value)
                 {
                     return;
                 }
 
-                Model.EmployeeID = value;
+                Model.VehicleID = value;
 
-                base.OnPropertyChanged("EmployeeID");
+                base.OnPropertyChanged("VehicleID");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="Payroll"/>
+        /// Gets or sets the brand.
         /// </summary>
-        public DateTime PaymentDate
+        /// <value>
+        /// The brand.
+        /// </value>
+        public string Brand
         {
             get
             {
-                return Model.PaymentDate;
+                return Model.Brand;
             }
             set
             {
 
-                if (Model.PaymentDate == value)
+                if (Model.Brand == value)
                 {
                     return;
                 }
 
-                Model.PaymentDate = value;
+                Model.Brand = value;
 
-                base.OnPropertyChanged("PaymentDate");
+                base.OnPropertyChanged("Brand");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="Payroll"/>
+        /// Gets or sets the year.
         /// </summary>
-        public double Payment
+        /// <value>
+        /// The year.
+        /// </value>
+        public int Year
         {
             get
             {
-                return Model.Payment;
+                return Model.Year;
             }
             set
             {
 
-                if (Model.Payment == value)
+                if (Model.Year == value)
                 {
                     return;
                 }
 
-                Model.Payment = value;
+                Model.Year = value;
 
-                base.OnPropertyChanged("Payment");
+                base.OnPropertyChanged("Year");
+                this.HasChanges = true;
+                
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the vehicle model.
+        /// </summary>
+        /// <value>
+        /// The vehicle model.
+        /// </value>
+        public string VehicleModel
+        {
+            get
+            {
+                return Model.Model;
+            }
+            set
+            {
+
+                if (Model.Model == value)
+                {
+                    return;
+                }
+
+                Model.Model = value;
+
+                base.OnPropertyChanged("VehicleModel");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="Payroll"/>
+        /// Gets or sets the type of the vehicle.
         /// </summary>
-        public double HoursWorked
+        /// <value>
+        /// The type of the vehicle.
+        /// </value>
+        public Enums.TruckMaxCapacity VehicleType
         {
             get
             {
-                return Model.HoursWorked;
+                return Model.VehicleType;
             }
             set
             {
 
-                if (Model.HoursWorked == value)
+                if (Model.VehicleType == value)
                 {
                     return;
                 }
 
-                Model.HoursWorked = value;
+                Model.VehicleType = value;
 
-                base.OnPropertyChanged("HoursWorked");
+                base.OnPropertyChanged("VehicleType");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// Flag indicating this viewmodel is new
+        /// Gets or sets the capacity.
+        /// </summary>
+        /// <value>
+        /// The capacity.
+        /// </value>
+        public int Capacity
+        {
+            get
+            {
+                return Model.Capacity;
+            }
+            set
+            {
+
+                if (Model.Capacity == value)
+                {
+                    return;
+                }
+
+                Model.Capacity = value;
+
+                base.OnPropertyChanged("Capacity");
+                this.HasChanges = true;
+
+            }
+        }
+
+        /// <summary>
+        /// Flag indicating this ViewModel is new
         /// </summary>
         public override bool IsNew
         {
@@ -251,7 +339,7 @@ namespace CS499.TCMS.View.ViewModels
             get
             {
                 string displayName = Model == null ? string.Empty : Model.ToString();
-                string msg = string.Format(Messages.PayrollDisplayName, this.IsNew ? "New" : displayName);
+                string msg = string.Format(Messages.VehicleDisplayName, this.IsNew ? "New" : displayName);
                 return msg;
             }
             protected set
@@ -261,7 +349,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Display tooltip
+        /// Display tool tip
         /// </summary>
         public override string DisplayToolTip
         {
@@ -276,7 +364,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Flag indicating this viewmodel is selected in the UI
+        /// Flag indicating this ViewModel is selected in the UI
         /// </summary>
         public override bool IsSelected
         {
@@ -308,7 +396,7 @@ namespace CS499.TCMS.View.ViewModels
         private ICommand _commandSave;
 
         /// <summary>
-        /// Command to execute the save viewmodel
+        /// Command to execute the save ViewModel
         /// </summary>
         public ICommand CommandSave
         {

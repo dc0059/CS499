@@ -14,33 +14,33 @@ using System.Windows.Input;
 namespace CS499.TCMS.View.ViewModels
 {
     /// <summary>
-    /// This class will handle the maintenance of the <see cref="UserViewModel"/>
+    /// This class will handle the maintenance of the <see cref="VehicleViewModel"/>
     /// </summary>
     /// <seealso cref="CS499.TCMS.View.ViewModels.WorkspaceViewModel" />
     /// <seealso cref="CS499.TCMS.View.Interfaces.IKeyCommand" />
-    public class AllUserViewModel : WorkspaceViewModel, IKeyCommand
+    public class AllVehicleViewModel : WorkspaceViewModel, IKeyCommand
     {
 
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AllUserViewModel"/> class.
+        /// Initializes a new instance of the <see cref="AllVehicleViewModel"/> class.
         /// </summary>
         /// <param name="dialog">Dialog service to show messages from ViewModel</param>
         /// <param name="taskManager">Task manager to hold reference to running tasks</param>
-        /// <param name="userRepository">The user repository.</param>
-        public AllUserViewModel(IDialogService dialog, ITaskManager taskManager, IUserRepository userRepository)
+        /// <param name="vehicleRepository">vehicle repository</param>
+        public AllVehicleViewModel(IDialogService dialog, ITaskManager taskManager, IVehicleRepository vehicleRepository)
         {
             this.dialog = dialog;
             this.TaskManager = taskManager;
             this.IsSelected = true;
-            this.ViewModels = new ObservableCollectionExtended<UserViewModel>(new List<UserViewModel>());
+            this.ViewModels = new ObservableCollectionExtended<VehicleViewModel>(new List<VehicleViewModel>());
             this.ViewModels.PageSize = 10;
-            this.DisplayName = Messages.AllUserDisplayName;
-            this.DisplayToolTip = Messages.AllUserDisplayToolTip;
-            this.userRepository = userRepository;
+            this.DisplayName = Messages.AllVehicleDisplayName;
+            this.DisplayToolTip = Messages.AllVehicleDisplayToolTip;
+            this.vehicleRepository = vehicleRepository;
             this.Load();
-            this.MessengerInstance.Register<NotificationMessage<AllUserViewModel>>(this, (n) => this.Load(n));
+            this.MessengerInstance.Register<NotificationMessage<AllVehicleViewModel>>(this, (n) => this.Load(n));
             this.SearchType = "contains";
         }
 
@@ -52,7 +52,7 @@ namespace CS499.TCMS.View.ViewModels
         /// Load list of ViewModels
         /// </summary>
         /// <param name="notificationMessage">notification message</param>
-        private void Load(NotificationMessage<AllUserViewModel> notificationMessage)
+        private void Load(NotificationMessage<AllVehicleViewModel> notificationMessage)
         {
             this.Load();
         }
@@ -63,17 +63,17 @@ namespace CS499.TCMS.View.ViewModels
         private void Load()
         {
 
-            List<User> ViewModels = null;
+            List<Vehicle> ViewModels = null;
 
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
-                ViewModels = userRepository.GetAll().ToList();
+                ViewModels = vehicleRepository.GetAll().ToList();
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.AllUserLoading,
+            Messages.AllVehicleLoading,
             () =>
             {
 
@@ -91,8 +91,8 @@ namespace CS499.TCMS.View.ViewModels
             },
              Messages.MainWindowInitialStatus,
              UIContext.Current,
-             "loading users",
-             Messages.AllUserLoadError,
+             "loading vehicles",
+             Messages.AllVehicleLoadError,
              log);
 
         }
@@ -100,17 +100,17 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Add each ViewModel to the collection
         /// </summary>
-        /// <param name="users">list of models</param>
-        private void Set(List<User> users)
+        /// <param name="vehicles">list of models</param>
+        private void Set(List<Vehicle> vehicles)
         {
 
             // clear current list
             this.ViewModels.ClearAll();
 
             // loop through each model and add e ViewModel to the collection
-            foreach (var model in users)
+            foreach (var model in vehicles)
             {
-                UserViewModel viewModel = new UserViewModel(model, this.userRepository, this.TaskManager, false);
+                VehicleViewModel viewModel = new VehicleViewModel(model, this.vehicleRepository, this.TaskManager, false);
                 this.ViewModels.AddItem(viewModel);
             }
 
@@ -122,17 +122,11 @@ namespace CS499.TCMS.View.ViewModels
         private void New()
         {
 
-            // create a default user password
-            string passphrase;
-            string hash = PasswordService.HashPassword("Password1", out passphrase);
-
             // create new model
-            User model = new User(0, string.Empty, string.Empty, string.Empty, string.Empty,
-                string.Empty, string.Empty, string.Empty, 0, string.Empty, string.Empty, string.Empty,
-                0, DateTime.Now, 0, string.Empty, string.Empty, false, hash, passphrase);
+            Vehicle model = new Vehicle(0, string.Empty, 2000, string.Empty, Enums.TruckMaxCapacity.class1, 6000);
 
             // create new ViewModel
-            UserViewModel viewModel = new UserViewModel(model, this.userRepository, this.TaskManager, true);
+            VehicleViewModel viewModel = new VehicleViewModel(model, this.vehicleRepository, this.TaskManager, true);
 
             // send ViewModel
             this.SendViewModel(viewModel);
@@ -154,7 +148,7 @@ namespace CS499.TCMS.View.ViewModels
         /// send message to the mainwindowViewModel to add the ViewModel to the collection
         /// </summary>
         /// <param name="viewModel">ViewModel</param>
-        private void SendViewModel(UserViewModel viewModel)
+        private void SendViewModel(VehicleViewModel viewModel)
         {
             this.MessengerInstance.Send<NotificationMessage<WorkspaceViewModel>>(
                 new NotificationMessage<WorkspaceViewModel>(viewModel, null));
@@ -167,10 +161,10 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             // get selected ViewModel
-            UserViewModel viewModel = this.SelectedViewModel;
+            VehicleViewModel viewModel = this.SelectedViewModel;
 
             // Ask viewModel to confirm the deletion
-            string msg = string.Format(Messages.DeleteMessage, "user", viewModel.Model.ToString());
+            string msg = string.Format(Messages.DeleteMessage, "vehicle", viewModel.Model.ToString());
             MessageDialogResult result = await dialog.Dialog.ShowMessageAsync(dialog.ViewModel, Messages.TitleApp, msg,
                     MessageDialogStyle.AffirmativeAndNegative);
 
@@ -183,11 +177,11 @@ namespace CS499.TCMS.View.ViewModels
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
-                this.userRepository.Delete(viewModel.Model);
+                this.vehicleRepository.Delete(viewModel.Model);
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.AllUserDeleting,
+            Messages.AllVehicleDeleting,
             () =>
             {
 
@@ -196,8 +190,8 @@ namespace CS499.TCMS.View.ViewModels
             },
             Messages.MainWindowInitialStatus,
             UIContext.Current,
-            "deleting user",
-            string.Format(Messages.AllUserDeleteError, viewModel.DisplayName),
+            "deleting vehicle",
+            string.Format(Messages.AllVehicleDeleteError, viewModel.DisplayName),
             log);
 
         }
@@ -214,14 +208,13 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Search for the user based on the search text
+        /// Search for the vehicle based on the search text
         /// </summary>
         private void SearchForText()
         {
 
-            this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText,
-                "EmployeeID", "UserName", "FirstName", "MiddleName", "LastName", "Address", "City", "State", "ZipCode",
-                "HomePhone", "CellPhone", "EmailAddress", "PayRate", "EmploymentDate", "JobID", "HomeStore", "JobDescription");
+            this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText, 
+                "VehicleID", "Brand", "Year", "Model", "Capacity", "VehicleType");
 
         }
 
@@ -270,9 +263,9 @@ namespace CS499.TCMS.View.ViewModels
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// User repository
+        /// Vehicle repository
         /// </summary>
-        private IUserRepository userRepository;
+        private IVehicleRepository vehicleRepository;
 
         /// <summary>
         /// Dialog service for showing messages from the ViewModel
@@ -282,12 +275,12 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Selected ViewModel
         /// </summary>
-        public UserViewModel SelectedViewModel { get; set; }
+        public VehicleViewModel SelectedViewModel { get; set; }
 
         /// <summary>
         /// Collection of ViewModels
         /// </summary>
-        public ObservableCollectionExtended<UserViewModel> ViewModels { get; set; }
+        public ObservableCollectionExtended<VehicleViewModel> ViewModels { get; set; }
 
         private string _searchType;
 

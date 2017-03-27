@@ -135,6 +135,42 @@
   <data name="AllBusinessPartnerLoading" xml:space="preserve">
     <value>Loading business partners... Please wait.</value>
   </data>
+  <data name="AllManifestDeleteError" xml:space="preserve">
+    <value>Failed to delete manifest ({0}). Please contact support.</value>
+  </data>
+  <data name="AllManifestDeleting" xml:space="preserve">
+    <value>Deleting manifest. Please wait.</value>
+  </data>
+  <data name="AllManifestDisplayName" xml:space="preserve">
+    <value>Manifests</value>
+  </data>
+  <data name="AllManifestDisplayToolTip" xml:space="preserve">
+    <value>Click here to modify manifests.</value>
+  </data>
+  <data name="AllManifestLoadError" xml:space="preserve">
+    <value>Failed to load manifest. Please wait.</value>
+  </data>
+  <data name="AllManifestLoading" xml:space="preserve">
+    <value>Loading manifests... Please wait.</value>
+  </data>
+  <data name="AllPartDeleteError" xml:space="preserve">
+    <value>Failed to delete part ({0}). Please contact support.</value>
+  </data>
+  <data name="AllPartDeleting" xml:space="preserve">
+    <value>Deleting part... Please wait.</value>
+  </data>
+  <data name="AllPartDisplayName" xml:space="preserve">
+    <value>Parts</value>
+  </data>
+  <data name="AllPartDisplayToolTip" xml:space="preserve">
+    <value>Click here to modify parts.</value>
+  </data>
+  <data name="AllPartLoadError" xml:space="preserve">
+    <value>Failed to load parts. Please contact support.</value>
+  </data>
+  <data name="AllPartLoading" xml:space="preserve">
+    <value>Loading parts... Please wait.</value>
+  </data>
   <data name="AllPayrollDeleteError" xml:space="preserve">
     <value>Failed to delete payroll. Please contact support.</value>
   </data>
@@ -170,6 +206,24 @@
   </data>
   <data name="AllUserLoading" xml:space="preserve">
     <value>Loading users... Please wait.</value>
+  </data>
+  <data name="AllVehicleDeleteError" xml:space="preserve">
+    <value>Failed to delete vehicle ({0}). Please contact support.</value>
+  </data>
+  <data name="AllVehicleDeleting" xml:space="preserve">
+    <value>Deleting vehicle... Please wait.</value>
+  </data>
+  <data name="AllVehicleDisplayName" xml:space="preserve">
+    <value>Vehicles</value>
+  </data>
+  <data name="AllVehicleDisplayToolTip" xml:space="preserve">
+    <value>Click here to modify vehicles.</value>
+  </data>
+  <data name="AllVehicleLoadError" xml:space="preserve">
+    <value>Failed to load vehicles. Please contact support.</value>
+  </data>
+  <data name="AllVehicleLoading" xml:space="preserve">
+    <value>Loading vehicles... Please wait.</value>
   </data>
   <data name="AppSettingsDisplayName" xml:space="preserve">
     <value>Settings</value>
@@ -252,6 +306,24 @@
   <data name="MainWindowViewModelCheckForChanges" xml:space="preserve">
     <value>One or more unsaved changes were found. Are you sure you want to continue without saving?</value>
   </data>
+  <data name="ManifestSaveError" xml:space="preserve">
+    <value>Failed to save manifest ({0}). Please contact support.</value>
+  </data>
+  <data name="ManifestSaving" xml:space="preserve">
+    <value>Saving manifest...Please wait.</value>
+  </data>
+  <data name="PartDisplayName" xml:space="preserve">
+    <value>Part: {0}</value>
+  </data>
+  <data name="PartDisplayToolTip" xml:space="preserve">
+    <value>Part: {0}</value>
+  </data>
+  <data name="PartSaveError" xml:space="preserve">
+    <value>Failed to save part ({0}) because it already exists.</value>
+  </data>
+  <data name="PartSaving" xml:space="preserve">
+    <value>Saving part... Please wait.</value>
+  </data>
   <data name="PayrollDisplayName" xml:space="preserve">
     <value>Payroll: {0}</value>
   </data>
@@ -296,5 +368,17 @@
   </data>
   <data name="UserSaving" xml:space="preserve">
     <value>Saving user... Please wait.</value>
+  </data>
+  <data name="VehicleDisplayName" xml:space="preserve">
+    <value>Vehicle: {0}</value>
+  </data>
+  <data name="VehicleDisplayToolTip" xml:space="preserve">
+    <value>Vehicle: {0}</value>
+  </data>
+  <data name="VehicleSaveError" xml:space="preserve">
+    <value>Failed to save vehicle ({0}). Please contact support.</value>
+  </data>
+  <data name="VehicleSaving" xml:space="preserve">
+    <value>Saving vehicle... Please wait.</value>
   </data>
 </root>

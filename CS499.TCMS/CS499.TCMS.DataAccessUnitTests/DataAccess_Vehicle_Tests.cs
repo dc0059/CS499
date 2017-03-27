@@ -16,7 +16,7 @@ namespace CS499.TCMS.DataAccessUnitTests
         [TestMethod]
         public void VehicleInsertTest()
         {
-            Vehicle testVehicle = new Vehicle(12345, "Mercedes-Benz", 2004, "Actros", Enums.TruckMaxCapacity.class5, 17500);
+            Vehicle testVehicle = new Vehicle(12345, "Mercedes-Benz", 2004, "Actros",  Enums.TruckMaxCapacity.class6, 17500);
 
             RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
             IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
@@ -30,7 +30,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
             IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
 
-            Vehicle returnVehicle = vehicleRepository.GetSingle(1);
+            Vehicle returnVehicle = vehicleRepository.GetSingle(12345);
 
             Assert.IsTrue(returnVehicle.IsValid);
             System.Diagnostics.Debug.Print(returnVehicle.VehicleID.ToString());
@@ -65,7 +65,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
             IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
 
-            Vehicle delVehicle = vehicleRepository.GetSingle(1);
+            Vehicle delVehicle = vehicleRepository.GetSingle(12345);
 
             vehicleRepository.Delete(delVehicle);
         }
@@ -76,7 +76,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
             IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
 
-            Vehicle updateVehicle = new Vehicle(1, "Chevy", 2016, "Thing", Enums.TruckMaxCapacity.class3, 9000);
+            Vehicle updateVehicle = new Vehicle(12347, "Chevy", 2016, "Thing",  Enums.TruckMaxCapacity.class3, 9000);
 
             vehicleRepository.Update(updateVehicle);
         }

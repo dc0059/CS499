@@ -1,8 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-                    xmlns:local="clr-namespace:CS499.TCMS.View.Converters">
-   
+                    xmlns:local="clr-namespace:CS499.TCMS.View.Converters"
+                    xmlns:vm="clr-namespace:CS499.TCMS.View.ViewModels"
+                    xmlns:vw="clr-namespace:CS499.TCMS.View.Views">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Icons.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
     <!-- converters -->
     <local:StringToCanvasConverter x:Key="StringToCanvasConverter"/>
     <local:EnumToStringConverter x:Key="EnumToStringConverter"/>
@@ -10,6 +16,7 @@
     <local:StringToTimeSpanConverter x:Key="StringToTimeSpanConverter"/>
     <local:VisibilityToBoolConverter x:Key="VisibilityToBoolConverter"/>
     <local:StringToPhoneConverter x:Key="StringToPhoneConverter"/>
+    
 
     <!-- Command button style-->
     <SolidColorBrush x:Key="BackgroundHighlighted" Color="#66007ACC"/>
@@ -43,8 +50,8 @@
                             </Grid.ColumnDefinitions>
                             <iconPacks:PackIconModern Name="icon"
                                                       Kind="{Binding Icon}"
-                                                      Height="50"
-                                                      Width="50"
+                                                      Height="42"
+                                                      Width="42"
                                                       HorizontalAlignment="Center"
                                                       VerticalAlignment="Center"
                                                       Grid.Column="0"
@@ -158,5 +165,51 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <DataTemplate DataType="{x:Type vm:AllUserViewModel}">
+        <vw:AllUserView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:UserViewModel}">
+        <vw:UserView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllBusinessPartnerViewModel}">
+        <vw:AllBusinessPartnerView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:BusinessPartnerViewModel}">
+        <vw:BusinessPartnerView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllPayrollViewModel}">
+        <vw:AllPayrollView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PayrollViewModel}">
+        <vw:PayrollView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:UserThemeViewModel}">
+        <vw:UserThemeView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AssemblyInformationViewModel}">
+        <vw:AssemblyInformationView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AppSettingsViewModel}">
+        <vw:AppSettingView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllVehicleViewModel}">
+        <vw:AllVehicleView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:VehicleViewModel}">
+        <vw:VehicleView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllPartViewModel}">
+        <vw:AllPartView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PartViewModel}">
+        <vw:PartView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllManifestViewModel}">
+        <vw:AllManifestView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ManifestViewModel}">
+        <vw:ManifestView />
+    </DataTemplate>
+
 </ResourceDictionary>

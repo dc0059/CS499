@@ -12,14 +12,15 @@ namespace CS499.TCMS.ModelUnitTest
         public void UserModelTest()
         {
             User testUser = new User(123456, "jadams63", "James", "William", "Adams", "495 Trevor Lane", "Macon", "GA", 31201, "7063156775", "7063156775",
-                "jwadams@gmail.com", 30000.00, new DateTime(2012, 6, 18), Enums.AccessLevel.MaintenanceData, "Store A", "Technician", true, "stuff", "otherstuff");
+                "jwadams@gmail.com", 30000.00, new DateTime(2012, 6, 18), Enums.AccessLevel.Full, "Store A", "Technician", true, "stuff", "otherstuff");
+
             Assert.IsTrue(testUser.IsValid);
         }
 
         [TestMethod]
         public void VehicleModelTest()
         {
-            Vehicle testVehicle = new Vehicle(12345, "Mercedes-Benz", 2004, "Actros", Enums.TruckMaxCapacity.class5, 17500);
+            Vehicle testVehicle = new Vehicle(12345, "Mercedes-Benz", 2004, "Actros",  Enums.TruckMaxCapacity.class8, 17500);
             Assert.IsTrue(testVehicle.IsValid);
         }
 
@@ -82,7 +83,7 @@ namespace CS499.TCMS.ModelUnitTest
         [TestMethod]
         public void PayrollModelTest()
         {
-            Payroll testPayroll = new Payroll(12345, 123456, new DateTime(2016, 11, 8), 3560.52, 60.2);
+            Payroll testPayroll = new Payroll(12345, 123456, new DateTime(2016, 11, 8), 3560.52, 80);
             Assert.IsTrue(testPayroll.IsValid);
         }
     }

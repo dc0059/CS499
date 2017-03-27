@@ -21,7 +21,7 @@ namespace CS499.TCMS.Model
         /// <param name="price">price per unit of the item</param>
         /// <param name="weight">weight of the item in pounds</param>
         /// <param name="quantity">quantity of the item in stock</param>
-        public Part(long partID, string description, int partNumber, double price, double weight, int quantity)
+        public Part(long partID, string description, long partNumber, double price, double weight, int quantity)
         {
             this.PartID = partID;
             this.PartDescription = description;

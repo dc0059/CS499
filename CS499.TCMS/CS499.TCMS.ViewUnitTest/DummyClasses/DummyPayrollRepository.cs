@@ -14,7 +14,7 @@ namespace CS499.TCMS.ViewUnitTest.DummyClasses
     {
         void IRepository<Payroll>.Delete(Payroll model)
         {
-            Debug.Print("Delete user with EmployeeID = {0}", model.EmployeeID);
+            Debug.Print("Delete payroll with PayrollID = {0}", model.PayrollID);
         }
 
         void IPayrollRepository.Delete(long PayrollID)
@@ -24,7 +24,7 @@ namespace CS499.TCMS.ViewUnitTest.DummyClasses
 
         IEnumerable<Payroll> IRepository<Payroll>.GetAll()
         {
-            Debug.Print("GetAll users");
+            Debug.Print("GetAll payrolls");
             return new List<Payroll>();
         }
 

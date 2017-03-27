@@ -65,7 +65,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IPartRepository partRepository = factory.Create<IPartRepository>();
 
-            Part delPart = partRepository.GetSingle(1);
+            Part delPart = partRepository.GetSingle(3);
 
             partRepository.Delete(delPart);
         }

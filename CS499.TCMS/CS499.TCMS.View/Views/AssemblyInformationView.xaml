@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="CS499.TCMS.View.Views.AssemblyInformationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:local="clr-namespace:CS499.TCMS.View.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="600">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   FontWeight="ExtraBold"
+                   FontSize="18"
+                   Text="Loaded Assemblies"
+                   Foreground="{DynamicResource AccentColorBrush}"/>
+        <DataGrid Grid.Row="1"
+                  AutoGenerateColumns="True"
+                  IsReadOnly="True"
+                  ItemsSource="{Binding Assemblies, Mode=OneTime}"/>
+        <TextBlock Grid.Row="2"
+                   FontWeight="ExtraBold"
+                   FontSize="18"
+                   Text="Task Log"
+                   Foreground="{DynamicResource AccentColorBrush}"/>
+        <local:DataGridScrollToSelectedItem Grid.Row="3"
+                                            RenderOptions.ClearTypeHint="Enabled"
+                                            TextOptions.TextFormattingMode="Display"
+                                            SelectionUnit="FullRow"
+                                            GridLinesVisibility="None"
+                                            AutoGenerateColumns="False"
+                                            IsReadOnly="False"
+                                            CanUserAddRows="False"
+                                            ItemsSource="{Binding TaskLog}"                                            
+                                            Style="{StaticResource MetroDataGrid}">
+
+            <local:DataGridScrollToSelectedItem.Columns>
+                <DataGridTextColumn Binding="{Binding Item1}"
+                                    Header="Task"
+                                    IsReadOnly="True"                                    
+                                    />
+                <DataGridTextColumn Binding="{Binding Item2}"
+                                    Header="Date/Time"
+                                    IsReadOnly="True"/>
+            </local:DataGridScrollToSelectedItem.Columns>
+
+        </local:DataGridScrollToSelectedItem>
+
+        <TextBlock Grid.Row="4"
+                   FontWeight="ExtraBold"
+                   FontSize="18"
+                   Text="Update Location"
+                   Foreground="{DynamicResource AccentColorBrush}"/>
+        <TextBox Grid.Row="5"
+                 Text="{Binding UpdateLocation, Mode=OneTime}"
+                 IsReadOnly="True"
+                 Style="{DynamicResource MetroTextBox}"/>
+        <TextBlock Grid.Row="6"
+                   FontWeight="ExtraBold"
+                   FontSize="18"
+                   Text="Database Name"
+                   Foreground="{DynamicResource AccentColorBrush}"/>
+        <TextBox Grid.Row="7"
+                 Text="{Binding DatabaseName, Mode=OneTime}"
+                 IsReadOnly="True"
+                 Style="{DynamicResource MetroTextBox}"/>
+
+    </Grid>
+</UserControl>

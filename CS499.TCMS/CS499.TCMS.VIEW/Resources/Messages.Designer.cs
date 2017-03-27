@@ -115,6 +115,114 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to delete manifest ({0}). Please contact support..
+        /// </summary>
+        internal static string AllManifestDeleteError {
+            get {
+                return ResourceManager.GetString("AllManifestDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting manifest. Please wait..
+        /// </summary>
+        internal static string AllManifestDeleting {
+            get {
+                return ResourceManager.GetString("AllManifestDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manifests.
+        /// </summary>
+        internal static string AllManifestDisplayName {
+            get {
+                return ResourceManager.GetString("AllManifestDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to modify manifests..
+        /// </summary>
+        internal static string AllManifestDisplayToolTip {
+            get {
+                return ResourceManager.GetString("AllManifestDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load manifest. Please wait..
+        /// </summary>
+        internal static string AllManifestLoadError {
+            get {
+                return ResourceManager.GetString("AllManifestLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading manifests... Please wait..
+        /// </summary>
+        internal static string AllManifestLoading {
+            get {
+                return ResourceManager.GetString("AllManifestLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to delete part ({0}). Please contact support..
+        /// </summary>
+        internal static string AllPartDeleteError {
+            get {
+                return ResourceManager.GetString("AllPartDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting part... Please wait..
+        /// </summary>
+        internal static string AllPartDeleting {
+            get {
+                return ResourceManager.GetString("AllPartDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parts.
+        /// </summary>
+        internal static string AllPartDisplayName {
+            get {
+                return ResourceManager.GetString("AllPartDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to modify parts..
+        /// </summary>
+        internal static string AllPartDisplayToolTip {
+            get {
+                return ResourceManager.GetString("AllPartDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load parts. Please contact support..
+        /// </summary>
+        internal static string AllPartLoadError {
+            get {
+                return ResourceManager.GetString("AllPartLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading parts... Please wait..
+        /// </summary>
+        internal static string AllPartLoading {
+            get {
+                return ResourceManager.GetString("AllPartLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to delete payroll. Please contact support..
         /// </summary>
         internal static string AllPayrollDeleteError {
@@ -219,6 +327,60 @@ namespace CS499.TCMS.View.Resources {
         internal static string AllUserLoading {
             get {
                 return ResourceManager.GetString("AllUserLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to delete vehicle ({0}). Please contact support..
+        /// </summary>
+        internal static string AllVehicleDeleteError {
+            get {
+                return ResourceManager.GetString("AllVehicleDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting vehicle... Please wait..
+        /// </summary>
+        internal static string AllVehicleDeleting {
+            get {
+                return ResourceManager.GetString("AllVehicleDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vehicles.
+        /// </summary>
+        internal static string AllVehicleDisplayName {
+            get {
+                return ResourceManager.GetString("AllVehicleDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to modify vehicles..
+        /// </summary>
+        internal static string AllVehicleDisplayToolTip {
+            get {
+                return ResourceManager.GetString("AllVehicleDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load vehicles. Please contact support..
+        /// </summary>
+        internal static string AllVehicleLoadError {
+            get {
+                return ResourceManager.GetString("AllVehicleLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading vehicles... Please wait..
+        /// </summary>
+        internal static string AllVehicleLoading {
+            get {
+                return ResourceManager.GetString("AllVehicleLoading", resourceCulture);
             }
         }
         
@@ -466,6 +628,60 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to save manifest ({0}). Please contact support..
+        /// </summary>
+        internal static string ManifestSaveError {
+            get {
+                return ResourceManager.GetString("ManifestSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving manifest...Please wait..
+        /// </summary>
+        internal static string ManifestSaving {
+            get {
+                return ResourceManager.GetString("ManifestSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Part: {0}.
+        /// </summary>
+        internal static string PartDisplayName {
+            get {
+                return ResourceManager.GetString("PartDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Part: {0}.
+        /// </summary>
+        internal static string PartDisplayToolTip {
+            get {
+                return ResourceManager.GetString("PartDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to save part ({0}) because it already exists..
+        /// </summary>
+        internal static string PartSaveError {
+            get {
+                return ResourceManager.GetString("PartSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving part... Please wait..
+        /// </summary>
+        internal static string PartSaving {
+            get {
+                return ResourceManager.GetString("PartSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payroll: {0}.
         /// </summary>
         internal static string PayrollDisplayName {
@@ -597,6 +813,42 @@ namespace CS499.TCMS.View.Resources {
         internal static string UserSaving {
             get {
                 return ResourceManager.GetString("UserSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vehicle: {0}.
+        /// </summary>
+        internal static string VehicleDisplayName {
+            get {
+                return ResourceManager.GetString("VehicleDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vehicle: {0}.
+        /// </summary>
+        internal static string VehicleDisplayToolTip {
+            get {
+                return ResourceManager.GetString("VehicleDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to save vehicle ({0}). Please contact support..
+        /// </summary>
+        internal static string VehicleSaveError {
+            get {
+                return ResourceManager.GetString("VehicleSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving vehicle... Please wait..
+        /// </summary>
+        internal static string VehicleSaving {
+            get {
+                return ResourceManager.GetString("VehicleSaving", resourceCulture);
             }
         }
     }
