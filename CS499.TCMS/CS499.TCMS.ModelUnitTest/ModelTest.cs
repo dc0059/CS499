@@ -13,6 +13,7 @@ namespace CS499.TCMS.ModelUnitTest
         {
             User testUser = new User(123456, "jadams63", "James", "William", "Adams", "495 Trevor Lane", "Macon", "GA", 31201, "7063156775", "7063156775",
                 "jwadams@gmail.com", 30000.00, new DateTime(2012, 6, 18), Enums.AccessLevel.Full, "Store A", "Technician", true, "stuff", "otherstuff");
+
             Assert.IsTrue(testUser.IsValid);
         }
 
@@ -54,7 +55,7 @@ namespace CS499.TCMS.ModelUnitTest
         [TestMethod]
         public void PurchaseOrderModelTest()
         {
-            PurchaseOrder testOrder = new PurchaseOrder(12345, 123, 905, 438, 12345);
+            PurchaseOrder testOrder = new PurchaseOrder(12345, 123, 905, 438, 12345, false);
             Assert.IsTrue(testOrder.IsValid);
         }
 

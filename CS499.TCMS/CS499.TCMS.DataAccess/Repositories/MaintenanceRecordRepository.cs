@@ -400,7 +400,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        MaintenanceRecord IMaintenanceRecordRepository.GetSingle(long RecordID)
+        /*MaintenanceRecord IMaintenanceRecordRepository.GetSingle(long RecordID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -423,7 +423,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             });
 
             return this.Database.ExecuteSingleQuery<MaintenanceRecord>(definition, Map);
-        }
+        }*/
 
 
         /// <summary>
@@ -512,21 +512,21 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Direction = ParameterDirection.Input,
                 Name = "P_VehicleID",
                 Type = DbType.Int64,
-                Value = model.MaintenanceID
+                Value = model.VehicleID
             });
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
                 Name = "P_MaintenanceDate",
                 Type = DbType.DateTime,
-                Value = model.MaintenanceID
+                Value = model.MaintenanceDate
             });
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
                 Name = "P_MaintenanceDescription",
                 Type = DbType.String,
-                Value = model.MaintenanceID
+                Value = model.MaintenanceDescription
             });
             definition.Parameters.Add(new ParameterDefinition()
             {
@@ -548,10 +548,10 @@ namespace CS499.TCMS.DataAccess.Repositories
 
         protected override MaintenanceRecord Map(IDataReader reader)
         {
-            return new MaintenanceRecord(reader.GetValueOrDefault<Int64>("MaintenanceID"),
-                reader.GetValueOrDefault<Int64>("VehicleID"),
+            return new MaintenanceRecord(reader.GetValueOrDefault<long>("MaintenanceID"),
+                reader.GetValueOrDefault<long>("VehicleID"),
                 reader.GetValueOrDefault<DateTime>("MaintenanceDate"),
-                reader.GetValueOrDefault<String>("MaintenanceDescription"));
+                reader.GetValueOrDefault<string>("MaintenanceDescription"));
         }
     }
 }

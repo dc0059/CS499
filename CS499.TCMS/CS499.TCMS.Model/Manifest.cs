@@ -24,7 +24,8 @@ namespace CS499.TCMS.Model
         /// <param name="arrived">flag indicating the shipment arrived at its destination</param>
         /// <param name="shippingCost">total cost of the shipment</param>
         /// <param name="employeeID">identifier of the employee assigned to this manifest</param>
-        public Manifest(long manifestID, string shipmentType, long vehicleID, DateTime departureTime, DateTime eta, bool arrived, double shippingCost, long employeeID)
+        public Manifest(long manifestID, string shipmentType, long vehicleID, DateTime departureTime, DateTime eta, bool arrived, double shippingCost,
+            long employeeID)
         {
             this.ManifestID = manifestID;
             this.ShipmentType = shipmentType;
@@ -179,6 +180,7 @@ namespace CS499.TCMS.Model
                     this.ShippingCost.Equals(other.ShippingCost) &&
                     this.DepartureTime.Equals(other.DepartureTime) &&
                     this.ETA.Equals(other.ETA) &&
+                    this.Arrived.Equals(other.Arrived) &&
                     this.EmployeeID.Equals(other.EmployeeID) &&
                     this.VehicleID.Equals(other.VehicleID);
             }

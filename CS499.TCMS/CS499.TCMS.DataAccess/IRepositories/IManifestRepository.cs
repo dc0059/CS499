@@ -9,7 +9,7 @@ namespace CS499.TCMS.DataAccess.IRepositories
 {
     public interface IManifestRepository : IRepository<Manifest>, IRepositoryBase
     {
-        Manifest GetSingle(long ManifestID);
+        //Manifest GetSingle(long ManifestID);
 
         IEnumerable<Manifest> GetManifestByDepartureDate(DateTime DepartureTime);
         IEnumerable<Manifest> GetManifestByArrivalDate(DateTime ArrivalDate);

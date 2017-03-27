@@ -106,7 +106,6 @@ namespace CS499.TCMS.DataAccessUnitTests
             }
         }
 
-        [TestMethod]
         public void GetUserByUserNameTest()
         {
             RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");

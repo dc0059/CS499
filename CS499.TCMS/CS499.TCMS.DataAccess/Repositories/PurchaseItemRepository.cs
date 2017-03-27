@@ -154,7 +154,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT ItemID, OrderID, Quantity, PartID " +
-                              "FROM purchasitems " +
+                              "FROM purchaseitems " +
                               "ORDER BY ItemID",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -308,7 +308,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE purchaseitems " +
-                              "SET OrderID, Quantity, PartID, LastModifiedBy = ? " +
+                              "SET OrderID = ?, Quantity = ?, PartID = ?, LastModifiedBy = ? " +
                               "WHERE ItemID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",

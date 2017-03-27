@@ -90,7 +90,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
-                Name = "P_VehicleID",
+                Name = "P_PayrollID",
                 Type = DbType.Int64,
                 Value = PayrollID
             });
@@ -98,14 +98,14 @@ namespace CS499.TCMS.DataAccess.Repositories
             this.Database.ExecuteModQuery(definition);
 
             // Create query definition
-            /*definition = new QueryDefinition()
+            definition = new QueryDefinition()
             {
-                CommandText = "UPDATE users_log " +
+                CommandText = "UPDATE payroll_log " +
                               "SET DeletedBy = ? " +
-                              "WHERE UserID = ? " +
+                              "WHERE PayrollID = ? " +
                               "AND ModifiedStatus = 'D'",
                 cType = CommandType.Text,
-                Database = "database_name",
+                Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
             };
 
@@ -122,10 +122,10 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Direction = ParameterDirection.Input,
                 Name = "P_ID",
                 Type = DbType.Int64,
-                Value = model.EmployeeID
+                Value = PayrollID
             });
 
-            this.Database.ExecuteModQuery(definition);*/
+            this.Database.ExecuteModQuery(definition);
         }
 
         public IEnumerable<Payroll> GetAll()
