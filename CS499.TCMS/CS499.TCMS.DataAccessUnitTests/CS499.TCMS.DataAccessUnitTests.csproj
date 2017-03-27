@@ -51,6 +51,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DataAccess_BusinessPartner_Test.cs" />
+    <Compile Include="DataAccess_MaintenancePart_Tests.cs" />
+    <Compile Include="DataAccess_MaintenanceRecordDetails_Tests.cs" />
+    <Compile Include="DataAccess_MaintenanceRecord_Tests.cs" />
     <Compile Include="DataAccess_Manifest_Tests.cs" />
     <Compile Include="DataAccess_Part_Tests.cs" />
     <Compile Include="DataAccess_Payroll_Tests.cs" />

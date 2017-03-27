@@ -366,7 +366,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="DetailID"></param>
         /// <returns></returns>
-        MaintenanceRecordDetails IMaintenanceRecordDetailsRepository.GetSingle(long DetailID)
+        /*MaintenanceRecordDetails IMaintenanceRecordDetailsRepository.GetSingle(long DetailID)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -389,7 +389,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             });
 
             return this.Database.ExecuteSingleQuery<MaintenanceRecordDetails>(definition, Map);
-        }
+        }*/
 
 
         /// <summary>
@@ -476,7 +476,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE maintenancerecorddetails " +
-                              "MaintenanceID = ?, EmployeeID = ?, RepairDescription = ?, RepairDate = ?, LastModifiedBy = ? " +
+                              "SET MaintenanceID = ?, EmployeeID = ?, RepairDescription = ?, RepairDate = ?, LastModifiedBy = ? " +
                               "WHERE DetailID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -537,9 +537,9 @@ namespace CS499.TCMS.DataAccess.Repositories
 
         protected override MaintenanceRecordDetails Map(IDataReader reader)
         {
-            return new MaintenanceRecordDetails(reader.GetValueOrDefault<Int64>("DetailID"),
-                reader.GetValueOrDefault<Int64>("MaintenanceID"),
-                reader.GetValueOrDefault<Int64>("EmployeeID"),
+            return new MaintenanceRecordDetails(reader.GetValueOrDefault<long>("DetailID"),
+                reader.GetValueOrDefault<long>("MaintenanceID"),
+                reader.GetValueOrDefault<long>("EmployeeID"),
                 reader.GetValueOrDefault<string>("RepairDescription"),
                 reader.GetValueOrDefault<DateTime>("RepairDate"));
         }

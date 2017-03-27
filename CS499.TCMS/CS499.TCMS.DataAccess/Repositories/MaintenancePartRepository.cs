@@ -175,7 +175,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT MaintenancePartID, Quantity, MaintenanceID, PartID, " +
+                CommandText = "SELECT MaintenancePartID, Quantity, MaintenanceRecordID, PartID " +
                               "FROM maintenancepart " +
                               "ORDER BY MaintenancePartID",
                 cType = CommandType.Text,
@@ -259,9 +259,9 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT MaintenancePartID, Quantity, MaintenanceRecordID, PartID, " +
-                              "FROM manifest " +
-                              "WHERE PartID = ?",
+                CommandText = "SELECT MaintenancePartID, Quantity, MaintenanceRecordID, PartID " +
+                              "FROM maintenancepart " +
+                              "WHERE MaintenancePartID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -285,7 +285,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="MaintenancePartID"></param>
         /// <returns></returns>
-        MaintenancePart IMaintenancePartRepository.GetSingle(long MaintenancePartID)
+        /*MaintenancePart IMaintenancePartRepository.GetSingle(long MaintenancePartID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -308,7 +308,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             });
 
             return this.Database.ExecuteSingleQuery<MaintenancePart>(definition, Map);
-        }
+        }*/
 
 
         /// <summary>
@@ -433,10 +433,10 @@ namespace CS499.TCMS.DataAccess.Repositories
 
         protected override MaintenancePart Map(IDataReader reader)
         {
-            return new MaintenancePart(reader.GetValueOrDefault<Int64>("MaintenancePartID"),
-                reader.GetValueOrDefault<Int32>("Quantity"),
-                reader.GetValueOrDefault<Int64>("MaintenanceID"),
-                reader.GetValueOrDefault<Int64>("PartID"));
+            return new MaintenancePart(reader.GetValueOrDefault<long>("MaintenancePartID"),
+                reader.GetValueOrDefault<int>("Quantity"),
+                reader.GetValueOrDefault<long>("MaintenanceRecordID"),
+                reader.GetValueOrDefault<long>("PartID"));
         }
     }
 }

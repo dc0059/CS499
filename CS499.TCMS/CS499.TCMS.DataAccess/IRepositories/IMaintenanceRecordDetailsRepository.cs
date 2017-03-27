@@ -7,9 +7,9 @@ using CS499.TCMS.Model;
 
 namespace CS499.TCMS.DataAccess.IRepositories
 {
-    public interface IMaintenanceRecordDetailsRepository : IRepository<MaintenanceRecordDetails>
+    public interface IMaintenanceRecordDetailsRepository : IRepository<MaintenanceRecordDetails>, IRepositoryBase
     {
-        MaintenanceRecordDetails GetSingle(long DetailID);
+        //MaintenanceRecordDetails GetSingle(long DetailID);
 
         IEnumerable<MaintenanceRecordDetails> GetDetailsByEmployee(long EmployeeID);
         IEnumerable<MaintenanceRecordDetails> GetDetailsByMaintenanceID(long MaintenanceID);

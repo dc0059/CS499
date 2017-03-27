@@ -7,9 +7,9 @@ using CS499.TCMS.Model;
 
 namespace CS499.TCMS.DataAccess.IRepositories
 {
-    public interface IMaintenanceRecordRepository : IRepository<MaintenanceRecord>
+    public interface IMaintenanceRecordRepository : IRepository<MaintenanceRecord>, IRepositoryBase
     {
-        MaintenanceRecord GetSingle(long RecordID);
+        //MaintenanceRecord GetSingle(long RecordID);
 
         IEnumerable<MaintenanceRecord> GetRecordsByVehicle(long VehicleID);
         IEnumerable<MaintenanceRecord> GetRecordsByVehicleAndDate(long VehicleID, DateTime Earliest, DateTime Latest);
