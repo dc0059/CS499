@@ -17,7 +17,7 @@ namespace CS499.TCMS.DataAccessUnitTests
         public void MaintenanceRecordDetailsInsertTest()
         {
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
-            IMaintenanceRecordDetailsRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailsRepository>();
+            IMaintenanceRecordDetailRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailRepository>();
 
             MaintenanceRecordDetail newDetails = new MaintenanceRecordDetail(123456, 2, 1, "Stuff happened.", new DateTime(2010, 8, 14));
 
@@ -28,7 +28,7 @@ namespace CS499.TCMS.DataAccessUnitTests
         public void MaintenanceRecordDetailsGetSingleTest()
         {
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
-            IMaintenanceRecordDetailsRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailsRepository>();
+            IMaintenanceRecordDetailRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailRepository>();
 
             MaintenanceRecordDetail returnDetails = recordDetailsRepo.GetSingle(1);
 
@@ -43,7 +43,7 @@ namespace CS499.TCMS.DataAccessUnitTests
         public void MaintenanceDetailsGetAllTest()
         {
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
-            IMaintenanceRecordDetailsRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailsRepository>();
+            IMaintenanceRecordDetailRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailRepository>();
 
             foreach(MaintenanceRecordDetail x in recordDetailsRepo.GetAll())
             {
@@ -59,7 +59,7 @@ namespace CS499.TCMS.DataAccessUnitTests
         public void MaintenanceDetailsUpdateTest()
         {
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
-            IMaintenanceRecordDetailsRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailsRepository>();
+            IMaintenanceRecordDetailRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailRepository>();
 
             MaintenanceRecordDetail updateDetails = new MaintenanceRecordDetail(1, 2, 1, "MORE stuff happened.", new DateTime(2016, 6, 30));
 
@@ -70,7 +70,7 @@ namespace CS499.TCMS.DataAccessUnitTests
         public void MaintenanceDetailsDeleteTest()
         {
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
-            IMaintenanceRecordDetailsRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailsRepository>();
+            IMaintenanceRecordDetailRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailRepository>();
 
             recordDetailsRepo.Delete(recordDetailsRepo.GetSingle(1));
         }

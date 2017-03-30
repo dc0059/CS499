@@ -10,11 +10,11 @@ using System.Data;
 
 namespace CS499.TCMS.DataAccess.Repositories
 {
-    class MaintenanceRecordDetailsRepository : GenericRepository<MaintenanceRecordDetail>, IMaintenanceRecordDetailsRepository
+    class MaintenanceRecordDetailRepository : GenericRepository<MaintenanceRecordDetail>, IMaintenanceRecordDetailRepository
     {
 
         #region Constructor
-        public MaintenanceRecordDetailsRepository(IDatabase database) : base(database)
+        public MaintenanceRecordDetailRepository(IDatabase database) : base(database)
         {
         }
         #endregion
@@ -83,7 +83,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// Deletes details object from database with matching DetailID
         /// </summary>
         /// <param name="DetailID"></param>
-        void IMaintenanceRecordDetailsRepository.Delete(long DetailID)
+        void IMaintenanceRecordDetailRepository.Delete(long DetailID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -113,7 +113,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="Earliest"></param>
         /// <param name="Latest"></param>
-        void IMaintenanceRecordDetailsRepository.DeleteByDate(DateTime Earliest, DateTime Latest)
+        void IMaintenanceRecordDetailRepository.DeleteByDate(DateTime Earliest, DateTime Latest)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -151,7 +151,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// Deletes each detail object in database from the given employee 
         /// </summary>
         /// <param name="EmployeeID"></param>
-        void IMaintenanceRecordDetailsRepository.DeleteByEmployee(long EmployeeID)
+        void IMaintenanceRecordDetailRepository.DeleteByEmployee(long EmployeeID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -180,7 +180,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// Deletes each detail from the given maintenanceID
         /// </summary>
         /// <param name="MaintenanceID"></param>
-        void IMaintenanceRecordDetailsRepository.DeleteByMaintenanceID(long MaintenanceID)
+        void IMaintenanceRecordDetailRepository.DeleteByMaintenanceID(long MaintenanceID)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -232,7 +232,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// <param name="Earliest"></param>
         /// <param name="Latest"></param>
         /// <returns></returns>
-        IEnumerable<MaintenanceRecordDetail> IMaintenanceRecordDetailsRepository.GetDetailsByDate(DateTime Earliest, DateTime Latest)
+        IEnumerable<MaintenanceRecordDetail> IMaintenanceRecordDetailRepository.GetDetailsByDate(DateTime Earliest, DateTime Latest)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -272,7 +272,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="EmployeeID"></param>
         /// <returns></returns>
-        IEnumerable<MaintenanceRecordDetail> IMaintenanceRecordDetailsRepository.GetDetailsByEmployee(long EmployeeID)
+        IEnumerable<MaintenanceRecordDetail> IMaintenanceRecordDetailRepository.GetDetailsByEmployee(long EmployeeID)
         {
 
             // Create query definition
@@ -304,7 +304,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="MaintenanceID"></param>
         /// <returns></returns>
-        IEnumerable<MaintenanceRecordDetail> IMaintenanceRecordDetailsRepository.GetDetailsByMaintenanceID(long MaintenanceID)
+        IEnumerable<MaintenanceRecordDetail> IMaintenanceRecordDetailRepository.GetDetailsByMaintenanceID(long MaintenanceID)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
