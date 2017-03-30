@@ -19,7 +19,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IMaintenanceRecordDetailsRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailsRepository>();
 
-            MaintenanceRecordDetails newDetails = new MaintenanceRecordDetails(123456, 2, 1, "Stuff happened.", new DateTime(2010, 8, 14));
+            MaintenanceRecordDetail newDetails = new MaintenanceRecordDetail(123456, 2, 1, "Stuff happened.", new DateTime(2010, 8, 14));
 
             recordDetailsRepo.Insert(newDetails);
         }
@@ -30,7 +30,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IMaintenanceRecordDetailsRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailsRepository>();
 
-            MaintenanceRecordDetails returnDetails = recordDetailsRepo.GetSingle(1);
+            MaintenanceRecordDetail returnDetails = recordDetailsRepo.GetSingle(1);
 
             Assert.IsTrue(returnDetails.IsValid);
             System.Diagnostics.Debug.Print(returnDetails.DetailID.ToString());
@@ -45,7 +45,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IMaintenanceRecordDetailsRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailsRepository>();
 
-            foreach(MaintenanceRecordDetails x in recordDetailsRepo.GetAll())
+            foreach(MaintenanceRecordDetail x in recordDetailsRepo.GetAll())
             {
                 Assert.IsTrue(x.IsValid);
                 System.Diagnostics.Debug.Print(x.DetailID.ToString());
@@ -61,7 +61,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IMaintenanceRecordDetailsRepository recordDetailsRepo = factory.Create<IMaintenanceRecordDetailsRepository>();
 
-            MaintenanceRecordDetails updateDetails = new MaintenanceRecordDetails(1, 2, 1, "MORE stuff happened.", new DateTime(2016, 6, 30));
+            MaintenanceRecordDetail updateDetails = new MaintenanceRecordDetail(1, 2, 1, "MORE stuff happened.", new DateTime(2016, 6, 30));
 
             recordDetailsRepo.Update(updateDetails);
         }

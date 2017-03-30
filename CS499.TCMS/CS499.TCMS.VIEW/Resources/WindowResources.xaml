@@ -211,5 +211,23 @@
     <DataTemplate DataType="{x:Type vm:ManifestViewModel}">
         <vw:ManifestView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllPurchaseOrderViewModel}">
+        <vw:AllPurchaseOrderView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PurchaseOrderViewModel}">
+        <vw:PurchaseOrderView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllPurchaseItemViewModel}">
+        <vw:AllPurchaseItemView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PurchaseItemViewModel}">
+        <vw:PurchaseItemView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllMaintenanceRecordViewModel}">
+        <vw:AllMaintenanceRecordView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:MaintenanceRecordViewModel}">
+        <vw:MaintenanceRecordView />
+    </DataTemplate>
 
 </ResourceDictionary>

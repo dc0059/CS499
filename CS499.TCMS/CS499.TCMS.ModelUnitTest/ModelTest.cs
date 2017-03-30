@@ -34,7 +34,7 @@ namespace CS499.TCMS.ModelUnitTest
         [TestMethod]
         public void MaintenanceRecordDetailsModelTest()
         {
-            MaintenanceRecordDetails testDetail = new MaintenanceRecordDetails(123456, 12345, 12345, "Stuff happened.", new DateTime(2010, 8, 14));
+            MaintenanceRecordDetail testDetail = new MaintenanceRecordDetail(123456, 12345, 12345, "Stuff happened.", new DateTime(2010, 8, 14));
             Assert.IsTrue(testDetail.IsValid);
         }
 

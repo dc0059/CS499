@@ -14,47 +14,46 @@ using System.Windows.Input;
 namespace CS499.TCMS.View.ViewModels
 {
     /// <summary>
-    /// This class will handle the maintenance of the <see cref="ManifestViewModel"/>
+    /// This class will handle the maintenance of the <see cref="PurchaseOrder"/>
     /// </summary>
     /// <seealso cref="CS499.TCMS.View.ViewModels.WorkspaceViewModel" />
     /// <seealso cref="CS499.TCMS.View.Interfaces.IKeyCommand" />
-    public class AllManifestViewModel : WorkspaceViewModel, IKeyCommand
+    public class AllPurchaseOrderViewModel : WorkspaceViewModel, IKeyCommand
     {
 
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AllManifestViewModel"/> class.
+        /// Initializes a new instance of the <see cref="AllPurchaseOrderViewModel"/> class.
         /// </summary>
         /// <param name="dialog">Dialog service to show messages from ViewModel</param>
         /// <param name="taskManager">Task manager to hold reference to running tasks</param>
+        /// <param name="purchaseOrderRepository">The purchase order repository.</param>
+        /// <param name="businessPartnerRepository">The business partner repository.</param>
         /// <param name="manifestRepository">The manifest repository.</param>
-        /// <param name="vehicleRepository">The vehicle repository.</param>
-        /// <param name="userRepository">The user repository.</param>
-        public AllManifestViewModel(IDialogService dialog, ITaskManager taskManager,
-            IManifestRepository manifestRepository, IVehicleRepository vehicleRepository, 
-            IUserRepository userRepository)
+        public AllPurchaseOrderViewModel(IDialogService dialog, ITaskManager taskManager, IPurchaseOrderRepository purchaseOrderRepository,
+            IBusinessPartnerRepository businessPartnerRepository, IManifestRepository manifestRepository)
         {
             this.dialog = dialog;
             this.TaskManager = taskManager;
             this.IsSelected = true;
-            this.ViewModels = new ObservableCollectionExtended<ManifestViewModel>(new List<ManifestViewModel>());
-            this.Vehicles = new ObservableCollectionExtended<Vehicle>(new List<Vehicle>());
-            this.Users = new ObservableCollectionExtended<User>(new List<User>());
+            this.ViewModels = new ObservableCollectionExtended<PurchaseOrderViewModel>(new List<PurchaseOrderViewModel>());
+            this.BusinessPartners = new ObservableCollectionExtended<BusinessPartner>(new List<BusinessPartner>());
+            this.Manifests = new ObservableCollectionExtended<Manifest>(new List<Manifest>());
             this.ViewModels.PageSize = 10;
-            this.Vehicles.PageSize = 100000;
-            this.Users.PageSize = 100000;
-            this.DisplayName = Messages.AllManifestDisplayName;
-            this.DisplayToolTip = Messages.AllManifestDisplayToolTip;
+            this.BusinessPartners.PageSize = 100000;
+            this.Manifests.PageSize = 100000;
+            this.DisplayName = Messages.AllPurchaseOrderDisplayName;
+            this.DisplayToolTip = Messages.AllPurchaseOrderDisplayToolTip;
+            this.purchaseOrderRepository = purchaseOrderRepository;
+            this.businessPartnerRepository = businessPartnerRepository;
             this.manifestRepository = manifestRepository;
-            this.vehicleRepository = vehicleRepository;
-            this.userRepository = userRepository;
-            this.LoadVehicles();
-            this.LoadUsers();
-            this.Load();            
-            this.MessengerInstance.Register<NotificationMessage<AllManifestViewModel>>(this, (n) => this.Load(n));
-            this.MessengerInstance.Register<NotificationMessage<AllVehicleViewModel>>(this, (n) => this.LoadVehicles(n));
-            this.MessengerInstance.Register<NotificationMessage<AllUserViewModel>>(this, (n) => this.LoadUsers(n));
+            this.LoadBusinessPartners();
+            this.LoadManifests();
+            this.Load();
+            this.MessengerInstance.Register<NotificationMessage<AllPurchaseOrderViewModel>>(this, (n) => this.Load(n));
+            this.MessengerInstance.Register<NotificationMessage<AllBusinessPartnerViewModel>>(this, (n) => this.LoadBusinessPartners(n));
+            this.MessengerInstance.Register<NotificationMessage<AllManifestViewModel>>(this, (n) => this.LoadManifests(n));
             this.SearchType = "contains";
         }
 
@@ -66,7 +65,7 @@ namespace CS499.TCMS.View.ViewModels
         /// Load list of ViewModels
         /// </summary>
         /// <param name="notificationMessage">notification message</param>
-        private void Load(NotificationMessage<AllManifestViewModel> notificationMessage)
+        private void Load(NotificationMessage<AllPurchaseOrderViewModel> notificationMessage)
         {
             this.Load();
         }
@@ -75,18 +74,18 @@ namespace CS499.TCMS.View.ViewModels
         /// Load list of models
         /// </summary>
         /// <param name="notificationMessage">notification message</param>
-        private void LoadVehicles(NotificationMessage<AllVehicleViewModel> notificationMessage)
+        private void LoadBusinessPartners(NotificationMessage<AllBusinessPartnerViewModel> notificationMessage)
         {
-            this.LoadVehicles();
+            this.LoadBusinessPartners();
         }
 
         /// <summary>
         /// Load list of models
         /// </summary>
         /// <param name="notificationMessage">notification message</param>
-        private void LoadUsers(NotificationMessage<AllUserViewModel> notificationMessage)
+        private void LoadManifests(NotificationMessage<AllManifestViewModel> notificationMessage)
         {
-            this.LoadUsers();
+            this.LoadManifests();
         }
 
         /// <summary>
@@ -95,13 +94,13 @@ namespace CS499.TCMS.View.ViewModels
         private void Load()
         {
 
-            List<Manifest> ViewModels = null;
+            List<PurchaseOrder> ViewModels = null;
 
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
-                ViewModels = manifestRepository.GetAll().ToList();
+                ViewModels = purchaseOrderRepository.GetAll().ToList();
 
                 // wait for other tasks to complete
                 while (this.TaskManager.TaskCount() > 1)
@@ -111,7 +110,7 @@ namespace CS499.TCMS.View.ViewModels
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.AllManifestLoading,
+            Messages.AllPurchaseOrderLoading,
             () =>
             {
 
@@ -129,8 +128,8 @@ namespace CS499.TCMS.View.ViewModels
             },
              Messages.MainWindowInitialStatus,
              UIContext.Current,
-             "loading manifests",
-             Messages.AllManifestLoadError,
+             "loading purchase orders",
+             Messages.AllPurchaseOrderLoadError,
              log);
 
         }
@@ -138,18 +137,18 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Add each ViewModel to the collection
         /// </summary>
-        /// <param name="manifests">list of models</param>
-        private void Set(List<Manifest> manifests)
+        /// <param name="purchaseOrders">list of models</param>
+        private void Set(List<PurchaseOrder> purchaseOrders)
         {
 
             // clear current list
             this.ViewModels.ClearAll();
 
             // loop through each model and add e ViewModel to the collection
-            foreach (var model in manifests)
+            foreach (var model in purchaseOrders)
             {
-                ManifestViewModel viewModel = new ManifestViewModel(model, this.manifestRepository, this.TaskManager, false, 
-                    this.Vehicles, this.Users);
+                PurchaseOrderViewModel viewModel = new PurchaseOrderViewModel(model, this.purchaseOrderRepository, this.TaskManager, false,
+                    this.BusinessPartners, this.Manifests);
                 this.ViewModels.AddItem(viewModel);
             }
 
@@ -158,20 +157,20 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Load list of ViewModels
         /// </summary>
-        private void LoadVehicles()
+        private void LoadBusinessPartners()
         {
 
-            List<Vehicle> models = null;
+            List<BusinessPartner> models = null;
 
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
-                models = vehicleRepository.GetAll().ToList();
+                models = businessPartnerRepository.GetAll().ToList();
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.AllVehicleLoading,
+            Messages.AllBusinessPartnerLoading,
             () =>
             {
 
@@ -184,13 +183,13 @@ namespace CS499.TCMS.View.ViewModels
                 this.Set(models);
 
                 // refresh the list
-                this.Vehicles.Refresh();
+                this.BusinessPartners.Refresh();
 
             },
              Messages.MainWindowInitialStatus,
              UIContext.Current,
-             "loading vehicles",
-             Messages.AllVehicleLoadError,
+             "loading business partners",
+             Messages.AllBusinessPartnerLoadError,
              log);
 
         }
@@ -198,17 +197,17 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Add each Model to the collection
         /// </summary>
-        /// <param name="vehicles">list of models</param>
-        private void Set(List<Vehicle> vehicles)
+        /// <param name="businessPartners">list of models</param>
+        private void Set(List<BusinessPartner> businessPartners)
         {
 
             // clear current list
-            this.Vehicles.ClearAll();
+            this.BusinessPartners.ClearAll();
 
             // loop through each model and add to the collection
-            foreach (var model in vehicles)
-            {                
-                this.Vehicles.AddItem(model);
+            foreach (var model in businessPartners)
+            {
+                this.BusinessPartners.AddItem(model);
             }
 
         }
@@ -216,20 +215,20 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Load list of ViewModels
         /// </summary>
-        private void LoadUsers()
+        private void LoadManifests()
         {
 
-            List<User> models = null;
+            List<Manifest> models = null;
 
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
-                models = userRepository.GetAll().ToList();
+                models = manifestRepository.GetAll().ToList();
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.AllUserLoading,
+            Messages.AllManifestLoading,
             () =>
             {
 
@@ -242,13 +241,13 @@ namespace CS499.TCMS.View.ViewModels
                 this.Set(models);
 
                 // refresh the list
-                this.Users.Refresh();
+                this.Manifests.Refresh();
 
             },
              Messages.MainWindowInitialStatus,
              UIContext.Current,
-             "loading users",
-             Messages.AllUserLoadError,
+             "loading manifests",
+             Messages.AllManifestLoadError,
              log);
 
         }
@@ -256,17 +255,17 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Add each Model to the collection
         /// </summary>
-        /// <param name="users">list of models</param>
-        private void Set(List<User> users)
+        /// <param name="manifests">list of models</param>
+        private void Set(List<Manifest> manifests)
         {
 
             // clear current list
-            this.Users.ClearAll();
+            this.Manifests.ClearAll();
 
             // loop through each model and add to the collection
-            foreach (var model in users)
+            foreach (var model in manifests)
             {
-                this.Users.AddItem(model);
+                this.Manifests.AddItem(model);
             }
 
         }
@@ -278,11 +277,11 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             // create new model
-            Manifest model = new Manifest(0, "Outgoing", 0, DateTime.Now, DateTime.Now.AddDays(7), false, 0, 0);
+            PurchaseOrder model = new PurchaseOrder(0, 0, 0, 0, 0, false);
 
             // create new ViewModel
-            ManifestViewModel viewModel = new ManifestViewModel(model, this.manifestRepository, this.TaskManager, true,
-                this.Vehicles, this.Users);
+            PurchaseOrderViewModel viewModel = new PurchaseOrderViewModel(model, this.purchaseOrderRepository, this.TaskManager, true,
+                this.BusinessPartners, this.Manifests);
 
             // send ViewModel
             this.SendViewModel(viewModel);
@@ -304,7 +303,7 @@ namespace CS499.TCMS.View.ViewModels
         /// send message to the mainwindowViewModel to add the ViewModel to the collection
         /// </summary>
         /// <param name="viewModel">ViewModel</param>
-        private void SendViewModel(ManifestViewModel viewModel)
+        private void SendViewModel(PurchaseOrderViewModel viewModel)
         {
             this.MessengerInstance.Send<NotificationMessage<WorkspaceViewModel>>(
                 new NotificationMessage<WorkspaceViewModel>(viewModel, null));
@@ -317,10 +316,10 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             // get selected ViewModel
-            ManifestViewModel viewModel = this.SelectedViewModel;
+            PurchaseOrderViewModel viewModel = this.SelectedViewModel;
 
             // Ask viewModel to confirm the deletion
-            string msg = string.Format(Messages.DeleteMessage, "manifest", viewModel.Model.ToString());
+            string msg = string.Format(Messages.DeleteMessage, "purchase order", viewModel.Model.ToString());
             MessageDialogResult result = await dialog.Dialog.ShowMessageAsync(dialog.ViewModel, Messages.TitleApp, msg,
                     MessageDialogStyle.AffirmativeAndNegative);
 
@@ -333,11 +332,11 @@ namespace CS499.TCMS.View.ViewModels
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
-                this.manifestRepository.Delete(viewModel.Model);
+                this.purchaseOrderRepository.Delete(viewModel.Model);
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.AllManifestDeleting,
+            Messages.AllPurchaseOrderDeleting,
             () =>
             {
 
@@ -346,8 +345,8 @@ namespace CS499.TCMS.View.ViewModels
             },
             Messages.MainWindowInitialStatus,
             UIContext.Current,
-            "deleting manifest",
-            string.Format(Messages.AllManifestDeleteError, viewModel.DisplayName),
+            "deleting purchase order",
+            string.Format(Messages.AllPurchaseOrderDeleteError, viewModel.DisplayName),
             log);
 
         }
@@ -364,14 +363,13 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Search for the manifest based on the search text
+        /// Search for the purchaseOrder based on the search text
         /// </summary>
         private void SearchForText()
         {
 
             this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText,
-                "ManifestID", "ShipmentType", "VehicleID", "DepartureTime", "ETA", "ShippingCost", 
-                "EmployeeID");
+                "OrderID", "OrderNumber", "SourceID", "DestinationID", "ManifestID");
 
         }
 
@@ -420,19 +418,19 @@ namespace CS499.TCMS.View.ViewModels
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Manifest repository
+        /// Purchase Order repository
+        /// </summary>
+        private IPurchaseOrderRepository purchaseOrderRepository;
+
+        /// <summary>
+        /// The business partner repository
+        /// </summary>
+        private IBusinessPartnerRepository businessPartnerRepository;
+
+        /// <summary>
+        /// The manifest repository
         /// </summary>
         private IManifestRepository manifestRepository;
-
-        /// <summary>
-        /// The vehicle repository
-        /// </summary>
-        private IVehicleRepository vehicleRepository;
-
-        /// <summary>
-        /// The user repository
-        /// </summary>
-        private IUserRepository userRepository;
 
         /// <summary>
         /// Dialog service for showing messages from the ViewModel
@@ -440,30 +438,30 @@ namespace CS499.TCMS.View.ViewModels
         private IDialogService dialog;
 
         /// <summary>
+        /// Gets or sets the business partners.
+        /// </summary>
+        /// <value>
+        /// The business partners.
+        /// </value>
+        public ObservableCollectionExtended<BusinessPartner> BusinessPartners { get; set; }
+
+        /// <summary>
+        /// Gets or sets the purchaseOrders.
+        /// </summary>
+        /// <value>
+        /// The purchaseOrders.
+        /// </value>
+        public ObservableCollectionExtended<Manifest> Manifests { get; set; }
+
+        /// <summary>
         /// Selected ViewModel
         /// </summary>
-        public ManifestViewModel SelectedViewModel { get; set; }
+        public PurchaseOrderViewModel SelectedViewModel { get; set; }
 
         /// <summary>
         /// Collection of ViewModels
         /// </summary>
-        public ObservableCollectionExtended<ManifestViewModel> ViewModels { get; set; }
-
-        /// <summary>
-        /// Gets or sets the vehicles.
-        /// </summary>
-        /// <value>
-        /// The vehicles.
-        /// </value>
-        public ObservableCollectionExtended<Vehicle> Vehicles { get; set; }
-
-        /// <summary>
-        /// Gets or sets the users.
-        /// </summary>
-        /// <value>
-        /// The users.
-        /// </value>
-        public ObservableCollectionExtended<User> Users { get; set; }
+        public ObservableCollectionExtended<PurchaseOrderViewModel> ViewModels { get; set; }
 
         private string _searchType;
 

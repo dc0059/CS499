@@ -372,61 +372,23 @@ namespace CS499.TCMS.View.ViewModels
             {
                 case Enums.AccessLevel.Full:
 
-                    commandList.Add(
-                            new CommandViewModel(
-                                Messages.AllUserDisplayName,
-                                Messages.AllUserDisplayToolTip,
-                                new RelayCommand(param => this.ExecuteCommand(() => 
-                                this.CreateDocument<AllUserViewModel>(this.Dialog, this.TaskManager, this.userRepository))),
-                                    "People"));
-
-                    commandList.Add(
-                            new CommandViewModel(
-                                Messages.AllBusinessPartnerDisplayName,
-                                Messages.AllBusinessPartnerDisplayToolTip,
-                                new RelayCommand(param => this.ExecuteCommand(() =>
-                                this.CreateDocument<AllBusinessPartnerViewModel>(this.Dialog, this.TaskManager, Factory.Create<IBusinessPartnerRepository>()))),
-                                    "Group"));
-
-                    commandList.Add(
-                            new CommandViewModel(
-                                Messages.AllPayrollDisplayName,
-                                Messages.AllPayrollDisplayToolTip,
-                                new RelayCommand(param => this.ExecuteCommand(() =>
-                                this.CreateDocument<AllPayrollViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPayrollRepository>()))),
-                                    "Money"));
-
-                    commandList.Add(
-                            new CommandViewModel(
-                                Messages.AllVehicleDisplayName,
-                                Messages.AllVehicleDisplayToolTip,
-                                new RelayCommand(param => this.ExecuteCommand(() =>
-                                this.CreateDocument<AllVehicleViewModel>(this.Dialog, this.TaskManager, Factory.Create<IVehicleRepository>()))),
-                                    "Truck"));
-
-                    commandList.Add(
-                            new CommandViewModel(
-                                Messages.AllPartDisplayName,
-                                Messages.AllPartDisplayToolTip,
-                                new RelayCommand(param => this.ExecuteCommand(() =>
-                                this.CreateDocument<AllPartViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPartRepository>()))),
-                                    "Cart"));
-
-                    commandList.Add(
-                            new CommandViewModel(
-                                Messages.AllManifestDisplayName,
-                                Messages.AllManifestDisplayToolTip,
-                                new RelayCommand(param => this.ExecuteCommand(() =>
-                                this.CreateDocument<AllManifestViewModel>(this.Dialog, this.TaskManager, Factory.Create<IManifestRepository>(),
-                                Factory.Create<IVehicleRepository>(), Factory.Create<IUserRepository>()))),
-                                    "ListCheck"));
+                    this.GetFullAccessCommands(commandList);
 
                     break;
                 case Enums.AccessLevel.ShippingData:
+
+                    this.GetShippingDataAccessCommands(commandList);
+
                     break;
                 case Enums.AccessLevel.MaintenanceData:
+
+                    this.GetMaintenanceDataAccessCommands(commandList);
+
                     break;
                 case Enums.AccessLevel.DriverData:
+
+                    this.GetDriverDataAccessCommands(commandList);
+
                     break;
                 default:
                     break;
@@ -464,7 +426,123 @@ namespace CS499.TCMS.View.ViewModels
             // close loading dialog
             controller.CloseAsync();
 
-        }       
+        }
+
+        /// <summary>
+        /// Gets the driver data access commands.
+        /// </summary>
+        /// <param name="commandList">The command list.</param>
+        /// <exception cref="System.NotImplementedException"></exception>
+        private void GetDriverDataAccessCommands(List<CommandViewModel> commandList)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets the maintenance data access commands.
+        /// </summary>
+        /// <param name="commandList">The command list.</param>
+        /// <exception cref="System.NotImplementedException"></exception>
+        private void GetMaintenanceDataAccessCommands(List<CommandViewModel> commandList)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets the shipping data access commands.
+        /// </summary>
+        /// <param name="commandList">The command list.</param>
+        /// <exception cref="System.NotImplementedException"></exception>
+        private void GetShippingDataAccessCommands(List<CommandViewModel> commandList)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets the full access commands.
+        /// </summary>
+        /// <param name="commandList">The command list.</param>
+        private void GetFullAccessCommands(List<CommandViewModel> commandList)
+        {
+
+            commandList.Add(
+                new CommandViewModel(
+                    Messages.AllUserDisplayName,
+                    Messages.AllUserDisplayToolTip,
+                    new RelayCommand(param => this.ExecuteCommand(() =>
+                    this.CreateDocument<AllUserViewModel>(this.Dialog, this.TaskManager, this.userRepository))),
+                        "People"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllBusinessPartnerDisplayName,
+                        Messages.AllBusinessPartnerDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllBusinessPartnerViewModel>(this.Dialog, this.TaskManager, Factory.Create<IBusinessPartnerRepository>()))),
+                            "Group"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllPayrollDisplayName,
+                        Messages.AllPayrollDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllPayrollViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPayrollRepository>()))),
+                            "Money"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllVehicleDisplayName,
+                        Messages.AllVehicleDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllVehicleViewModel>(this.Dialog, this.TaskManager, Factory.Create<IVehicleRepository>()))),
+                            "Truck"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllPartDisplayName,
+                        Messages.AllPartDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllPartViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPartRepository>()))),
+                            "Cart"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllManifestDisplayName,
+                        Messages.AllManifestDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllManifestViewModel>(this.Dialog, this.TaskManager, Factory.Create<IManifestRepository>(),
+                        Factory.Create<IVehicleRepository>(), Factory.Create<IUserRepository>()))),
+                            "ListCheck"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllPurchaseOrderDisplayName,
+                        Messages.AllPurchaseOrderDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllPurchaseOrderViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPurchaseOrderRepository>(),
+                        Factory.Create<IBusinessPartnerRepository>(), Factory.Create<IManifestRepository>()))),
+                            "Creditcard"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllPurchaseItemDisplayName,
+                        Messages.AllPurchaseItemDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllPurchaseItemViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPurchaseItemRepository>(),
+                        Factory.Create<IPurchaseOrderRepository>(), Factory.Create<IPartRepository>()))),
+                            "ListAddBelow"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllMaintenanceRecordDisplayName,
+                        Messages.AllMaintenanceRecordDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllMaintenanceRecordViewModel>(this.Dialog, this.TaskManager, Factory.Create<IMaintenanceRecordRepository>(),
+                        Factory.Create<IVehicleRepository>()))),
+                            "Tools"));
+
+
+        }
 
         /// <summary>
         /// Set command list
@@ -500,7 +578,7 @@ namespace CS499.TCMS.View.ViewModels
                 try
                 {
 
-                    if (!CoreAssembly.IsDebug())
+                    if (true)
                     {
 
                         // show login dialog
@@ -536,6 +614,9 @@ namespace CS499.TCMS.View.ViewModels
                                 // set current application user
                                 CoreAssembly.SetCurrentUser(credentials.Username);
 
+                                // load user theme settings
+                                this.UserThemeViewModel = WorkspaceFactory.Create<UserThemeViewModel>();
+
                                 // show loading while changing the user time sheet is loading
                                 var controller = await this.Dialog.Dialog.ShowProgressAsync(this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginLoading);
                                 await Task.Delay(500);
@@ -564,6 +645,9 @@ namespace CS499.TCMS.View.ViewModels
 
                         // set current application user
                         CoreAssembly.SetCurrentUser("dc0059");
+
+                        // load user theme settings
+                        this.UserThemeViewModel = WorkspaceFactory.Create<UserThemeViewModel>();
 
                         // show loading while changing the user time sheet is loading
                         var controller = await this.Dialog.Dialog.ShowProgressAsync(this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginLoading);
@@ -638,9 +722,14 @@ namespace CS499.TCMS.View.ViewModels
 
             if (workspace == null)
             {
-
-                workspace = WorkspaceFactory.Create<T>(this.Dialog, this.TaskManager);
-                this.DocumentWorkspaces.Add(workspace);
+                                
+                this.TaskManager.AddTask(Task.Run(() => workspace = WorkspaceFactory.Create<T>(this.Dialog, this.TaskManager)),
+                    Messages.MainWindowLoadingWindow, () => this.DocumentWorkspaces.Add(workspace),
+                    Messages.MainWindowInitialStatus,
+                    UIContext.Current,
+                    "opening menu item",
+                    string.Empty,
+                    log);
 
             }
 
@@ -660,8 +749,13 @@ namespace CS499.TCMS.View.ViewModels
             if (workspace == null)
             {
 
-                workspace = WorkspaceFactory.Create<T>(constructorArgs);
-                this.DocumentWorkspaces.Add(workspace);
+                this.TaskManager.AddTask(Task.Run(() => workspace = WorkspaceFactory.Create<T>(constructorArgs)),
+                    Messages.MainWindowLoadingWindow,() => this.DocumentWorkspaces.Add(workspace), 
+                    Messages.MainWindowInitialStatus, 
+                    UIContext.Current, 
+                    "opening menu item", 
+                    string.Empty, 
+                    log);                
 
             }
 

@@ -1,12 +1,136 @@
 ﻿<UserControl x:Class="CS499.TCMS.View.Views.MaintenanceRecordView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CS499.TCMS.View.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+			 xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+			 xmlns:local="clr-namespace:CS499.TCMS.View.Views"             
+			 mc:Ignorable="d" 
+			 d:DesignHeight="300" d:DesignWidth="300">
+	<Border BorderBrush="{DynamicResource AccentColorBrush}"
+			BorderThickness="1"
+			Margin="5">
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<Grid Grid.Column="0"
+				  Grid.Row="0"
+				  Grid.ColumnSpan="2">
+
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Button Width="50"
+						Height="50"
+						Grid.Column="1"
+						HorizontalAlignment="Right"
+						Style="{StaticResource MetroCircleButtonStyle}"
+						Background="{DynamicResource AccentColorBrush}"
+						ToolTip="Save"
+						Command="{Binding CommandSave}"
+						Content="{iconPacks:PackIconModern Kind=Save, Height=26, Width=26}"/>
+			</Grid>
+
+			<ScrollViewer Grid.Row="1" 
+						  VerticalScrollBarVisibility="Auto"
+						  CanContentScroll="True"
+						  Margin="5">
+				<StackPanel Orientation="Vertical">
+
+					<Expander Header="Maintenance Information"
+							  IsExpanded="True"
+							  Margin="5">
+
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Maintenance ID:"
+									   Grid.Column="0"
+									   Grid.Row="0"/>
+							<TextBox Text="{Binding MaintenanceID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+									 IsReadOnly="True"
+									 Grid.Column="1"
+									 Grid.Row="0"
+									 Margin="0, 10, 0, 10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Maintenance Date:"
+									   Grid.Column="0"
+									   Grid.Row="1"/>
+							<Controls:DateTimePicker SelectedDate="{Binding MaintenanceDate, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+													 Controls:TextBoxHelper.Watermark="Select maintenance date"
+													 Controls:TextBoxHelper.ClearTextButton="True"                                 
+													 Grid.Column="1"
+													 Grid.Row="1"
+													 Margin="0, 10, 0, 10"/>
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Maintenance Description:"
+									   Grid.Column="0"
+									   Grid.Row="2"/>
+							<TextBox Text="{Binding MaintenanceDescription, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									 Controls:TextBoxHelper.Watermark="Enter maintenance description"
+									 Controls:TextBoxHelper.ClearTextButton="True"
+									 Controls:TextBoxHelper.IsSpellCheckContextMenuEnabled="True"
+									 TextWrapping="Wrap"
+									 AcceptsReturn="True"
+									 Grid.Column="1"
+									 Grid.Row="2"
+									 Margin="0, 10, 0, 10"/>                            
+						</Grid>
+
+					</Expander>
+					<Expander Header="Vehicle Information"
+							  IsExpanded="false"
+							  Margin="5">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+
+							<TextBlock VerticalAlignment="Center"
+									   Margin="5"
+									   Text="Vehicle:"
+									   Grid.Column="0"
+									   Grid.Row="0"/>
+							<ComboBox ItemsSource="{Binding Vehicles}" 
+									  SelectedItem="{Binding SelectedVehicle, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									  Controls:TextBoxHelper.Watermark="Select vehicle"
+									  Controls:TextBoxHelper.ClearTextButton="True"
+									  Grid.Column="1"
+									  Grid.Row="0"
+									  Margin="0, 10, 0, 10"/>
+
+						</Grid>
+
+					</Expander>
+
+				</StackPanel>
+
+			</ScrollViewer>
+
+		</Grid>
+	</Border>
 </UserControl>

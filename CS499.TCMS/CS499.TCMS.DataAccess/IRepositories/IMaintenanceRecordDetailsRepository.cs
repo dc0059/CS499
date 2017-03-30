@@ -7,13 +7,13 @@ using CS499.TCMS.Model;
 
 namespace CS499.TCMS.DataAccess.IRepositories
 {
-    public interface IMaintenanceRecordDetailsRepository : IRepository<MaintenanceRecordDetails>, IRepositoryBase
+    public interface IMaintenanceRecordDetailsRepository : IRepository<MaintenanceRecordDetail>, IRepositoryBase
     {
         //MaintenanceRecordDetails GetSingle(long DetailID);
 
-        IEnumerable<MaintenanceRecordDetails> GetDetailsByEmployee(long EmployeeID);
-        IEnumerable<MaintenanceRecordDetails> GetDetailsByMaintenanceID(long MaintenanceID);
-        IEnumerable<MaintenanceRecordDetails> GetDetailsByDate(DateTime Earliest, DateTime Latest);
+        IEnumerable<MaintenanceRecordDetail> GetDetailsByEmployee(long EmployeeID);
+        IEnumerable<MaintenanceRecordDetail> GetDetailsByMaintenanceID(long MaintenanceID);
+        IEnumerable<MaintenanceRecordDetail> GetDetailsByDate(DateTime Earliest, DateTime Latest);
 
         void Delete(long DetailID);
         void DeleteByEmployee(long EmployeeID);

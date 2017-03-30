@@ -32,10 +32,12 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>4014</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\truck.ico</ApplicationIcon>
@@ -64,6 +66,9 @@
     <Reference Include="MahApps.Metro.IconPacks, Version=1.7.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.1.7.1\lib\net45\MahApps.Metro.IconPacks.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Maps.MapControl.WPF">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Bing Maps WPF Control\V1\Libraries\Microsoft.Maps.MapControl.WPF.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -138,10 +143,13 @@
     <Compile Include="Services\UIContext.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="ViewModels\AllBusinessPartnerViewModel.cs" />
+    <Compile Include="ViewModels\AllMaintenanceRecordDetailViewModel.cs" />
+    <Compile Include="ViewModels\AllMaintenanceRecordViewModel.cs" />
     <Compile Include="ViewModels\AllManifestViewModel.cs" />
     <Compile Include="ViewModels\AllPartViewModel.cs" />
     <Compile Include="ViewModels\AllPayrollViewModel.cs" />
     <Compile Include="ViewModels\AllPurchaseItemViewModel.cs" />
+    <Compile Include="ViewModels\AllPurchaseOrderViewModel.cs" />
     <Compile Include="ViewModels\AllUserViewModel.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="ViewModels\AllVehicleViewModel.cs" />
@@ -149,12 +157,15 @@
     <Compile Include="ViewModels\AssemblyInformationViewModel.cs" />
     <Compile Include="ViewModels\BusinessPartnerViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
+    <Compile Include="ViewModels\MaintenanceRecordDetailViewModel.cs" />
+    <Compile Include="ViewModels\MaintenanceRecordViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ManifestViewModel.cs" />
     <Compile Include="ViewModels\ObservableCollectionExtended.cs" />
     <Compile Include="ViewModels\PartViewModel.cs" />
     <Compile Include="ViewModels\PayrollViewModel.cs" />
     <Compile Include="ViewModels\PurchaseItemViewModel.cs" />
+    <Compile Include="ViewModels\PurchaseOrderViewModel.cs" />
     <Compile Include="ViewModels\UserThemeViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
@@ -214,6 +225,9 @@
     </Compile>
     <Compile Include="Views\ManifestView.xaml.cs">
       <DependentUpon>ManifestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PartView.xaml.cs">
       <DependentUpon>PartView.xaml</DependentUpon>
@@ -337,6 +351,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ManifestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

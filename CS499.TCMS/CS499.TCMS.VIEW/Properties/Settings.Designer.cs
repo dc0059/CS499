@@ -70,7 +70,7 @@ namespace CS499.TCMS.View.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("tcms_dev")]
+        [global::System.Configuration.DefaultSettingValueAttribute("tcms")]
         public string DevDatabase {
             get {
                 return ((string)(this["DevDatabase"]));

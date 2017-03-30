@@ -14,47 +14,40 @@ using System.Windows.Input;
 namespace CS499.TCMS.View.ViewModels
 {
     /// <summary>
-    /// This class will handle the maintenance of the <see cref="ManifestViewModel"/>
+    /// This class will handle the maintenance of the <see cref="MaintenanceRecordViewModel"/>
     /// </summary>
     /// <seealso cref="CS499.TCMS.View.ViewModels.WorkspaceViewModel" />
     /// <seealso cref="CS499.TCMS.View.Interfaces.IKeyCommand" />
-    public class AllManifestViewModel : WorkspaceViewModel, IKeyCommand
+    public class AllMaintenanceRecordViewModel : WorkspaceViewModel, IKeyCommand
     {
 
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AllManifestViewModel"/> class.
+        /// Initializes a new instance of the <see cref="AllMaintenanceRecordViewModel"/> class.
         /// </summary>
         /// <param name="dialog">Dialog service to show messages from ViewModel</param>
         /// <param name="taskManager">Task manager to hold reference to running tasks</param>
-        /// <param name="manifestRepository">The manifest repository.</param>
+        /// <param name="maintenanceRecordRepository">The maintenanceRecord repository.</param>
         /// <param name="vehicleRepository">The vehicle repository.</param>
-        /// <param name="userRepository">The user repository.</param>
-        public AllManifestViewModel(IDialogService dialog, ITaskManager taskManager,
-            IManifestRepository manifestRepository, IVehicleRepository vehicleRepository, 
-            IUserRepository userRepository)
+        public AllMaintenanceRecordViewModel(IDialogService dialog, ITaskManager taskManager,
+            IMaintenanceRecordRepository maintenanceRecordRepository, IVehicleRepository vehicleRepository)
         {
             this.dialog = dialog;
             this.TaskManager = taskManager;
             this.IsSelected = true;
-            this.ViewModels = new ObservableCollectionExtended<ManifestViewModel>(new List<ManifestViewModel>());
+            this.ViewModels = new ObservableCollectionExtended<MaintenanceRecordViewModel>(new List<MaintenanceRecordViewModel>());
             this.Vehicles = new ObservableCollectionExtended<Vehicle>(new List<Vehicle>());
-            this.Users = new ObservableCollectionExtended<User>(new List<User>());
             this.ViewModels.PageSize = 10;
             this.Vehicles.PageSize = 100000;
-            this.Users.PageSize = 100000;
-            this.DisplayName = Messages.AllManifestDisplayName;
-            this.DisplayToolTip = Messages.AllManifestDisplayToolTip;
-            this.manifestRepository = manifestRepository;
+            this.DisplayName = Messages.AllMaintenanceRecordDisplayName;
+            this.DisplayToolTip = Messages.AllMaintenanceRecordDisplayToolTip;
+            this.maintenanceRecordRepository = maintenanceRecordRepository;
             this.vehicleRepository = vehicleRepository;
-            this.userRepository = userRepository;
             this.LoadVehicles();
-            this.LoadUsers();
-            this.Load();            
-            this.MessengerInstance.Register<NotificationMessage<AllManifestViewModel>>(this, (n) => this.Load(n));
+            this.Load();
+            this.MessengerInstance.Register<NotificationMessage<AllMaintenanceRecordViewModel>>(this, (n) => this.Load(n));
             this.MessengerInstance.Register<NotificationMessage<AllVehicleViewModel>>(this, (n) => this.LoadVehicles(n));
-            this.MessengerInstance.Register<NotificationMessage<AllUserViewModel>>(this, (n) => this.LoadUsers(n));
             this.SearchType = "contains";
         }
 
@@ -66,7 +59,7 @@ namespace CS499.TCMS.View.ViewModels
         /// Load list of ViewModels
         /// </summary>
         /// <param name="notificationMessage">notification message</param>
-        private void Load(NotificationMessage<AllManifestViewModel> notificationMessage)
+        private void Load(NotificationMessage<AllMaintenanceRecordViewModel> notificationMessage)
         {
             this.Load();
         }
@@ -79,29 +72,20 @@ namespace CS499.TCMS.View.ViewModels
         {
             this.LoadVehicles();
         }
-
-        /// <summary>
-        /// Load list of models
-        /// </summary>
-        /// <param name="notificationMessage">notification message</param>
-        private void LoadUsers(NotificationMessage<AllUserViewModel> notificationMessage)
-        {
-            this.LoadUsers();
-        }
-
+               
         /// <summary>
         /// Load list of ViewModels
         /// </summary>
         private void Load()
         {
 
-            List<Manifest> ViewModels = null;
+            List<MaintenanceRecord> ViewModels = null;
 
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
-                ViewModels = manifestRepository.GetAll().ToList();
+                ViewModels = maintenanceRecordRepository.GetAll().ToList();
 
                 // wait for other tasks to complete
                 while (this.TaskManager.TaskCount() > 1)
@@ -111,7 +95,7 @@ namespace CS499.TCMS.View.ViewModels
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.AllManifestLoading,
+            Messages.AllMaintenanceRecordLoading,
             () =>
             {
 
@@ -129,8 +113,8 @@ namespace CS499.TCMS.View.ViewModels
             },
              Messages.MainWindowInitialStatus,
              UIContext.Current,
-             "loading manifests",
-             Messages.AllManifestLoadError,
+             "loading maintenance records",
+             Messages.AllMaintenanceRecordLoadError,
              log);
 
         }
@@ -138,18 +122,18 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Add each ViewModel to the collection
         /// </summary>
-        /// <param name="manifests">list of models</param>
-        private void Set(List<Manifest> manifests)
+        /// <param name="maintenanceRecords">list of models</param>
+        private void Set(List<MaintenanceRecord> maintenanceRecords)
         {
 
             // clear current list
             this.ViewModels.ClearAll();
 
             // loop through each model and add e ViewModel to the collection
-            foreach (var model in manifests)
+            foreach (var model in maintenanceRecords)
             {
-                ManifestViewModel viewModel = new ManifestViewModel(model, this.manifestRepository, this.TaskManager, false, 
-                    this.Vehicles, this.Users);
+                MaintenanceRecordViewModel viewModel = new MaintenanceRecordViewModel(model, this.maintenanceRecordRepository, this.TaskManager, false,
+                    this.Vehicles);
                 this.ViewModels.AddItem(viewModel);
             }
 
@@ -207,66 +191,8 @@ namespace CS499.TCMS.View.ViewModels
 
             // loop through each model and add to the collection
             foreach (var model in vehicles)
-            {                
+            {
                 this.Vehicles.AddItem(model);
-            }
-
-        }
-
-        /// <summary>
-        /// Load list of ViewModels
-        /// </summary>
-        private void LoadUsers()
-        {
-
-            List<User> models = null;
-
-            // start new task to get the models from the database
-            this.TaskManager.AddTask(Task.Factory.StartNew(() =>
-            {
-
-                models = userRepository.GetAll().ToList();
-
-            },
-            TaskCreationOptions.LongRunning),
-            Messages.AllUserLoading,
-            () =>
-            {
-
-                if (models == null)
-                {
-                    return;
-                }
-
-                // set models
-                this.Set(models);
-
-                // refresh the list
-                this.Users.Refresh();
-
-            },
-             Messages.MainWindowInitialStatus,
-             UIContext.Current,
-             "loading users",
-             Messages.AllUserLoadError,
-             log);
-
-        }
-
-        /// <summary>
-        /// Add each Model to the collection
-        /// </summary>
-        /// <param name="users">list of models</param>
-        private void Set(List<User> users)
-        {
-
-            // clear current list
-            this.Users.ClearAll();
-
-            // loop through each model and add to the collection
-            foreach (var model in users)
-            {
-                this.Users.AddItem(model);
             }
 
         }
@@ -278,11 +204,11 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             // create new model
-            Manifest model = new Manifest(0, "Outgoing", 0, DateTime.Now, DateTime.Now.AddDays(7), false, 0, 0);
+            MaintenanceRecord model = new MaintenanceRecord(0, 0, DateTime.Now, string.Empty);
 
             // create new ViewModel
-            ManifestViewModel viewModel = new ManifestViewModel(model, this.manifestRepository, this.TaskManager, true,
-                this.Vehicles, this.Users);
+            MaintenanceRecordViewModel viewModel = new MaintenanceRecordViewModel(model, this.maintenanceRecordRepository, this.TaskManager, true,
+                this.Vehicles);
 
             // send ViewModel
             this.SendViewModel(viewModel);
@@ -304,7 +230,7 @@ namespace CS499.TCMS.View.ViewModels
         /// send message to the mainwindowViewModel to add the ViewModel to the collection
         /// </summary>
         /// <param name="viewModel">ViewModel</param>
-        private void SendViewModel(ManifestViewModel viewModel)
+        private void SendViewModel(MaintenanceRecordViewModel viewModel)
         {
             this.MessengerInstance.Send<NotificationMessage<WorkspaceViewModel>>(
                 new NotificationMessage<WorkspaceViewModel>(viewModel, null));
@@ -317,10 +243,10 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             // get selected ViewModel
-            ManifestViewModel viewModel = this.SelectedViewModel;
+            MaintenanceRecordViewModel viewModel = this.SelectedViewModel;
 
             // Ask viewModel to confirm the deletion
-            string msg = string.Format(Messages.DeleteMessage, "manifest", viewModel.Model.ToString());
+            string msg = string.Format(Messages.DeleteMessage, "maintenance record", viewModel.Model.ToString());
             MessageDialogResult result = await dialog.Dialog.ShowMessageAsync(dialog.ViewModel, Messages.TitleApp, msg,
                     MessageDialogStyle.AffirmativeAndNegative);
 
@@ -333,11 +259,11 @@ namespace CS499.TCMS.View.ViewModels
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
-                this.manifestRepository.Delete(viewModel.Model);
+                this.maintenanceRecordRepository.Delete(viewModel.Model);
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.AllManifestDeleting,
+            Messages.AllMaintenanceRecordDeleting,
             () =>
             {
 
@@ -346,8 +272,8 @@ namespace CS499.TCMS.View.ViewModels
             },
             Messages.MainWindowInitialStatus,
             UIContext.Current,
-            "deleting manifest",
-            string.Format(Messages.AllManifestDeleteError, viewModel.DisplayName),
+            "deleting maintenance record",
+            string.Format(Messages.AllMaintenanceRecordDeleteError, viewModel.DisplayName),
             log);
 
         }
@@ -364,14 +290,13 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Search for the manifest based on the search text
+        /// Search for the maintenance record based on the search text
         /// </summary>
         private void SearchForText()
         {
 
             this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText,
-                "ManifestID", "ShipmentType", "VehicleID", "DepartureTime", "ETA", "ShippingCost", 
-                "EmployeeID");
+                "MaintenanceID", "VehicleID", "MaintenanceDate", "MaintenanceDescription");
 
         }
 
@@ -420,19 +345,14 @@ namespace CS499.TCMS.View.ViewModels
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Manifest repository
+        /// Maintenance Record repository
         /// </summary>
-        private IManifestRepository manifestRepository;
+        private IMaintenanceRecordRepository maintenanceRecordRepository;
 
         /// <summary>
         /// The vehicle repository
         /// </summary>
         private IVehicleRepository vehicleRepository;
-
-        /// <summary>
-        /// The user repository
-        /// </summary>
-        private IUserRepository userRepository;
 
         /// <summary>
         /// Dialog service for showing messages from the ViewModel
@@ -442,12 +362,12 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Selected ViewModel
         /// </summary>
-        public ManifestViewModel SelectedViewModel { get; set; }
+        public MaintenanceRecordViewModel SelectedViewModel { get; set; }
 
         /// <summary>
         /// Collection of ViewModels
         /// </summary>
-        public ObservableCollectionExtended<ManifestViewModel> ViewModels { get; set; }
+        public ObservableCollectionExtended<MaintenanceRecordViewModel> ViewModels { get; set; }
 
         /// <summary>
         /// Gets or sets the vehicles.
@@ -456,15 +376,7 @@ namespace CS499.TCMS.View.ViewModels
         /// The vehicles.
         /// </value>
         public ObservableCollectionExtended<Vehicle> Vehicles { get; set; }
-
-        /// <summary>
-        /// Gets or sets the users.
-        /// </summary>
-        /// <value>
-        /// The users.
-        /// </value>
-        public ObservableCollectionExtended<User> Users { get; set; }
-
+              
         private string _searchType;
 
         /// <summary>

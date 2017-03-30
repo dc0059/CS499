@@ -135,6 +135,24 @@
   <data name="AllBusinessPartnerLoading" xml:space="preserve">
     <value>Loading business partners... Please wait.</value>
   </data>
+  <data name="AllMaintenanceRecordDeleteError" xml:space="preserve">
+    <value>Failed to delete maintenance record ({0}). Please contact support.</value>
+  </data>
+  <data name="AllMaintenanceRecordDeleting" xml:space="preserve">
+    <value>Deleting maintenance record... Please wait.</value>
+  </data>
+  <data name="AllMaintenanceRecordDisplayName" xml:space="preserve">
+    <value>Maintenance Records</value>
+  </data>
+  <data name="AllMaintenanceRecordDisplayToolTip" xml:space="preserve">
+    <value>Click here to modify maintenance records.</value>
+  </data>
+  <data name="AllMaintenanceRecordLoadError" xml:space="preserve">
+    <value>Failed to load maintenance records. Please contact support.</value>
+  </data>
+  <data name="AllMaintenanceRecordLoading" xml:space="preserve">
+    <value>Loading maintenance records... Please wait.</value>
+  </data>
   <data name="AllManifestDeleteError" xml:space="preserve">
     <value>Failed to delete manifest ({0}). Please contact support.</value>
   </data>
@@ -188,6 +206,42 @@
   </data>
   <data name="AllPayrollLoading" xml:space="preserve">
     <value>Loading payrolls... Please wait.</value>
+  </data>
+  <data name="AllPurchaseItemDeleteError" xml:space="preserve">
+    <value>Failed to delete purchase item ({0}). Please contact support.</value>
+  </data>
+  <data name="AllPurchaseItemDeleting" xml:space="preserve">
+    <value>Deleting purchase item... Please wait.</value>
+  </data>
+  <data name="AllPurchaseItemDisplayName" xml:space="preserve">
+    <value>Purchase Items</value>
+  </data>
+  <data name="AllPurchaseItemDisplayToolTip" xml:space="preserve">
+    <value>Click here to modify purchase items</value>
+  </data>
+  <data name="AllPurchaseItemLoadError" xml:space="preserve">
+    <value>Failed to load purchase items. Please contact support.</value>
+  </data>
+  <data name="AllPurchaseItemLoading" xml:space="preserve">
+    <value>Loading purchase items... Please wait.</value>
+  </data>
+  <data name="AllPurchaseOrderDeleteError" xml:space="preserve">
+    <value>Failed to delete purchase order ({0}). Please contact support.</value>
+  </data>
+  <data name="AllPurchaseOrderDeleting" xml:space="preserve">
+    <value>Deleting purchase order... Please wait.</value>
+  </data>
+  <data name="AllPurchaseOrderDisplayName" xml:space="preserve">
+    <value>Purchase Orders</value>
+  </data>
+  <data name="AllPurchaseOrderDisplayToolTip" xml:space="preserve">
+    <value>Click here to modify purchase orders.</value>
+  </data>
+  <data name="AllPurchaseOrderLoadError" xml:space="preserve">
+    <value>Failed to load purchase orders. Please contact support.</value>
+  </data>
+  <data name="AllPurchaseOrderLoading" xml:space="preserve">
+    <value>Loading purchase orders... Please wait.</value>
   </data>
   <data name="AllUserDeleteError" xml:space="preserve">
     <value>Failed to delete user ({0}). Please contact support.</value>
@@ -279,6 +333,18 @@
   <data name="LogoutDisplayToolTip" xml:space="preserve">
     <value>Click here to log out of the application.</value>
   </data>
+  <data name="MaintenanceRecordDisplayName" xml:space="preserve">
+    <value>Maintenance Record: {0}</value>
+  </data>
+  <data name="MaintenanceRecordDisplayToolTip" xml:space="preserve">
+    <value>Maintenance Record: {0}</value>
+  </data>
+  <data name="MaintenanceRecordSaveError" xml:space="preserve">
+    <value>Failed to save maintenance record ({0}). Please contact support.</value>
+  </data>
+  <data name="MaintenanceRecordSaving" xml:space="preserve">
+    <value>Saving maintenance record... Please wait.</value>
+  </data>
   <data name="MainWindowBackgroundTask" xml:space="preserve">
     <value>Please wait for background task to complete before closing or logging out of the application.</value>
   </data>
@@ -294,6 +360,9 @@
   <data name="MainWindowInitialStatus" xml:space="preserve">
     <value>Ready</value>
   </data>
+  <data name="MainWindowLoadingWindow" xml:space="preserve">
+    <value>Loading window... Please wait.</value>
+  </data>
   <data name="MainWindowMenuTooltip" xml:space="preserve">
     <value>Click here to see the Main Menu.</value>
   </data>
@@ -305,6 +374,12 @@
   </data>
   <data name="MainWindowViewModelCheckForChanges" xml:space="preserve">
     <value>One or more unsaved changes were found. Are you sure you want to continue without saving?</value>
+  </data>
+  <data name="ManifestDisplayName" xml:space="preserve">
+    <value>Manifest: {0}</value>
+  </data>
+  <data name="ManifestDisplayToolTip" xml:space="preserve">
+    <value>Manifest: {0}</value>
   </data>
   <data name="ManifestSaveError" xml:space="preserve">
     <value>Failed to save manifest ({0}). Please contact support.</value>
@@ -335,6 +410,30 @@
   </data>
   <data name="PayrollSaving" xml:space="preserve">
     <value>Saving payroll... Please wait.</value>
+  </data>
+  <data name="PurchaseItemDisplayName" xml:space="preserve">
+    <value>Purchase Item: {0}</value>
+  </data>
+  <data name="PurchaseItemDisplayToolTip" xml:space="preserve">
+    <value>Purchase Item: {0}</value>
+  </data>
+  <data name="PurchaseItemSaveError" xml:space="preserve">
+    <value>Failed to save purchase item ({0}). Please contact support.</value>
+  </data>
+  <data name="PurchaseItemSaving" xml:space="preserve">
+    <value>Saving purchase item... Please wait.</value>
+  </data>
+  <data name="PurchaseOrderDisplayName" xml:space="preserve">
+    <value>Purchase Order: {0}</value>
+  </data>
+  <data name="PurchaseOrderDisplayToolTip" xml:space="preserve">
+    <value>Purchase Order: {0}</value>
+  </data>
+  <data name="PurchaseOrderSaveError" xml:space="preserve">
+    <value>Failed to save purchase order ({0}). Please contact support.</value>
+  </data>
+  <data name="PurchaseOrderSaving" xml:space="preserve">
+    <value>Saving purchase order... Please wait.</value>
   </data>
   <data name="SearchWatermark" xml:space="preserve">
     <value>Search by any column.</value>

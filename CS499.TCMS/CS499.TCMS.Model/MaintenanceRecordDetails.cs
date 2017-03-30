@@ -8,7 +8,7 @@ namespace CS499.TCMS.Model
     /// <summary>
     /// Holds all relevant data for maintenance record details
     /// </summary>
-    public class MaintenanceRecordDetails : IModel
+    public class MaintenanceRecordDetail : IModel
     {
         #region Constructor
 
@@ -20,7 +20,7 @@ namespace CS499.TCMS.Model
         /// <param name="employeeID">identifier of the employee associated with this detail</param>
         /// <param name="repairDescription">summary description of the repairs performed</param>
         /// <param name="repairDate">date the repair was performed</param>
-        public MaintenanceRecordDetails
+        public MaintenanceRecordDetail
             (long detailID, long maintenanceID, long employeeID, string repairDescription, DateTime repairDate)
         {
             this.DetailID = detailID;
@@ -139,9 +139,9 @@ namespace CS499.TCMS.Model
 
         public override bool Equals(object obj)
         {
-            if(obj is MaintenanceRecordDetails)
+            if(obj is MaintenanceRecordDetail)
             {
-                MaintenanceRecordDetails other = obj as MaintenanceRecordDetails;
+                MaintenanceRecordDetail other = obj as MaintenanceRecordDetail;
                 return this.DetailID.Equals(other.DetailID) &&
                     this.EmployeeID.Equals(other.EmployeeID) &&
                     this.MaintenanceID.Equals(other.MaintenanceID) &&

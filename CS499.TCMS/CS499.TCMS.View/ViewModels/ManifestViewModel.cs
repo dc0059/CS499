@@ -45,14 +45,35 @@ namespace CS499.TCMS.View.ViewModels
             this.ContentId = model.EmployeeID.GetContentId(this.DisplayName);
             this.Vehicles = vehicles;
             this.Users = users;
-            this.SelectedVehicle = vehicles.UnfilteredList.FirstOrDefault();
-            this.SelectedUser = users.UnfilteredList.FirstOrDefault();
+            this.SetSelected(isNew);
             _shipmentTypes = new string[] { "Outgoing", "Incoming" };
         }
 
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Sets the selected.
+        /// </summary>
+        /// <param name="isNew">if set to <c>true</c> is new.</param>
+        private void SetSelected(bool isNew)
+        {
+
+            if (isNew)
+            {
+                this.SelectedVehicle = this.Vehicles.UnfilteredList.FirstOrDefault();
+                this.SelectedUser = this.Users.UnfilteredList.FirstOrDefault();
+            }
+            else
+            {
+                this.SelectedVehicle = this.Vehicles.UnfilteredList
+                    .FirstOrDefault((v) => v.VehicleID.Equals(this.VehicleID));
+                this.SelectedUser = this.Users.UnfilteredList
+                    .FirstOrDefault((u) => u.EmployeeID.Equals(this.EmployeeID));
+            }
+            
+        }
 
         /// <summary>
         /// Save ViewModel
@@ -265,7 +286,40 @@ namespace CS499.TCMS.View.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets or sets the type of the shipment.
+        /// </summary>
+        /// <value>
+        /// The type of the shipment.
+        /// </value>
+        public string ShipmentType
+        {
+            get
+            {
+                return Model.ShipmentType;
+            }
+            set
+            {
 
+                if (Model.ShipmentType == value)
+                {
+                    return;
+                }
+
+                Model.ShipmentType = value;
+
+                base.OnPropertyChanged("ShipmentType");
+                this.HasChanges = true;
+
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the vehicle identifier.
+        /// </summary>
+        /// <value>
+        /// The vehicle identifier.
+        /// </value>
         public long VehicleID
         {
             get
@@ -446,7 +500,7 @@ namespace CS499.TCMS.View.ViewModels
             get
             {
                 string displayName = Model == null ? string.Empty : Model.ToString();
-                string msg = string.Format(Messages.UserDisplayName, this.IsNew ? "New" : displayName);
+                string msg = string.Format(Messages.ManifestDisplayName, this.IsNew ? "New" : displayName);
                 return msg;
             }
             protected set

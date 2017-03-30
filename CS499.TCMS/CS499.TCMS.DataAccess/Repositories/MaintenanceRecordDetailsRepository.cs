@@ -10,7 +10,7 @@ using System.Data;
 
 namespace CS499.TCMS.DataAccess.Repositories
 {
-    class MaintenanceRecordDetailsRepository : GenericRepository<MaintenanceRecordDetails>, IMaintenanceRecordDetailsRepository
+    class MaintenanceRecordDetailsRepository : GenericRepository<MaintenanceRecordDetail>, IMaintenanceRecordDetailsRepository
     {
 
         #region Constructor
@@ -24,7 +24,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// Deletes maintenanceRecordDetail from database corresponding to the argument object
         /// </summary>
         /// <param name="model"></param>
-        void IRepository<MaintenanceRecordDetails>.Delete(MaintenanceRecordDetails model)
+        void IRepository<MaintenanceRecordDetail>.Delete(MaintenanceRecordDetail model)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -209,7 +209,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// Returns a collection of every MaintenanceRecordDetails from database
         /// </summary>
         /// <returns></returns>
-        IEnumerable<MaintenanceRecordDetails> IRepository<MaintenanceRecordDetails>.GetAll()
+        IEnumerable<MaintenanceRecordDetail> IRepository<MaintenanceRecordDetail>.GetAll()
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -222,7 +222,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Type = ConnectionType.MySQL
             };
 
-            return this.Database.ExecuteListQuery<MaintenanceRecordDetails>(definition, Map);
+            return this.Database.ExecuteListQuery<MaintenanceRecordDetail>(definition, Map);
         }
 
 
@@ -232,7 +232,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// <param name="Earliest"></param>
         /// <param name="Latest"></param>
         /// <returns></returns>
-        IEnumerable<MaintenanceRecordDetails> IMaintenanceRecordDetailsRepository.GetDetailsByDate(DateTime Earliest, DateTime Latest)
+        IEnumerable<MaintenanceRecordDetail> IMaintenanceRecordDetailsRepository.GetDetailsByDate(DateTime Earliest, DateTime Latest)
         {
             // create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -263,7 +263,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             });
 
 
-            return this.Database.ExecuteListQuery<MaintenanceRecordDetails>(definition, Map);
+            return this.Database.ExecuteListQuery<MaintenanceRecordDetail>(definition, Map);
         }
 
 
@@ -272,7 +272,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="EmployeeID"></param>
         /// <returns></returns>
-        IEnumerable<MaintenanceRecordDetails> IMaintenanceRecordDetailsRepository.GetDetailsByEmployee(long EmployeeID)
+        IEnumerable<MaintenanceRecordDetail> IMaintenanceRecordDetailsRepository.GetDetailsByEmployee(long EmployeeID)
         {
 
             // Create query definition
@@ -295,7 +295,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Value = EmployeeID
             });
 
-            return this.Database.ExecuteListQuery<MaintenanceRecordDetails>(definition, Map);
+            return this.Database.ExecuteListQuery<MaintenanceRecordDetail>(definition, Map);
         }
 
 
@@ -304,7 +304,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="MaintenanceID"></param>
         /// <returns></returns>
-        IEnumerable<MaintenanceRecordDetails> IMaintenanceRecordDetailsRepository.GetDetailsByMaintenanceID(long MaintenanceID)
+        IEnumerable<MaintenanceRecordDetail> IMaintenanceRecordDetailsRepository.GetDetailsByMaintenanceID(long MaintenanceID)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -326,7 +326,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Value = MaintenanceID
             });
 
-            return this.Database.ExecuteListQuery<MaintenanceRecordDetails>(definition, Map);
+            return this.Database.ExecuteListQuery<MaintenanceRecordDetail>(definition, Map);
         }
 
 
@@ -335,7 +335,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        MaintenanceRecordDetails IRepository<MaintenanceRecordDetails>.GetSingle(object id)
+        MaintenanceRecordDetail IRepository<MaintenanceRecordDetail>.GetSingle(object id)
         {
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
@@ -357,7 +357,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Value = id
             });
 
-            return this.Database.ExecuteSingleQuery<MaintenanceRecordDetails>(definition, Map);
+            return this.Database.ExecuteSingleQuery<MaintenanceRecordDetail>(definition, Map);
         }
 
 
@@ -396,7 +396,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// Adds the argument object to the database
         /// </summary>
         /// <param name="model"></param>
-        void IRepository<MaintenanceRecordDetails>.Insert(MaintenanceRecordDetails model)
+        void IRepository<MaintenanceRecordDetail>.Insert(MaintenanceRecordDetail model)
         {
 
             long id;
@@ -469,7 +469,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// Finds argument in database and updates dbase information using that argument
         /// </summary>
         /// <param name="model"></param>
-        void IRepository<MaintenanceRecordDetails>.Update(MaintenanceRecordDetails model)
+        void IRepository<MaintenanceRecordDetail>.Update(MaintenanceRecordDetail model)
         {
 
             // Create query definition
@@ -535,9 +535,9 @@ namespace CS499.TCMS.DataAccess.Repositories
             this.Database.ExecuteModQuery(definition);
         }
 
-        protected override MaintenanceRecordDetails Map(IDataReader reader)
+        protected override MaintenanceRecordDetail Map(IDataReader reader)
         {
-            return new MaintenanceRecordDetails(reader.GetValueOrDefault<long>("DetailID"),
+            return new MaintenanceRecordDetail(reader.GetValueOrDefault<long>("DetailID"),
                 reader.GetValueOrDefault<long>("MaintenanceID"),
                 reader.GetValueOrDefault<long>("EmployeeID"),
                 reader.GetValueOrDefault<string>("RepairDescription"),

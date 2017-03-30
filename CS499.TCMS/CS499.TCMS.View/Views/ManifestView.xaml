@@ -78,8 +78,8 @@
 									   Grid.Column="0"
 									   Grid.Row="1"/>
 							<ComboBox ItemsSource="{Binding ShipmentTypes}" 
-									  Text="{Binding ShipmentType, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-									  Controls:TextBoxHelper.Watermark="Select shipment Type"
+									  SelectedItem="{Binding ShipmentType, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+									  Controls:TextBoxHelper.Watermark="Select shipment type"
 									  Controls:TextBoxHelper.ClearTextButton="True"                                 
 									  Grid.Column="1"
 									  Grid.Row="1"
@@ -155,7 +155,7 @@
 									   Grid.Row="1"/>
 							<ComboBox ItemsSource="{Binding Users}" 
 									  SelectedItem="{Binding SelectedUser, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
-									  Controls:TextBoxHelper.Watermark="Selet employee"
+									  Controls:TextBoxHelper.Watermark="Select employee"
 									  Controls:TextBoxHelper.ClearTextButton="True"                                 
 									  Grid.Column="1"
 									  Grid.Row="1"

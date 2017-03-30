@@ -115,6 +115,60 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to delete maintenance record ({0}). Please contact support..
+        /// </summary>
+        internal static string AllMaintenanceRecordDeleteError {
+            get {
+                return ResourceManager.GetString("AllMaintenanceRecordDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting maintenance record... Please wait..
+        /// </summary>
+        internal static string AllMaintenanceRecordDeleting {
+            get {
+                return ResourceManager.GetString("AllMaintenanceRecordDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance Records.
+        /// </summary>
+        internal static string AllMaintenanceRecordDisplayName {
+            get {
+                return ResourceManager.GetString("AllMaintenanceRecordDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to modify maintenance records..
+        /// </summary>
+        internal static string AllMaintenanceRecordDisplayToolTip {
+            get {
+                return ResourceManager.GetString("AllMaintenanceRecordDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load maintenance records. Please contact support..
+        /// </summary>
+        internal static string AllMaintenanceRecordLoadError {
+            get {
+                return ResourceManager.GetString("AllMaintenanceRecordLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading maintenance records... Please wait..
+        /// </summary>
+        internal static string AllMaintenanceRecordLoading {
+            get {
+                return ResourceManager.GetString("AllMaintenanceRecordLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to delete manifest ({0}). Please contact support..
         /// </summary>
         internal static string AllManifestDeleteError {
@@ -273,6 +327,114 @@ namespace CS499.TCMS.View.Resources {
         internal static string AllPayrollLoading {
             get {
                 return ResourceManager.GetString("AllPayrollLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to delete purchase item ({0}). Please contact support..
+        /// </summary>
+        internal static string AllPurchaseItemDeleteError {
+            get {
+                return ResourceManager.GetString("AllPurchaseItemDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting purchase item... Please wait..
+        /// </summary>
+        internal static string AllPurchaseItemDeleting {
+            get {
+                return ResourceManager.GetString("AllPurchaseItemDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Items.
+        /// </summary>
+        internal static string AllPurchaseItemDisplayName {
+            get {
+                return ResourceManager.GetString("AllPurchaseItemDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to modify purchase items.
+        /// </summary>
+        internal static string AllPurchaseItemDisplayToolTip {
+            get {
+                return ResourceManager.GetString("AllPurchaseItemDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load purchase items. Please contact support..
+        /// </summary>
+        internal static string AllPurchaseItemLoadError {
+            get {
+                return ResourceManager.GetString("AllPurchaseItemLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading purchase items... Please wait..
+        /// </summary>
+        internal static string AllPurchaseItemLoading {
+            get {
+                return ResourceManager.GetString("AllPurchaseItemLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to delete purchase order ({0}). Please contact support..
+        /// </summary>
+        internal static string AllPurchaseOrderDeleteError {
+            get {
+                return ResourceManager.GetString("AllPurchaseOrderDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting purchase order... Please wait..
+        /// </summary>
+        internal static string AllPurchaseOrderDeleting {
+            get {
+                return ResourceManager.GetString("AllPurchaseOrderDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Orders.
+        /// </summary>
+        internal static string AllPurchaseOrderDisplayName {
+            get {
+                return ResourceManager.GetString("AllPurchaseOrderDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to modify purchase orders..
+        /// </summary>
+        internal static string AllPurchaseOrderDisplayToolTip {
+            get {
+                return ResourceManager.GetString("AllPurchaseOrderDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load purchase orders. Please contact support..
+        /// </summary>
+        internal static string AllPurchaseOrderLoadError {
+            get {
+                return ResourceManager.GetString("AllPurchaseOrderLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading purchase orders... Please wait..
+        /// </summary>
+        internal static string AllPurchaseOrderLoading {
+            get {
+                return ResourceManager.GetString("AllPurchaseOrderLoading", resourceCulture);
             }
         }
         
@@ -547,6 +709,42 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maintenance Record: {0}.
+        /// </summary>
+        internal static string MaintenanceRecordDisplayName {
+            get {
+                return ResourceManager.GetString("MaintenanceRecordDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance Record: {0}.
+        /// </summary>
+        internal static string MaintenanceRecordDisplayToolTip {
+            get {
+                return ResourceManager.GetString("MaintenanceRecordDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to save maintenance record ({0}). Please contact support..
+        /// </summary>
+        internal static string MaintenanceRecordSaveError {
+            get {
+                return ResourceManager.GetString("MaintenanceRecordSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving maintenance record... Please wait..
+        /// </summary>
+        internal static string MaintenanceRecordSaving {
+            get {
+                return ResourceManager.GetString("MaintenanceRecordSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please wait for background task to complete before closing or logging out of the application..
         /// </summary>
         internal static string MainWindowBackgroundTask {
@@ -592,6 +790,15 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading window... Please wait..
+        /// </summary>
+        internal static string MainWindowLoadingWindow {
+            get {
+                return ResourceManager.GetString("MainWindowLoadingWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click here to see the Main Menu..
         /// </summary>
         internal static string MainWindowMenuTooltip {
@@ -624,6 +831,24 @@ namespace CS499.TCMS.View.Resources {
         internal static string MainWindowViewModelCheckForChanges {
             get {
                 return ResourceManager.GetString("MainWindowViewModelCheckForChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manifest: {0}.
+        /// </summary>
+        internal static string ManifestDisplayName {
+            get {
+                return ResourceManager.GetString("ManifestDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manifest: {0}.
+        /// </summary>
+        internal static string ManifestDisplayToolTip {
+            get {
+                return ResourceManager.GetString("ManifestDisplayToolTip", resourceCulture);
             }
         }
         
@@ -714,6 +939,78 @@ namespace CS499.TCMS.View.Resources {
         internal static string PayrollSaving {
             get {
                 return ResourceManager.GetString("PayrollSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Item: {0}.
+        /// </summary>
+        internal static string PurchaseItemDisplayName {
+            get {
+                return ResourceManager.GetString("PurchaseItemDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Item: {0}.
+        /// </summary>
+        internal static string PurchaseItemDisplayToolTip {
+            get {
+                return ResourceManager.GetString("PurchaseItemDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to save purchase item ({0}). Please contact support..
+        /// </summary>
+        internal static string PurchaseItemSaveError {
+            get {
+                return ResourceManager.GetString("PurchaseItemSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving purchase item... Please wait..
+        /// </summary>
+        internal static string PurchaseItemSaving {
+            get {
+                return ResourceManager.GetString("PurchaseItemSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Order: {0}.
+        /// </summary>
+        internal static string PurchaseOrderDisplayName {
+            get {
+                return ResourceManager.GetString("PurchaseOrderDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Order: {0}.
+        /// </summary>
+        internal static string PurchaseOrderDisplayToolTip {
+            get {
+                return ResourceManager.GetString("PurchaseOrderDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to save purchase order ({0}). Please contact support..
+        /// </summary>
+        internal static string PurchaseOrderSaveError {
+            get {
+                return ResourceManager.GetString("PurchaseOrderSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving purchase order... Please wait..
+        /// </summary>
+        internal static string PurchaseOrderSaving {
+            get {
+                return ResourceManager.GetString("PurchaseOrderSaving", resourceCulture);
             }
         }
         

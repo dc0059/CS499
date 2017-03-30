@@ -13,38 +13,38 @@ using System.Windows.Input;
 namespace CS499.TCMS.View.ViewModels
 {
     /// <summary>
-    /// This class will handle the maintenance of the <see cref="PurchaseItem"/> model
+    /// This class will handle the maintenance of the <see cref="PurchaseOrder"/> model
     /// </summary>
     /// <seealso cref="CS499.TCMS.View.ViewModels.WorkspaceViewModel" />
     /// <seealso cref="System.ComponentModel.IDataErrorInfo" />
     /// <seealso cref="CS499.TCMS.View.Interfaces.IChanges" />
     /// <seealso cref="CS499.TCMS.View.Interfaces.IKeyCommand" />
-    public class PurchaseItemViewModel : WorkspaceViewModel, IDataErrorInfo, IChanges, IKeyCommand
+    public class PurchaseOrderViewModel : WorkspaceViewModel, IDataErrorInfo, IChanges, IKeyCommand
     {
 
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PurchaseItemViewModel"/> class.
+        /// Initializes a new instance of the <see cref="PurchaseOrderViewModel"/> class.
         /// </summary>
-        /// <param name="model">model for the purchase item</param>
-        /// <param name="purchaseItemRepository">repository for database operations</param>
+        /// <param name="model">model for the purchase order</param>
+        /// <param name="purchaseOrderRepository">repository for database operations</param>
         /// <param name="taskManager">task manager to hold reference to running tasks</param>
-        /// <param name="isNew">flag indicating if this is a new purchase item</param>
-        /// <param name="purchaseOrders">The purchase orders.</param>
-        /// <param name="parts">The parts.</param>
-        public PurchaseItemViewModel(PurchaseItem model, IPurchaseItemRepository purchaseItemRepository, ITaskManager taskManager, bool isNew,
-            ObservableCollectionExtended<PurchaseOrder> purchaseOrders, ObservableCollectionExtended<Part> parts)
+        /// <param name="isNew">flag indicating if this is a new purchase order</param>
+        /// <param name="businessPartners">The business partners.</param>
+        /// <param name="manifests">The manifests.</param>
+        public PurchaseOrderViewModel(PurchaseOrder model, IPurchaseOrderRepository purchaseOrderRepository, ITaskManager taskManager, bool isNew,
+            ObservableCollectionExtended<BusinessPartner> businessPartners, ObservableCollectionExtended<Manifest> manifests)
         {
             this.Model = model;
-            this.purchaseItemRepository = purchaseItemRepository;
+            this.purchaseOrderRepository = purchaseOrderRepository;
             this.TaskManager = taskManager;
             this.IsNew = isNew;
             this.IsSelected = true;
             this.HasChanges = false;
-            this.ContentId = model.ItemID.GetContentId(this.DisplayName);
-            this.Orders = purchaseOrders;
-            this.Parts = parts;
+            this.ContentId = model.OrderID.GetContentId(this.DisplayName);
+            this.BusinessPartners = businessPartners;
+            this.Manifests = manifests;
             this.SetSelected(isNew);
         }
 
@@ -61,15 +61,18 @@ namespace CS499.TCMS.View.ViewModels
 
             if (isNew)
             {
-                this.SelectedPurchaseOrder = this.Orders.UnfilteredList.FirstOrDefault();
-                this.SelectedPart = this.Parts.UnfilteredList.FirstOrDefault();
+                this.SelectedSource = this.BusinessPartners.UnfilteredList.FirstOrDefault();
+                this.SelectedDestination = this.BusinessPartners.UnfilteredList.FirstOrDefault();
+                this.SelectedManifest = this.Manifests.UnfilteredList.FirstOrDefault();
             }
             else
             {
-                this.SelectedPurchaseOrder = this.Orders.UnfilteredList
-                    .FirstOrDefault((p) => p.OrderID.Equals(this.OrderID));
-                this.SelectedPart = this.Parts.UnfilteredList
-                    .FirstOrDefault((p) => p.PartID.Equals(this.PartID));
+                this.SelectedSource = this.BusinessPartners.UnfilteredList
+                    .FirstOrDefault((s) => s.CompanyID.Equals(this.SourceID));
+                this.SelectedDestination = this.BusinessPartners.UnfilteredList
+                    .FirstOrDefault((d) => d.CompanyID.Equals(this.DestinationID));
+                this.SelectedManifest = this.Manifests.UnfilteredList
+                    .FirstOrDefault((m) => m.ManifestID.Equals(this.ManifestID));
             }
 
         }
@@ -87,27 +90,27 @@ namespace CS499.TCMS.View.ViewModels
                 // insert new viewModel or update current viewModel
                 if (this.IsNew)
                 {
-                    this.purchaseItemRepository.Insert(this.Model);
+                    this.purchaseOrderRepository.Insert(this.Model);
                 }
                 else
                 {
-                    this.purchaseItemRepository.Update(this.Model);
+                    this.purchaseOrderRepository.Update(this.Model);
                 }
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.PurchaseItemSaving,
+            Messages.PurchaseOrderSaving,
             () => { },
             Messages.MainWindowInitialStatus,
             UIContext.Current,
-            "Saving purchase item",
-            string.Format(Messages.PurchaseItemSaveError, this.Model.ToString()),
+            "Saving purchase order",
+            string.Format(Messages.PurchaseOrderSaveError, this.Model.ToString()),
             log,
             () =>
             {
-                // send load notification to the all purchase item view model
-                this.MessengerInstance.Send<NotificationMessage<AllPurchaseItemViewModel>>(
-                    new NotificationMessage<AllPurchaseItemViewModel>(null, null));
+                // send load notification to the all purchase order view model
+                this.MessengerInstance.Send<NotificationMessage<AllPurchaseOrderViewModel>>(
+                    new NotificationMessage<AllPurchaseOrderViewModel>(null, null));
 
             });
 
@@ -152,123 +155,129 @@ namespace CS499.TCMS.View.ViewModels
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Purchase Item model
+        /// Purchase Order model
         /// </summary>
-        public PurchaseItem Model;
+        public PurchaseOrder Model;
 
         /// <summary>
-        /// Purchase Item repository
+        /// purchase Order repository
         /// </summary>
-        private IPurchaseItemRepository purchaseItemRepository;
+        private IPurchaseOrderRepository purchaseOrderRepository;
 
         /// <summary>
-        /// Gets or sets the purchase orders.
+        /// Gets or sets the business partners.
         /// </summary>
         /// <value>
-        /// The purchase orders.
+        /// The business partners.
         /// </value>
-        public ObservableCollectionExtended<PurchaseOrder> Orders { get; set; }
-
-        private PurchaseOrder _selectedPurchaseOrder;
+        public ObservableCollectionExtended<BusinessPartner> BusinessPartners { get; set; }
 
         /// <summary>
-        /// Gets or sets the selected purchase order.
+        /// Gets or sets the manifests.
         /// </summary>
         /// <value>
-        /// The selected purchase order.
+        /// The manifests.
         /// </value>
-        public PurchaseOrder SelectedPurchaseOrder
+        public ObservableCollectionExtended<Manifest> Manifests { get; set; }
+
+        private BusinessPartner _selectedSource;
+
+        /// <summary>
+        /// Gets or sets the selected source.
+        /// </summary>
+        /// <value>
+        /// The selected source.
+        /// </value>
+        public BusinessPartner SelectedSource
         {
             get
             {
-                return _selectedPurchaseOrder;
+                return _selectedSource;
             }
             set
             {
 
-                if (_selectedPurchaseOrder == value)
+                if (_selectedSource == value)
                 {
                     return;
                 }
 
-                _selectedPurchaseOrder = value;
+                _selectedSource = value;
 
-                if (_selectedPurchaseOrder != null)
+                if (_selectedSource != null)
                 {
-                    this.OrderID = _selectedPurchaseOrder.OrderID;
+                    this.SourceID = _selectedSource.CompanyID;
                 }
 
-                base.OnPropertyChanged("SelectedPurchaseOrder");
+                base.OnPropertyChanged("SelectedSource");
 
             }
         }
 
-        /// <summary>
-        /// Gets or sets the parts.
-        /// </summary>
-        /// <value>
-        /// The parts.
-        /// </value>
-        public ObservableCollectionExtended<Part> Parts { get; set; }
-
-        private Part _selectedPart;
+        private BusinessPartner _selectedDestination;
 
         /// <summary>
-        /// Gets or sets the selected part.
+        /// Gets or sets the selected destination.
         /// </summary>
         /// <value>
-        /// The selected part.
+        /// The selected destination.
         /// </value>
-        public Part SelectedPart
+        public BusinessPartner SelectedDestination
         {
             get
             {
-                return _selectedPart;
+                return _selectedDestination;
             }
             set
             {
 
-                if (_selectedPart == value)
+                if (_selectedDestination == value)
                 {
                     return;
                 }
 
-                _selectedPart = value;
+                _selectedDestination = value;
 
-                if (_selectedPart != null)
+                if (_selectedDestination != null)
                 {
-                    this.PartID = _selectedPart.PartID;
+                    this.DestinationID = _selectedDestination.CompanyID;
                 }
 
-                base.OnPropertyChanged("SelectedPart");
+                base.OnPropertyChanged("SelectedDestination");
 
             }
         }
 
+        private Manifest _selectedManifest;
+
         /// <summary>
-        /// Gets or sets the item identifier.
+        /// Gets or sets the selected manifest.
         /// </summary>
         /// <value>
-        /// The item identifier.
+        /// The selected manifest.
         /// </value>
-        public long ItemID
+        public Manifest SelectedManifest
         {
             get
             {
-                return Model.ItemID;
+                return _selectedManifest;
             }
             set
             {
 
-                if (Model.ItemID == value)
+                if (_selectedManifest == value)
                 {
                     return;
                 }
 
-                Model.ItemID = value;
+                _selectedManifest = value;
 
-                base.OnPropertyChanged("ItemID");
-                this.HasChanges = true;
+                if (_selectedManifest != null)
+                {
+                    this.ManifestID = _selectedManifest.ManifestID;
+                }
+
+                base.OnPropertyChanged("SelectedManifest");
 
             }
         }
@@ -302,56 +311,140 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets the quantity.
+        /// Gets or sets the order number.
         /// </summary>
         /// <value>
-        /// The quantity.
+        /// The order number.
         /// </value>
-        public int Quantity
+        public long OrderNumber
         {
             get
             {
-                return Model.Quantity;
+                return Model.OrderNumber;
             }
             set
             {
 
-                if (Model.Quantity == value)
+                if (Model.OrderNumber == value)
                 {
                     return;
                 }
 
-                Model.Quantity = value;
+                Model.OrderNumber = value;
 
-                base.OnPropertyChanged("Quantity");
+                base.OnPropertyChanged("OrderNumber");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// Gets or sets the part identifier.
+        /// Gets or sets the source identifier.
         /// </summary>
         /// <value>
-        /// The part identifier.
+        /// The source identifier.
         /// </value>
-        public long PartID
+        public long SourceID
         {
             get
             {
-                return Model.PartID;
+                return Model.SourceID;
             }
             set
             {
 
-                if (Model.PartID == value)
+                if (Model.SourceID == value)
                 {
                     return;
                 }
 
-                Model.PartID = value;
+                Model.SourceID = value;
 
-                base.OnPropertyChanged("PartID");
+                base.OnPropertyChanged("SourceID");
+                this.HasChanges = true;
+
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the destination identifier.
+        /// </summary>
+        /// <value>
+        /// The destination identifier.
+        /// </value>
+        public long DestinationID
+        {
+            get
+            {
+                return Model.DestinationID;
+            }
+            set
+            {
+
+                if (Model.DestinationID == value)
+                {
+                    return;
+                }
+
+                Model.DestinationID = value;
+
+                base.OnPropertyChanged("DestinationID");
+                this.HasChanges = true;
+
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the manifest identifier.
+        /// </summary>
+        /// <value>
+        /// The manifest identifier.
+        /// </value>
+        public long ManifestID
+        {
+            get
+            {
+                return Model.ManifestID;
+            }
+            set
+            {
+
+                if (Model.ManifestID == value)
+                {
+                    return;
+                }
+
+                Model.ManifestID = value;
+
+                base.OnPropertyChanged("ManifestID");
+                this.HasChanges = true;
+
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether payment was made.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if payment made; otherwise, <c>false</c>.
+        /// </value>
+        public bool PaymentMade
+        {
+            get
+            {
+                return Model.PaymentMade;
+            }
+            set
+            {
+
+                if (Model.PaymentMade == value)
+                {
+                    return;
+                }
+
+                Model.PaymentMade = value;
+
+                base.OnPropertyChanged("PaymentMade");
                 this.HasChanges = true;
 
             }
@@ -380,7 +473,7 @@ namespace CS499.TCMS.View.ViewModels
             get
             {
                 string displayName = Model == null ? string.Empty : Model.ToString();
-                string msg = string.Format(Messages.PurchaseItemDisplayName, this.IsNew ? "New" : displayName);
+                string msg = string.Format(Messages.PurchaseOrderDisplayName, this.IsNew ? "New" : displayName);
                 return msg;
             }
             protected set

@@ -76,9 +76,9 @@ namespace CS499.TCMS.View.Views
             if (splash != null)
             {
 
-                if (watch.ElapsedMilliseconds <= 2000)
+                if (watch.ElapsedMilliseconds <= 8000)
                 {
-                    Thread.Sleep(2000);
+                    Thread.Sleep(8000);
                 }
 
                 splash.Dispatcher.BeginInvoke(new Action(() =>

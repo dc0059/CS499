@@ -15,7 +15,7 @@
       <Value Profile="(Default)">Emerald</Value>
     </Setting>
     <Setting Name="DevDatabase" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">tcms_dev</Value>
+      <Value Profile="(Default)">tcms</Value>
     </Setting>
     <Setting Name="ProductionDatabase" Type="System.String" Scope="Application">
       <Value Profile="(Default)">tcms</Value>

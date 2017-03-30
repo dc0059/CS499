@@ -13,38 +13,36 @@ using System.Windows.Input;
 namespace CS499.TCMS.View.ViewModels
 {
     /// <summary>
-    /// This class will handle the maintenance of the <see cref="PurchaseItem"/> model
+    /// This class will handle the maintenance of the <see cref="MaintenanceRecord"/> model
     /// </summary>
     /// <seealso cref="CS499.TCMS.View.ViewModels.WorkspaceViewModel" />
     /// <seealso cref="System.ComponentModel.IDataErrorInfo" />
     /// <seealso cref="CS499.TCMS.View.Interfaces.IChanges" />
     /// <seealso cref="CS499.TCMS.View.Interfaces.IKeyCommand" />
-    public class PurchaseItemViewModel : WorkspaceViewModel, IDataErrorInfo, IChanges, IKeyCommand
+    public class MaintenanceRecordViewModel : WorkspaceViewModel, IDataErrorInfo, IChanges, IKeyCommand
     {
 
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PurchaseItemViewModel"/> class.
+        /// Initializes a new instance of the <see cref="MaintenanceRecordViewModel"/> class.
         /// </summary>
-        /// <param name="model">model for the purchase item</param>
-        /// <param name="purchaseItemRepository">repository for database operations</param>
+        /// <param name="model">model for the maintenance record</param>
+        /// <param name="maintenanceRecordRepository">repository for database operations</param>
         /// <param name="taskManager">task manager to hold reference to running tasks</param>
-        /// <param name="isNew">flag indicating if this is a new purchase item</param>
-        /// <param name="purchaseOrders">The purchase orders.</param>
-        /// <param name="parts">The parts.</param>
-        public PurchaseItemViewModel(PurchaseItem model, IPurchaseItemRepository purchaseItemRepository, ITaskManager taskManager, bool isNew,
-            ObservableCollectionExtended<PurchaseOrder> purchaseOrders, ObservableCollectionExtended<Part> parts)
+        /// <param name="isNew">flag indicating if this is a new maintenance record</param>
+        /// <param name="vehicles">collection of all vehicles</param>
+        public MaintenanceRecordViewModel(MaintenanceRecord model, IMaintenanceRecordRepository maintenanceRecordRepository, ITaskManager taskManager, bool isNew,
+            ObservableCollectionExtended<Vehicle> vehicles)
         {
             this.Model = model;
-            this.purchaseItemRepository = purchaseItemRepository;
+            this.maintenanceRecordRepository = maintenanceRecordRepository;
             this.TaskManager = taskManager;
             this.IsNew = isNew;
             this.IsSelected = true;
             this.HasChanges = false;
-            this.ContentId = model.ItemID.GetContentId(this.DisplayName);
-            this.Orders = purchaseOrders;
-            this.Parts = parts;
+            this.ContentId = model.MaintenanceID.GetContentId(this.DisplayName);
+            this.Vehicles = vehicles;
             this.SetSelected(isNew);
         }
 
@@ -61,15 +59,12 @@ namespace CS499.TCMS.View.ViewModels
 
             if (isNew)
             {
-                this.SelectedPurchaseOrder = this.Orders.UnfilteredList.FirstOrDefault();
-                this.SelectedPart = this.Parts.UnfilteredList.FirstOrDefault();
+                this.SelectedVehicle = this.Vehicles.UnfilteredList.FirstOrDefault();
             }
             else
             {
-                this.SelectedPurchaseOrder = this.Orders.UnfilteredList
-                    .FirstOrDefault((p) => p.OrderID.Equals(this.OrderID));
-                this.SelectedPart = this.Parts.UnfilteredList
-                    .FirstOrDefault((p) => p.PartID.Equals(this.PartID));
+                this.SelectedVehicle = this.Vehicles.UnfilteredList
+                    .FirstOrDefault((v) => v.VehicleID.Equals(this.VehicleID));
             }
 
         }
@@ -87,27 +82,27 @@ namespace CS499.TCMS.View.ViewModels
                 // insert new viewModel or update current viewModel
                 if (this.IsNew)
                 {
-                    this.purchaseItemRepository.Insert(this.Model);
+                    this.maintenanceRecordRepository.Insert(this.Model);
                 }
                 else
                 {
-                    this.purchaseItemRepository.Update(this.Model);
+                    this.maintenanceRecordRepository.Update(this.Model);
                 }
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.PurchaseItemSaving,
+            Messages.MaintenanceRecordSaving,
             () => { },
             Messages.MainWindowInitialStatus,
             UIContext.Current,
-            "Saving purchase item",
-            string.Format(Messages.PurchaseItemSaveError, this.Model.ToString()),
+            "Saving maintenance record",
+            string.Format(Messages.MaintenanceRecordSaveError, this.Model.ToString()),
             log,
             () =>
             {
-                // send load notification to the all purchase item view model
-                this.MessengerInstance.Send<NotificationMessage<AllPurchaseItemViewModel>>(
-                    new NotificationMessage<AllPurchaseItemViewModel>(null, null));
+                // send load notification to the all maintenance record view model
+                this.MessengerInstance.Send<NotificationMessage<AllMaintenanceRecordViewModel>>(
+                    new NotificationMessage<AllMaintenanceRecordViewModel>(null, null));
 
             });
 
@@ -152,223 +147,165 @@ namespace CS499.TCMS.View.ViewModels
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Purchase Item model
+        /// Maintenance Record model
         /// </summary>
-        public PurchaseItem Model;
+        public MaintenanceRecord Model;
 
         /// <summary>
-        /// Purchase Item repository
+        /// Maintenance Record repository
         /// </summary>
-        private IPurchaseItemRepository purchaseItemRepository;
+        private IMaintenanceRecordRepository maintenanceRecordRepository;
 
         /// <summary>
-        /// Gets or sets the purchase orders.
+        /// Gets or sets the vehicles.
         /// </summary>
         /// <value>
-        /// The purchase orders.
+        /// The vehicles.
         /// </value>
-        public ObservableCollectionExtended<PurchaseOrder> Orders { get; set; }
+        public ObservableCollectionExtended<Vehicle> Vehicles { get; set; }
 
-        private PurchaseOrder _selectedPurchaseOrder;
+        private Vehicle _selectedVehicle;
 
         /// <summary>
-        /// Gets or sets the selected purchase order.
+        /// Gets or sets the selected vehicle.
         /// </summary>
         /// <value>
-        /// The selected purchase order.
+        /// The selected vehicle.
         /// </value>
-        public PurchaseOrder SelectedPurchaseOrder
+        public Vehicle SelectedVehicle
         {
             get
             {
-                return _selectedPurchaseOrder;
+                return _selectedVehicle;
             }
             set
             {
 
-                if (_selectedPurchaseOrder == value)
+                if (_selectedVehicle == value)
                 {
                     return;
                 }
 
-                _selectedPurchaseOrder = value;
+                _selectedVehicle = value;
 
-                if (_selectedPurchaseOrder != null)
+                if (_selectedVehicle != null)
                 {
-                    this.OrderID = _selectedPurchaseOrder.OrderID;
+                    this.VehicleID = _selectedVehicle.VehicleID;
                 }
 
-                base.OnPropertyChanged("SelectedPurchaseOrder");
+                base.OnPropertyChanged("SelectedVehicle");
 
             }
         }
 
         /// <summary>
-        /// Gets or sets the parts.
+        /// Gets or sets the maintenance identifier.
         /// </summary>
         /// <value>
-        /// The parts.
+        /// The maintenance identifier.
         /// </value>
-        public ObservableCollectionExtended<Part> Parts { get; set; }
-
-        private Part _selectedPart;
-
-        /// <summary>
-        /// Gets or sets the selected part.
-        /// </summary>
-        /// <value>
-        /// The selected part.
-        /// </value>
-        public Part SelectedPart
+        public long MaintenanceID
         {
             get
             {
-                return _selectedPart;
+                return Model.MaintenanceID;
             }
             set
             {
 
-                if (_selectedPart == value)
+                if (Model.MaintenanceID == value)
                 {
                     return;
                 }
 
-                _selectedPart = value;
+                Model.MaintenanceID = value;
 
-                if (_selectedPart != null)
-                {
-                    this.PartID = _selectedPart.PartID;
-                }
-
-                base.OnPropertyChanged("SelectedPart");
-
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the item identifier.
-        /// </summary>
-        /// <value>
-        /// The item identifier.
-        /// </value>
-        public long ItemID
-        {
-            get
-            {
-                return Model.ItemID;
-            }
-            set
-            {
-
-                if (Model.ItemID == value)
-                {
-                    return;
-                }
-
-                Model.ItemID = value;
-
-                base.OnPropertyChanged("ItemID");
+                base.OnPropertyChanged("MaintenanceID");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// Gets or sets the order identifier.
+        /// Gets or sets the vehicle identifier.
         /// </summary>
         /// <value>
-        /// The order identifier.
+        /// The vehicle identifier.
         /// </value>
-        public long OrderID
+        public long VehicleID
         {
             get
             {
-                return Model.OrderID;
+                return Model.VehicleID;
             }
             set
             {
 
-                if (Model.OrderID == value)
+                if (Model.VehicleID == value)
                 {
                     return;
                 }
 
-                Model.OrderID = value;
+                Model.VehicleID = value;
 
-                base.OnPropertyChanged("OrderID");
+                base.OnPropertyChanged("VehicleID");
+                this.HasChanges = true;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the maintenance date.
+        /// </summary>
+        /// <value>
+        /// The maintenance date.
+        /// </value>
+        public DateTime MaintenanceDate
+        {
+            get
+            {
+                return Model.MaintenanceDate;
+            }
+            set
+            {
+
+                if (Model.MaintenanceDate == value)
+                {
+                    return;
+                }
+
+                Model.MaintenanceDate = value;
+
+                base.OnPropertyChanged("MaintenanceDate");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// Gets or sets the quantity.
+        /// Gets or sets the maintenance description.
         /// </summary>
         /// <value>
-        /// The quantity.
+        /// The maintenance description.
         /// </value>
-        public int Quantity
+        public string MaintenanceDescription
         {
             get
             {
-                return Model.Quantity;
+                return Model.MaintenanceDescription;
             }
             set
             {
 
-                if (Model.Quantity == value)
+                if (Model.MaintenanceDescription == value)
                 {
                     return;
                 }
 
-                Model.Quantity = value;
+                Model.MaintenanceDescription = value;
 
-                base.OnPropertyChanged("Quantity");
+                base.OnPropertyChanged("MaintenanceDescription");
                 this.HasChanges = true;
 
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the part identifier.
-        /// </summary>
-        /// <value>
-        /// The part identifier.
-        /// </value>
-        public long PartID
-        {
-            get
-            {
-                return Model.PartID;
-            }
-            set
-            {
-
-                if (Model.PartID == value)
-                {
-                    return;
-                }
-
-                Model.PartID = value;
-
-                base.OnPropertyChanged("PartID");
-                this.HasChanges = true;
-
-            }
-        }
-
-        /// <summary>
-        /// Flag indicating this ViewModel is new
-        /// </summary>
-        public override bool IsNew
-        {
-            get
-            {
-                return base.IsNew;
-            }
-            set
-            {
-                base.IsNew = value;
             }
         }
 
@@ -380,7 +317,7 @@ namespace CS499.TCMS.View.ViewModels
             get
             {
                 string displayName = Model == null ? string.Empty : Model.ToString();
-                string msg = string.Format(Messages.PurchaseItemDisplayName, this.IsNew ? "New" : displayName);
+                string msg = string.Format(Messages.MaintenanceRecordDisplayName, this.IsNew ? "New" : displayName);
                 return msg;
             }
             protected set
@@ -456,7 +393,6 @@ namespace CS499.TCMS.View.ViewModels
                 return _commandSave;
             }
         }
-
         #endregion
 
     }
