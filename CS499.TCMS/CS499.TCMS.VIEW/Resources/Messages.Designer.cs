@@ -115,6 +115,60 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to delete maintenance part ({0}). Please contact support..
+        /// </summary>
+        internal static string AllMaintenancePartDeleteError {
+            get {
+                return ResourceManager.GetString("AllMaintenancePartDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting maintenance part... Please wait..
+        /// </summary>
+        internal static string AllMaintenancePartDeleting {
+            get {
+                return ResourceManager.GetString("AllMaintenancePartDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance Parts.
+        /// </summary>
+        internal static string AllMaintenancePartDisplayName {
+            get {
+                return ResourceManager.GetString("AllMaintenancePartDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to modify maintenance parts..
+        /// </summary>
+        internal static string AllMaintenancePartDisplayToolTip {
+            get {
+                return ResourceManager.GetString("AllMaintenancePartDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load maintenance parts. Please contact support..
+        /// </summary>
+        internal static string AllMaintenancePartLoadError {
+            get {
+                return ResourceManager.GetString("AllMaintenancePartLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading maintenance parts... Please wait..
+        /// </summary>
+        internal static string AllMaintenancePartLoading {
+            get {
+                return ResourceManager.GetString("AllMaintenancePartLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to delete maintenance record ({0}). Please contact support..
         /// </summary>
         internal static string AllMaintenanceRecordDeleteError {
@@ -129,6 +183,60 @@ namespace CS499.TCMS.View.Resources {
         internal static string AllMaintenanceRecordDeleting {
             get {
                 return ResourceManager.GetString("AllMaintenanceRecordDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to delete maintenance record detail. Please contact support..
+        /// </summary>
+        internal static string AllMaintenanceRecordDetailDeleteError {
+            get {
+                return ResourceManager.GetString("AllMaintenanceRecordDetailDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting maintenance record detail... Please wait..
+        /// </summary>
+        internal static string AllMaintenanceRecordDetailDeleting {
+            get {
+                return ResourceManager.GetString("AllMaintenanceRecordDetailDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance Record Details.
+        /// </summary>
+        internal static string AllMaintenanceRecordDetailDisplayName {
+            get {
+                return ResourceManager.GetString("AllMaintenanceRecordDetailDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to modify maintenance record details..
+        /// </summary>
+        internal static string AllMaintenanceRecordDetailDisplayToolTip {
+            get {
+                return ResourceManager.GetString("AllMaintenanceRecordDetailDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load maintenance record details. Please contact support..
+        /// </summary>
+        internal static string AllMaintenanceRecordDetailLoadError {
+            get {
+                return ResourceManager.GetString("AllMaintenanceRecordDetailLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading maintenance record details... Please wait..
+        /// </summary>
+        internal static string AllMaintenanceRecordDetailLoading {
+            get {
+                return ResourceManager.GetString("AllMaintenanceRecordDetailLoading", resourceCulture);
             }
         }
         
@@ -705,6 +813,78 @@ namespace CS499.TCMS.View.Resources {
         internal static string LogoutDisplayToolTip {
             get {
                 return ResourceManager.GetString("LogoutDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance Part: {0}.
+        /// </summary>
+        internal static string MaintenancePartDisplayName {
+            get {
+                return ResourceManager.GetString("MaintenancePartDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance Part: {0}.
+        /// </summary>
+        internal static string MaintenancePartDisplayToolTip {
+            get {
+                return ResourceManager.GetString("MaintenancePartDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to save maintenance part ({0}). Please contact support..
+        /// </summary>
+        internal static string MaintenancePartSaveError {
+            get {
+                return ResourceManager.GetString("MaintenancePartSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving maintenance part... Please wait..
+        /// </summary>
+        internal static string MaintenancePartSaving {
+            get {
+                return ResourceManager.GetString("MaintenancePartSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance Record Detail: {0}.
+        /// </summary>
+        internal static string MaintenanceRecordDetailDisplayName {
+            get {
+                return ResourceManager.GetString("MaintenanceRecordDetailDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance Record Detail: {0}.
+        /// </summary>
+        internal static string MaintenanceRecordDetailDisplayToolTip {
+            get {
+                return ResourceManager.GetString("MaintenanceRecordDetailDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to save maintenance record detail ({0}). Please contact support..
+        /// </summary>
+        internal static string MaintenanceRecordDetailSaveError {
+            get {
+                return ResourceManager.GetString("MaintenanceRecordDetailSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving maintenance record detail... Please wait..
+        /// </summary>
+        internal static string MaintenanceRecordDetailSaving {
+            get {
+                return ResourceManager.GetString("MaintenanceRecordDetailSaving", resourceCulture);
             }
         }
         

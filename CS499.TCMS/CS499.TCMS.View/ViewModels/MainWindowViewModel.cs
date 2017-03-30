@@ -486,7 +486,8 @@ namespace CS499.TCMS.View.ViewModels
                         Messages.AllPayrollDisplayName,
                         Messages.AllPayrollDisplayToolTip,
                         new RelayCommand(param => this.ExecuteCommand(() =>
-                        this.CreateDocument<AllPayrollViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPayrollRepository>()))),
+                        this.CreateDocument<AllPayrollViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPayrollRepository>(),
+                        Factory.Create<IUserRepository>()))),
                             "Money"));
 
             commandList.Add(
@@ -541,6 +542,24 @@ namespace CS499.TCMS.View.ViewModels
                         Factory.Create<IVehicleRepository>()))),
                             "Tools"));
 
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllMaintenanceRecordDetailDisplayName,
+                        Messages.AllMaintenanceRecordDetailDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllMaintenanceRecordDetailViewModel>(this.Dialog, this.TaskManager, Factory.Create<IMaintenanceRecordDetailRepository>(),
+                        Factory.Create<IMaintenanceRecordRepository>(), Factory.Create<IUserRepository>()))),
+                            "PeopleProfile"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllMaintenancePartDisplayName,
+                        Messages.AllMaintenancePartDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllMaintenancePartViewModel>(this.Dialog, this.TaskManager, Factory.Create<IMaintenancePartRepository>(),
+                        Factory.Create<IMaintenanceRecordDetailRepository>(), Factory.Create<IPartRepository>()))),
+                            "ListAddBelow"));
+
 
         }
 
@@ -578,7 +597,7 @@ namespace CS499.TCMS.View.ViewModels
                 try
                 {
 
-                    if (true)
+                    if (false)
                     {
 
                         // show login dialog

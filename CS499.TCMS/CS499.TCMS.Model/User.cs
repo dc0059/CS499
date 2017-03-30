@@ -264,7 +264,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidatePayRate()
         {
-            if (this.PayRate < 0.0)
+            if (this.PayRate <= 0.0)
                 return Messages.InvalidValue;
             return null;
         }

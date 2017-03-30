@@ -17,12 +17,12 @@ namespace CS499.TCMS.Model
         /// </summary>
         /// <param name="mainPartID">unique identifier</param>
         /// <param name="quantity">quantity of the part</param>
-        /// <param name="maintenanceID">identifier of the maintenance record the maintenance part is part of</param>
-        public MaintenancePart(long mainPartID, int quantity, long maintenanceID, long partID)
+        /// <param name="detailID">identifier of the maintenance record the maintenance part is part of</param>
+        public MaintenancePart(long mainPartID, int quantity, long detailID, long partID)
         {
             this.MaintenancePartID = mainPartID;
             this.Quantity = quantity;
-            this.MaintenanceID = maintenanceID;
+            this.DetailID = detailID;
             this.PartID = partID;
         }
         #endregion
@@ -46,8 +46,8 @@ namespace CS499.TCMS.Model
                 case "Quantity":
                     error = this.ValidateQuantity();
                     break;
-                case "MaintenanceID":
-                    error = this.ValidateMaintenanceID();
+                case "DetailID":
+                    error = this.ValidateDetailID();
                     break;
                 case "PartID":
                     error = this.ValidatePartID();
@@ -77,7 +77,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateQuantity()
         {
-            if (this.Quantity < 0)
+            if (this.Quantity <= 0)
                 return Messages.InvalidValue;
             return null;
         }
@@ -86,9 +86,9 @@ namespace CS499.TCMS.Model
         /// Validate the maintenance ID
         /// </summary>
         /// <returns>string for the error</returns>
-        private string ValidateMaintenanceID()
+        private string ValidateDetailID()
         {
-            if (this.MaintenanceID < 0)
+            if (this.DetailID <= 0)
                 return Messages.InvalidID;
             else
                 return null;
@@ -100,7 +100,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidatePartID()
         {
-            if (this.PartID < 0)
+            if (this.PartID <= 0)
                 return Messages.InvalidID;
             else
                 return null;
@@ -118,7 +118,7 @@ namespace CS499.TCMS.Model
 
         public override string ToString()
         {
-            return string.Format("Part #{0} used in Maintenance #{1}", this.MaintenancePartID, this.MaintenanceID);
+            return string.Format("Part #{0} used in Maintenance #{1}", this.MaintenancePartID, this.DetailID);
         }
 
         public override bool Equals(object obj)
@@ -127,7 +127,7 @@ namespace CS499.TCMS.Model
             {
                 MaintenancePart other = obj as MaintenancePart;
                 return this.MaintenancePartID.Equals(other.MaintenancePartID) &&
-                    this.MaintenanceID.Equals(other.MaintenanceID) &&
+                    this.DetailID.Equals(other.DetailID) &&
                     this.PartID.Equals(other.PartID) &&
                     this.Quantity.Equals(other.Quantity);
             }
@@ -194,7 +194,7 @@ namespace CS499.TCMS.Model
         {
             "MaintenancePartID",
             "Quantity",
-            "MaintenanceID",
+            "DetailID",
             "PartID"
         };
 
@@ -211,7 +211,7 @@ namespace CS499.TCMS.Model
         /// <summary>
         /// Identifier of the maintenance record associate
         /// </summary>
-        public long MaintenanceID { get; set; }
+        public long DetailID { get; set; }
 
         /// <summary>
         /// Identifier of the part this maintenance part is associated with

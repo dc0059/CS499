@@ -373,7 +373,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Direction = ParameterDirection.Input,
                 Name = "P_MaintenanceRecordID",
                 Type = DbType.Int64,
-                Value = model.MaintenanceID
+                Value = model.DetailID
             });
             definition.Parameters.Add(new ParameterDefinition()
             {
@@ -432,7 +432,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Direction = ParameterDirection.Input,
                 Name = "P_MaintenanceRecordID",
                 Type = DbType.Int64,
-                Value = model.MaintenanceID
+                Value = model.DetailID
             });
             definition.Parameters.Add(new ParameterDefinition()
             {

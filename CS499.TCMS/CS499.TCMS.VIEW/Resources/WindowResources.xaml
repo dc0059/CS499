@@ -101,7 +101,9 @@
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" />
+                    <WrapPanel Orientation="Vertical"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
@@ -228,6 +230,18 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:MaintenanceRecordViewModel}">
         <vw:MaintenanceRecordView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllMaintenanceRecordDetailViewModel}">
+        <vw:AllMaintenanceRecordDetailView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:MaintenanceRecordDetailViewModel}">
+        <vw:MaintenanceRecordDetailView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllMaintenancePartViewModel}">
+        <vw:AllMaintenancePartView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:MaintenancePartViewModel}">
+        <vw:MaintenancePartView />
     </DataTemplate>
 
 </ResourceDictionary>

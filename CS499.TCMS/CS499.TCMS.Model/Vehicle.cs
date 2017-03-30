@@ -138,7 +138,7 @@ namespace CS499.TCMS.Model
         /// <returns></returns>
         private string ValidateCapacity()
         {
-            if (this.Capacity < 0)
+            if (this.Capacity <= 0)
                 return Messages.InvalidID;
             return null;
         }

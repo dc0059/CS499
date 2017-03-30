@@ -77,7 +77,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateOrderID()
         {
-            if (this.OrderID < 0)
+            if (this.OrderID <= 0)
                 return Messages.InvalidID;
             return null;
         }
@@ -100,7 +100,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidatePartID()
         {
-            if (this.PartID < 0)
+            if (this.PartID <= 0)
                 return Messages.InvalidID;
             return null;
         }

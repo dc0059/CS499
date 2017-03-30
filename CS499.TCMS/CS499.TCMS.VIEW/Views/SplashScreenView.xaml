@@ -10,34 +10,79 @@
         WindowStyle="None"
         ShowInTaskbar="False"
         Topmost="True"
-        ResizeMode="NoResize"
-        Background="{StaticResource AccentColorBrush}">
-    <Grid>        
+        ResizeMode="NoResize">
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <ColorAnimation From="Red" 
+                                    To="Yellow" 
+                                    Storyboard.TargetName="progressRing"
+                                    Storyboard.TargetProperty="(TextBlock.Foreground).Color"
+                                    BeginTime="0:0:2"
+                                    Duration="0:0:2"/>
+                    <ColorAnimation From="Yellow" 
+                                    To="Green" 
+                                    Storyboard.TargetName="progressRing"
+                                    Storyboard.TargetProperty="(TextBlock.Foreground).Color"
+                                    BeginTime="0:0:4"
+                                    Duration="0:0:2"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid>
+
+        <Grid.Background>
+            <ImageBrush TileMode="None" ImageSource="splash_image.png">
+
+            </ImageBrush>
+        </Grid.Background>
         <DockPanel>
             <Controls:MetroContentControl>
-                <StackPanel Orientation="Vertical" 
-                            VerticalAlignment="Center" 
-                            HorizontalAlignment="Center"
-                            Width="Auto">
-                    <TextBlock Foreground="White"
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Foreground="Brown"
                                FontSize="24"
                                FontWeight="Medium"
-                               HorizontalAlignment="Center">
+                               Width="300"
+                               HorizontalAlignment="Left"
+                               TextWrapping="Wrap"
+                               Margin="10"
+                               Grid.Row="0"
+                               Grid.Column="0">
                         Trucking Company Management System
                     </TextBlock>
-                    <Controls:MetroProgressBar IsIndeterminate="True"
-                                               Minimum="0"
-                                               Maximum="100"
-                                               Width="474"
-                                               Height="22"
-                                               EllipseDiameter="9"
-                                               Foreground="White"/>
+                    <StackPanel Grid.Column="0"
+                                Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <Controls:ProgressRing Name="progressRing" 
+                                               Foreground="red" 
+                                               EllipseDiameterScale="1"
+                                               Height="150"
+                                               Width="150"/>
+                    </StackPanel>
                     <TextBlock Name="Status"
-                               
                                Foreground="White"
-                               FontSize="14"
-                               HorizontalAlignment="Center">Connecting to database... please wait.</TextBlock>
-                </StackPanel>
+                               FontSize="19"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Bottom"
+                               Grid.Column="0"
+                               Grid.Row="2"
+                               Margin="10, 5, 0, 5">Connecting to database... please wait.</TextBlock>
+                </Grid>
             </Controls:MetroContentControl>
 
         </DockPanel>

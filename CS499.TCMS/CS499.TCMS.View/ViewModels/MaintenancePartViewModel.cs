@@ -13,32 +13,38 @@ using System.Windows.Input;
 namespace CS499.TCMS.View.ViewModels
 {
     /// <summary>
-    /// This class will handle the maintenance of the payroll model
+    /// This class will handle the maintenance of the <see cref="MaintenancePart"/> model
     /// </summary>
-    public class PayrollViewModel : WorkspaceViewModel, IDataErrorInfo, IChanges, IKeyCommand
+    /// <seealso cref="CS499.TCMS.View.ViewModels.WorkspaceViewModel" />
+    /// <seealso cref="System.ComponentModel.IDataErrorInfo" />
+    /// <seealso cref="CS499.TCMS.View.Interfaces.IChanges" />
+    /// <seealso cref="CS499.TCMS.View.Interfaces.IKeyCommand" />
+    public class MaintenancePartViewModel : WorkspaceViewModel, IDataErrorInfo, IChanges, IKeyCommand
     {
 
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PayrollViewModel"/> class.
+        /// Initializes a new instance of the <see cref="MaintenancePartViewModel"/> class.
         /// </summary>
-        /// <param name="model">model for the payroll</param>
-        /// <param name="payrollRepository">repository for database operations</param>
+        /// <param name="model">model for the maintenance part</param>
+        /// <param name="maintenancePartRepository">repository for database operations</param>
         /// <param name="taskManager">task manager to hold reference to running tasks</param>
-        /// <param name="isNew">flag indicating if this is a new payroll</param>
-        /// <param name="users">collection of all users</param>
-        public PayrollViewModel(Payroll model, IPayrollRepository payrollRepository, ITaskManager taskManager, bool isNew,
-            ObservableCollectionExtended<User> users)
+        /// <param name="isNew">flag indicating if this is a new maintenance part</param>
+        /// <param name="maintenanceRecordDetails">The purchase orders.</param>
+        /// <param name="parts">The parts.</param>
+        public MaintenancePartViewModel(MaintenancePart model, IMaintenancePartRepository maintenancePartRepository, ITaskManager taskManager, bool isNew,
+            ObservableCollectionExtended<MaintenanceRecordDetail> maintenanceRecordDetails, ObservableCollectionExtended<Part> parts)
         {
             this.Model = model;
-            this.payrollRepository = payrollRepository;
+            this.maintenancePartRepository = maintenancePartRepository;
             this.TaskManager = taskManager;
             this.IsNew = isNew;
             this.IsSelected = true;
             this.HasChanges = false;
-            this.ContentId = model.EmployeeID.GetContentId(this.DisplayName);
-            this.Users = users;
+            this.ContentId = model.MaintenancePartID.GetContentId(this.DisplayName);
+            this.MaintenanceRecordDetails = maintenanceRecordDetails;
+            this.Parts = parts;
             this.SetSelected(isNew);
         }
 
@@ -55,12 +61,15 @@ namespace CS499.TCMS.View.ViewModels
 
             if (isNew)
             {
-                this.SelectedUser = this.Users.UnfilteredList.FirstOrDefault();
+                this.SelectedMaintenanceRecordDetail = this.MaintenanceRecordDetails.UnfilteredList.FirstOrDefault();
+                this.SelectedPart = this.Parts.UnfilteredList.FirstOrDefault();
             }
             else
             {
-                this.SelectedUser = this.Users.UnfilteredList
-                    .FirstOrDefault((u) => u.EmployeeID.Equals(this.EmployeeID));
+                this.SelectedMaintenanceRecordDetail = this.MaintenanceRecordDetails.UnfilteredList
+                    .FirstOrDefault((i) => i.DetailID.Equals(this.DetailID));
+                this.SelectedPart = this.Parts.UnfilteredList
+                    .FirstOrDefault((p) => p.PartID.Equals(this.PartID));
             }
 
         }
@@ -78,27 +87,27 @@ namespace CS499.TCMS.View.ViewModels
                 // insert new viewModel or update current viewModel
                 if (this.IsNew)
                 {
-                    this.payrollRepository.Insert(this.Model);
+                    this.maintenancePartRepository.Insert(this.Model);
                 }
                 else
                 {
-                    this.payrollRepository.Update(this.Model);
+                    this.maintenancePartRepository.Update(this.Model);
                 }
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.PayrollSaving,
-            () => {},
+            Messages.MaintenancePartSaving,
+            () => { },
             Messages.MainWindowInitialStatus,
             UIContext.Current,
-            "Saving payroll",
-            Messages.PayrollSaveError,
+            "Saving maintenance part",
+            string.Format(Messages.MaintenancePartSaveError, this.Model.ToString()),
             log,
             () =>
             {
-                // send load notification to the all payroll view model
-                this.MessengerInstance.Send<NotificationMessage<AllPayrollViewModel>>(
-                    new NotificationMessage<AllPayrollViewModel>(null, null));
+                // send load notification to the all maintenance part view model
+                this.MessengerInstance.Send<NotificationMessage<AllMaintenancePartViewModel>>(
+                    new NotificationMessage<AllMaintenancePartViewModel>(null, null));
 
             });
 
@@ -132,7 +141,7 @@ namespace CS499.TCMS.View.ViewModels
             }
 
         }
-    
+
         #endregion
 
         #region Properties
@@ -143,152 +152,206 @@ namespace CS499.TCMS.View.ViewModels
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// payroll model
+        /// Maintenance Part model
         /// </summary>
-        public Payroll Model;
+        public MaintenancePart Model;
 
         /// <summary>
-        /// payroll repository
+        /// Maintenance Part repository
         /// </summary>
-        private IPayrollRepository payrollRepository;
+        private IMaintenancePartRepository maintenancePartRepository;
 
         /// <summary>
-        /// Gets or sets the users.
+        /// Gets or sets the maintenance record details.
         /// </summary>
         /// <value>
-        /// The users.
+        /// The maintenance record details.
         /// </value>
-        public ObservableCollectionExtended<User> Users { get; set; }
+        public ObservableCollectionExtended<MaintenanceRecordDetail> MaintenanceRecordDetails { get; set; }
 
-        private User _selectedUser;
+        private MaintenanceRecordDetail _selectedMaintenanceRecordDetail;
 
         /// <summary>
-        /// Gets or sets the selected user.
+        /// Gets or sets the selected maintenance record detail.
         /// </summary>
         /// <value>
-        /// The selected user.
+        /// The selected maintenance record detail.
         /// </value>
-        public User SelectedUser
+        public MaintenanceRecordDetail SelectedMaintenanceRecordDetail
         {
             get
             {
-                return _selectedUser;
+                return _selectedMaintenanceRecordDetail;
             }
             set
             {
 
-                if (_selectedUser == value)
+                if (_selectedMaintenanceRecordDetail == value)
                 {
                     return;
                 }
 
-                _selectedUser = value;
+                _selectedMaintenanceRecordDetail = value;
 
-                if (_selectedUser != null)
+                if (_selectedMaintenanceRecordDetail != null)
                 {
-                    this.EmployeeID = _selectedUser.EmployeeID;
+                    this.DetailID = _selectedMaintenanceRecordDetail.DetailID;
                 }
 
-                base.OnPropertyChanged("SelectedUser");
+                base.OnPropertyChanged("SelectedMaintenanceRecordDetail");
 
             }
         }
 
         /// <summary>
-        /// <see cref="Payroll"/>
+        /// Gets or sets the parts.
         /// </summary>
-        public long EmployeeID
+        /// <value>
+        /// The parts.
+        /// </value>
+        public ObservableCollectionExtended<Part> Parts { get; set; }
+
+        private Part _selectedPart;
+
+        /// <summary>
+        /// Gets or sets the selected part.
+        /// </summary>
+        /// <value>
+        /// The selected part.
+        /// </value>
+        public Part SelectedPart
         {
             get
             {
-                return Model.EmployeeID;
+                return _selectedPart;
             }
             set
             {
 
-                if (Model.EmployeeID == value)
+                if (_selectedPart == value)
                 {
                     return;
                 }
 
-                Model.EmployeeID = value;
+                _selectedPart = value;
 
-                base.OnPropertyChanged("EmployeeID");
+                if (_selectedPart != null)
+                {
+                    this.PartID = _selectedPart.PartID;
+                }
+
+                base.OnPropertyChanged("SelectedPart");
+
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the maintenance part identifier.
+        /// </summary>
+        /// <value>
+        /// The maintenance part identifier.
+        /// </value>
+        public long MaintenancePartID
+        {
+            get
+            {
+                return Model.MaintenancePartID;
+            }
+            set
+            {
+
+                if (Model.MaintenancePartID == value)
+                {
+                    return;
+                }
+
+                Model.MaintenancePartID = value;
+
+                base.OnPropertyChanged("MaintenancePartID");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="Payroll"/>
+        /// Gets or sets the quantity.
         /// </summary>
-        public DateTime PaymentDate
+        /// <value>
+        /// The quantity.
+        /// </value>
+        public int Quantity
         {
             get
             {
-                return Model.PaymentDate;
+                return Model.Quantity;
             }
             set
             {
 
-                if (Model.PaymentDate == value)
+                if (Model.Quantity == value)
                 {
                     return;
                 }
 
-                Model.PaymentDate = value;
+                Model.Quantity = value;
 
-                base.OnPropertyChanged("PaymentDate");
+                base.OnPropertyChanged("Quantity");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="Payroll"/>
+        /// Gets or sets the detail identifier.
         /// </summary>
-        public double Payment
+        /// <value>
+        /// The detail identifier.
+        /// </value>
+        public long DetailID
         {
             get
             {
-                return Model.Payment;
+                return Model.DetailID;
             }
             set
             {
 
-                if (Model.Payment == value)
+                if (Model.DetailID == value)
                 {
                     return;
                 }
 
-                Model.Payment = value;
+                Model.DetailID = value;
 
-                base.OnPropertyChanged("Payment");
+                base.OnPropertyChanged("DetailID");
                 this.HasChanges = true;
 
             }
         }
 
         /// <summary>
-        /// <see cref="Payroll"/>
+        /// Gets or sets the part identifier.
         /// </summary>
-        public double HoursWorked
+        /// <value>
+        /// The part identifier.
+        /// </value>
+        public long PartID
         {
             get
             {
-                return Model.HoursWorked;
+                return Model.PartID;
             }
             set
             {
 
-                if (Model.HoursWorked == value)
+                if (Model.PartID == value)
                 {
                     return;
                 }
 
-                Model.HoursWorked = value;
+                Model.PartID = value;
 
-                base.OnPropertyChanged("HoursWorked");
+                base.OnPropertyChanged("PartID");
                 this.HasChanges = true;
 
             }
@@ -317,7 +380,7 @@ namespace CS499.TCMS.View.ViewModels
             get
             {
                 string displayName = Model == null ? string.Empty : Model.ToString();
-                string msg = string.Format(Messages.PayrollDisplayName, this.IsNew ? "New" : displayName);
+                string msg = string.Format(Messages.MaintenancePartDisplayName, this.IsNew ? "New" : displayName);
                 return msg;
             }
             protected set

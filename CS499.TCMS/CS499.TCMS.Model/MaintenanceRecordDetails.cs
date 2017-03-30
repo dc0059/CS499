@@ -84,7 +84,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateMaintenanceID()
         {
-            if (this.MaintenanceID < 0)
+            if (this.MaintenanceID <= 0)
                 return Messages.InvalidID;
             return null;
         }
@@ -95,7 +95,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateEmployeeID()
         {
-            if (this.EmployeeID < 0)
+            if (this.EmployeeID <= 0)
                 return Messages.InvalidID;
             else
                 return null;
@@ -255,6 +255,7 @@ namespace CS499.TCMS.Model
         {
             get { return this.GetValidationError(propertyName); }
         }
+        
         #endregion
     }
 }

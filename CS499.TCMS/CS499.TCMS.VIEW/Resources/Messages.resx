@@ -480,4 +480,64 @@
   <data name="VehicleSaving" xml:space="preserve">
     <value>Saving vehicle... Please wait.</value>
   </data>
+  <data name="AllMaintenanceRecordDetailDeleteError" xml:space="preserve">
+    <value>Failed to delete maintenance record detail. Please contact support.</value>
+  </data>
+  <data name="AllMaintenanceRecordDetailDeleting" xml:space="preserve">
+    <value>Deleting maintenance record detail... Please wait.</value>
+  </data>
+  <data name="AllMaintenanceRecordDetailDisplayName" xml:space="preserve">
+    <value>Maintenance Record Details</value>
+  </data>
+  <data name="AllMaintenanceRecordDetailDisplayToolTip" xml:space="preserve">
+    <value>Click here to modify maintenance record details.</value>
+  </data>
+  <data name="AllMaintenanceRecordDetailLoadError" xml:space="preserve">
+    <value>Failed to load maintenance record details. Please contact support.</value>
+  </data>
+  <data name="AllMaintenanceRecordDetailLoading" xml:space="preserve">
+    <value>Loading maintenance record details... Please wait.</value>
+  </data>
+  <data name="MaintenancePartDisplayName" xml:space="preserve">
+    <value>Maintenance Part: {0}</value>
+  </data>
+  <data name="MaintenancePartDisplayToolTip" xml:space="preserve">
+    <value>Maintenance Part: {0}</value>
+  </data>
+  <data name="MaintenancePartSaveError" xml:space="preserve">
+    <value>Failed to save maintenance part ({0}). Please contact support.</value>
+  </data>
+  <data name="MaintenancePartSaving" xml:space="preserve">
+    <value>Saving maintenance part... Please wait.</value>
+  </data>
+  <data name="MaintenanceRecordDetailDisplayName" xml:space="preserve">
+    <value>Maintenance Record Detail: {0}</value>
+  </data>
+  <data name="MaintenanceRecordDetailDisplayToolTip" xml:space="preserve">
+    <value>Maintenance Record Detail: {0}</value>
+  </data>
+  <data name="MaintenanceRecordDetailSaveError" xml:space="preserve">
+    <value>Failed to save maintenance record detail ({0}). Please contact support.</value>
+  </data>
+  <data name="MaintenanceRecordDetailSaving" xml:space="preserve">
+    <value>Saving maintenance record detail... Please wait.</value>
+  </data>
+  <data name="AllMaintenancePartDeleteError" xml:space="preserve">
+    <value>Failed to delete maintenance part ({0}). Please contact support.</value>
+  </data>
+  <data name="AllMaintenancePartDeleting" xml:space="preserve">
+    <value>Deleting maintenance part... Please wait.</value>
+  </data>
+  <data name="AllMaintenancePartDisplayName" xml:space="preserve">
+    <value>Maintenance Parts</value>
+  </data>
+  <data name="AllMaintenancePartDisplayToolTip" xml:space="preserve">
+    <value>Click here to modify maintenance parts.</value>
+  </data>
+  <data name="AllMaintenancePartLoadError" xml:space="preserve">
+    <value>Failed to load maintenance parts. Please contact support.</value>
+  </data>
+  <data name="AllMaintenancePartLoading" xml:space="preserve">
+    <value>Loading maintenance parts... Please wait.</value>
+  </data>
 </root>

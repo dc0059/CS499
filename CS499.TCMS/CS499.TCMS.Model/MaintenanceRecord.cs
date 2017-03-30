@@ -78,7 +78,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateVehicleID()
         {
-            if (this.VehicleID < 0)
+            if (this.VehicleID <= 0)
                 return Messages.InvalidID;
             return null;
         }

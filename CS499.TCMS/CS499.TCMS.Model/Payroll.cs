@@ -82,7 +82,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateEmployeeID()
         {
-            if (this.EmployeeID < 0)
+            if (this.EmployeeID <= 0)
                 return Messages.InvalidID;
             return null;
         }
@@ -104,7 +104,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidatePayment()
         {
-            if (this.Payment < 0.0)
+            if (this.Payment <= 0.0)
                 return Messages.InvalidValue;
             return null;
         }
@@ -115,7 +115,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateHoursWorked()
         {
-            if (this.HoursWorked < 0.0)
+            if (this.HoursWorked <= 0.0)
                 return Messages.InvalidValue;
             return null;
         }

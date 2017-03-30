@@ -84,7 +84,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateOrderNumber()
         {
-            if (this.OrderNumber < 0)
+            if (this.OrderNumber <= 0)
                 return Messages.InvalidID;
             else
                 return null;
@@ -96,7 +96,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateSourceID()
         {
-            if (this.SourceID < 0)
+            if (this.SourceID <= 0)
                 return Messages.InvalidID;
             return null;
         }
@@ -107,7 +107,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateDestinationID()
         {
-            if (this.DestinationID < 0)
+            if (this.DestinationID <= 0)
                 return Messages.InvalidID;
             return null;
         }
@@ -118,7 +118,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidateManifestID()
         {
-            if (this.ManifestID < 0)
+            if (this.ManifestID <= 0)
                 return Messages.InvalidID;
             return null;
         }

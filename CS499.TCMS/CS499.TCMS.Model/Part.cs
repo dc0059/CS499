@@ -87,7 +87,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidatePartNumber()
         {
-            if (this.PartNumber < 0)
+            if (this.PartNumber <= 0)
                 return Messages.InvalidID;
             return null;
         }
@@ -118,7 +118,7 @@ namespace CS499.TCMS.Model
         /// <returns>string for the error</returns>
         private string ValidatePartWeight()
         {
-            if (this.PartWeight < 0.0)
+            if (this.PartWeight <= 0.0)
                 return Messages.InvalidValue;
             return null;
         }

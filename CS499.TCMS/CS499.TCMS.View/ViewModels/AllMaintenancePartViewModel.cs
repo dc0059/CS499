@@ -14,38 +14,47 @@ using System.Windows.Input;
 namespace CS499.TCMS.View.ViewModels
 {
     /// <summary>
-    /// This class will handle the maintenance of the payroll view model
+    /// This class will handle the maintenance of the <see cref="MaintenancePartViewModel"/>
     /// </summary>
-    public class AllPayrollViewModel : WorkspaceViewModel, IKeyCommand
+    /// <seealso cref="CS499.TCMS.View.ViewModels.WorkspaceViewModel" />
+    /// <seealso cref="CS499.TCMS.View.Interfaces.IKeyCommand" />
+    public class AllMaintenancePartViewModel : WorkspaceViewModel, IKeyCommand
     {
 
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AllPayrollViewModel"/> class.
+        /// Initializes a new instance of the <see cref="AllMaintenancePartViewModel"/> class.
         /// </summary>
         /// <param name="dialog">Dialog service to show messages from ViewModel</param>
         /// <param name="taskManager">Task manager to hold reference to running tasks</param>
-        /// <param name="payrollRepository">The payroll repository.</param>
-        /// <param name="userRepository">The user repository.</param>
-        public AllPayrollViewModel(IDialogService dialog, ITaskManager taskManager, IPayrollRepository payrollRepository,
-            IUserRepository userRepository)
+        /// <param name="maintenancePartRepository">The maintenance part repository.</param>
+        /// <param name="maintenanceRecordDetailRepository">The maintenance record detail repository.</param>
+        /// <param name="partRepository">The part repository.</param>
+        public AllMaintenancePartViewModel(IDialogService dialog, ITaskManager taskManager,
+            IMaintenancePartRepository maintenancePartRepository, IMaintenanceRecordDetailRepository maintenanceRecordDetailRepository,
+            IPartRepository partRepository)
         {
             this.dialog = dialog;
             this.TaskManager = taskManager;
             this.IsSelected = true;
-            this.ViewModels = new ObservableCollectionExtended<PayrollViewModel>(new List<PayrollViewModel>());
-            this.Users = new ObservableCollectionExtended<User>(new List<User>());
+            this.ViewModels = new ObservableCollectionExtended<MaintenancePartViewModel>(new List<MaintenancePartViewModel>());
+            this.MaintenanceRecordDetails = new ObservableCollectionExtended<MaintenanceRecordDetail>(new List<MaintenanceRecordDetail>());
+            this.Parts = new ObservableCollectionExtended<Part>(new List<Part>());
             this.ViewModels.PageSize = 10;
-            this.Users.PageSize = 100000;
-            this.DisplayName = Messages.AllPayrollDisplayName;
-            this.DisplayToolTip = Messages.AllPayrollDisplayToolTip;
-            this.payrollRepository = payrollRepository;
-            this.userRepository = userRepository;
-            this.LoadUsers();
+            this.MaintenanceRecordDetails.PageSize = 100000;
+            this.Parts.PageSize = 100000;
+            this.DisplayName = Messages.AllMaintenancePartDisplayName;
+            this.DisplayToolTip = Messages.AllMaintenancePartDisplayToolTip;
+            this.maintenancePartRepository = maintenancePartRepository;
+            this.maintenanceRecordDetailRepository = maintenanceRecordDetailRepository;
+            this.partRepository = partRepository;
+            this.LoadMaintenanceRecordDetails();
+            this.LoadParts();
             this.Load();
-            this.MessengerInstance.Register<NotificationMessage<AllPayrollViewModel>>(this, (n) => this.Load(n));
-            this.MessengerInstance.Register<NotificationMessage<AllUserViewModel>>(this, (n) => this.LoadUsers(n));
+            this.MessengerInstance.Register<NotificationMessage<AllMaintenancePartViewModel>>(this, (n) => this.Load(n));
+            this.MessengerInstance.Register<NotificationMessage<AllMaintenanceRecordDetailViewModel>>(this, (n) => this.LoadMaintenanceRecordDetails(n));
+            this.MessengerInstance.Register<NotificationMessage<AllPartViewModel>>(this, (n) => this.LoadParts(n));
             this.SearchType = "contains";
         }
 
@@ -57,7 +66,7 @@ namespace CS499.TCMS.View.ViewModels
         /// Load list of ViewModels
         /// </summary>
         /// <param name="notificationMessage">notification message</param>
-        private void Load(NotificationMessage<AllPayrollViewModel> notificationMessage)
+        private void Load(NotificationMessage<AllMaintenancePartViewModel> notificationMessage)
         {
             this.Load();
         }
@@ -66,9 +75,18 @@ namespace CS499.TCMS.View.ViewModels
         /// Load list of models
         /// </summary>
         /// <param name="notificationMessage">notification message</param>
-        private void LoadUsers(NotificationMessage<AllUserViewModel> notificationMessage)
+        private void LoadMaintenanceRecordDetails(NotificationMessage<AllMaintenanceRecordDetailViewModel> notificationMessage)
         {
-            this.LoadUsers();
+            this.LoadMaintenanceRecordDetails();
+        }
+
+        /// <summary>
+        /// Load list of models
+        /// </summary>
+        /// <param name="notificationMessage">notification message</param>
+        private void LoadParts(NotificationMessage<AllPartViewModel> notificationMessage)
+        {
+            this.LoadParts();
         }
 
         /// <summary>
@@ -77,13 +95,13 @@ namespace CS499.TCMS.View.ViewModels
         private void Load()
         {
 
-            List<Payroll> ViewModels = null;
+            List<MaintenancePart> ViewModels = null;
 
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
-                ViewModels = payrollRepository.GetAll().ToList();
+                ViewModels = maintenancePartRepository.GetAll().ToList();
 
                 // wait for other tasks to complete
                 while (this.TaskManager.TaskCount() > 1)
@@ -93,7 +111,7 @@ namespace CS499.TCMS.View.ViewModels
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.AllPayrollLoading,
+            Messages.AllMaintenancePartLoading,
             () =>
             {
 
@@ -111,8 +129,8 @@ namespace CS499.TCMS.View.ViewModels
             },
              Messages.MainWindowInitialStatus,
              UIContext.Current,
-             "loading payrolls",
-             Messages.AllPayrollLoadError,
+             "loading maintenance part",
+             Messages.AllMaintenancePartLoadError,
              log);
 
         }
@@ -120,18 +138,18 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Add each ViewModel to the collection
         /// </summary>
-        /// <param name="payrolls">list of models</param>
-        private void Set(List<Payroll> payrolls)
+        /// <param name="maintenancePart">list of models</param>
+        private void Set(List<MaintenancePart> maintenancePart)
         {
 
             // clear current list
             this.ViewModels.ClearAll();
 
             // loop through each model and add e ViewModel to the collection
-            foreach (var model in payrolls)
+            foreach (var model in maintenancePart)
             {
-                PayrollViewModel viewModel = new PayrollViewModel(model, this.payrollRepository, this.TaskManager, false, 
-                    this.Users);
+                MaintenancePartViewModel viewModel = new MaintenancePartViewModel(model, this.maintenancePartRepository, this.TaskManager, false,
+                    this.MaintenanceRecordDetails, this.Parts);
                 this.ViewModels.AddItem(viewModel);
             }
 
@@ -140,20 +158,20 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Load list of ViewModels
         /// </summary>
-        private void LoadUsers()
+        private void LoadMaintenanceRecordDetails()
         {
 
-            List<User> models = null;
+            List<MaintenanceRecordDetail> models = null;
 
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
-                models = userRepository.GetAll().ToList();
+                models = maintenanceRecordDetailRepository.GetAll().ToList();
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.AllUserLoading,
+            Messages.AllMaintenanceRecordDetailLoading,
             () =>
             {
 
@@ -166,13 +184,13 @@ namespace CS499.TCMS.View.ViewModels
                 this.Set(models);
 
                 // refresh the list
-                this.Users.Refresh();
+                this.MaintenanceRecordDetails.Refresh();
 
             },
              Messages.MainWindowInitialStatus,
              UIContext.Current,
-             "loading users",
-             Messages.AllUserLoadError,
+             "loading maintenance record details",
+             Messages.AllMaintenanceRecordDetailLoadError,
              log);
 
         }
@@ -180,17 +198,75 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Add each Model to the collection
         /// </summary>
-        /// <param name="users">list of models</param>
-        private void Set(List<User> users)
+        /// <param name="maintenanceRecordDetails">list of models</param>
+        private void Set(List<MaintenanceRecordDetail> maintenanceRecordDetails)
         {
 
             // clear current list
-            this.Users.ClearAll();
+            this.MaintenanceRecordDetails.ClearAll();
 
             // loop through each model and add to the collection
-            foreach (var model in users)
+            foreach (var model in maintenanceRecordDetails)
             {
-                this.Users.AddItem(model);
+                this.MaintenanceRecordDetails.AddItem(model);
+            }
+
+        }
+
+        /// <summary>
+        /// Load list of ViewModels
+        /// </summary>
+        private void LoadParts()
+        {
+
+            List<Part> models = null;
+
+            // start new task to get the models from the database
+            this.TaskManager.AddTask(Task.Factory.StartNew(() =>
+            {
+
+                models = partRepository.GetAll().ToList();
+
+            },
+            TaskCreationOptions.LongRunning),
+            Messages.AllPartLoading,
+            () =>
+            {
+
+                if (models == null)
+                {
+                    return;
+                }
+
+                // set models
+                this.Set(models);
+
+                // refresh the list
+                this.Parts.Refresh();
+
+            },
+             Messages.MainWindowInitialStatus,
+             UIContext.Current,
+             "loading parts",
+             Messages.AllPartLoadError,
+             log);
+
+        }
+
+        /// <summary>
+        /// Add each Model to the collection
+        /// </summary>
+        /// <param name="parts">list of models</param>
+        private void Set(List<Part> parts)
+        {
+
+            // clear current list
+            this.Parts.ClearAll();
+
+            // loop through each model and add to the collection
+            foreach (var model in parts)
+            {
+                this.Parts.AddItem(model);
             }
 
         }
@@ -202,11 +278,11 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             // create new model
-            Payroll model = new Payroll(0, 0, DateTime.Now, 0, 80);
+            MaintenancePart model = new MaintenancePart(0, 0, 0, 0);
 
             // create new ViewModel
-            PayrollViewModel viewModel = new PayrollViewModel(model, this.payrollRepository, this.TaskManager, true,
-                this.Users);
+            MaintenancePartViewModel viewModel = new MaintenancePartViewModel(model, this.maintenancePartRepository, this.TaskManager, true,
+                this.MaintenanceRecordDetails, this.Parts);
 
             // send ViewModel
             this.SendViewModel(viewModel);
@@ -228,7 +304,7 @@ namespace CS499.TCMS.View.ViewModels
         /// send message to the mainwindowViewModel to add the ViewModel to the collection
         /// </summary>
         /// <param name="viewModel">ViewModel</param>
-        private void SendViewModel(PayrollViewModel viewModel)
+        private void SendViewModel(MaintenancePartViewModel viewModel)
         {
             this.MessengerInstance.Send<NotificationMessage<WorkspaceViewModel>>(
                 new NotificationMessage<WorkspaceViewModel>(viewModel, null));
@@ -241,10 +317,10 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             // get selected ViewModel
-            PayrollViewModel viewModel = this.SelectedViewModel;
+            MaintenancePartViewModel viewModel = this.SelectedViewModel;
 
             // Ask viewModel to confirm the deletion
-            string msg = string.Format(Messages.DeleteMessage, "payroll", viewModel.Model.ToString());
+            string msg = string.Format(Messages.DeleteMessage, "maintenance part", viewModel.Model.ToString());
             MessageDialogResult result = await dialog.Dialog.ShowMessageAsync(dialog.ViewModel, Messages.TitleApp, msg,
                     MessageDialogStyle.AffirmativeAndNegative);
 
@@ -257,11 +333,11 @@ namespace CS499.TCMS.View.ViewModels
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
-                this.payrollRepository.Delete(viewModel.Model);
+                this.maintenancePartRepository.Delete(viewModel.Model);
 
             },
             TaskCreationOptions.LongRunning),
-            Messages.AllPayrollDeleting,
+            Messages.AllMaintenancePartDeleting,
             () =>
             {
 
@@ -270,8 +346,8 @@ namespace CS499.TCMS.View.ViewModels
             },
             Messages.MainWindowInitialStatus,
             UIContext.Current,
-            "deleting payroll",
-            string.Format(Messages.AllPayrollDeleteError, viewModel.DisplayName),
+            "deleting maintenance part",
+            string.Format(Messages.AllMaintenancePartDeleteError, viewModel.DisplayName),
             log);
 
         }
@@ -288,13 +364,13 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Search for the payroll based on the search text
+        /// Search for the manifest based on the search text
         /// </summary>
         private void SearchForText()
         {
 
             this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText,
-                "EmployeeID", "PaymentDate", "Payment", "HoursWorked");
+                "MaintenancePartID", "Quantity", "DetailID", "PartID");
 
         }
 
@@ -343,14 +419,19 @@ namespace CS499.TCMS.View.ViewModels
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Payroll repository
+        /// Maintenance Part repository
         /// </summary>
-        private IPayrollRepository payrollRepository;
+        private IMaintenancePartRepository maintenancePartRepository;
 
         /// <summary>
-        /// The user repository
+        /// The maintenance record detail repository
         /// </summary>
-        private IUserRepository userRepository;
+        private IMaintenanceRecordDetailRepository maintenanceRecordDetailRepository;
+
+        /// <summary>
+        /// The part repository
+        /// </summary>
+        private IPartRepository partRepository;
 
         /// <summary>
         /// Dialog service for showing messages from the ViewModel
@@ -360,20 +441,28 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Selected ViewModel
         /// </summary>
-        public PayrollViewModel SelectedViewModel { get; set; }
+        public MaintenancePartViewModel SelectedViewModel { get; set; }
 
         /// <summary>
         /// Collection of ViewModels
         /// </summary>
-        public ObservableCollectionExtended<PayrollViewModel> ViewModels { get; set; }
+        public ObservableCollectionExtended<MaintenancePartViewModel> ViewModels { get; set; }
 
         /// <summary>
-        /// Gets or sets the users.
+        /// Gets or sets the maintenance record details.
         /// </summary>
         /// <value>
-        /// The users.
+        /// The maintenance record details.
         /// </value>
-        public ObservableCollectionExtended<User> Users { get; set; }
+        public ObservableCollectionExtended<MaintenanceRecordDetail> MaintenanceRecordDetails { get; set; }
+
+        /// <summary>
+        /// Gets or sets the parts.
+        /// </summary>
+        /// <value>
+        /// The parts.
+        /// </value>
+        public ObservableCollectionExtended<Part> Parts { get; set; }
 
         private string _searchType;
 

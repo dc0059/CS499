@@ -35,7 +35,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             Assert.IsTrue(returnPart.IsValid);
             System.Diagnostics.Debug.Print(returnPart.MaintenancePartID.ToString());
             System.Diagnostics.Debug.Print(returnPart.Quantity.ToString());
-            System.Diagnostics.Debug.Print(returnPart.MaintenanceID.ToString());
+            System.Diagnostics.Debug.Print(returnPart.DetailID.ToString());
             System.Diagnostics.Debug.Print(returnPart.PartID.ToString());
         }
 
@@ -50,7 +50,7 @@ namespace CS499.TCMS.DataAccessUnitTests
                 Assert.IsTrue(x.IsValid);
                 System.Diagnostics.Debug.Print(x.MaintenancePartID.ToString());
                 System.Diagnostics.Debug.Print(x.Quantity.ToString());
-                System.Diagnostics.Debug.Print(x.MaintenanceID.ToString());
+                System.Diagnostics.Debug.Print(x.DetailID.ToString());
                 System.Diagnostics.Debug.Print(x.PartID.ToString());
             }
         }
