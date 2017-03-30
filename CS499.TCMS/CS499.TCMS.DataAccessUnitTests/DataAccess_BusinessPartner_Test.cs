@@ -84,5 +84,43 @@ namespace CS499.TCMS.DataAccessUnitTests
 
             businessPartRepo.Delete(delPartner);
         }
+
+        [TestMethod]
+        public void BusinessPartnerGetByZipCodeTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
+            IBusinessPartnerRepository businessPartRepo = factory.Create<IBusinessPartnerRepository>();
+
+            foreach (BusinessPartner x in businessPartRepo.GetPartnersByZipCode(56569))
+            {
+                Assert.IsTrue(x.IsValid);
+                System.Diagnostics.Debug.Print(x.CompanyID.ToString());
+                System.Diagnostics.Debug.Print(x.CompanyName);
+                System.Diagnostics.Debug.Print(x.Address);
+                System.Diagnostics.Debug.Print(x.City);
+                System.Diagnostics.Debug.Print(x.State);
+                System.Diagnostics.Debug.Print(x.ZipCode.ToString());
+                System.Diagnostics.Debug.Print(x.PhoneNumber);
+            }
+        }
+
+        [TestMethod]
+        public void BusinessPartnerGetByStateTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
+            IBusinessPartnerRepository businessPartRepo = factory.Create<IBusinessPartnerRepository>();
+
+            foreach (BusinessPartner x in businessPartRepo.GetPartnersByState("CA"))
+            {
+                Assert.IsTrue(x.IsValid);
+                System.Diagnostics.Debug.Print(x.CompanyID.ToString());
+                System.Diagnostics.Debug.Print(x.CompanyName);
+                System.Diagnostics.Debug.Print(x.Address);
+                System.Diagnostics.Debug.Print(x.City);
+                System.Diagnostics.Debug.Print(x.State);
+                System.Diagnostics.Debug.Print(x.ZipCode.ToString());
+                System.Diagnostics.Debug.Print(x.PhoneNumber);
+            }
+        }
     }
 }

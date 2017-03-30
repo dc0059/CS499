@@ -76,5 +76,30 @@ namespace CS499.TCMS.DataAccessUnitTests
 
             purchaseItemRepo.Delete(delItem);
         }
+
+        [TestMethod]
+        public void PurchaseItemGetByOrderIDTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
+            IPurchaseItemRepository purchaseItemRepo = factory.Create<IPurchaseItemRepository>();
+
+            foreach (PurchaseItem x in purchaseItemRepo.GetItemsByOrderID(4))
+            {
+                Assert.IsTrue(x.IsValid);
+                System.Diagnostics.Debug.Print(x.ItemID.ToString());
+                System.Diagnostics.Debug.Print(x.OrderID.ToString());
+                System.Diagnostics.Debug.Print(x.Quantity.ToString());
+                System.Diagnostics.Debug.Print(x.PartID.ToString());
+            }
+        }
+
+        [TestMethod]
+        public void PurchaseItemDeleteByOrderTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
+            IPurchaseItemRepository purchaseItemRepo = factory.Create<IPurchaseItemRepository>();
+
+            purchaseItemRepo.DeleteItemsByOrderID(4);
+        }
     }
 }

@@ -134,6 +134,36 @@ namespace CS499.TCMS.DataAccess.Repositories
             });
 
             this.Database.ExecuteModQuery(definition);
+
+            // Create query definition
+            definition = new QueryDefinition()
+            {
+                CommandText = "UPDATE maintenancepart_log " +
+                              "SET DeletedBy = ? " +
+                              "WHERE MaintenanceRecordID = ? " +
+                              "AND ModifiedStatus = 'D'",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            // create parameter definition            
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_User",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_ID",
+                Type = DbType.Int64,
+                Value = RecordID
+            });
+
+            this.Database.ExecuteModQuery(definition);
         }
 
 

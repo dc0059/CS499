@@ -74,5 +74,14 @@ namespace CS499.TCMS.DataAccessUnitTests
 
             maintenancePartRepo.Delete(maintenancePartRepo.GetSingle(1));
         }
+
+        [TestMethod]
+        public void MaintenancePartDeleteByRecordTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
+            IMaintenancePartRepository maintenancePartRepo = factory.Create<IMaintenancePartRepository>();
+
+            maintenancePartRepo.DeleteByMaintenanceRecord(2);
+        }
     }
 }
