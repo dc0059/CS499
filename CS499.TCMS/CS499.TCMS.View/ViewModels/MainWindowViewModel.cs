@@ -445,7 +445,42 @@ namespace CS499.TCMS.View.ViewModels
         /// <exception cref="System.NotImplementedException"></exception>
         private void GetMaintenanceDataAccessCommands(List<CommandViewModel> commandList)
         {
-            throw new NotImplementedException();
+                        
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllVehicleDisplayName,
+                        Messages.AllVehicleDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllVehicleViewModel>(this.Dialog, this.TaskManager, Factory.Create<IVehicleRepository>()))),
+                            "Truck"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllMaintenanceRecordDisplayName,
+                        Messages.AllMaintenanceRecordDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllMaintenanceRecordViewModel>(this.Dialog, this.TaskManager, Factory.Create<IMaintenanceRecordRepository>(),
+                        Factory.Create<IVehicleRepository>()))),
+                            "Tools"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllMaintenanceRecordDetailDisplayName,
+                        Messages.AllMaintenanceRecordDetailDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllMaintenanceRecordDetailViewModel>(this.Dialog, this.TaskManager, Factory.Create<IMaintenanceRecordDetailRepository>(),
+                        Factory.Create<IMaintenanceRecordRepository>(), Factory.Create<IUserRepository>()))),
+                            "PeopleProfile"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllMaintenancePartDisplayName,
+                        Messages.AllMaintenancePartDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllMaintenancePartViewModel>(this.Dialog, this.TaskManager, Factory.Create<IMaintenancePartRepository>(),
+                        Factory.Create<IMaintenanceRecordDetailRepository>(), Factory.Create<IPartRepository>()))),
+                            "ListAddBelow"));
+
         }
 
         /// <summary>
@@ -455,7 +490,42 @@ namespace CS499.TCMS.View.ViewModels
         /// <exception cref="System.NotImplementedException"></exception>
         private void GetShippingDataAccessCommands(List<CommandViewModel> commandList)
         {
-            throw new NotImplementedException();
+            
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllPartDisplayName,
+                        Messages.AllPartDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllPartViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPartRepository>()))),
+                            "Cart"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllManifestDisplayName,
+                        Messages.AllManifestDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllManifestViewModel>(this.Dialog, this.TaskManager, Factory.Create<IManifestRepository>(),
+                        Factory.Create<IVehicleRepository>(), Factory.Create<IUserRepository>()))),
+                            "ListCheck"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllPurchaseOrderDisplayName,
+                        Messages.AllPurchaseOrderDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllPurchaseOrderViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPurchaseOrderRepository>(),
+                        Factory.Create<IBusinessPartnerRepository>(), Factory.Create<IManifestRepository>()))),
+                            "Creditcard"));
+
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.AllPurchaseItemDisplayName,
+                        Messages.AllPurchaseItemDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<AllPurchaseItemViewModel>(this.Dialog, this.TaskManager, Factory.Create<IPurchaseItemRepository>(),
+                        Factory.Create<IPurchaseOrderRepository>(), Factory.Create<IPartRepository>()))),
+                            "ListAddBelow"));
+
         }
 
         /// <summary>
@@ -597,7 +667,7 @@ namespace CS499.TCMS.View.ViewModels
                 try
                 {
 
-                    if (false)
+                    if (true)
                     {
 
                         // show login dialog
@@ -674,9 +744,9 @@ namespace CS499.TCMS.View.ViewModels
 
                         // create commands for debugging
                         this.CreateCommands(new User(1, "dc0059", "Donal", "David", "Cavanaugh",
-                            "12345 some where dr.", "Huntsville", "Alabama", 35802, "1234567890",
+                            "12345 some where Dr.", "Huntsville", "Alabama", 35802, "1234567890",
                             "1234567890", "dc0059@uah.edu", 50, DateTime.Now, Enums.AccessLevel.Full,
-                            "Uah", "The Man", true, string.Empty, string.Empty), controller);
+                            "UAH", "The Man", true, string.Empty, string.Empty), controller);
 
                         // set exit flag
                         exit = true;
