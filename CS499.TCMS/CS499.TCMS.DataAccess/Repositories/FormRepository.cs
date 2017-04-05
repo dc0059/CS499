@@ -9,7 +9,7 @@ using System.Data;
 
 namespace CS499.TCMS.DataAccess.Repositories
 {
-    internal class FormRepository : GenericRepository<DataTable>, IFormRepository
+    internal class ReportRepository : GenericRepository<DataTable>, IReportRepository
     {
         #region Constructor
 
@@ -17,7 +17,7 @@ namespace CS499.TCMS.DataAccess.Repositories
         /// Form Repository Constructor
         /// </summary>
         /// <param name="database"></param>
-        public FormRepository(IDatabase database) : base(database)
+        public ReportRepository(IDatabase database) : base(database)
         {
         }
         #endregion

@@ -8,7 +8,7 @@ using ToolKit.Data;
 
 namespace CS499.TCMS.DataAccess.IRepositories
 {
-    public interface IFormRepository: IRepositoryBase
+    public interface IReportRepository: IRepositoryBase
     {
         DataTable GetPayrollReport(DateTime date);
         DataTable GetMaintenanceCostReport();

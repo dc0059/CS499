@@ -17,7 +17,7 @@ namespace CS499.TCMS.DataAccessUnitTests
         public void PayrollDataTableTest()
         {
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
-            IFormRepository formRepo = factory.Create<IFormRepository>();
+            IReportRepository formRepo = factory.Create<IReportRepository>();
 
             DataTable table = formRepo.GetPayrollReport(new DateTime(2017,3,25));
 
