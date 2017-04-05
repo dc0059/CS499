@@ -426,7 +426,12 @@ namespace CS499.TCMS.View.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// Gets or sets the shipping cost.
+        /// </summary>
+        /// <value>
+        /// The shipping cost.
+        /// </value>
         public double ShippingCost
         {
             get

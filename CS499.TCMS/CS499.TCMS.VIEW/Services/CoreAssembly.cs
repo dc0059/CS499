@@ -5,6 +5,7 @@ using System.Deployment.Application;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -102,42 +103,7 @@ namespace CS499.TCMS.View.Services
             Properties.Settings.Default.LoggedInUser = userName;
             Properties.Settings.Default.Save();
             log4net.GlobalContext.Properties["userNameProperty"] = userName;
-        }
-
-        /// <summary>
-        /// Store the current user password in a secure string
-        /// </summary>
-        /// <param name="password">password to secure</param>
-        public static void SetCurrentUserPassword(string password)
-        {
-
-            secureString.Clear();
-
-            foreach (var c in password)
-            {
-                secureString.AppendChar(c);
-            }
-
-        }
-
-        /// <summary>
-        /// Get current user password
-        /// </summary>
-        /// <returns>password</returns>
-        public static string CurrentUserPassword()
-        {
-            IntPtr unmanagedString = IntPtr.Zero;
-            try
-            {
-                unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(secureString);
-                return Marshal.PtrToStringUni(unmanagedString);
-            }
-            finally
-            {
-                Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
-            }
-
-        }
+        }       
 
         /// <summary>
         /// Set the update location
@@ -395,6 +361,19 @@ namespace CS499.TCMS.View.Services
         public static string GetThemeFileLocation()
         {
             return string.Format(Properties.Settings.Default.ThemeFileLocation, Path.GetTempPath());
+        }
+
+        /// <summary>
+        /// Plays the truck sound.
+        /// </summary>
+        public static void PlayTruckSound()
+        {
+
+            using (var player = new SoundPlayer(Properties.Resources.ResourceManager.GetStream("truck_sound")))
+            {
+                player.Play();
+            }
+
         }
 
         #endregion

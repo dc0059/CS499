@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CS499.TCMS.View.Services;
 using System.Windows;
+using System.Diagnostics;
 
 namespace CS499.TCMS.ViewUnitTest
 {
@@ -36,8 +37,7 @@ namespace CS499.TCMS.ViewUnitTest
             string password = "Password1";
 
             string hashString = PasswordService.HashPassword(password, out passphrase);
-
-            Clipboard.SetText(string.Format("Passphrase: {0}{1}Hash: {2}", passphrase, Environment.NewLine, hashString));
+            Debug.Print(string.Format("Passphrase: {0}{1}Hash: {2}", passphrase, Environment.NewLine, hashString));
 
         }
 

@@ -158,11 +158,14 @@
     <Compile Include="ViewModels\AssemblyInformationViewModel.cs" />
     <Compile Include="ViewModels\BusinessPartnerViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\MaintenancePartViewModel.cs" />
     <Compile Include="ViewModels\MaintenanceRecordDetailViewModel.cs" />
     <Compile Include="ViewModels\MaintenanceRecordViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ManifestViewModel.cs" />
+    <Compile Include="ViewModels\MyInfoViewModel.cs" />
+    <Compile Include="ViewModels\MyManifestViewModel.cs" />
     <Compile Include="ViewModels\ObservableCollectionExtended.cs" />
     <Compile Include="ViewModels\PartViewModel.cs" />
     <Compile Include="ViewModels\PayrollViewModel.cs" />
@@ -233,6 +236,12 @@
     </Compile>
     <Compile Include="Views\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MyInfoView.xaml.cs">
+      <DependentUpon>MyInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MyManifestView.xaml.cs">
+      <DependentUpon>MyManifestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PartView.xaml.cs">
       <DependentUpon>PartView.xaml</DependentUpon>
@@ -367,6 +376,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MyInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MyManifestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -451,6 +468,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\truck.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\truck_horn.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

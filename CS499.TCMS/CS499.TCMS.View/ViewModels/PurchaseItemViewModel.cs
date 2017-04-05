@@ -42,6 +42,7 @@ namespace CS499.TCMS.View.ViewModels
             this.IsNew = isNew;
             this.IsSelected = true;
             this.HasChanges = false;
+            _partStatuses = new string[] { "Shipped", "On Back Order", "No Longer Available"};
             this.ContentId = model.ItemID.GetContentId(this.DisplayName);
             this.Orders = purchaseOrders;
             this.Parts = parts;
@@ -241,9 +242,47 @@ namespace CS499.TCMS.View.ViewModels
                 }
 
                 base.OnPropertyChanged("SelectedPart");
+                base.OnPropertyChanged("MaxQuantity");
 
             }
         }
+
+        /// <summary>
+        /// Gets or sets the maximum quantity.
+        /// </summary>
+        /// <value>
+        /// The maximum quantity.
+        /// </value>
+        public int MaxQuantity
+        {
+            get
+            {
+                if (this.SelectedPart != null)
+                {
+                    return this.SelectedPart.QuantityInStock;
+                }
+
+                return 0;
+
+            }
+        }
+
+        private string[] _partStatuses;
+
+        /// <summary>
+        /// Gets the part statuses.
+        /// </summary>
+        /// <value>
+        /// The part statuses.
+        /// </value>
+        public string[] PartStatuses
+        {
+            get
+            {
+                return _partStatuses;
+            }
+        }
+
 
         /// <summary>
         /// Gets or sets the item identifier.
@@ -352,6 +391,34 @@ namespace CS499.TCMS.View.ViewModels
                 Model.PartID = value;
 
                 base.OnPropertyChanged("PartID");
+                this.HasChanges = true;
+
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the part status.
+        /// </summary>
+        /// <value>
+        /// The part status.
+        /// </value>
+        public string PartStatus
+        {
+            get
+            {
+                return Model.PartStatus;
+            }
+            set
+            {
+
+                if (Model.PartStatus == value)
+                {
+                    return;
+                }
+
+                Model.PartStatus = value;
+
+                base.OnPropertyChanged("PartStatus");
                 this.HasChanges = true;
 
             }

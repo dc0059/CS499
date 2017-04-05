@@ -6,6 +6,7 @@ using CS499.TCMS.DataAccess.IRepositories;
 using CS499.TCMS.ViewUnitTest.DummyClasses;
 using CS499.TCMS.View.Interfaces;
 using CS499.TCMS.View.Services;
+using System.Collections.Generic;
 
 namespace CS499.TCMS.ViewUnitTest
 {
@@ -17,7 +18,7 @@ namespace CS499.TCMS.ViewUnitTest
         {
             // create new payroll repository
             IPayrollRepository payrollRepository = new DummyPayrollRepository();
-
+           
             // create new task manager
             ITaskManager taskManager = new TaskManager(new DummyDialogService(new DummyDialogCoordinator(), null));
 
@@ -25,7 +26,7 @@ namespace CS499.TCMS.ViewUnitTest
             Payroll model = new Payroll(100, 100, DateTime.Now, 100, 100);
 
             // create new payroll viewmodel
-            PayrollViewModel viewModel = new PayrollViewModel(model, payrollRepository, taskManager, true);
+            PayrollViewModel viewModel = new PayrollViewModel(model, payrollRepository, taskManager, true, new ObservableCollectionExtended<User>(new List<User>()));
 
             if (viewModel.CommandSave.CanExecute(null))
             {

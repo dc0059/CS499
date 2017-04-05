@@ -325,7 +325,7 @@
     <value>Loading user settings... Please wait.</value>
   </data>
   <data name="LoginStart" xml:space="preserve">
-    <value>Please enter your Windows username and password to login.</value>
+    <value>Welcome to TCMS!!! Please enter your username and password to login.</value>
   </data>
   <data name="LogoutDisplayName" xml:space="preserve">
     <value>Logout</value>
@@ -539,5 +539,20 @@
   </data>
   <data name="AllMaintenancePartLoading" xml:space="preserve">
     <value>Loading maintenance parts... Please wait.</value>
+  </data>
+  <data name="DashboardDisplayName" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="DontMatchError" xml:space="preserve">
+    <value>Does not match new password!</value>
+  </data>
+  <data name="LoginVerify" xml:space="preserve">
+    <value>Please verify your current password to change it to the new password.</value>
+  </data>
+  <data name="MyInfoDisplayName" xml:space="preserve">
+    <value>My Information</value>
+  </data>
+  <data name="MyManifestDisplayName" xml:space="preserve">
+    <value>My Manifests</value>
   </data>
 </root>

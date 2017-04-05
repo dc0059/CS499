@@ -45,7 +45,7 @@ namespace CS499.TCMS.View
 
             _execute = execute;
             _canExecute = canExecute;
-        }
+        }       
 
         #endregion // Constructors
 

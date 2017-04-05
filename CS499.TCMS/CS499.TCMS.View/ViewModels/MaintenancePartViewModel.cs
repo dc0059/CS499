@@ -241,6 +241,27 @@ namespace CS499.TCMS.View.ViewModels
                 }
 
                 base.OnPropertyChanged("SelectedPart");
+                base.OnPropertyChanged("MaxQuantity");
+
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the maximum quantity.
+        /// </summary>
+        /// <value>
+        /// The maximum quantity.
+        /// </value>
+        public int MaxQuantity
+        {
+            get
+            {
+                if (this.SelectedPart != null)
+                {
+                    return this.SelectedPart.QuantityInStock;
+                }
+
+                return 0;
 
             }
         }

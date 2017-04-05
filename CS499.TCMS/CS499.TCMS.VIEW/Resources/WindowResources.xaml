@@ -3,12 +3,14 @@
                     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                     xmlns:local="clr-namespace:CS499.TCMS.View.Converters"
                     xmlns:vm="clr-namespace:CS499.TCMS.View.ViewModels"
-                    xmlns:vw="clr-namespace:CS499.TCMS.View.Views">
+                    xmlns:vw="clr-namespace:CS499.TCMS.View.Views" 
+                    xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock" 
+                    xmlns:Controls="clr-namespace:Xceed.Wpf.AvalonDock.Themes.Controls;assembly=Xceed.Wpf.AvalonDock.Themes.Expression">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Icons.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
+
     <!-- converters -->
     <local:StringToCanvasConverter x:Key="StringToCanvasConverter"/>
     <local:EnumToStringConverter x:Key="EnumToStringConverter"/>
@@ -16,7 +18,6 @@
     <local:StringToTimeSpanConverter x:Key="StringToTimeSpanConverter"/>
     <local:VisibilityToBoolConverter x:Key="VisibilityToBoolConverter"/>
     <local:StringToPhoneConverter x:Key="StringToPhoneConverter"/>
-    
 
     <!-- Command button style-->
     <SolidColorBrush x:Key="BackgroundHighlighted" Color="#66007ACC"/>
@@ -27,11 +28,11 @@
            TargetType="{x:Type Button}">
 
         <Setter Property="Background"
-                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}, Path=Background}"/>
+                Value="{Binding Background, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentControl}}}"/>
         <Setter Property="Foreground"
-                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}, Path=Foreground}"/>
+                Value="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentControl}}}"/>
         <Setter Property="FontSize"
-                Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}, Path=FontSize}"/>
+                Value="{Binding FontSize, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentControl}}}"/>
         <Setter Property="BorderThickness"
                 Value="0"/>
         <Setter Property="Margin"
@@ -48,7 +49,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <iconPacks:PackIconModern Name="icon"
+                            <iconPacks:PackIconModern x:Name="icon"
                                                       Kind="{Binding Icon}"
                                                       Height="42"
                                                       Width="42"
@@ -88,7 +89,7 @@
         </Setter>
 
     </Style>
-   
+
     <DataTemplate x:Key="CommandsTemplate">
         <ItemsControl IsTabStop="False" ItemsSource="{Binding}" Margin="0">
             <ItemsControl.ItemTemplate>
@@ -242,6 +243,15 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:MaintenancePartViewModel}">
         <vw:MaintenancePartView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+        <vw:DashboardView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:MyInfoViewModel}">
+        <vw:MyInfoView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:MyManifestViewModel}">
+        <vw:MyManifestView />
     </DataTemplate>
 
 </ResourceDictionary>

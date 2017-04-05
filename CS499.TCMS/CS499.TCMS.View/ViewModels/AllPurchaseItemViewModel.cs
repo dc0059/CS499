@@ -278,7 +278,7 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             // create new model
-            PurchaseItem model = new PurchaseItem(0, 0, 0, 0);
+            PurchaseItem model = new PurchaseItem(0, 0, 0, 0, string.Empty);
 
             // create new ViewModel
             PurchaseItemViewModel viewModel = new PurchaseItemViewModel(model, this.purchaseItemRepository, this.TaskManager, true,

@@ -727,6 +727,15 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dashboard.
+        /// </summary>
+        internal static string DashboardDisplayName {
+            get {
+                return ResourceManager.GetString("DashboardDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to connect to the database. Please contact support..
         /// </summary>
         internal static string DatabaseConnectionError {
@@ -741,6 +750,15 @@ namespace CS499.TCMS.View.Resources {
         internal static string DeleteMessage {
             get {
                 return ResourceManager.GetString("DeleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Does not match new password!.
+        /// </summary>
+        internal static string DontMatchError {
+            get {
+                return ResourceManager.GetString("DontMatchError", resourceCulture);
             }
         }
         
@@ -790,11 +808,20 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter your Windows username and password to login..
+        ///   Looks up a localized string similar to Welcome to TCMS!!! Please enter your username and password to login..
         /// </summary>
         internal static string LoginStart {
             get {
                 return ResourceManager.GetString("LoginStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please verify your current password to change it to the new password..
+        /// </summary>
+        internal static string LoginVerify {
+            get {
+                return ResourceManager.GetString("LoginVerify", resourceCulture);
             }
         }
         
@@ -1047,6 +1074,24 @@ namespace CS499.TCMS.View.Resources {
         internal static string ManifestSaving {
             get {
                 return ResourceManager.GetString("ManifestSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Information.
+        /// </summary>
+        internal static string MyInfoDisplayName {
+            get {
+                return ResourceManager.GetString("MyInfoDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Manifests.
+        /// </summary>
+        internal static string MyManifestDisplayName {
+            get {
+                return ResourceManager.GetString("MyManifestDisplayName", resourceCulture);
             }
         }
         

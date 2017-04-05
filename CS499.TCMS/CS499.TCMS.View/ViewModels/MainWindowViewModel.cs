@@ -387,7 +387,7 @@ namespace CS499.TCMS.View.ViewModels
                     break;
                 case Enums.AccessLevel.DriverData:
 
-                    this.GetDriverDataAccessCommands(commandList);
+                    // default commands
 
                     break;
                 default:
@@ -426,16 +426,6 @@ namespace CS499.TCMS.View.ViewModels
             // close loading dialog
             controller.CloseAsync();
 
-        }
-
-        /// <summary>
-        /// Gets the driver data access commands.
-        /// </summary>
-        /// <param name="commandList">The command list.</param>
-        /// <exception cref="System.NotImplementedException"></exception>
-        private void GetDriverDataAccessCommands(List<CommandViewModel> commandList)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -710,6 +700,9 @@ namespace CS499.TCMS.View.ViewModels
                                 var controller = await this.Dialog.Dialog.ShowProgressAsync(this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginLoading);
                                 await Task.Delay(500);
 
+                                // add dashboard
+                                this.CreateDocument<DashboardViewModel>(user, this.TaskManager, this.Dialog);
+
                                 // create command list
                                 this.CreateCommands(user, controller);
 
@@ -732,6 +725,12 @@ namespace CS499.TCMS.View.ViewModels
                     else
                     {
 
+                        // testing user
+                        User user = new User(1, "dc0059", "Donal", "David", "Cavanaugh",
+                            "12345 some where Dr.", "Huntsville", "Alabama", 35802, "1234567890",
+                            "1234567890", "dc0059@uah.edu", 50, DateTime.Now, Enums.AccessLevel.Full,
+                            "UAH", "The Man", true, @"uXgbWhLABkEQ/khtpfAmCDP4A/an3qV/351ndiBxKJ4acPPr6LDV90kdx3pFbOSqSkev2KXibj8Ok08vuIVf2g==", @"d2Trfixx39ZtUkwyBZJeVepV9NZ8nuTCAFe6rDPzxQprzq3ExWiRpBGFyVlRB0FJk07G0F0Pj7C5lrMSoph9026AID0Q+hqGmXBNFJGXV4lg1GZNGj8QTp/h3NPeAyN1Vt51ERCxb/jYYRTWZzncIamj2m/Pw3dflCcOJnPi91Zp4ZvT5tdWnLduRVQDKaYczfDADFgHqr3I6amy3mYx+Z/IPBzCMqxxB2pOODMjXfgbFE0RorP+Z7F5oj74xCpSNXlPClJk9bjM/ATnisp1lyMsruSNy1b3JSz2jm66g6VBz1a3rcukgpT9Te+wBQzu31Waip3PcF82+qFFhbMB3w==");
+
                         // set current application user
                         CoreAssembly.SetCurrentUser("dc0059");
 
@@ -742,11 +741,11 @@ namespace CS499.TCMS.View.ViewModels
                         var controller = await this.Dialog.Dialog.ShowProgressAsync(this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginLoading);
                         await Task.Delay(500);
 
+                        // add dashboard
+                        this.CreateDocument<DashboardViewModel>(user, this.TaskManager, this.Dialog);
+
                         // create commands for debugging
-                        this.CreateCommands(new User(1, "dc0059", "Donal", "David", "Cavanaugh",
-                            "12345 some where Dr.", "Huntsville", "Alabama", 35802, "1234567890",
-                            "1234567890", "dc0059@uah.edu", 50, DateTime.Now, Enums.AccessLevel.Full,
-                            "UAH", "The Man", true, string.Empty, string.Empty), controller);
+                        this.CreateCommands(user, controller);
 
                         // set exit flag
                         exit = true;

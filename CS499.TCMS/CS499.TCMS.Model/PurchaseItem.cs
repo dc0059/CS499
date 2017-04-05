@@ -16,12 +16,14 @@ namespace CS499.TCMS.Model
         /// <param name="orderID">identifier of the purchase order this item is part of</param>
         /// <param name="quantity">quantity of the item</param>
         /// <param name="partID">identifier of the part this item is associated with</param>
-        public PurchaseItem (long itemID, long orderID, int quantity, long partID)
+        /// <param name="partStatus">part shipment status</param>
+        public PurchaseItem (long itemID, long orderID, int quantity, long partID, string partStatus)
         {
             this.ItemID = itemID;
             this.OrderID = orderID;
             this.Quantity = quantity;
             this.PartID = partID;
+            this.PartStatus = partStatus;
         }
 
         #endregion
@@ -50,6 +52,9 @@ namespace CS499.TCMS.Model
                     break;
                 case "PartID":
                     error = this.ValidatePartID();
+                    break;
+                case "PartStatus":
+                    error = this.ValidatePartStatus();
                     break;
                 default:
                     Debug.Fail("Unexpected property being validated on PurchaseItem: " + propertyName);
@@ -106,6 +111,15 @@ namespace CS499.TCMS.Model
         }
 
         /// <summary>
+        /// Validates the part status.
+        /// </summary>
+        /// <returns>string for the error</returns>
+        private string ValidatePartStatus()
+        {
+            return IsEmpty(this.PartStatus) ? Messages.InvalidStatus : null;
+        }
+
+        /// <summary>
         /// Check to make sure the string is not null or empty
         /// </summary>
         /// <param name="value">string value to test</param>
@@ -128,7 +142,8 @@ namespace CS499.TCMS.Model
                 return this.ItemID.Equals(other.ItemID) &&
                     this.OrderID.Equals(other.OrderID) &&
                     this.Quantity.Equals(other.Quantity) &&
-                    this.PartID.Equals(other.PartID);
+                    this.PartID.Equals(other.PartID) &&
+                    this.PartStatus.Equals(other.PartStatus);
             }
             return false;
         }
@@ -194,7 +209,8 @@ namespace CS499.TCMS.Model
             "ItemID",
             "OrderID",
             "Quantity",
-            "PartID"
+            "PartID",
+            "PartStatus"
         };
 
         /// <summary>
@@ -213,6 +229,14 @@ namespace CS499.TCMS.Model
         /// Identifier of the part this item is associated with
         /// </summary>
         public long PartID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the part status.
+        /// </summary>
+        /// <value>
+        /// The part status.
+        /// </value>
+        public string PartStatus { get; set; }
 
         string IDataErrorInfo.Error
         {

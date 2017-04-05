@@ -196,6 +196,15 @@ namespace CS499.TCMS.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid status!.
+        /// </summary>
+        internal static string InvalidStatus {
+            get {
+                return ResourceManager.GetString("InvalidStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid store location!.
         /// </summary>
         internal static string InvalidStore {

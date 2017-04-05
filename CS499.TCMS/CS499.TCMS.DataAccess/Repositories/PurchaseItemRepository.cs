@@ -183,7 +183,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ItemID, OrderID, Quantity, PartID " +
+                CommandText = "SELECT ItemID, OrderID, Quantity, PartID, PartStatus " +
                               "FROM purchaseitems " +
                               "ORDER BY ItemID",
                 cType = CommandType.Text,
@@ -199,7 +199,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ItemID, OrderID, Quantity, PartID " +
+                CommandText = "SELECT ItemID, OrderID, Quantity, PartID, PartStatus " +
                               "FROM purchaseitems " +
                               "WHERE OrderID = ? " +
                               "ORDER BY ItemID",
@@ -225,7 +225,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ItemID, OrderID, Quantity, PartID " +
+                CommandText = "SELECT ItemID, OrderID, Quantity, PartID, PartStatus " +
                               "FROM purchasitems " +
                               "WHERE PartID = ? " +
                               "ORDER BY ItemID",
@@ -251,7 +251,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ItemID, OrderID, Quantity, PartID " +
+                CommandText = "SELECT ItemID, OrderID, Quantity, PartID, PartStatus " +
                               "FROM purchaseitems " +
                               "WHERE ItemID = ?",
                 cType = CommandType.Text,
@@ -284,8 +284,8 @@ namespace CS499.TCMS.DataAccess.Repositories
             // Create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "INSERT INTO purchaseitems (OrderID, Quantity, PartID, CreatedBy, LastModifiedBy) " +
-                              "VALUES (?,?,?,?,?)",
+                CommandText = "INSERT INTO purchaseitems (OrderID, Quantity, PartID, PartStatus, CreatedBy, LastModifiedBy) " +
+                              "VALUES (?,?,?,?,?,?)",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -315,6 +315,13 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
+                Name = "P_PartStatus",
+                Type = DbType.String,
+                Value = model.PartStatus
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
                 Name = "P_CreatedBy",
                 Type = DbType.String,
                 Value = this.Database.UserName
@@ -338,7 +345,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "UPDATE purchaseitems " +
-                              "SET OrderID = ?, Quantity = ?, PartID = ?, LastModifiedBy = ? " +
+                              "SET OrderID = ?, Quantity = ?, PartID = ?, PartStatus = ?, LastModifiedBy = ? " +
                               "WHERE ItemID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -370,6 +377,13 @@ namespace CS499.TCMS.DataAccess.Repositories
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
+                Name = "P_PartStatus",
+                Type = DbType.String,
+                Value = model.PartStatus
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
                 Name = "P_LastModifiedBy",
                 Type = DbType.String,
                 Value = this.Database.UserName
@@ -390,7 +404,8 @@ namespace CS499.TCMS.DataAccess.Repositories
             return new PurchaseItem(reader.GetValueOrDefault<long>("ItemID"),
                 reader.GetValueOrDefault<long>("OrderID"),
                 reader.GetValueOrDefault<int>("Quantity"),
-                reader.GetValueOrDefault<long>("PartID"));
+                reader.GetValueOrDefault<long>("PartID"),
+                reader.GetValueOrDefault<string>("PartStatus"));
         }
 
         #endregion

@@ -633,7 +633,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Returns e selected prop for the object
+        /// Returns a selected value for the object
         /// </summary>
         public override bool IsSelected
         {

@@ -121,6 +121,11 @@
                 <DataGridTextColumn Binding="{Binding EmployeeID}"
                                     Header="Employee ID"
                                     IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Binding="{Binding Arrived}"
+                                        Header="Arrived"
+                                        IsReadOnly="True"
+                                        ElementStyle="{StaticResource MetroDataGridCheckBox}"
+                                        EditingElementStyle="{StaticResource MetroDataGridCheckBox}"/>
             </local:DataGridScrollToSelectedItem.Columns>
 
         </local:DataGridScrollToSelectedItem>

@@ -1,5 +1,4 @@
-﻿using CS499.TCMS.View.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace CS499.TCMS.View.Views
 {
     /// <summary>
-    /// Interaction logic for DashboardView.xaml
+    /// Interaction logic for MyManifestView.xaml
     /// </summary>
-    public partial class DashboardView : UserControl
+    public partial class MyManifestView : UserControl
     {
-        public DashboardView()
+        public MyManifestView()
         {
             InitializeComponent();
         }

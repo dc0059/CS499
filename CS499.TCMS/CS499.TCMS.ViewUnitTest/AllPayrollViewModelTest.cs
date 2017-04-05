@@ -19,6 +19,11 @@ namespace CS499.TCMS.ViewUnitTest
         private static IPayrollRepository payrollRepository = new DummyPayrollRepository();
 
         /// <summary>
+        /// The user repository
+        /// </summary>
+        private static IUserRepository userRepository = new DummyUserRepository();
+
+        /// <summary>
         /// create new dialog service
         /// </summary>
         private static IDialogService dialog = new DummyDialogService(new DummyDialogCoordinator(), null);
@@ -39,7 +44,7 @@ namespace CS499.TCMS.ViewUnitTest
         {
 
             // create new all payroll viewmodel
-            viewModel = new AllPayrollViewModel(dialog, taskManager, payrollRepository);
+            viewModel = new AllPayrollViewModel(dialog, taskManager, payrollRepository, userRepository);
         }
 
         [TestMethod]

@@ -111,7 +111,10 @@
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Quantity}"
                                     Header="Quantity"
-                                    IsReadOnly="True"/>                
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding PartStatus}"
+                                    Header="Part Status"
+                                    IsReadOnly="True"/>
             </local:DataGridScrollToSelectedItem.Columns>
 
         </local:DataGridScrollToSelectedItem>

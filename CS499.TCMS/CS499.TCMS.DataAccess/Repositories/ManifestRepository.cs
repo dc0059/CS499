@@ -21,7 +21,6 @@ namespace CS499.TCMS.DataAccess.Repositories
 
         #region Methods
 
-
         /// <summary>
         /// Deletes the argument Manifest object from the database
         /// </summary>
@@ -534,8 +533,53 @@ namespace CS499.TCMS.DataAccess.Repositories
                 reader.GetValueOrDefault<double>("ShippingCost"),
                 reader.GetValueOrDefault<long>("EmployeeID"));
         }
-    }
 
-    #endregion
+        /// <summary>
+        /// Gets the manifest by employee identifier.
+        /// </summary>
+        /// <param name="employeeID">The employee identifier.</param>
+        /// <returns>
+        /// a <see cref="DataTable" /> containing the manifest information
+        /// </returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        DataTable IManifestRepository.GetManifestByEmployeeID(long employeeID)
+        {
+
+            // create query definition
+            QueryDefinition definition = new QueryDefinition()
+            {
+                CommandText = "SELECT m.ManifestID AS `Manifest ID`, m.DepartureTime AS `Departure Time`, m.ETA, po.OrderNumber AS `Order Number`, " +
+                              "(SELECT ba.Address FROM businesspartners_addresses ba WHERE ba.CompanyID = po.SourceID)  AS `Source Address`, " +
+                              "(SELECT ba.Address FROM businesspartners_addresses ba WHERE ba.CompanyID = po.DestinationID )  AS `Destination Address`, " +
+                              "pi.PartStatus AS `Part Status`, pi.Quantity, p.PartNumber AS `Part Number`, p.PartDescription AS `Part Description`, " +
+                              "pi.Quantity * p.PartPrice  AS `Total Part Price`, pi.Quantity * p.PartWeight AS `Total Part Weight` " +
+                              "FROM ((cs_499_tcms.purchaseitems pi " +
+                              "INNER JOIN cs_499_tcms.parts p ON (pi.PartID = p.PartID)) " +
+                              "INNER JOIN cs_499_tcms.purchaseorder po ON (pi.OrderID = po.OrderID)) " +
+                              "INNER JOIN cs_499_tcms.manifest m ON (po.ManifestID = m.ManifestID) " +
+                              "WHERE m.Arrived = 0 " +
+                              "AND m.EmployeeID = ? " +
+                              "ORDER BY `Manifest ID` ASC, `Order Number` ASC, `Part Number` ASC",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            // create parameter definition
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_EmployeeID",
+                Type = DbType.Int64,
+                Value = employeeID
+            });
+
+            return this.Database.ExecuteDataTableQuery(definition);
+
+        }
+
+        #endregion
+
+    }
 
 }
