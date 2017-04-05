@@ -38,7 +38,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public DataTable GetPayrollReport(DateTime date)
+        public DataTable GetPayrollReport(DateTime startDate, DateTime endDate)
         {
 
             // create query definition
@@ -61,14 +61,14 @@ namespace CS499.TCMS.DataAccess.Repositories
                 Direction = ParameterDirection.Input,
                 Name = "P_Date",
                 Type = DbType.DateTime,
-                Value = date
+                Value = startDate
             });
             definition.Parameters.Add(new ParameterDefinition()
             {
                 Direction = ParameterDirection.Input,
                 Name = "P_CurrentDate",
                 Type = DbType.DateTime,
-                Value = DateTime.Now
+                Value = endDate
             });
 
             return this.Database.ExecuteDataTableQuery(definition);
