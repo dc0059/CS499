@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ToolKit.Data;
 using CS499.TCMS.DataAccess.IRepositories;
 using System.Data;
+using CS499.TCMS.Model;
 
 namespace CS499.TCMS.DataAccess.Repositories
 {
@@ -74,9 +75,38 @@ namespace CS499.TCMS.DataAccess.Repositories
             return this.Database.ExecuteDataTableQuery(definition);
         }
 
-        public DataTable GetVehicleMaintenanceReport()
+        public DataTable GetVehicleMaintenanceReport(Vehicle model)
         {
-            throw new NotImplementedException();
+            // create query definition
+            QueryDefinition definition = new QueryDefinition()
+            {
+                CommandText = "SELECT vehicle.VehicleID, vehicle.Brand, vehicle.Year, vehicle.Model, vehicle.VehicleType, vehicle.Capacity, " +
+                              "maintenancerecord.MaintenanceDate, maintenancerecord.MaintenanceDescription, maintenancerecorddetails.EmployeeID, " +
+                              "maintenancerecorddetails.RepairDescription, maintenancerecorddetails.RepairDate, maintenancepart.Quantity, " +
+                              "parts.PartDescription, parts.PartNumber, parts.PartPrice, parts.PartWeight, user.FirstName, user.MiddleName, user.LastName, " +
+                              "user.HomeStore, user.JobDescription " +
+                              "FROM maintenancerecorddetails " +
+                              "INNER JOIN user ON maintenancerecorddetails.EmployeeID = user.EmployeeID " +
+                              "INNER JOIN maintenancerecord ON maintenancerecorddetails.MaintenanceID = maintenancerecord.MaintenanceID " +
+                              "INNER JOIN vehicle ON maintenancerecord.VehicleID = vehicle.VehicleID " +
+                              "INNER JOIN maintenancepart ON maintenancepart.MaintenanceRecordID = maintenancerecorddetails.DetailID " +
+                              "INNER JOIN parts ON maintenancepart.PartID = parts.PartID " + 
+                              "WHERE vehicle.VehicleID = ? " +
+                              "ORDER BY VehicleID",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_VehicleID",
+                Type = DbType.Int64,
+                Value = model.VehicleID
+            });
+
+            return this.Database.ExecuteDataTableQuery(definition);
         }
 
         protected override DataTable Map(IDataReader reader)

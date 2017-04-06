@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRepositories\IFormRepository.cs" />
+    <Compile Include="IRepositories\IReportRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IRepositoryBase.cs" />
     <Compile Include="IRepositories\IBusinessPartnerRepository.cs" />
@@ -62,7 +62,6 @@
     <Compile Include="IRepositories\IVehicleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BusinessPartnerRepository.cs" />
-    <Compile Include="Repositories\FormRepository.cs" />
     <Compile Include="Repositories\MaintenancePartRepository.cs" />
     <Compile Include="Repositories\MaintenanceRecordDetailsRepository.cs" />
     <Compile Include="Repositories\MaintenanceRecordRepository.cs" />
@@ -71,6 +70,7 @@
     <Compile Include="Repositories\PayrollRepository.cs" />
     <Compile Include="Repositories\PurchaseItemRepository.cs" />
     <Compile Include="Repositories\PurchaseOrderRepository.cs" />
+    <Compile Include="Repositories\ReportRepository.cs" />
     <Compile Include="Repositories\VehicleRepository.cs" />
     <Compile Include="RepositoryFactory.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

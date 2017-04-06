@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ToolKit.Data;
+using CS499.TCMS.Model;
 
 namespace CS499.TCMS.DataAccess.IRepositories
 {
@@ -12,7 +13,7 @@ namespace CS499.TCMS.DataAccess.IRepositories
     {
         DataTable GetPayrollReport(DateTime startDate, DateTime endDate);
         DataTable GetMaintenanceCostReport();
-        DataTable GetVehicleMaintenanceReport();
+        DataTable GetVehicleMaintenanceReport(Vehicle model);
         DataTable GetIncomingShipmentReport();
         DataTable GetOutgoingShipmentReport();
     }
