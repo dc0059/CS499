@@ -51,7 +51,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                               "FROM payroll " +
                               "INNER JOIN user ON payroll.EmployeeID = user.EmployeeID " +
                               "WHERE PaymentDate BETWEEN ? and ? " +
-                              "ORDER BY EmployeeID",
+                              "ORDER BY user.EmployeeID",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL
@@ -94,8 +94,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                               "INNER JOIN vehicle ON maintenancerecord.VehicleID = vehicle.VehicleID " +
                               "INNER JOIN maintenancepart ON maintenancepart.MaintenanceRecordID = maintenancerecorddetails.DetailID " +
                               "INNER JOIN parts ON maintenancepart.PartID = parts.PartID " + 
-                              "WHERE vehicle.VehicleID = ? " +
-                              "ORDER BY VehicleID",
+                              "WHERE vehicle.VehicleID = ? ",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL

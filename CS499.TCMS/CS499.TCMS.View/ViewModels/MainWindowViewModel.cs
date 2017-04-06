@@ -628,7 +628,8 @@ namespace CS499.TCMS.View.ViewModels
                         Messages.ReportDisplayName,
                         Messages.ReportDisplayToolTip,
                         new RelayCommand(param => this.ExecuteCommand(() =>
-                        this.CreateDocument<ReportViewModel>(this.Dialog, this.TaskManager, Factory.Create<IReportRepository>()))),
+                        this.CreateDocument<ReportViewModel>(this.Dialog, this.TaskManager, Factory.Create<IReportRepository>(),
+                        Factory.Create<IVehicleRepository>()))),
                             "GraphLineUp"));
 
 

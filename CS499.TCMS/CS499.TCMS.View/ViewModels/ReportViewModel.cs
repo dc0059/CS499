@@ -3,9 +3,13 @@ using CS499.TCMS.Model;
 using CS499.TCMS.View.Interfaces;
 using CS499.TCMS.View.Resources;
 using CS499.TCMS.View.Services;
+using GalaSoft.MvvmLight.Messaging;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -22,26 +26,99 @@ namespace CS499.TCMS.View.ViewModels
         #region Constructor
 
         /// <summary>
-        /// Default constructor
+        /// Initializes a new instance of the <see cref="ReportViewModel"/> class.
         /// </summary>
         /// <param name="dialog">Dialog service to show messages from ViewModel</param>
         /// <param name="taskManager">Task manager to hold reference to running tasks</param>
-        /// <param name="reportRepository">The report repository</param>
-        public ReportViewModel(IDialogService dialog, ITaskManager taskManager, IReportRepository reportRepository)
+        /// <param name="reportRepository">The report repository.</param>
+        /// <param name="vehicleRepository">The vehicle repository.</param>
+        public ReportViewModel(IDialogService dialog, ITaskManager taskManager, IReportRepository reportRepository, IVehicleRepository vehicleRepository)
         {
             this.dialog = dialog;
             this.TaskManager = taskManager;
             this.IsSelected = true;
             this.reportRepository = reportRepository;
+            this.vehicleRepository = vehicleRepository;
             this.DisplayName = Messages.ReportDisplayName;
             this.DisplayToolTip = Messages.ReportDisplayToolTip;
             this.StartDate = DateTime.Today.AddDays(-7);
             this.EndDate = DateTime.Today;
+            this.Vehicles = new ObservableCollection<Vehicle>();
+            this.LoadVehicles();
+            this.MessengerInstance.Register<NotificationMessage<AllVehicleViewModel>>(this, (n) => this.LoadVehicles(n));
+            this.SetMenuVisibility();
         }
 
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Load list of models
+        /// </summary>
+        /// <param name="notificationMessage">notification message</param>
+        private void LoadVehicles(NotificationMessage<AllVehicleViewModel> notificationMessage)
+        {
+            this.LoadVehicles();
+        }
+
+        /// <summary>
+        /// Load list of ViewModels
+        /// </summary>
+        private void LoadVehicles()
+        {
+
+            List<Vehicle> models = null;
+
+            // start new task to get the models from the database
+            this.TaskManager.AddTask(Task.Factory.StartNew(() =>
+            {
+
+                models = vehicleRepository.GetAll().ToList();
+
+            },
+            TaskCreationOptions.LongRunning),
+            Messages.AllVehicleLoading,
+            () =>
+            {
+
+                if (models == null)
+                {
+                    return;
+                }
+
+                // set models
+                this.Set(models);
+
+            },
+             Messages.MainWindowInitialStatus,
+             UIContext.Current,
+             "loading vehicles",
+             Messages.AllVehicleLoadError,
+             log);
+
+        }
+
+        /// <summary>
+        /// Add each Model to the collection
+        /// </summary>
+        /// <param name="vehicles">list of models</param>
+        private void Set(List<Vehicle> vehicles)
+        {
+
+            // clear current list
+            this.Vehicles.Clear();
+
+            // loop through each model and add to the collection
+            foreach (var model in vehicles)
+            {
+                this.Vehicles.Add(model);
+            }
+
+            // set selected vehicle
+            this.SelectedVehicle = this.Vehicles.FirstOrDefault();
+
+        }
 
         /// <summary>
         /// Run report
@@ -98,7 +175,7 @@ namespace CS499.TCMS.View.ViewModels
 
                 case Enums.ReportTypes.Vehicle_Maintenance:
 
-                    return this.reportRepository.GetVehicleMaintenanceReport(null);
+                    return this.reportRepository.GetVehicleMaintenanceReport(this.SelectedVehicle);
 
                 case Enums.ReportTypes.Incoming_Shipment:
 
@@ -180,9 +257,32 @@ namespace CS499.TCMS.View.ViewModels
         /// <returns>flag indicating if the report can be run</returns>
         private bool ValidateRun()
         {
-            return StartDate < EndDate;
+            return StartDate < EndDate && this.SelectedVehicle != null;
         }
 
+        /// <summary>
+        /// Sets the menu visibility.
+        /// </summary>
+        private void SetMenuVisibility()
+        {
+
+            if (this.SelectedReportType == Enums.ReportTypes.Vehicle_Maintenance)
+            {
+                this.VehicleSelectionVisible = true;
+                this.DateRangeVisible = false;
+            }
+            else
+            {
+                this.VehicleSelectionVisible = false;
+                this.DateRangeVisible = true;
+            }
+
+        }
+
+        /// <summary>
+        /// Send key stroke to the ViewModel
+        /// </summary>
+        /// <param name="e">Key event args</param>
         void IKeyCommand.SendKeys(KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -192,6 +292,16 @@ namespace CS499.TCMS.View.ViewModels
                     this.RunReport();
                 }
             }
+        }
+
+        /// <summary>
+        /// Called when [request close].
+        /// </summary>
+        public override void OnRequestClose()
+        {
+            // unregister ViewModel
+            this.MessengerInstance.Unregister(this);
+            base.OnRequestClose();
         }
 
         #endregion
@@ -209,9 +319,61 @@ namespace CS499.TCMS.View.ViewModels
         private IReportRepository reportRepository;
 
         /// <summary>
+        /// The vehicle repository
+        /// </summary>
+        private IVehicleRepository vehicleRepository;
+
+        /// <summary>
         /// Dialog service for showing messages from the ViewModel
         /// </summary>
         private IDialogService dialog;
+
+        private bool _vehicleSelectionVisible;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [vehicle selection visible].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [vehicle selection visible]; otherwise, <c>false</c>.
+        /// </value>
+        public bool VehicleSelectionVisible
+        {
+            get
+            {
+                return _vehicleSelectionVisible;
+            }
+            set
+            {
+
+                _vehicleSelectionVisible = value;
+                base.OnPropertyChanged("VehicleSelectionVisible");
+
+            }
+        }
+
+        private bool _dateRangesVisible;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [date range visible].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [date range visible]; otherwise, <c>false</c>.
+        /// </value>
+        public bool DateRangeVisible
+        {
+            get
+            {
+                return _dateRangesVisible;
+            }
+            set
+            {
+
+                _dateRangesVisible = value;
+                base.OnPropertyChanged("DateRangeVisible");
+
+            }
+        }
+
 
         /// <summary>
         /// Report types
@@ -241,11 +403,12 @@ namespace CS499.TCMS.View.ViewModels
                 }
 
                 _selectedReportType = value;
-
+                
                 base.OnPropertyChanged("SelectedReportType");
+                this.SetMenuVisibility();
 
             }
-        }
+        }       
 
         private DataTable _report;
 
@@ -272,6 +435,43 @@ namespace CS499.TCMS.View.ViewModels
 
             }
         }
+
+        /// <summary>
+        /// Gets or sets the vehicles.
+        /// </summary>
+        /// <value>
+        /// The vehicles.
+        /// </value>
+        public ObservableCollection<Vehicle> Vehicles { get; set; }
+
+        private Vehicle _selectedVehicle;
+
+        /// <summary>
+        /// Gets or sets the selected vehicle.
+        /// </summary>
+        /// <value>
+        /// The selected vehicle.
+        /// </value>
+        public Vehicle SelectedVehicle
+        {
+            get
+            {
+                return _selectedVehicle;
+            }
+            set
+            {
+
+                if (_selectedVehicle == value)
+                {
+                    return;
+                }
+
+                _selectedVehicle = value;
+                base.OnPropertyChanged("SelectedVehicle");
+
+            }
+        }
+
 
         /// <summary>
         /// Start date
