@@ -3,11 +3,14 @@ namespace CS499.TCMS.Model
 {
 
     /// <summary>
-    /// this class will hold the enums for the application
+    /// this class will hold the Enums for the application
     /// </summary>
     public static class Enums
     {
-                
+
+        /// <summary>
+        /// Truck capacity class
+        /// </summary>
         public enum TruckMaxCapacity
         {
             class1 = 0,
@@ -20,6 +23,9 @@ namespace CS499.TCMS.Model
             class8
         }
 
+        /// <summary>
+        /// User access level
+        /// </summary>
         public enum AccessLevel
         {
             Full = 0,
@@ -27,6 +33,18 @@ namespace CS499.TCMS.Model
             MaintenanceData,
             DriverData
 
+        }
+
+        /// <summary>
+        /// Report types
+        /// </summary>
+        public enum ReportTypes
+        {
+            Payroll = 0,
+            Maintenance_Cost,
+            Vehicle_Maintenance,
+            Incoming_Shipment,
+            Outgoing_Shipment
         }
 
         /// <summary>

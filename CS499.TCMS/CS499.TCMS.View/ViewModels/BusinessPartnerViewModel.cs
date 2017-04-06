@@ -42,7 +42,7 @@ namespace CS499.TCMS.View.ViewModels
         #region Methods
 
         /// <summary>
-        /// Save viewmodel
+        /// Save ViewModel
         /// </summary>
         private void Save()
         {

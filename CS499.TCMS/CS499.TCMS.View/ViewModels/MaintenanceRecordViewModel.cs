@@ -92,7 +92,13 @@ namespace CS499.TCMS.View.ViewModels
             },
             TaskCreationOptions.LongRunning),
             Messages.MaintenanceRecordSaving,
-            () => { },
+            () =>
+            {
+
+                // request to remove from parent workspace
+                this.CloseCommand.Execute(this);
+
+            },
             Messages.MainWindowInitialStatus,
             UIContext.Current,
             "Saving maintenance record",

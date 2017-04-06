@@ -555,4 +555,25 @@
   <data name="MyManifestDisplayName" xml:space="preserve">
     <value>My Manifests</value>
   </data>
+  <data name="ReportDisplayName" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="ReportDisplayToolTip" xml:space="preserve">
+    <value>Click here to run reports.</value>
+  </data>
+  <data name="ReportExportFailedError" xml:space="preserve">
+    <value>Failed to write report to excel file... Please verify the file is not open already.</value>
+  </data>
+  <data name="ReportExporting" xml:space="preserve">
+    <value>Exporting report to Excel... Please wait.</value>
+  </data>
+  <data name="ReportLoading" xml:space="preserve">
+    <value>Loading report... Please wait.</value>
+  </data>
+  <data name="ReportRunFailedError" xml:space="preserve">
+    <value>Failed to load report. Please contact support.</value>
+  </data>
+  <data name="ReportFileFilter" xml:space="preserve">
+    <value>Excel files (*.xlsx)|*.xlsx</value>
+  </data>
 </root>

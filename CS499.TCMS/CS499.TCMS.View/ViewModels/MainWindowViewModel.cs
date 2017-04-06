@@ -620,6 +620,14 @@ namespace CS499.TCMS.View.ViewModels
                         Factory.Create<IMaintenanceRecordDetailRepository>(), Factory.Create<IPartRepository>()))),
                             "ListAddBelow"));
 
+            commandList.Add(
+                    new CommandViewModel(
+                        Messages.ReportDisplayName,
+                        Messages.ReportDisplayToolTip,
+                        new RelayCommand(param => this.ExecuteCommand(() =>
+                        this.CreateDocument<ReportViewModel>(this.Dialog, this.TaskManager, Factory.Create<IReportRepository>()))),
+                            "GraphLineUp"));
+
 
         }
 
@@ -672,7 +680,7 @@ namespace CS499.TCMS.View.ViewModels
                         }
 
                         string userName = credentials.Username;
-                        User user = await Task.Run(() => { return this.userRepository.GetUserByUserName(userName); });
+                        User user = this.userRepository.GetUserByUserName(userName); 
 
                         // validate username first
                         if (user == null)

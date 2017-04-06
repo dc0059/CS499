@@ -1240,6 +1240,69 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reports.
+        /// </summary>
+        internal static string ReportDisplayName {
+            get {
+                return ResourceManager.GetString("ReportDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to run reports..
+        /// </summary>
+        internal static string ReportDisplayToolTip {
+            get {
+                return ResourceManager.GetString("ReportDisplayToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to write report to excel file... Please verify the file is not open already..
+        /// </summary>
+        internal static string ReportExportFailedError {
+            get {
+                return ResourceManager.GetString("ReportExportFailedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporting report to Excel... Please wait..
+        /// </summary>
+        internal static string ReportExporting {
+            get {
+                return ResourceManager.GetString("ReportExporting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excel files (*.xlsx)|*.xlsx.
+        /// </summary>
+        internal static string ReportFileFilter {
+            get {
+                return ResourceManager.GetString("ReportFileFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading report... Please wait..
+        /// </summary>
+        internal static string ReportLoading {
+            get {
+                return ResourceManager.GetString("ReportLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load report. Please contact support..
+        /// </summary>
+        internal static string ReportRunFailedError {
+            get {
+                return ResourceManager.GetString("ReportRunFailedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search by any column..
         /// </summary>
         internal static string SearchWatermark {

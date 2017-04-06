@@ -253,5 +253,8 @@
     <DataTemplate DataType="{x:Type vm:MyManifestViewModel}">
         <vw:MyManifestView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ReportViewModel}">
+        <vw:ReportView />
+    </DataTemplate>
 
 </ResourceDictionary>
