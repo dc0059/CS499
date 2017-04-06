@@ -45,8 +45,9 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT payroll.EmployeeID, payroll.PaymentDate, payroll.Payment, payroll.HoursWorked, user.FirstName, " +
-                              "user.MiddleName, user.LastName, user.Address, user.City, user.State, user.ZipCode, user.PayRate, user.HomeStore, user.JobDescription " +
+                CommandText = "SELECT payroll.EmployeeID AS 'Employee ID', payroll.PaymentDate AS 'Payment Date', payroll.Payment, payroll.HoursWorked AS 'Hours Worked', " +
+                              "user.FirstName AS 'First Name', user.MiddleName AS 'Middle Name', user.LastName AS 'Last Name', user.Address, user.City, user.State, " +
+                              "user.ZipCode AS 'Zip Code', user.PayRate AS 'Pay Rate', user.HomeStore AS 'Home Store', user.JobDescription AS 'Job Description' " +
                               "FROM payroll " +
                               "INNER JOIN user ON payroll.EmployeeID = user.EmployeeID " +
                               "WHERE PaymentDate BETWEEN ? and ? " +
@@ -80,11 +81,13 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT vehicle.VehicleID, vehicle.Brand, vehicle.Year, vehicle.Model, vehicle.VehicleType, vehicle.Capacity, " +
-                              "maintenancerecord.MaintenanceDate, maintenancerecord.MaintenanceDescription, maintenancerecorddetails.EmployeeID, " +
-                              "maintenancerecorddetails.RepairDescription, maintenancerecorddetails.RepairDate, maintenancepart.Quantity, " +
-                              "parts.PartDescription, parts.PartNumber, parts.PartPrice, parts.PartWeight, user.FirstName, user.MiddleName, user.LastName, " +
-                              "user.HomeStore, user.JobDescription " +
+                CommandText = "SELECT vehicle.VehicleID AS 'Vehicle ID', vehicle.Brand, vehicle.Year, vehicle.Model, vehicle.VehicleType AS 'Vehicle Type', " +
+                              "vehicle.Capacity, maintenancerecord.MaintenanceDate AS 'Maintenance Date', maintenancerecord.MaintenanceDescription AS 'Maintenance Description', " +
+                              "maintenancerecorddetails.EmployeeID AS 'Employee ID', maintenancerecorddetails.RepairDescription AS 'Repair Description', " +
+                              "maintenancerecorddetails.RepairDate AS 'Repair Date', maintenancepart.Quantity, parts.PartDescription AS 'Part Description', " +
+                              "parts.PartNumber AS 'Part Number', parts.PartPrice AS 'Part Price', parts.PartWeight AS 'Part Weight', " +
+                              "user.FirstName AS 'First Name', user.MiddleName AS 'Middle Name', user.LastName AS 'Last Name', user.HomeStore AS 'Home Store', " +
+                              "user.JobDescription AS 'Job Description' " +
                               "FROM maintenancerecorddetails " +
                               "INNER JOIN user ON maintenancerecorddetails.EmployeeID = user.EmployeeID " +
                               "INNER JOIN maintenancerecord ON maintenancerecorddetails.MaintenanceID = maintenancerecord.MaintenanceID " +
