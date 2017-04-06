@@ -3,6 +3,7 @@ using CS499.TCMS.Model;
 using CS499.TCMS.View.Interfaces;
 using CS499.TCMS.View.Resources;
 using CS499.TCMS.View.Services;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Data;
 using System.Linq;
@@ -120,6 +121,14 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
+        /// Sends the manifest to the <see cref="MapViewModel"/>
+        /// </summary>
+        private void Map()
+        {
+            this.MessengerInstance.Send(new NotificationMessage<DataTable>(this.Manifests, null));
+        }
+
+        /// <summary>
         /// Called when [request close].
         /// </summary>
         public override void OnRequestClose()
@@ -210,6 +219,33 @@ namespace CS499.TCMS.View.ViewModels
                 }
 
                 return _commandLoad;
+            }
+        }
+
+
+        private ICommand _commandMap;
+
+        /// <summary>
+        /// Gets the command map.
+        /// </summary>
+        /// <value>
+        /// The command map.
+        /// </value>
+        public ICommand CommandMap
+        {
+            get
+            {
+
+                if ( _commandMap == null)
+                {
+                     _commandMap = new RelayCommand(param =>
+                        {
+                            this.Map();
+                        },
+                        param => this.Manifests != null && this.Manifests.Rows.Count > 0);
+                }
+
+                return  _commandMap;
             }
         }
 

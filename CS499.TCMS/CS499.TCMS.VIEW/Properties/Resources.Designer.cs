@@ -59,14 +59,5 @@ namespace CS499.TCMS.View.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream truck_horn {
-            get {
-                return ResourceManager.GetStream("truck_horn", resourceCulture);
-            }
-        }
     }
 }

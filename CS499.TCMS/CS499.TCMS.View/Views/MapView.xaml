@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+             xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <m:Map CredentialsProvider="Au2zHop0XrjpOU4I2AWTn56ihoET-nZfMrNhVQD9BcGmpZQwYlc8JWWEiSw2g_0Q">
-            
-        </m:Map>
+
+        <cef:ChromiumWebBrowser Address="{Binding WebAddress}"/>
+
     </Grid>
 </UserControl>

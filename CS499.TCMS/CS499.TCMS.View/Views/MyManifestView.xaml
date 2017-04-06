@@ -1,84 +1,99 @@
 ﻿<UserControl x:Class="CS499.TCMS.View.Views.MyManifestView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:local="clr-namespace:CS499.TCMS.View.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+			 xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+			 xmlns:local="clr-namespace:CS499.TCMS.View.Controls"
+			 mc:Ignorable="d" 
+			 d:DesignHeight="600" d:DesignWidth="800">
 
-    <Grid>
+	<Grid>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal"
-                    Background="{DynamicResource AccentColorBrush}"
-                    Grid.Row="0">
-            <TextBlock Text="Total Manifest Weight (Lbs.):"
-                       VerticalAlignment="Center"
-                       FontSize="26"
-                       FontWeight="Bold"
-                       Foreground="White"
-                       Margin="5"/>
-            <TextBlock Text="{Binding TotalWeight, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"
-                       VerticalAlignment="Center"
-                       FontSize="26"
-                       FontWeight="Bold"
-                       Foreground="White"
-                       Margin="5"/>
-        </StackPanel>
-        
-        <DataGrid RenderOptions.ClearTypeHint="Enabled"
-                  AutoGenerateColumns="False"
-                  SelectionUnit="FullRow"
-                  GridLinesVisibility="All"
-                  IsReadOnly="True"
-                  CanUserAddRows="False"
-                  ItemsSource="{Binding Manifests}"
-                  Grid.Row="1">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Manifest ID}"
-                                    Header="Manifest ID"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Departure Time}"
-                                    Header="Departure Time"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding ETA}"
-                                    Header="ETA"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Order Number}"
-                                    Header="Order Number"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Source Address }"
-                                    Header="Source Address"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Destination Address}"
-                                    Header="Destination Address"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Part Status}"
-                                    Header="Part Status"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Part Number}"
-                                    Header="Part Number"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Part Description}"
-                                    Header="Part Description"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Quantity}"
-                                    Header="Quantity"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Total Part Price, StringFormat=C2}"
-                                    Header="Total Part Price"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Total Part Weight, StringFormat=N2}"
-                                    Header="Total Part Weight (Lbs.)"
-                                    IsReadOnly="True"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+		<StackPanel Orientation="Horizontal"
+					Background="{DynamicResource AccentColorBrush}"
+					Grid.Row="0">
+			<TextBlock Text="Total Manifest Weight (Lbs.):"
+					   VerticalAlignment="Center"
+					   FontSize="26"
+					   FontWeight="Bold"
+					   Foreground="White"
+					   Margin="5"/>
+			<TextBlock Text="{Binding TotalWeight, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"
+					   VerticalAlignment="Center"
+					   FontSize="26"
+					   FontWeight="Bold"
+					   Foreground="White"
+					   Margin="5"/>            
+		</StackPanel>
+		
+		<DataGrid RenderOptions.ClearTypeHint="Enabled"
+				  AutoGenerateColumns="False"
+				  SelectionUnit="FullRow"
+				  GridLinesVisibility="All"
+				  IsReadOnly="True"
+				  CanUserAddRows="False"
+				  ItemsSource="{Binding Manifests}"
+				  Grid.Row="1">
+			<DataGrid.Columns>
+				<DataGridTextColumn Binding="{Binding Manifest ID}"
+									Header="Manifest ID"
+									IsReadOnly="True"/>
+				<DataGridTextColumn Binding="{Binding Departure Time}"
+									Header="Departure Time"
+									IsReadOnly="True"/>
+				<DataGridTextColumn Binding="{Binding ETA}"
+									Header="ETA"
+									IsReadOnly="True"/>
+				<DataGridTextColumn Binding="{Binding Order Number}"
+									Header="Order Number"
+									IsReadOnly="True"/>
+				<DataGridTextColumn Binding="{Binding Source Address }"
+									Header="Source Address"
+									IsReadOnly="True"/>
+				<DataGridTextColumn Binding="{Binding Destination Address}"
+									Header="Destination Address"
+									IsReadOnly="True"/>
+				<DataGridTextColumn Binding="{Binding Part Status}"
+									Header="Part Status"
+									IsReadOnly="True"/>
+				<DataGridTextColumn Binding="{Binding Part Number}"
+									Header="Part Number"
+									IsReadOnly="True"/>
+				<DataGridTextColumn Binding="{Binding Part Description}"
+									Header="Part Description"
+									IsReadOnly="True"/>
+				<DataGridTextColumn Binding="{Binding Quantity}"
+									Header="Quantity"
+									IsReadOnly="True"/>
+				<DataGridTextColumn Binding="{Binding Total Part Price, StringFormat=C2}"
+									Header="Total Part Price"
+									IsReadOnly="True"/>
+				<DataGridTextColumn Binding="{Binding Total Part Weight, StringFormat=N2}"
+									Header="Total Part Weight (Lbs.)"
+									IsReadOnly="True"/>
+			</DataGrid.Columns>
+		</DataGrid>
+
+		<StackPanel Orientation="Horizontal"
+					FlowDirection="RightToLeft"
+					Grid.Row="2">
+			<Button Width="50"
+					Height="50"
+					Grid.Column="1"
+					HorizontalAlignment="Right"
+					Style="{StaticResource MetroCircleButtonStyle}"
+					Background="{DynamicResource AccentColorBrush}"
+					ToolTip="View Route"
+					Command="{Binding CommandMap}"
+					Content="{iconPacks:PackIconModern Kind=MapGps, Height=26, Width=26}"/>
+		</StackPanel>
+	</Grid>
 </UserControl>

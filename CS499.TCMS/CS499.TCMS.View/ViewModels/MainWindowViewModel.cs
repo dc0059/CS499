@@ -343,6 +343,9 @@ namespace CS499.TCMS.View.ViewModels
             timer.Interval = TimeSpan.FromMinutes(5);
             timer.Start();
 
+            // create new MapViewModel
+            this.MapViewModel = new MapViewModel();
+
         }
 
         /// <summary>
@@ -679,8 +682,16 @@ namespace CS499.TCMS.View.ViewModels
                             return;
                         }
 
+                        // show getting user
+                        var controller = await this.Dialog.Dialog.ShowProgressAsync(this, Messages.TitleApp, Messages.LoginGettingUserInfo);
+                        await Task.Delay(500);
+
+                        // get user
                         string userName = credentials.Username;
-                        User user = this.userRepository.GetUserByUserName(userName); 
+                        User user = this.userRepository.GetUserByUserName(userName);
+
+                        // close progress
+                        await controller.CloseAsync();
 
                         // validate username first
                         if (user == null)
@@ -705,7 +716,7 @@ namespace CS499.TCMS.View.ViewModels
                                 this.UserThemeViewModel = WorkspaceFactory.Create<UserThemeViewModel>();
 
                                 // show loading while changing the user time sheet is loading
-                                var controller = await this.Dialog.Dialog.ShowProgressAsync(this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginLoading);
+                                controller = await this.Dialog.Dialog.ShowProgressAsync(this, Messages.TitleApp, Messages.LoginLoading);
                                 await Task.Delay(500);
 
                                 // add dashboard
@@ -1198,6 +1209,36 @@ namespace CS499.TCMS.View.ViewModels
 
             }
         }
+
+        private MapViewModel _mapViewModel;
+
+        /// <summary>
+        /// Gets or sets the map view model.
+        /// </summary>
+        /// <value>
+        /// The map view model.
+        /// </value>
+        public MapViewModel MapViewModel
+        {
+            get
+            {
+                return _mapViewModel;
+            }
+            set
+            {
+
+                if (_mapViewModel == value)
+                {
+                    return;
+                }
+
+                _mapViewModel = value;
+
+                base.OnPropertyChanged("MapViewModel");
+
+            }
+        }
+
 
         private ICommand _commandHelp;
 

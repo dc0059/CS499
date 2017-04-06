@@ -109,7 +109,7 @@
                 <DataGridTextColumn Binding="{Binding Payment, StringFormat=C2}"
                                     Header="Payment"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding HoursWorked, StringFormat=C2}"
+                <DataGridTextColumn Binding="{Binding HoursWorked, StringFormat=N2}"
                                     Header="Hours Worked"
                                     IsReadOnly="True"/>
             </local:DataGridScrollToSelectedItem.Columns>

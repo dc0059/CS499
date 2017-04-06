@@ -62,7 +62,7 @@ namespace CS499.TCMS.ModelUnitTest
         [TestMethod]
         public void PurchaseItemModelTest()
         {
-            PurchaseItem testItem = new PurchaseItem(12345, 12345, 6, 123456);
+            PurchaseItem testItem = new PurchaseItem(12345, 12345, 6, 123456, "Some");
             Assert.IsTrue(testItem.IsValid);
         }
 

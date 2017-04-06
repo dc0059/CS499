@@ -41,10 +41,7 @@ namespace CS499.TCMS.View
 
             // show splash screen
             SplashScreenService.ShowSplash();
-
-            // play truck horn
-            CoreAssembly.PlayTruckSound();
-
+         
             // get the update location
             CoreAssembly.SetUpdateLocation();
 
@@ -178,6 +175,9 @@ namespace CS499.TCMS.View
         {
 
             base.OnExit(e);
+
+            // shutdown browser
+            CefSharp.Cef.Shutdown();
 
             // log close
             log.Info("Closed application.");

@@ -115,7 +115,7 @@
                 <DataGridTextColumn Binding="{Binding ZipCode}"
                                     Header="Zip Code"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PhoneNumber}"
+                <DataGridTextColumn Binding="{Binding PhoneNumber, Converter={StaticResource StringToPhoneConverter}}"
                                     Header="Phone Number"
                                     IsReadOnly="True"/>                
             </local:DataGridScrollToSelectedItem.Columns>

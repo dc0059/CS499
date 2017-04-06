@@ -581,7 +581,7 @@ namespace CS499.TCMS.View.ViewModels
                     {
                         this.Save();
                     },
-                        param => this.Model != null ? this.Model.IsValid : false);
+                        param => this.Model != null ? this.Model.IsValid && this.HasChanges : false);
                 }
 
                 return _commandSave;

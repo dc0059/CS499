@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,17 @@ namespace CS499.TCMS.View
 
             return source.IndexOf(target, stringComparison) != -1;
 
+        }
+
+        /// <summary>
+        /// Replaces the white space and new lines.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="replacement">The replacement.</param>
+        /// <returns>string with the replacement string</returns>
+        public static string ReplaceWhiteSpaceAndNewLines(this string source, string replacement)
+        {
+            return Regex.Replace(source, @"\r\n?|\n|\s", replacement);
         }
 
         #endregion

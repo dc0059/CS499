@@ -127,10 +127,10 @@
                 <DataGridTextColumn Binding="{Binding ZipCode}"
                                     Header="Zip Code"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding HomePhone}"
+                <DataGridTextColumn Binding="{Binding HomePhone, Converter={StaticResource StringToPhoneConverter}}"
                                     Header="Home Phone"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding CellPhone}"
+                <DataGridTextColumn Binding="{Binding CellPhone, Converter={StaticResource StringToPhoneConverter}}"
                                     Header="Cell Phone"
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding EmailAddress}"

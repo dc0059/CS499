@@ -790,6 +790,15 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading user info... Please wait..
+        /// </summary>
+        internal static string LoginGettingUserInfo {
+            get {
+                return ResourceManager.GetString("LoginGettingUserInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username ({0}) not found. Please contact support..
         /// </summary>
         internal static string LoginLoadError {

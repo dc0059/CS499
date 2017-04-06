@@ -362,20 +362,7 @@ namespace CS499.TCMS.View.Services
         {
             return string.Format(Properties.Settings.Default.ThemeFileLocation, Path.GetTempPath());
         }
-
-        /// <summary>
-        /// Plays the truck sound.
-        /// </summary>
-        public static void PlayTruckSound()
-        {
-
-            using (var player = new SoundPlayer(Properties.Resources.ResourceManager.GetStream("truck_sound")))
-            {
-                player.Play();
-            }
-
-        }
-
+       
         #endregion
 
     }

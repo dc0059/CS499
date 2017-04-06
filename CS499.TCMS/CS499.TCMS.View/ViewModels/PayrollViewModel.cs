@@ -199,7 +199,7 @@ namespace CS499.TCMS.View.ViewModels
 
             }
         }
-
+                
         /// <summary>
         /// <see cref="Payroll"/>
         /// </summary>
@@ -259,19 +259,9 @@ namespace CS499.TCMS.View.ViewModels
             {
                 return Model.Payment;
             }
-            set
+            private set
             {
-
-                if (Model.Payment == value)
-                {
-                    return;
-                }
-
                 Model.Payment = value;
-
-                base.OnPropertyChanged("Payment");
-                this.HasChanges = true;
-
             }
         }
 
@@ -294,7 +284,13 @@ namespace CS499.TCMS.View.ViewModels
 
                 Model.HoursWorked = value;
 
+                if (_selectedUser != null)
+                {
+                    this.Payment = this.SelectedUser.PayRate * this.HoursWorked;
+                }
+
                 base.OnPropertyChanged("HoursWorked");
+                base.OnPropertyChanged("Payment");
                 this.HasChanges = true;
 
             }
@@ -393,7 +389,7 @@ namespace CS499.TCMS.View.ViewModels
                     {
                         this.Save();
                     },
-                        param => this.Model != null ? this.Model.IsValid : false);
+                        param => this.Model != null ? this.Model.IsValid && this.HasChanges : false);
                 }
 
                 return _commandSave;

@@ -49,9 +49,6 @@ namespace CS499.TCMS.Model
                 case "EmployeeID":
                     error = this.ValidateEmployeeID();
                     break;
-                case "PaymentDate":
-                    error = this.ValidatePaymentDate();
-                    break;
                 case "Payment":
                     error = this.ValidatePayment();
                     break;
@@ -84,17 +81,6 @@ namespace CS499.TCMS.Model
         {
             if (this.EmployeeID <= 0)
                 return Messages.InvalidID;
-            return null;
-        }
-
-        /// <summary>
-        /// Validate the payment date
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidatePaymentDate()
-        {
-            if (this.PaymentDate.CompareTo(DateTime.Now) > 0)
-                return Messages.InvalidDate;
             return null;
         }
 
@@ -209,7 +195,6 @@ namespace CS499.TCMS.Model
         {
             "PayrollID",
             "EmployeeID",
-            "PaymentDate",
             "Payment",
             "HoursWorked"
         };

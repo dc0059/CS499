@@ -93,13 +93,21 @@ namespace CS499.TCMS.View.ViewModels
                     return this.reportRepository.GetPayrollReport(this.StartDate, this.EndDate);
 
                 case Enums.ReportTypes.Maintenance_Cost:
-                    break;
+
+                    return this.reportRepository.GetMaintenanceCostReport();
+
                 case Enums.ReportTypes.Vehicle_Maintenance:
-                    break;
+
+                    return this.reportRepository.GetVehicleMaintenanceReport(null);
+
                 case Enums.ReportTypes.Incoming_Shipment:
-                    break;
+
+                    return this.reportRepository.GetIncomingShipmentReport();
+
                 case Enums.ReportTypes.Outgoing_Shipment:
-                    break;
+
+                    return this.reportRepository.GetOutgoingShipmentReport();
+
                 default:
                     break;
             }

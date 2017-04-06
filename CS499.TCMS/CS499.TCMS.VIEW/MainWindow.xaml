@@ -6,6 +6,7 @@
 					  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
 					  xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
 					  xmlns:dockctrl="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
+					  xmlns:v="clr-namespace:CS499.TCMS.View.Views"
 					  Title="{Binding DisplayName}" 
 					  Height="600" 
 					  Width="800"
@@ -17,7 +18,8 @@
 					  WindowTransitionsEnabled="True"
 					  WindowStartupLocation="CenterScreen"
 					  dialog:DialogParticipation.Register="{Binding}"
-					  Name="mainWindow">
+					  Name="mainWindow"
+					  LeftWindowCommandsOverlayBehavior="Never">
 	
 	<Controls:MetroWindow.WindowButtonCommands>
 		<Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
@@ -28,7 +30,7 @@
 			<Controls:Flyout Theme="Accent"
 							 Position="Left"
 							 Name="FlyoutMenu"
-							 Width="{Binding Width, ElementName=mainWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                             
+							 Width="{Binding ActualWidth, ElementName=mainWindow, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"                             
 							 IsOpen="{Binding IsMenuOpen, Mode=TwoWay}"
 							 IsAutoCloseEnabled="True"
 							 AutoCloseInterval="30000">
@@ -38,6 +40,17 @@
 					FontSize="20"
 					Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Controls:Flyout}, Path=Background}"
 					Foreground="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Controls:Flyout}, Path=Foreground}"/>
+			</Controls:Flyout>
+			<Controls:Flyout Theme="Dark"
+							 Position="right"
+							 Width="{Binding ActualWidth, ElementName=mainWindow, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"                             
+							 IsOpen="{Binding MapViewModel.IsMapOpen, Mode=TwoWay}">
+				<Border BorderBrush="{DynamicResource AccentColorBrush}"
+						BorderThickness="2"
+						Margin="5">
+					<v:MapView DataContext="{Binding MapViewModel}"/>
+				</Border>
+				
 			</Controls:Flyout>
 		</Controls:FlyoutsControl>
 	</Controls:MetroWindow.Flyouts>
@@ -109,9 +122,9 @@
 						<Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}" />
 						<Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
 						<Setter Property="ContentId" Value="{Binding Model.ContentId, Mode=TwoWay}" />                        
-                    </Style>
+					</Style>
 				</dock:DockingManager.LayoutItemContainerStyle>
-                                
+								
 				<dock:LayoutRoot>
 					<dock:LayoutPanel>
 

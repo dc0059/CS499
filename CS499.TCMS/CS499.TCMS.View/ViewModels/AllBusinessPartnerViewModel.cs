@@ -24,7 +24,7 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="dialog">Dialog service to show messages from viewmodel</param>
+        /// <param name="dialog">Dialog service to show messages from ViewModel</param>
         /// <param name="taskManager">Task manager to hold reference to running tasks</param>
         /// <param name="businessPartnerRepository">business partner repository</param>
         public AllBusinessPartnerViewModel(IDialogService dialog, ITaskManager taskManager, IBusinessPartnerRepository businessPartnerRepository)
@@ -47,7 +47,7 @@ namespace CS499.TCMS.View.ViewModels
         #region Methods
 
         /// <summary>
-        /// Load list of viewmodels
+        /// Load list of ViewModels
         /// </summary>
         /// <param name="notificationMessage">notification message</param>
         private void Load(NotificationMessage<AllBusinessPartnerViewModel> notificationMessage)
@@ -56,7 +56,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Load list of viewmodels
+        /// Load list of ViewModels
         /// </summary>
         private void Load()
         {
@@ -105,7 +105,7 @@ namespace CS499.TCMS.View.ViewModels
             // clear current list
             this.ViewModels.ClearAll();
 
-            // loop through each model and add e viewmodel to the collection
+            // loop through each model and add e ViewModel to the collection
             foreach (var model in businessPartners)
             {
                 BusinessPartnerViewModel viewModel = new BusinessPartnerViewModel(model, this.businessPartnerRepository, this.TaskManager, false);
@@ -115,7 +115,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Create new instance of the viewmodel
+        /// Create new instance of the ViewModel
         /// </summary>
         private void New()
         {
@@ -124,16 +124,16 @@ namespace CS499.TCMS.View.ViewModels
             BusinessPartner model = new BusinessPartner(0, string.Empty, string.Empty, 
                 string.Empty, string.Empty, 0, string.Empty);
 
-            // create new viewmodel
+            // create new ViewModel
             BusinessPartnerViewModel viewModel = new BusinessPartnerViewModel(model, this.businessPartnerRepository, this.TaskManager, true);
 
-            // send viewmodel
+            // send ViewModel
             this.SendViewModel(viewModel);
 
         }
 
         /// <summary>
-        /// Edit instance of the viewmodel
+        /// Edit instance of the ViewModel
         /// </summary>
         private void Edit()
         {
@@ -144,9 +144,9 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// send message to the mainwindowviewmodel to add the viewmodel to the collection
+        /// send message to the mainwindowViewModel to add the ViewModel to the collection
         /// </summary>
-        /// <param name="viewModel">viewmodel</param>
+        /// <param name="viewModel">ViewModel</param>
         private void SendViewModel(BusinessPartnerViewModel viewModel)
         {
             this.MessengerInstance.Send<NotificationMessage<WorkspaceViewModel>>(
@@ -154,12 +154,12 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Delete instance of the viewmodel
+        /// Delete instance of the ViewModel
         /// </summary>
         private async void Delete()
         {
 
-            // get selected viewmodel
+            // get selected ViewModel
             BusinessPartnerViewModel viewModel = this.SelectedViewModel;
 
             // Ask viewModel to confirm the deletion
@@ -196,12 +196,12 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Request the viewmodel be closed
+        /// Request the ViewModel be closed
         /// </summary>
         public override void OnRequestClose()
         {
 
-            // unregister viewmodel
+            // unregister ViewModel
             this.MessengerInstance.Unregister(this);
             base.OnRequestClose();
         }
@@ -267,17 +267,17 @@ namespace CS499.TCMS.View.ViewModels
         private IBusinessPartnerRepository businessPartnerRepository;
 
         /// <summary>
-        /// Dialog service for showing messages from the viewmodel
+        /// Dialog service for showing messages from the ViewModel
         /// </summary>
         private IDialogService dialog;
 
         /// <summary>
-        /// Selected viewmodel
+        /// Selected ViewModel
         /// </summary>
         public BusinessPartnerViewModel SelectedViewModel { get; set; }
 
         /// <summary>
-        /// Collection of viewmodels
+        /// Collection of ViewModels
         /// </summary>
         public ObservableCollectionExtended<BusinessPartnerViewModel> ViewModels { get; set; }
 
@@ -347,7 +347,7 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
-        /// Flag indicating if the selected viewmodel can be edited or deleted
+        /// Flag indicating if the selected ViewModel can be edited or deleted
         /// </summary>
         public bool CanEditOrDelete
         {
@@ -360,7 +360,7 @@ namespace CS499.TCMS.View.ViewModels
         private ICommand _commandNew;
 
         /// <summary>
-        /// Command to execute viewmodel creation
+        /// Command to execute ViewModel creation
         /// </summary>
         public ICommand CommandNew
         {
@@ -382,7 +382,7 @@ namespace CS499.TCMS.View.ViewModels
         private ICommand _commandEdit;
 
         /// <summary>
-        /// Command to execute viewmodel edit
+        /// Command to execute ViewModel edit
         /// </summary>
         public ICommand CommandEdit
         {
@@ -405,7 +405,7 @@ namespace CS499.TCMS.View.ViewModels
         private ICommand _commandDelete;
 
         /// <summary>
-        /// Command to execute viewmodel delete
+        /// Command to execute ViewModel delete
         /// </summary>
         public ICommand CommandDelete
         {

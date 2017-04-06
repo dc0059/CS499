@@ -576,4 +576,7 @@
   <data name="ReportFileFilter" xml:space="preserve">
     <value>Excel files (*.xlsx)|*.xlsx</value>
   </data>
+  <data name="LoginGettingUserInfo" xml:space="preserve">
+    <value>Loading user info... Please wait.</value>
+  </data>
 </root>
