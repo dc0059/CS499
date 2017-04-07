@@ -19,7 +19,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IPurchaseItemRepository purchaseItemRepo = factory.Create<IPurchaseItemRepository>();
 
-            PurchaseItem newItem = new PurchaseItem(123, 4, 3, 2, "Some");
+            PurchaseItem newItem = new PurchaseItem(123, 4, 3, 2, "here");
 
             purchaseItemRepo.Insert(newItem);
         }
@@ -61,7 +61,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IPurchaseItemRepository purchaseItemRepo = factory.Create<IPurchaseItemRepository>();
 
-            PurchaseItem updateItem = new PurchaseItem(1, 4, 250, 2, "Some");
+            PurchaseItem updateItem = new PurchaseItem(1, 4, 250, 2, "here");
 
             purchaseItemRepo.Update(updateItem);
         }

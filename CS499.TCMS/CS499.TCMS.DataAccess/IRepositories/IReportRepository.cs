@@ -12,7 +12,7 @@ namespace CS499.TCMS.DataAccess.IRepositories
     public interface IReportRepository: IRepositoryBase
     {
         DataTable GetPayrollReport(DateTime startDate, DateTime endDate);
-        DataTable GetMaintenanceCostReport();
+        DataTable GetMaintenanceCostReport(DateTime startDate, DateTime endDate);
         DataTable GetVehicleMaintenanceReport(Vehicle model);
         DataTable GetIncomingShipmentReport();
         DataTable GetOutgoingShipmentReport();

@@ -50,5 +50,23 @@ namespace CS499.TCMS.DataAccessUnitTests
                 }
             }
         }
+
+        [TestMethod]
+        public void GetOutgoingShipmentReportTest()
+        {
+            RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
+            IReportRepository reportRepo = factory.Create<IReportRepository>();
+
+            DataTable table = reportRepo.GetOutgoingShipmentReport();
+
+            foreach (DataRow row in table.Rows)
+            {
+                System.Diagnostics.Debug.Print("");
+                for (int x = 0; x < table.Columns.Count; x++)
+                {
+                    System.Diagnostics.Debug.Print(row[x].ToString() + " ");
+                }
+            }
+        }
     }
 }
