@@ -66,6 +66,20 @@ namespace CS499.TCMS.View.Interfaces
         /// <param name="status">Task status</param>
         void RemoveTask(Task t, string status);
 
+        /// <summary>
+        /// Check to see if the task is still running
+        /// </summary>
+        /// <param name="id">unique identifier for the task</param>
+        /// <returns>true if the task is still running, false otherwise</returns>
+        bool TaskRunning(int id);
+
+        /// <summary>
+        /// Wait for tasks to complete
+        /// </summary>
+        /// <param name="tasks">list of tasks</param>
+        /// <returns>awaitable task</returns>
+        Task WaitForTasks(params Task[] tasks);
+
         #endregion
 
         #region Events

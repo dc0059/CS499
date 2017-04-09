@@ -133,7 +133,7 @@ namespace CS499.TCMS.View.ViewModels
              Messages.AllManifestLoadError,
              log);
 
-        }
+        }        
 
         /// <summary>
         /// Add each ViewModel to the collection
@@ -185,7 +185,7 @@ namespace CS499.TCMS.View.ViewModels
 
                 // refresh the list
                 this.Vehicles.Refresh();
-
+               
             },
              Messages.MainWindowInitialStatus,
              UIContext.Current,
@@ -418,6 +418,16 @@ namespace CS499.TCMS.View.ViewModels
         /// Initialize logger
         /// </summary>
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        /// <summary>
+        /// User task
+        /// </summary>
+        private Task userTask;
+
+        /// <summary>
+        /// Vehicle task 
+        /// </summary>
+        private Task vehicleTask;
 
         /// <summary>
         /// Manifest repository

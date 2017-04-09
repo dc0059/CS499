@@ -171,7 +171,7 @@ namespace CS499.TCMS.View.ViewModels
 
                 case Enums.ReportTypes.Maintenance_Cost:
 
-                    return this.reportRepository.GetMaintenanceCostReport();
+                    return this.reportRepository.GetMaintenanceCostReport(this.StartDate, this.EndDate);
 
                 case Enums.ReportTypes.Vehicle_Maintenance:
 
@@ -266,15 +266,40 @@ namespace CS499.TCMS.View.ViewModels
         private void SetMenuVisibility()
         {
 
-            if (this.SelectedReportType == Enums.ReportTypes.Vehicle_Maintenance)
+            switch (this.SelectedReportType)
             {
-                this.VehicleSelectionVisible = true;
-                this.DateRangeVisible = false;
-            }
-            else
-            {
-                this.VehicleSelectionVisible = false;
-                this.DateRangeVisible = true;
+                case Enums.ReportTypes.Payroll:
+
+                    this.VehicleSelectionVisible = false;
+                    this.DateRangeVisible = true;
+
+                    break;
+                case Enums.ReportTypes.Maintenance_Cost:
+
+                    this.VehicleSelectionVisible = false;
+                    this.DateRangeVisible = true;
+
+                    break;
+                case Enums.ReportTypes.Vehicle_Maintenance:
+
+                    this.VehicleSelectionVisible = true;
+                    this.DateRangeVisible = false;
+
+                    break;
+                case Enums.ReportTypes.Incoming_Shipment:
+
+                    this.VehicleSelectionVisible = false;
+                    this.DateRangeVisible = false;
+
+                    break;
+                case Enums.ReportTypes.Outgoing_Shipment:
+
+                    this.VehicleSelectionVisible = false;
+                    this.DateRangeVisible = false;
+
+                    break;
+                default:
+                    break;
             }
 
         }

@@ -111,7 +111,7 @@ namespace CS499.TCMS.View.Services
         {
             this.Add(t, status);
 
-            t.ContinueWith((task) =>
+            var continueTask = t.ContinueWith((task) =>
             {
                 try
                 {
@@ -174,10 +174,12 @@ namespace CS499.TCMS.View.Services
 
                 }
 
-            }, scheduler)
-            .ContinueWith((task) => this.RemoveTask(t, nextStatus), scheduler);
+            }, scheduler);
 
-            return t;
+            var removeTask = continueTask.ContinueWith((task) => this.RemoveTask(t, nextStatus), scheduler);
+
+            return removeTask;
+
         }
 
 
@@ -199,14 +201,14 @@ namespace CS499.TCMS.View.Services
             Action continuationAlways)
         {
 
-            this.AddTask(t, status, continuation, nextStatus, scheduler, actionType, databaseError, log)
+            var continueAlwaysTask = this.AddTask(t, status, continuation, nextStatus, scheduler, actionType, databaseError, log)
                 .ContinueWith((task) =>
                 {
                     continuationAlways();
 
                 }, System.Threading.CancellationToken.None, TaskContinuationOptions.AttachedToParent, scheduler);
 
-            return t;
+            return continueAlwaysTask;
         }
 
         /// <summary>
@@ -219,6 +221,38 @@ namespace CS499.TCMS.View.Services
             this.Log(t, status, "Remove");
             tasks.Remove(t);
             this.TaskStatuChanged(status);
+        }
+
+        /// <summary>
+        /// Check to see if the task is still running
+        /// </summary>
+        /// <param name="id">unique identifier for the task</param>
+        /// <returns>true if the task is still running, false otherwise</returns>
+        public bool TaskRunning(int id)
+        {
+            return this.tasks.FirstOrDefault((t) => t.Id == id) != null;
+        }
+
+        /// <summary>
+        /// Wait for tasks to complete
+        /// </summary>
+        /// <param name="tasks">list of tasks</param>
+        /// <returns>awaitable task</returns>
+        public async Task WaitForTasks(params Task[] tasks)
+        {
+
+            // wait if any task is null
+            while (tasks.FirstOrDefault((t) => t == null) == null)
+            {
+                await Task.Delay(500);
+            }
+
+            // wait for all tasks to complete
+            while (tasks.FirstOrDefault((t) => t.IsCompleted == false) != null)
+            {
+                await Task.Delay(500);
+            }
+
         }
 
         /// <summary>
