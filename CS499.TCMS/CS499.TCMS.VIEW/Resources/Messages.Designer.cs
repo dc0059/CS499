@@ -817,7 +817,7 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to TCMS!!! Please enter your username and password to login..
+        ///   Looks up a localized string similar to Welcome to TCMS! Please enter your username and password to login..
         /// </summary>
         internal static string LoginStart {
             get {
