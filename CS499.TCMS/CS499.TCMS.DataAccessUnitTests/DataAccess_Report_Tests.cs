@@ -59,14 +59,18 @@ namespace CS499.TCMS.DataAccessUnitTests
 
             DataTable table = reportRepo.GetOutgoingShipmentReport();
 
-            foreach (DataRow row in table.Rows)
-            {
-                System.Diagnostics.Debug.Print("");
-                for (int x = 0; x < table.Columns.Count; x++)
-                {
-                    System.Diagnostics.Debug.Print(row[x].ToString() + " ");
-                }
-            }
+            Assert.IsTrue(table.Rows.Count > 0);
+        }
+
+        [TestMethod]
+        public void GetMaintenanceReport()
+        {
+            RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
+            IReportRepository reportRepo = factory.Create<IReportRepository>();
+
+            DataTable table = reportRepo.GetMaintenanceCostReport(DateTime.Now.AddMonths(-2), DateTime.Now);
+
+            Assert.IsTrue(table.Rows.Count > 0);
         }
     }
 }
