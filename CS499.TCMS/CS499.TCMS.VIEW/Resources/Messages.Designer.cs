@@ -1105,6 +1105,24 @@ namespace CS499.TCMS.View.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Opening link to {0}... Please wait..
+        /// </summary>
+        internal static string OpenLink {
+            get {
+                return ResourceManager.GetString("OpenLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to open link... Please contact support..
+        /// </summary>
+        internal static string OpenLinkError {
+            get {
+                return ResourceManager.GetString("OpenLinkError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Part: {0}.
         /// </summary>
         internal static string PartDisplayName {

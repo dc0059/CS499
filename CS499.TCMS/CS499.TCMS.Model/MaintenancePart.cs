@@ -118,7 +118,7 @@ namespace CS499.TCMS.Model
 
         public override string ToString()
         {
-            return string.Format("Part #{0} used in Maintenance #{1}", this.MaintenancePartID, this.DetailID);
+            return string.Format("{0}", this.MaintenancePartID);
         }
 
         public override bool Equals(object obj)

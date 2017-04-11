@@ -135,7 +135,7 @@ namespace CS499.TCMS.Model
 
         public override string ToString()
         {
-            return string.Format("Order #{0} from {1} to {2}", this.OrderNumber, this.SourceID, this.DestinationID);
+            return string.Format("{0}", this.OrderNumber);
         }
 
         public override bool Equals(object obj)

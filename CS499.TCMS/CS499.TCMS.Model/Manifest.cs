@@ -167,7 +167,7 @@ namespace CS499.TCMS.Model
 
         public override string ToString()
         {
-            return string.Format("{0} Manifest #{1}", this.ShipmentType, this.ManifestID);
+            return string.Format("{0} ({1})", this.ManifestID, this.ShipmentType);
         }
 
         public override bool Equals(object obj)

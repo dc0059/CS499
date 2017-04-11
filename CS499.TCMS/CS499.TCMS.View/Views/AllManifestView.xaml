@@ -100,6 +100,19 @@
                                             Style="{StaticResource MetroDataGrid}">
 
             <local:DataGridScrollToSelectedItem.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="40"
+                                    Height="40"
+                                    Style="{StaticResource MetroCircleButtonStyle}"
+                                    Background="{DynamicResource AccentColorBrush}"
+                                    ToolTip="View Purchase Orders"
+                                    Command="{Binding DataContext.CommandOpenLink, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                    Content="{iconPacks:PackIconModern Kind=Link, Height=16, Width=16}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding ManifestID}"
                                     Header="Manifest ID"
                                     IsReadOnly="True"/>
@@ -115,17 +128,18 @@
                 <DataGridTextColumn Binding="{Binding ShippingCost, StringFormat=C2}"
                                     Header="Shipping Cost"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding VehicleID}"
-                                    Header="Vehicle ID"
+                <DataGridTextColumn Binding="{Binding SelectedVehicle}"
+                                    Header="Vehicle"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding EmployeeID}"
-                                    Header="Employee ID"
+                <DataGridTextColumn Binding="{Binding SelectedUser}"
+                                    Header="Employee"
                                     IsReadOnly="True"/>
                 <DataGridCheckBoxColumn Binding="{Binding Arrived}"
                                         Header="Arrived"
                                         IsReadOnly="True"
                                         ElementStyle="{StaticResource MetroDataGridCheckBox}"
                                         EditingElementStyle="{StaticResource MetroDataGridCheckBox}"/>
+                
             </local:DataGridScrollToSelectedItem.Columns>
 
         </local:DataGridScrollToSelectedItem>

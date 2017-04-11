@@ -118,7 +118,7 @@ namespace CS499.TCMS.Model
 
         public override string ToString()
         {
-            return string.Format("Pay stub #{0} for Employee #{1}", this.PayrollID, this.EmployeeID);
+            return string.Format("{0}", this.PayrollID);
         }
 
         public override bool Equals(object obj)

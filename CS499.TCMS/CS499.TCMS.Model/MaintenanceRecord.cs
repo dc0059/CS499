@@ -115,7 +115,7 @@ namespace CS499.TCMS.Model
 
         public override string ToString()
         {
-            return string.Format("Maintenance #{0} for Vehicle #{1}", this.MaintenanceID, this.VehicleID);
+            return string.Format("{0}", this.MaintenanceID);
         }
 
         public override bool Equals(object obj)

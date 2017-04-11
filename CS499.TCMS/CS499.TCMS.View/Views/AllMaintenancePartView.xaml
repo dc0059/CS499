@@ -97,7 +97,7 @@
                                             CanUserAddRows="False"
                                             ItemsSource="{Binding ViewModels}"
                                             SelectedItem="{Binding SelectedViewModel, Mode=TwoWay}"
-                                            Style="{StaticResource MetroDataGrid}">
+                                            Style="{StaticResource MetroDataGrid}" Margin="0,2,0,48" Grid.RowSpan="2">
 
             <local:DataGridScrollToSelectedItem.Columns>
                 <DataGridTextColumn Binding="{Binding MaintenancePartID}"
@@ -106,8 +106,8 @@
                 <DataGridTextColumn Binding="{Binding DetailID}"
                                     Header="Detail ID"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PartID}"
-                                    Header="Part ID"
+                <DataGridTextColumn Binding="{Binding SelectedPart}"
+                                    Header="Part"
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Quantity}"
                                     Header="Quantity"

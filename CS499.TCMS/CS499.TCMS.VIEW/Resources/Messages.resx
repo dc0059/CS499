@@ -579,4 +579,10 @@
   <data name="LoginGettingUserInfo" xml:space="preserve">
     <value>Loading user info... Please wait.</value>
   </data>
+  <data name="OpenLink" xml:space="preserve">
+    <value>Opening link to {0}... Please wait.</value>
+  </data>
+  <data name="OpenLinkError" xml:space="preserve">
+    <value>Failed to open link... Please contact support.</value>
+  </data>
 </root>

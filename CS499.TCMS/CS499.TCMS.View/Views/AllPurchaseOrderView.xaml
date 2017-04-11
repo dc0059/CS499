@@ -100,6 +100,19 @@
                                             Style="{StaticResource MetroDataGrid}">
 
             <local:DataGridScrollToSelectedItem.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="40"
+                                    Height="40"
+                                    Style="{StaticResource MetroCircleButtonStyle}"
+                                    Background="{DynamicResource AccentColorBrush}"
+                                    ToolTip="View Purchase Items"
+                                    Command="{Binding DataContext.CommandOpenLink, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                    Content="{iconPacks:PackIconModern Kind=Link, Height=16, Width=16}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding OrderID}"
                                     Header="Order ID"
                                     IsReadOnly="True"/>
@@ -114,11 +127,11 @@
                                         IsReadOnly="True"
                                         ElementStyle="{StaticResource MetroDataGridCheckBox}"
                                         EditingElementStyle="{StaticResource MetroDataGridCheckBox}"/>
-                <DataGridTextColumn Binding="{Binding SourceID }"
-                                    Header="Source ID"
+                <DataGridTextColumn Binding="{Binding SelectedSource}"
+                                    Header="Source"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding DestinationID}"
-                                    Header="Destination ID"
+                <DataGridTextColumn Binding="{Binding SelectedDestination}"
+                                    Header="Destination"
                                     IsReadOnly="True"/>                
             </local:DataGridScrollToSelectedItem.Columns>
 

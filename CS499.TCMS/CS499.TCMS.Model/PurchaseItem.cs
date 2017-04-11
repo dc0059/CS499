@@ -131,7 +131,7 @@ namespace CS499.TCMS.Model
 
         public override string ToString()
         {
-            return string.Format("Item #{0} for Order #{1}", this.ItemID, this.OrderID);
+            return string.Format("{0}", this.ItemID);
         }
 
         public override bool Equals(object obj)

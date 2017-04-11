@@ -1,6 +1,7 @@
 ﻿using CS499.TCMS.DataAccess.IRepositories;
 using CS499.TCMS.Model;
 using CS499.TCMS.View.Interfaces;
+using CS499.TCMS.View.Models;
 using CS499.TCMS.View.Resources;
 using CS499.TCMS.View.Services;
 using GalaSoft.MvvmLight.Messaging;
@@ -153,7 +154,7 @@ namespace CS499.TCMS.View.ViewModels
         /// <summary>
         /// Add ViewModel to the workspace collection
         /// </summary>
-        /// <param name="sender">ViewModel</param>
+        /// <param name="notification">notification message</param>
         private void AddWorkspace(NotificationMessage<WorkspaceViewModel> notification)
         {
             WorkspaceViewModel viewModel = notification.Content as WorkspaceViewModel;
@@ -171,8 +172,36 @@ namespace CS499.TCMS.View.ViewModels
             // add viewModel as workspace to the document collection
             viewModel.IsSelected = viewModel.IsVisible = true;
             this.DocumentWorkspaces.Add(viewModel);
+
         }
 
+        /// <summary>
+        /// Add ViewModel to the workspace collection and apply filter
+        /// </summary>
+        /// <param name="f"></param>
+        private void AddWorkspace(Filter f)
+        {
+            WorkspaceViewModel viewModel = f.ViewModel as WorkspaceViewModel;
+
+            // check to make sure the ViewModel is not already added
+            WorkspaceViewModel currentViewModel = this.DocumentWorkspaces
+                    .FirstOrDefault(vm => vm.DisplayName
+                        .Equals(viewModel.DisplayName, StringComparison.OrdinalIgnoreCase));
+
+            // close the window if it exists
+            if (currentViewModel != null)
+            {
+                currentViewModel.CloseCommand.Execute(null);
+            }
+
+            // add viewModel as workspace to the document collection
+            viewModel.IsSelected = viewModel.IsVisible = true;
+            this.DocumentWorkspaces.Add(viewModel);
+
+            // apply filter
+            f.ViewModel.ApplyFilter(f);
+
+        }
 
         /// <summary>
         /// Send key stroke to the ViewModel
@@ -331,6 +360,9 @@ namespace CS499.TCMS.View.ViewModels
             // register MainWindowViewModel to the add notification
             this.MessengerInstance.Register<NotificationMessage<WorkspaceViewModel>>(this, (n) => this.AddWorkspace(n));
 
+            // register MainWindowViewModel to the add with filter notification
+            this.MessengerInstance.Register<Filter>(this, (f) => this.AddWorkspace(f));
+
             // create user repository
             this.userRepository = Factory.Create<IUserRepository>();
 
@@ -347,7 +379,7 @@ namespace CS499.TCMS.View.ViewModels
             this.MapViewModel = new MapViewModel();
 
         }
-
+                
         /// <summary>
         /// Create collections
         /// </summary>
@@ -669,106 +701,72 @@ namespace CS499.TCMS.View.ViewModels
                 try
                 {
 
-                    if (true)
+                    // show login dialog
+                    LoginDialogData credentials = await this.Dialog.Dialog.ShowLoginAsync(
+                        this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginStart, settings);
+
+                    // close application if the user cancels
+                    if (credentials == null)
+                    {
+                        this.OnClosing(this, new CancelEventArgs());
+                        return;
+                    }
+
+                    // show getting user
+                    var controller = await this.Dialog.Dialog.ShowProgressAsync(this, Messages.TitleApp, Messages.LoginGettingUserInfo);
+                    await Task.Delay(500);
+
+                    // get user
+                    string userName = credentials.Username;
+                    User user = this.userRepository.GetUserByUserName(userName);
+
+                    // close progress
+                    await controller.CloseAsync();
+
+                    // validate username first
+                    if (user == null)
                     {
 
-                        // show login dialog
-                        LoginDialogData credentials = await this.Dialog.Dialog.ShowLoginAsync(
-                            this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginStart, settings);
-
-                        // close application if the user cancels
-                        if (credentials == null)
-                        {
-                            this.OnClosing(this, new CancelEventArgs());
-                            return;
-                        }
-
-                        // show getting user
-                        var controller = await this.Dialog.Dialog.ShowProgressAsync(this, Messages.TitleApp, Messages.LoginGettingUserInfo);
-                        await Task.Delay(500);
-
-                        // get user
-                        string userName = credentials.Username;
-                        User user = this.userRepository.GetUserByUserName(userName);
-
-                        // close progress
-                        await controller.CloseAsync();
-
-                        // validate username first
-                        if (user == null)
-                        {
-
-                            // show failure message
-                            await this.Dialog.Dialog.ShowMessageAsync(
-                                this.Dialog.ViewModel, Messages.TitleApp, string.Format(Messages.LoginFailUsername, userName));
-
-                        }
-                        else
-                        {
-
-                            // validate credentials
-                            if (PasswordService.ValidatePassword(credentials.Password, user.Passphrase, user.HashKey))
-                            {
-
-                                // set current application user
-                                CoreAssembly.SetCurrentUser(credentials.Username);
-
-                                // load user theme settings
-                                this.UserThemeViewModel = WorkspaceFactory.Create<UserThemeViewModel>();
-
-                                // show loading while changing the user time sheet is loading
-                                controller = await this.Dialog.Dialog.ShowProgressAsync(this, Messages.TitleApp, Messages.LoginLoading);
-                                await Task.Delay(500);
-
-                                // add dashboard
-                                this.CreateDocument<DashboardViewModel>(user, this.TaskManager, this.Dialog);
-
-                                // create command list
-                                this.CreateCommands(user, controller);
-
-                                // set exit flag
-                                exit = true;
-
-                            }
-                            else
-                            {
-
-                                // show failure message
-                                await this.Dialog.Dialog.ShowMessageAsync(
-                                    this.Dialog.ViewModel, Messages.TitleApp, string.Format(Messages.LoginFailPassword, userName));
-
-                            }
-
-                        } 
+                        // show failure message
+                        await this.Dialog.Dialog.ShowMessageAsync(
+                            this.Dialog.ViewModel, Messages.TitleApp, string.Format(Messages.LoginFailUsername, userName));
 
                     }
                     else
                     {
 
-                        // testing user
-                        User user = new User(1, "dc0059", "Donal", "David", "Cavanaugh",
-                            "12345 some where Dr.", "Huntsville", "Alabama", 35802, "1234567890",
-                            "1234567890", "dc0059@uah.edu", 50, DateTime.Now, Enums.AccessLevel.Full,
-                            "UAH", "The Man", true, @"uXgbWhLABkEQ/khtpfAmCDP4A/an3qV/351ndiBxKJ4acPPr6LDV90kdx3pFbOSqSkev2KXibj8Ok08vuIVf2g==", @"d2Trfixx39ZtUkwyBZJeVepV9NZ8nuTCAFe6rDPzxQprzq3ExWiRpBGFyVlRB0FJk07G0F0Pj7C5lrMSoph9026AID0Q+hqGmXBNFJGXV4lg1GZNGj8QTp/h3NPeAyN1Vt51ERCxb/jYYRTWZzncIamj2m/Pw3dflCcOJnPi91Zp4ZvT5tdWnLduRVQDKaYczfDADFgHqr3I6amy3mYx+Z/IPBzCMqxxB2pOODMjXfgbFE0RorP+Z7F5oj74xCpSNXlPClJk9bjM/ATnisp1lyMsruSNy1b3JSz2jm66g6VBz1a3rcukgpT9Te+wBQzu31Waip3PcF82+qFFhbMB3w==");
+                        // validate credentials
+                        if (PasswordService.ValidatePassword(credentials.Password, user.Passphrase, user.HashKey))
+                        {
 
-                        // set current application user
-                        CoreAssembly.SetCurrentUser("dc0059");
+                            // set current application user
+                            CoreAssembly.SetCurrentUser(credentials.Username);
 
-                        // load user theme settings
-                        this.UserThemeViewModel = WorkspaceFactory.Create<UserThemeViewModel>();
+                            // load user theme settings
+                            this.UserThemeViewModel = WorkspaceFactory.Create<UserThemeViewModel>();
 
-                        // show loading while changing the user time sheet is loading
-                        var controller = await this.Dialog.Dialog.ShowProgressAsync(this.Dialog.ViewModel, Messages.TitleApp, Messages.LoginLoading);
-                        await Task.Delay(500);
+                            // show loading while changing the user time sheet is loading
+                            controller = await this.Dialog.Dialog.ShowProgressAsync(this, Messages.TitleApp, Messages.LoginLoading);
+                            await Task.Delay(500);
 
-                        // add dashboard
-                        this.CreateDocument<DashboardViewModel>(user, this.TaskManager, this.Dialog);
+                            // add dashboard
+                            this.CreateDocument<DashboardViewModel>(user, this.TaskManager, this.Dialog);
 
-                        // create commands for debugging
-                        this.CreateCommands(user, controller);
+                            // create command list
+                            this.CreateCommands(user, controller);
 
-                        // set exit flag
-                        exit = true;
+                            // set exit flag
+                            exit = true;
+
+                        }
+                        else
+                        {
+
+                            // show failure message
+                            await this.Dialog.Dialog.ShowMessageAsync(
+                                this.Dialog.ViewModel, Messages.TitleApp, string.Format(Messages.LoginFailPassword, userName));
+
+                        }
 
                     }
 

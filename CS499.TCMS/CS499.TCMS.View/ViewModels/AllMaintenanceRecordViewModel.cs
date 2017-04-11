@@ -1,6 +1,7 @@
 ﻿using CS499.TCMS.DataAccess.IRepositories;
 using CS499.TCMS.Model;
 using CS499.TCMS.View.Interfaces;
+using CS499.TCMS.View.Models;
 using CS499.TCMS.View.Resources;
 using CS499.TCMS.View.Services;
 using GalaSoft.MvvmLight.Messaging;
@@ -81,6 +82,9 @@ namespace CS499.TCMS.View.ViewModels
 
             List<MaintenanceRecord> ViewModels = null;
 
+            // set loading flag
+            this.loading = true;
+
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
@@ -88,7 +92,7 @@ namespace CS499.TCMS.View.ViewModels
                 ViewModels = maintenanceRecordRepository.GetAll().ToList();
 
                 // wait for other tasks to complete
-                while (this.TaskManager.TaskCount() > 1)
+                while (this.loadingVehicles)
                 {
                     Task.Delay(500);
                 }
@@ -109,6 +113,9 @@ namespace CS499.TCMS.View.ViewModels
 
                 // refresh the list
                 this.ViewModels.Refresh();
+
+                // set loading flag
+                this.loading = false;
 
             },
              Messages.MainWindowInitialStatus,
@@ -147,6 +154,9 @@ namespace CS499.TCMS.View.ViewModels
 
             List<Vehicle> models = null;
 
+            // set loading flag
+            this.loadingVehicles = true;
+
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
@@ -169,6 +179,9 @@ namespace CS499.TCMS.View.ViewModels
 
                 // refresh the list
                 this.Vehicles.Refresh();
+
+                // set loading flag
+                this.loadingVehicles = false;
 
             },
              Messages.MainWindowInitialStatus,
@@ -296,7 +309,7 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText,
-                "MaintenanceID", "VehicleID", "MaintenanceDate", "MaintenanceDescription");
+                "MaintenanceID", "SelectedVehicle", "MaintenanceDate", "MaintenanceDescription");
 
         }
 
@@ -335,6 +348,48 @@ namespace CS499.TCMS.View.ViewModels
 
         }
 
+        /// <summary>
+        /// Send message to open AllMaintenanceRecordDetailViewModel and apply filter
+        /// </summary>
+        private void OpenLink()
+        {
+            AllMaintenanceRecordDetailViewModel viewModel = null;
+
+            // start task to create ViewModel
+            this.TaskManager.AddTask(Task.Factory.StartNew(() =>
+            {
+
+                // create ViewModel
+                viewModel = WorkspaceFactory.Create<AllMaintenanceRecordDetailViewModel>(this.dialog, this.TaskManager,
+                    Factory.Create<IMaintenanceRecordDetailRepository>(),
+                    Factory.Create<IMaintenanceRecordRepository>(), 
+                    Factory.Create<IUserRepository>());
+
+                // wait for ViewModel to finish loading
+                while (viewModel.IsLoading)
+                {
+                    Task.Delay(500);
+                }
+
+            },
+            TaskCreationOptions.LongRunning),
+            string.Format(Messages.OpenLink, Messages.AllPurchaseOrderDisplayName),
+            () =>
+            {
+
+                // send message to open
+                this.MessengerInstance.Send(
+                    new Filter("MaintenanceID", this.SelectedViewModel.MaintenanceID.ToString(), viewModel));
+
+            },
+            Messages.MainWindowInitialStatus,
+            UIContext.Current,
+            "Opening link",
+            Messages.OpenLinkError,
+            log);
+
+        }
+
         #endregion
 
         #region Properties
@@ -358,6 +413,27 @@ namespace CS499.TCMS.View.ViewModels
         /// Dialog service for showing messages from the ViewModel
         /// </summary>
         private IDialogService dialog;
+
+        /// <summary>
+        /// Flag indicating the maintenance records are loading
+        /// </summary>
+        private bool loading = false;
+
+        /// <summary>
+        /// Flag indicating the vehicles are loading
+        /// </summary>
+        private bool loadingVehicles = false;
+
+        /// <summary>
+        /// Flag indicating the ViewModel is still loading data
+        /// </summary>
+        public bool IsLoading
+        {
+            get
+            {
+                return this.loadingVehicles || this.loading;
+            }
+        }
 
         /// <summary>
         /// Selected ViewModel
@@ -541,6 +617,28 @@ namespace CS499.TCMS.View.ViewModels
                 }
 
                 return _commandSearch;
+            }
+        }
+
+        private ICommand _commandOpenLink;
+
+        /// <summary>
+        /// Command to execute open link
+        /// </summary>
+        public ICommand CommandOpenLink
+        {
+            get
+            {
+
+                if (_commandOpenLink == null)
+                {
+                    _commandOpenLink = new RelayCommand(param =>
+                    {
+                        this.OpenLink();
+                    });
+                }
+
+                return _commandOpenLink;
             }
         }
 

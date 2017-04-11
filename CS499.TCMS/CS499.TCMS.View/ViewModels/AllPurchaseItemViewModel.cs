@@ -1,6 +1,7 @@
 ﻿using CS499.TCMS.DataAccess.IRepositories;
 using CS499.TCMS.Model;
 using CS499.TCMS.View.Interfaces;
+using CS499.TCMS.View.Models;
 using CS499.TCMS.View.Resources;
 using CS499.TCMS.View.Services;
 using GalaSoft.MvvmLight.Messaging;
@@ -18,7 +19,7 @@ namespace CS499.TCMS.View.ViewModels
     /// </summary>
     /// <seealso cref="CS499.TCMS.View.ViewModels.WorkspaceViewModel" />
     /// <seealso cref="CS499.TCMS.View.Interfaces.IKeyCommand" />
-    public class AllPurchaseItemViewModel : WorkspaceViewModel, IKeyCommand
+    public class AllPurchaseItemViewModel : WorkspaceViewModel, IKeyCommand, IFilterable
     {
 
         #region Constructor
@@ -97,6 +98,9 @@ namespace CS499.TCMS.View.ViewModels
 
             List<PurchaseItem> ViewModels = null;
 
+            // set loading flag
+            this.loading = true;
+
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
@@ -104,7 +108,7 @@ namespace CS499.TCMS.View.ViewModels
                 ViewModels = purchaseItemRepository.GetAll().ToList();
 
                 // wait for other tasks to complete
-                while (this.TaskManager.TaskCount() > 1)
+                while (this.loadingPurchaseOrders || this.loadingParts)
                 {
                     Task.Delay(500);
                 }
@@ -125,6 +129,9 @@ namespace CS499.TCMS.View.ViewModels
 
                 // refresh the list
                 this.ViewModels.Refresh();
+
+                // set loading flag
+                this.loading = false;
 
             },
              Messages.MainWindowInitialStatus,
@@ -163,6 +170,9 @@ namespace CS499.TCMS.View.ViewModels
 
             List<PurchaseOrder> models = null;
 
+            // set loading flag
+            this.loadingPurchaseOrders = true;
+
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
@@ -185,6 +195,9 @@ namespace CS499.TCMS.View.ViewModels
 
                 // refresh the list
                 this.Orders.Refresh();
+
+                // set loading flag
+                this.loadingPurchaseOrders = false;
 
             },
              Messages.MainWindowInitialStatus,
@@ -221,6 +234,9 @@ namespace CS499.TCMS.View.ViewModels
 
             List<Part> models = null;
 
+            // set loading flag
+            this.loadingParts = true;
+
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
@@ -243,6 +259,9 @@ namespace CS499.TCMS.View.ViewModels
 
                 // refresh the list
                 this.Parts.Refresh();
+
+                // set loading flag
+                this.loadingParts = false;
 
             },
              Messages.MainWindowInitialStatus,
@@ -370,7 +389,7 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText,
-                "ItemID", "OrderID", "Quantity", "PartID");
+                "ItemID", "SelectedPurchaseOrder", "Quantity", "SelectedPart");
 
         }
 
@@ -409,6 +428,24 @@ namespace CS499.TCMS.View.ViewModels
 
         }
 
+        /// <summary>
+        /// Apply filter
+        /// </summary>
+        /// <param name="filter">the filter</param>
+        void IFilterable.ApplyFilter(Filter filter)
+        {
+
+            // set search type
+            this.SearchType = "equals";
+
+            // set search text
+            this.SearchText = filter.FilterText;
+
+            // apply filter
+            this.ViewModels.Search(this.SearchType, this.SearchText, filter.PropertyName);
+
+        }
+
         #endregion
 
         #region Properties
@@ -437,6 +474,32 @@ namespace CS499.TCMS.View.ViewModels
         /// Dialog service for showing messages from the ViewModel
         /// </summary>
         private IDialogService dialog;
+
+        /// <summary>
+        /// Flag indicating the purchase items are loading
+        /// </summary>
+        private bool loading = false;
+
+        /// <summary>
+        /// Flag indicating the purchase orders are loading
+        /// </summary>
+        private bool loadingPurchaseOrders = false;
+
+        /// <summary>
+        /// Flag indicating the parts are loading
+        /// </summary>
+        private bool loadingParts = false;
+
+        /// <summary>
+        /// Flag indicating the ViewModel is still loading data
+        /// </summary>
+        public bool IsLoading
+        {
+            get
+            {
+                return this.loadingPurchaseOrders || this.loadingParts || this.loading;
+            }
+        }
 
         /// <summary>
         /// Selected ViewModel

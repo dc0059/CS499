@@ -100,6 +100,19 @@
                                             Style="{StaticResource MetroDataGrid}">
 
             <local:DataGridScrollToSelectedItem.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="40"
+                                    Height="40"
+                                    Style="{StaticResource MetroCircleButtonStyle}"
+                                    Background="{DynamicResource AccentColorBrush}"
+                                    ToolTip="View Details"
+                                    Command="{Binding DataContext.CommandOpenLink, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                    Content="{iconPacks:PackIconModern Kind=Link, Height=16, Width=16}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding MaintenanceID}"
                                     Header="Maintenance ID"
                                     IsReadOnly="True"/>
@@ -110,8 +123,8 @@
                                     Header="Maintenance Description"
                                     MaxWidth="200"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding VehicleID}"
-                                    Header="Vehicle ID"
+                <DataGridTextColumn Binding="{Binding SelectedVehicle}"
+                                    Header="Vehicle"
                                     IsReadOnly="True"/>
             </local:DataGridScrollToSelectedItem.Columns>
 

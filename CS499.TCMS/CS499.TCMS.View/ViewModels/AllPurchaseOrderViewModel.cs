@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CS499.TCMS.View.Models;
 
 namespace CS499.TCMS.View.ViewModels
 {
@@ -18,7 +19,7 @@ namespace CS499.TCMS.View.ViewModels
     /// </summary>
     /// <seealso cref="CS499.TCMS.View.ViewModels.WorkspaceViewModel" />
     /// <seealso cref="CS499.TCMS.View.Interfaces.IKeyCommand" />
-    public class AllPurchaseOrderViewModel : WorkspaceViewModel, IKeyCommand
+    public class AllPurchaseOrderViewModel : WorkspaceViewModel, IKeyCommand, IFilterable
     {
 
         #region Constructor
@@ -96,6 +97,9 @@ namespace CS499.TCMS.View.ViewModels
 
             List<PurchaseOrder> ViewModels = null;
 
+            // set loading flag
+            this.loading = true;
+
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
@@ -103,7 +107,7 @@ namespace CS499.TCMS.View.ViewModels
                 ViewModels = purchaseOrderRepository.GetAll().ToList();
 
                 // wait for other tasks to complete
-                while (this.TaskManager.TaskCount() > 1)
+                while (this.loadingBusinessPartners || this.loadingManifests)
                 {
                     Task.Delay(500);
                 }
@@ -124,6 +128,9 @@ namespace CS499.TCMS.View.ViewModels
 
                 // refresh the list
                 this.ViewModels.Refresh();
+
+                // set loading flag
+                this.loading = false;
 
             },
              Messages.MainWindowInitialStatus,
@@ -162,6 +169,9 @@ namespace CS499.TCMS.View.ViewModels
 
             List<BusinessPartner> models = null;
 
+            // set loading flag 
+            this.loadingBusinessPartners = true;
+
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
@@ -184,6 +194,9 @@ namespace CS499.TCMS.View.ViewModels
 
                 // refresh the list
                 this.BusinessPartners.Refresh();
+
+                // set loading flag 
+                this.loadingBusinessPartners = false;
 
             },
              Messages.MainWindowInitialStatus,
@@ -220,6 +233,9 @@ namespace CS499.TCMS.View.ViewModels
 
             List<Manifest> models = null;
 
+            // set loading flag
+            this.loadingManifests = true;
+
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
@@ -242,6 +258,9 @@ namespace CS499.TCMS.View.ViewModels
 
                 // refresh the list
                 this.Manifests.Refresh();
+
+                // set loading flag
+                this.loadingManifests = false;
 
             },
              Messages.MainWindowInitialStatus,
@@ -369,7 +388,7 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText,
-                "OrderID", "OrderNumber", "SourceID", "DestinationID", "ManifestID");
+                "OrderID", "OrderNumber", "SelectedSource", "SelectedDestination", "ManifestID");
 
         }
 
@@ -408,6 +427,66 @@ namespace CS499.TCMS.View.ViewModels
 
         }
 
+        /// <summary>
+        /// Apply filter
+        /// </summary>
+        /// <param name="filter">the filter</param>
+        void IFilterable.ApplyFilter(Filter filter)
+        {
+
+            // set search type
+            this.SearchType = "equals";
+
+            // set search text
+            this.SearchText = filter.FilterText;
+
+            // apply filter
+            this.ViewModels.Search(this.SearchType, this.SearchText, filter.PropertyName);
+
+        }
+
+        /// <summary>
+        /// Send message to open AllPurchaseItemViewModel and apply filter
+        /// </summary>
+        private void OpenLink()
+        {
+            AllPurchaseItemViewModel viewModel = null;
+
+            // start task to create ViewModel
+            this.TaskManager.AddTask(Task.Factory.StartNew(() =>
+            {
+
+                // create ViewModel
+                viewModel = WorkspaceFactory.Create<AllPurchaseItemViewModel>(this.dialog, this.TaskManager, 
+                    Factory.Create<IPurchaseItemRepository>(),
+                    Factory.Create<IPurchaseOrderRepository>(), 
+                    Factory.Create<IPartRepository>());
+
+                // wait for ViewModel to finish loading
+                while (viewModel.IsLoading)
+                {
+                    Task.Delay(500);
+                }
+
+            },
+            TaskCreationOptions.LongRunning),
+            string.Format(Messages.OpenLink, Messages.AllPurchaseOrderDisplayName),
+            () =>
+            {
+
+                // send message to open
+                this.MessengerInstance.Send(
+                    new Filter("SelectedPurchaseOrder", this.SelectedViewModel.OrderNumber.ToString(), viewModel));
+
+            },
+            Messages.MainWindowInitialStatus,
+            UIContext.Current,
+            "Opening link",
+            Messages.OpenLinkError,
+            log);
+
+        }
+
         #endregion
 
         #region Properties
@@ -436,6 +515,32 @@ namespace CS499.TCMS.View.ViewModels
         /// Dialog service for showing messages from the ViewModel
         /// </summary>
         private IDialogService dialog;
+
+        /// <summary>
+        /// Flag indicating the purchase orders are loading
+        /// </summary>
+        private bool loading = false;
+
+        /// <summary>
+        /// Flag indicating the manifests are loading
+        /// </summary>
+        private bool loadingManifests = false;
+
+        /// <summary>
+        /// Flag indicating the business partners are loading
+        /// </summary>
+        private bool loadingBusinessPartners = false;
+
+        /// <summary>
+        /// Flag indicating the ViewModel is still loading data
+        /// </summary>
+        public bool IsLoading
+        {
+            get
+            {
+                return this.loadingBusinessPartners || this.loadingManifests || this.loading;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the business partners.
@@ -627,6 +732,28 @@ namespace CS499.TCMS.View.ViewModels
                 }
 
                 return _commandSearch;
+            }
+        }
+
+        private ICommand _commandOpenLink;
+
+        /// <summary>
+        /// Command to execute open link
+        /// </summary>
+        public ICommand CommandOpenLink
+        {
+            get
+            {
+
+                if (_commandOpenLink == null)
+                {
+                    _commandOpenLink = new RelayCommand(param =>
+                    {
+                        this.OpenLink();
+                    });
+                }
+
+                return _commandOpenLink;
             }
         }
 

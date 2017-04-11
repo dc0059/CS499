@@ -199,6 +199,34 @@ namespace CS499.TCMS.View.ViewModels
 
             }
         }
+
+        /// <summary>
+        /// Gets or sets the payroll identifier.
+        /// </summary>
+        /// <value>
+        /// The payroll identifier.
+        /// </value>
+        public long PayrollID
+        {
+            get
+            {
+                return Model.PayrollID;
+            }
+            set
+            {
+
+                if (Model.PayrollID == value)
+                {
+                    return;
+                }
+
+                Model.PayrollID = value;
+
+                base.OnPropertyChanged("PayrollID");
+                this.HasChanges = true;
+
+            }
+        }
                 
         /// <summary>
         /// <see cref="Payroll"/>

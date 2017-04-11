@@ -294,7 +294,7 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText,
-                "EmployeeID", "PaymentDate", "Payment", "HoursWorked");
+                "SelectedUser", "PaymentDate", "Payment", "HoursWorked");
 
         }
 

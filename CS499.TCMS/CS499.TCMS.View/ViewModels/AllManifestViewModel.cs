@@ -1,6 +1,7 @@
 ﻿using CS499.TCMS.DataAccess.IRepositories;
 using CS499.TCMS.Model;
 using CS499.TCMS.View.Interfaces;
+using CS499.TCMS.View.Models;
 using CS499.TCMS.View.Resources;
 using CS499.TCMS.View.Services;
 using GalaSoft.MvvmLight.Messaging;
@@ -97,6 +98,9 @@ namespace CS499.TCMS.View.ViewModels
 
             List<Manifest> ViewModels = null;
 
+            // set loading flag
+            this.loading = true;
+
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
@@ -104,7 +108,7 @@ namespace CS499.TCMS.View.ViewModels
                 ViewModels = manifestRepository.GetAll().ToList();
 
                 // wait for other tasks to complete
-                while (this.TaskManager.TaskCount() > 1)
+                while (this.loadingUsers || this.loadingUsers)
                 {
                     Task.Delay(500);
                 }
@@ -125,6 +129,9 @@ namespace CS499.TCMS.View.ViewModels
 
                 // refresh the list
                 this.ViewModels.Refresh();
+
+                // set loading flag
+                this.loading = false;
 
             },
              Messages.MainWindowInitialStatus,
@@ -163,6 +170,9 @@ namespace CS499.TCMS.View.ViewModels
 
             List<Vehicle> models = null;
 
+            // set loading flag
+            this.loadingVehicles = true;
+
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
@@ -185,7 +195,10 @@ namespace CS499.TCMS.View.ViewModels
 
                 // refresh the list
                 this.Vehicles.Refresh();
-               
+
+                // set loading flag
+                this.loadingVehicles = false;
+
             },
              Messages.MainWindowInitialStatus,
              UIContext.Current,
@@ -221,6 +234,9 @@ namespace CS499.TCMS.View.ViewModels
 
             List<User> models = null;
 
+            // set loading flag
+            this.loadingUsers = true;
+
             // start new task to get the models from the database
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
@@ -243,6 +259,9 @@ namespace CS499.TCMS.View.ViewModels
 
                 // refresh the list
                 this.Users.Refresh();
+
+                // set loading flag
+                this.loadingUsers = false;
 
             },
              Messages.MainWindowInitialStatus,
@@ -370,8 +389,8 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText,
-                "ManifestID", "ShipmentType", "VehicleID", "DepartureTime", "ETA", "ShippingCost", 
-                "EmployeeID");
+                "ManifestID", "ShipmentType", "SelectedVehicle", "DepartureTime", "ETA", "ShippingCost",
+                "SelectedUser");
 
         }
 
@@ -410,6 +429,48 @@ namespace CS499.TCMS.View.ViewModels
 
         }
 
+        /// <summary>
+        /// Send message to open AllPurchaseOrderViewModel and apply filter
+        /// </summary>
+        private void OpenLink()
+        {
+            AllPurchaseOrderViewModel viewModel = null;
+
+            // start task to create ViewModel
+            this.TaskManager.AddTask(Task.Factory.StartNew(() =>
+            {
+
+                // create ViewModel
+                viewModel = WorkspaceFactory.Create<AllPurchaseOrderViewModel>(this.dialog, this.TaskManager, 
+                    Factory.Create<IPurchaseOrderRepository>(), 
+                    Factory.Create<IBusinessPartnerRepository>(), 
+                    Factory.Create<IManifestRepository>());
+
+                // wait for ViewModel to finish loading
+                while (viewModel.IsLoading)
+                {
+                    Task.Delay(500);
+                }
+                
+            },
+            TaskCreationOptions.LongRunning),
+            string.Format(Messages.OpenLink, Messages.AllPurchaseOrderDisplayName),
+            () =>
+            {
+
+                // send message to open
+                this.MessengerInstance.Send(
+                    new Filter("ManifestID", this.SelectedViewModel.ManifestID.ToString(), viewModel));
+
+            },
+            Messages.MainWindowInitialStatus,
+            UIContext.Current,
+            "Opening link",
+            Messages.OpenLinkError,
+            log);
+
+        }
+
         #endregion
 
         #region Properties
@@ -418,17 +479,7 @@ namespace CS499.TCMS.View.ViewModels
         /// Initialize logger
         /// </summary>
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-        /// <summary>
-        /// User task
-        /// </summary>
-        private Task userTask;
-
-        /// <summary>
-        /// Vehicle task 
-        /// </summary>
-        private Task vehicleTask;
-
+      
         /// <summary>
         /// Manifest repository
         /// </summary>
@@ -448,6 +499,32 @@ namespace CS499.TCMS.View.ViewModels
         /// Dialog service for showing messages from the ViewModel
         /// </summary>
         private IDialogService dialog;
+
+        /// <summary>
+        /// Flag indicating the manifests are loading
+        /// </summary>
+        private bool loading = false;
+
+        /// <summary>
+        /// Flag indicating the vehicles are loading
+        /// </summary>
+        private bool loadingVehicles = false;
+
+        /// <summary>
+        /// Flag indicating the users are loading
+        /// </summary>
+        private bool loadingUsers = false;
+
+        /// <summary>
+        /// Flag indicating the ViewModel is still loading data
+        /// </summary>
+        public bool IsLoading
+        {
+            get
+            {
+                return this.loadingVehicles || this.loadingUsers || this.loading;
+            }
+        }
 
         /// <summary>
         /// Selected ViewModel
@@ -639,6 +716,28 @@ namespace CS499.TCMS.View.ViewModels
                 }
 
                 return _commandSearch;
+            }
+        }
+
+        private ICommand _commandOpenLink;
+
+        /// <summary>
+        /// Command to execute open link
+        /// </summary>
+        public ICommand CommandOpenLink
+        {
+            get
+            {
+
+                if (_commandOpenLink == null)
+                {
+                    _commandOpenLink = new RelayCommand(param =>
+                    {
+                        this.OpenLink();
+                    });
+                }
+
+                return _commandOpenLink;
             }
         }
 

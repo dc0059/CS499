@@ -103,11 +103,11 @@
                 <DataGridTextColumn Binding="{Binding ItemID}"
                                     Header="Item ID"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding OrderID}"
-                                    Header="Order ID"
+                <DataGridTextColumn Binding="{Binding SelectedPurchaseOrder}"
+                                    Header="Purchase Order"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PartID}"
-                                    Header="Part ID"
+                <DataGridTextColumn Binding="{Binding SelectedPart}"
+                                    Header="Part"
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Quantity}"
                                     Header="Quantity"

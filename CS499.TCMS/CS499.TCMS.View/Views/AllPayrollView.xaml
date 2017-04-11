@@ -100,8 +100,11 @@
                                             Style="{StaticResource MetroDataGrid}">
 
             <local:DataGridScrollToSelectedItem.Columns>
-                <DataGridTextColumn Binding="{Binding EmployeeID}"
-                                    Header="Employee ID"
+                <DataGridTextColumn Binding="{Binding PayrollID}"
+                                    Header="Payroll ID"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding SelectedUser}"
+                                    Header="Employee"
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding PaymentDate}"
                                     Header="Payment Date"
