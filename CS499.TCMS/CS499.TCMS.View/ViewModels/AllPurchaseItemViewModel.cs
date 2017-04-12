@@ -389,7 +389,7 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText,
-                "ItemID", "SelectedPurchaseOrder", "Quantity", "SelectedPart");
+                "ItemID", "SelectedPurchaseOrder", "Quantity", "SelectedPart", "PartStatus");
 
         }
 

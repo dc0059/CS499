@@ -214,7 +214,7 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText, 
-                "VehicleID", "Brand", "Year", "Model", "Capacity", "VehicleType");
+                "VehicleID", "Brand", "Year", "VehicleModel", "Capacity", "VehicleType");
 
         }
 
