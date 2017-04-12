@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using ToolKit.Data;
 
@@ -79,7 +80,13 @@ namespace CS499.TCMS.View.Services
         /// <param name="status">task status</param>
         private void Log(Task t, string status, string action)
         {
-            this.TaskLog.Add(new Tuple<string, DateTime>(string.Format("{0}: TaskId => {1} Status => {2}::{3}", action, t.Id, t.Status, status), DateTime.Now));
+            Task.Factory.StartNew(() => 
+            {
+                this.TaskLog.Add(new Tuple<string, DateTime>(string.Format("{0}: TaskId => {1} Status => {2}::{3}", action, t.Id, t.Status, status), DateTime.Now));
+            }
+            , CancellationToken.None
+            , TaskCreationOptions.None
+            , UIContext.Current); 
         }
 
         /// <summary>
