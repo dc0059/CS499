@@ -33,8 +33,10 @@ namespace CS499.TCMS.View.ViewModels
         /// <param name="isNew">flag indicating if this is a new maintenance part</param>
         /// <param name="maintenanceRecordDetails">The purchase orders.</param>
         /// <param name="parts">The parts.</param>
+        /// <param name="partRepository">The part repository.</param>
         public MaintenancePartViewModel(MaintenancePart model, IMaintenancePartRepository maintenancePartRepository, ITaskManager taskManager, bool isNew,
-            ObservableCollectionExtended<MaintenanceRecordDetail> maintenanceRecordDetails, ObservableCollectionExtended<Part> parts)
+            ObservableCollectionExtended<MaintenanceRecordDetail> maintenanceRecordDetails, ObservableCollectionExtended<Part> parts,
+            IPartRepository partRepository)
         {
             this.Model = model;
             this.maintenancePartRepository = maintenancePartRepository;
@@ -45,6 +47,7 @@ namespace CS499.TCMS.View.ViewModels
             this.ContentId = model.MaintenancePartID.GetContentId(this.DisplayName);
             this.MaintenanceRecordDetails = maintenanceRecordDetails;
             this.Parts = parts;
+            this.partRepository = partRepository;
             this.SetSelected(isNew);
         }
 
@@ -93,6 +96,12 @@ namespace CS499.TCMS.View.ViewModels
                 {
                     this.maintenancePartRepository.Update(this.Model);
                 }
+
+                // decrement quantity on stock
+                this.SelectedPart.QuantityInStock -= this.Quantity;
+
+                // update part 
+                this.partRepository.Update(this.SelectedPart);
 
             },
             TaskCreationOptions.LongRunning),
@@ -166,6 +175,11 @@ namespace CS499.TCMS.View.ViewModels
         /// Maintenance Part repository
         /// </summary>
         private IMaintenancePartRepository maintenancePartRepository;
+
+        /// <summary>
+        /// The part repository
+        /// </summary>
+        private IPartRepository partRepository;
 
         /// <summary>
         /// Gets or sets the maintenance record details.

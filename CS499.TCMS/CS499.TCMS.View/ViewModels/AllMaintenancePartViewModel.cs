@@ -156,7 +156,7 @@ namespace CS499.TCMS.View.ViewModels
             foreach (var model in maintenancePart)
             {
                 MaintenancePartViewModel viewModel = new MaintenancePartViewModel(model, this.maintenancePartRepository, this.TaskManager, false,
-                    this.MaintenanceRecordDetails, this.Parts);
+                    this.MaintenanceRecordDetails, this.Parts, this.partRepository);
                 this.ViewModels.AddItem(viewModel);
             }
 
@@ -301,7 +301,7 @@ namespace CS499.TCMS.View.ViewModels
 
             // create new ViewModel
             MaintenancePartViewModel viewModel = new MaintenancePartViewModel(model, this.maintenancePartRepository, this.TaskManager, true,
-                this.MaintenanceRecordDetails, this.Parts);
+                this.MaintenanceRecordDetails, this.Parts, this.partRepository);
 
             // send ViewModel
             this.SendViewModel(viewModel);

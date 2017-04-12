@@ -156,7 +156,7 @@ namespace CS499.TCMS.View.ViewModels
             foreach (var model in purchaseItem)
             {
                 PurchaseItemViewModel viewModel = new PurchaseItemViewModel(model, this.purchaseItemRepository, this.TaskManager, false,
-                    this.Orders, this.Parts);
+                    this.Orders, this.Parts, this.partRepository);
                 this.ViewModels.AddItem(viewModel);
             }
 
@@ -301,7 +301,7 @@ namespace CS499.TCMS.View.ViewModels
 
             // create new ViewModel
             PurchaseItemViewModel viewModel = new PurchaseItemViewModel(model, this.purchaseItemRepository, this.TaskManager, true,
-                this.Orders, this.Parts);
+                this.Orders, this.Parts, this.partRepository);
 
             // send ViewModel
             this.SendViewModel(viewModel);

@@ -10,22 +10,24 @@
 			 mc:Ignorable="d" 
 			 d:DesignHeight="300" d:DesignWidth="300">
 
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<DataTemplate x:Key="TabItemTemplate">
-				<ContentPresenter Content="{Binding DisplayName}"/>
-			</DataTemplate>
-		</ResourceDictionary>
-	</UserControl.Resources>
-	<Grid>
-		<Controls:MetroAnimatedSingleRowTabControl ItemsSource="{Binding ViewModels}"
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="TabItemTemplate">
+                <TextBlock Text="{Binding DisplayName}"
+                           Foreground="Black"
+                           Margin="10, 0, 0, 0"/>
+            </DataTemplate>
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Controls:MetroAnimatedSingleRowTabControl ItemsSource="{Binding ViewModels}"
 												   SelectedItem="{Binding SelectedViewModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 												   ItemTemplate="{StaticResource TabItemTemplate}"
 												   Controls:TabControlHelper.IsUnderlined="True"
 												   Controls:TabControlHelper.Transition="Left"
-												   TabStripPlacement="Top"
-                                                   >
-            
-		</Controls:MetroAnimatedSingleRowTabControl>
-	</Grid>
+												   TabStripPlacement="Bottom">
+
+        </Controls:MetroAnimatedSingleRowTabControl>
+    </Grid>
 </UserControl>

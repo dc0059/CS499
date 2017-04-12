@@ -33,8 +33,10 @@ namespace CS499.TCMS.View.ViewModels
         /// <param name="isNew">flag indicating if this is a new purchase item</param>
         /// <param name="purchaseOrders">The purchase orders.</param>
         /// <param name="parts">The parts.</param>
+        /// <param name="partRepository">The part repository.</param>
         public PurchaseItemViewModel(PurchaseItem model, IPurchaseItemRepository purchaseItemRepository, ITaskManager taskManager, bool isNew,
-            ObservableCollectionExtended<PurchaseOrder> purchaseOrders, ObservableCollectionExtended<Part> parts)
+            ObservableCollectionExtended<PurchaseOrder> purchaseOrders, ObservableCollectionExtended<Part> parts,
+            IPartRepository partRepository)
         {
             this.Model = model;
             this.purchaseItemRepository = purchaseItemRepository;
@@ -46,6 +48,7 @@ namespace CS499.TCMS.View.ViewModels
             this.ContentId = model.ItemID.GetContentId(this.DisplayName);
             this.Orders = purchaseOrders;
             this.Parts = parts;
+            this.partRepository = partRepository;
             this.SetSelected(isNew);
         }
 
@@ -94,6 +97,12 @@ namespace CS499.TCMS.View.ViewModels
                 {
                     this.purchaseItemRepository.Update(this.Model);
                 }
+
+                // decrement quantity on stock
+                this.SelectedPart.QuantityInStock -= this.Quantity;
+
+                // update part 
+                this.partRepository.Update(this.SelectedPart);
 
             },
             TaskCreationOptions.LongRunning),
@@ -167,6 +176,11 @@ namespace CS499.TCMS.View.ViewModels
         /// Purchase Item repository
         /// </summary>
         private IPurchaseItemRepository purchaseItemRepository;
+
+        /// <summary>
+        /// The part repository
+        /// </summary>
+        private IPartRepository partRepository;
 
         /// <summary>
         /// Gets or sets the purchase orders.

@@ -221,7 +221,7 @@ namespace CS499.TCMS.View.ViewModels
 
             this.SelectedViewModel = this.ViewModels.Search(this.SearchType, this.SearchText,
                 "EmployeeID", "UserName", "FirstName", "MiddleName", "LastName", "Address", "City", "State", "ZipCode",
-                "HomePhone", "CellPhone", "EmailAddress", "PayRate", "EmploymentDate", "JobID", "HomeStore", "JobDescription");
+                "HomePhone", "CellPhone", "EmailAddress", "PayRate", "EmploymentDate", "AccessLevel", "HomeStore", "JobDescription");
 
         }
 
