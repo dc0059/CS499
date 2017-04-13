@@ -37,7 +37,7 @@ namespace CS499.TCMS.View.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("TODO")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Resources\\TCMS Help Document.pdf")]
         public string HelpDocument {
             get {
                 return ((string)(this["HelpDocument"]));

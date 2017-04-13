@@ -6,7 +6,7 @@
       <Value Profile="(Default)">dc0059</Value>
     </Setting>
     <Setting Name="HelpDocument" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">TODO</Value>
+      <Value Profile="(Default)">Resources\TCMS Help Document.pdf</Value>
     </Setting>
     <Setting Name="Theme" Type="System.String" Scope="User">
       <Value Profile="(Default)">BaseDark</Value>
