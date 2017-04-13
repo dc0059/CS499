@@ -13,9 +13,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="TabItemTemplate">
-                <TextBlock Text="{Binding DisplayName}"
-                           Foreground="Black"
-                           Margin="10, 0, 0, 0"/>
+                <ContentPresenter Content="{Binding DisplayName}"/>
             </DataTemplate>
             
         </ResourceDictionary>

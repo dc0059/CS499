@@ -15,6 +15,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -22,6 +24,7 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock VerticalAlignment="Center"
+                   Foreground="{DynamicResource AccentColorBrush}"
                    Margin="5"
                    Text="Base"
                    Grid.Column="0"
@@ -30,10 +33,11 @@
                   SelectedItem="{Binding CurrentTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                   
                   Grid.Column="0"
                   Grid.Row="1"
-                  Margin="0, 0, 0, 10"
+                  Margin="5"
                   Style="{StaticResource ThemeTypeBaseStyle}"/>
 
         <TextBlock VerticalAlignment="Center"
+                   Foreground="{DynamicResource AccentColorBrush}"
                    Margin="5"
                    Text="Accent"
                    Grid.Column="0"
@@ -42,12 +46,22 @@
                   SelectedItem="{Binding CurrentAccent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                   Grid.Column="0"
                   Grid.Row="3"
-                  Margin="0, 0, 0, 10" 
+                  Margin="5" 
                   Style="{StaticResource ThemeTypeAccentStyle}"/>
-
+        <TextBlock VerticalAlignment="Center"
+                   Foreground="{DynamicResource AccentColorBrush}"
+                   Margin="5"
+                   Text="Dock Theme"
+                   Grid.Column="0"
+                   Grid.Row="4"/>
+        <ComboBox ItemsSource="{Binding DockThemes}"
+                  SelectedItem="{Binding CurrentDockTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToStringConverter}}" 
+                  Grid.Column="0"
+                  Grid.Row="5"
+                  Margin="5"/>
         <StackPanel Orientation="Horizontal"
                     Grid.Column="0"
-                    Grid.Row="4"
+                    Grid.Row="6"
                     FlowDirection="RightToLeft">
 
             <Button Width="50"

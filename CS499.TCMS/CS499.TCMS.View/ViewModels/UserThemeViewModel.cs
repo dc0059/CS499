@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Xceed.Wpf.AvalonDock.Themes;
+using CS499.TCMS.Model;
 
 namespace CS499.TCMS.View.ViewModels
 {
@@ -65,12 +66,13 @@ namespace CS499.TCMS.View.ViewModels
             if (this.currentUserTheme == null)
             {
                 this.currentUserTheme = new UserTheme(0, CoreAssembly.CurrentUser(),
-                        this.CurrentTheme.Name, this.CurrentAccent.Name);
+                        this.CurrentTheme.Name, this.CurrentAccent.Name, this.currentUserTheme.AvalonTheme);
             }
             else
             {
                 this.currentUserTheme.BaseColor = this.CurrentTheme.Name;
                 this.currentUserTheme.AccentColor = this.CurrentAccent.Name;
+                this.currentUserTheme.AvalonTheme = this.CurrentDockTheme;
             }
 
             // save theme
@@ -95,14 +97,47 @@ namespace CS499.TCMS.View.ViewModels
 
             // change theme and accent on AvalonDock DockingManager
             ThemeManager.ChangeAppStyle(Application.Current, accent, theme);
-            if (theme.Name == "BaseLight")
+            switch (this.CurrentDockTheme)
             {
-                CoreAssembly.ChangeAvalonTheme(new MetroTheme());
+                case AvalonThemes.Generic:
+                    CoreAssembly.ChangeAvalonTheme(new GenericTheme());
+                    break;
+                case AvalonThemes.Aero:
+                    CoreAssembly.ChangeAvalonTheme(new AeroTheme());
+                    break;
+                case AvalonThemes.Metro:
+                    CoreAssembly.ChangeAvalonTheme(new MetroTheme());
+                    break;
+                case AvalonThemes.Office_2007_Black:
+                    CoreAssembly.ChangeAvalonTheme(new Office2007BlackTheme());
+                    break;
+                case AvalonThemes.Office_2007_Blue:
+                    CoreAssembly.ChangeAvalonTheme(new Office2007BlueTheme());
+                    break;
+                case AvalonThemes.Office_2007_Silver:
+                    CoreAssembly.ChangeAvalonTheme(new Office2007SilverTheme());
+                    break;
+                case AvalonThemes.Visual_Studio_2010:
+                    CoreAssembly.ChangeAvalonTheme(new VS2010Theme());
+                    break;
+                case AvalonThemes.Visual_Studio_2013_Blue:
+                    CoreAssembly.ChangeAvalonTheme(new Vs2013BlueTheme());
+                    break;
+                case AvalonThemes.Visual_Studio_2013_Dark:
+                    CoreAssembly.ChangeAvalonTheme(new Vs2013DarkTheme());
+                    break;
+                case AvalonThemes.Visual_Studio_2013_Light:
+                    CoreAssembly.ChangeAvalonTheme(new Vs2013LightTheme());
+                    break;
+                case AvalonThemes.Windows_10:
+                    CoreAssembly.ChangeAvalonTheme(new Windows10Theme());
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                CoreAssembly.ChangeAvalonTheme(new ExpressionDarkTheme());
-            }
+
+            // set flag
+            this.HasChanges = false;
 
         }
 
@@ -112,18 +147,7 @@ namespace CS499.TCMS.View.ViewModels
         /// <returns>flag indicating true/false</returns>
         private bool CanSaveTheme()
         {
-            bool save = false;
-
-            if (this.CurrentAccent != null && this.CurrentTheme != null)
-            {
-
-                var theme = ThemeManager.DetectAppStyle(Application.Current);
-
-                save = (!theme.Item1.Name.Equals(this.CurrentTheme.Name)
-                    || !theme.Item2.Name.Equals(this.CurrentAccent.Name));
-            }
-
-            return save;
+            return this.HasChanges;
         }
 
         /// <summary>
@@ -143,12 +167,13 @@ namespace CS499.TCMS.View.ViewModels
                 (th) => th.Name == userTheme.BaseColor);
                 this.CurrentAccent = this.Accents.FirstOrDefault(
                     (a) => a.Name == userTheme.AccentColor);
+                this.CurrentDockTheme = userTheme.AvalonTheme;
 
             }
 
             // set theme in application
             this.SetTheme();
-
+                       
         }
 
         #endregion
@@ -203,6 +228,7 @@ namespace CS499.TCMS.View.ViewModels
                 _currentTheme = value;
 
                 base.OnPropertyChanged("CurrentTheme");
+                this.HasChanges = true;
 
             }
         }
@@ -232,6 +258,51 @@ namespace CS499.TCMS.View.ViewModels
                 _currentAccent = value;
 
                 base.OnPropertyChanged("CurrentAccent");
+                this.HasChanges = true;
+
+            }
+        }
+
+        /// <summary>
+        /// Gets the dock themes.
+        /// </summary>
+        /// <value>
+        /// The dock themes.
+        /// </value>
+        public string[] DockThemes
+        {
+            get
+            {
+                return Enums.GetHumanizedValues<AvalonThemes>();
+            }
+        }
+
+        private AvalonThemes _currentDockTheme;
+
+        /// <summary>
+        /// Gets or sets the current dock theme.
+        /// </summary>
+        /// <value>
+        /// The current dock theme.
+        /// </value>
+        public AvalonThemes CurrentDockTheme
+        {
+            get
+            {
+                return _currentDockTheme;
+            }
+            set
+            {
+
+                if (_currentDockTheme == value)
+                {
+                    return;
+                }
+
+                _currentDockTheme = value;
+
+                base.OnPropertyChanged("CurrentDockTheme");
+                this.HasChanges = true;
 
             }
         }

@@ -107,7 +107,7 @@
 				</dock:DockingManager.Resources>
 
 				<dock:DockingManager.Theme>
-					<dock:ExpressionDarkTheme/>
+					<dock:Vs2013DarkTheme/>
 				</dock:DockingManager.Theme>
 
 				<dock:DockingManager.LayoutItemContainerStyle>

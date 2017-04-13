@@ -32,5 +32,8 @@
     <Setting Name="ThemeFileLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">{0}\TCMS\user.theme</Value>
     </Setting>
+    <Setting Name="AvalonTheme" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">8</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -5,10 +5,8 @@ using System.Deployment.Application;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Media;
 using System.Net;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Windows;
@@ -203,7 +201,7 @@ namespace CS499.TCMS.View.Services
 
             DockingManager dockManager = Application.Current.Windows.OfType<MainWindow>()
                     .FirstOrDefault().MainDockManager;
-            if (!dockManager.Theme.ToString().Equals(theme.ToString()))
+            if (!dockManager.Theme.Equals(theme))
                 dockManager.Theme = theme;
 
         }
@@ -274,7 +272,10 @@ namespace CS499.TCMS.View.Services
         {
 
             // default user theme
-            UserTheme defaultTheme = new UserTheme(0, CoreAssembly.CurrentUser(), Properties.Settings.Default.Theme, Properties.Settings.Default.Accent);
+            UserTheme defaultTheme = new UserTheme(0, CoreAssembly.CurrentUser(), 
+                Properties.Settings.Default.Theme, 
+                Properties.Settings.Default.Accent,
+                (AvalonThemes)Properties.Settings.Default.AvalonTheme);
 
             try
             {

@@ -127,5 +127,17 @@ namespace CS499.TCMS.View.Properties {
                 this["ThemeFileLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        public int AvalonTheme {
+            get {
+                return ((int)(this["AvalonTheme"]));
+            }
+            set {
+                this["AvalonTheme"] = value;
+            }
+        }
     }
 }
