@@ -1,0 +1,63 @@
+CREATE DATABASE  IF NOT EXISTS `cs_499_tcms` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `cs_499_tcms`;
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+--
+-- Host: localhost    Database: cs_499_tcms
+-- ------------------------------------------------------
+-- Server version	5.7.17-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `payroll_log`
+--
+
+DROP TABLE IF EXISTS `payroll_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payroll_log` (
+  `PayrollID` int(11) DEFAULT NULL,
+  `EmployeeID` int(11) DEFAULT NULL,
+  `PaymentDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `Payment` double DEFAULT NULL,
+  `HoursWorked` double DEFAULT NULL,
+  `CreatedDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `CreatedBy` varchar(20) DEFAULT NULL,
+  `LastModifiedDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `LastModifiedBy` varchar(20) DEFAULT NULL,
+  `Version` int(11) DEFAULT NULL,
+  `ModifiedStatus` varchar(1) DEFAULT NULL,
+  `DeletedDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `DeletedBy` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payroll_log`
+--
+
+LOCK TABLES `payroll_log` WRITE;
+/*!40000 ALTER TABLE `payroll_log` DISABLE KEYS */;
+INSERT INTO `payroll_log` VALUES (1,1,'2017-03-26 00:05:07',8000,NULL,'2017-03-26 00:05:53','dc0059','0000-00-00 00:00:00','dc0059',1,'D','2017-03-26 00:13:33','dc0059'),(2,1,'2017-03-26 00:22:51',0,80,'2017-03-26 00:25:32','dc0059','0000-00-00 00:00:00','dc0059',1,'D','2017-03-26 00:28:25','dc0059'),(4,1,'2017-03-26 05:00:00',5500,NULL,'2017-03-26 18:38:43','johnsza','0000-00-00 00:00:00','johnsza',1,'D','2017-03-26 18:41:07',NULL),(5,1,'2017-03-26 05:00:00',5500,55.5,'2017-03-26 18:40:56','johnsza','0000-00-00 00:00:00','johnsza',1,'U','0000-00-00 00:00:00',NULL),(5,1,'2015-03-05 06:00:00',100.5,5,'2017-03-26 18:40:56','johnsza','2017-03-26 18:52:05','johnsza',2,'D','2017-03-26 18:54:26','johnsza'),(5,4,'0000-00-00 00:00:00',NULL,NULL,'2017-04-05 19:54:26','Default','0000-00-00 00:00:00','Default',1,'U','0000-00-00 00:00:00',NULL),(5,4,'2017-05-21 08:55:00',NULL,NULL,'2017-04-05 19:54:26','Default','2017-04-05 19:55:03','Default',2,'U','0000-00-00 00:00:00',NULL),(3,1,'2017-03-26 00:28:31',0,80,'2017-03-26 00:28:55','dc0059','0000-00-00 00:00:00','dc0059',1,'U','0000-00-00 00:00:00',NULL),(4,3,'2017-04-01 05:00:00',25,4,'2017-04-05 19:39:01','Default','0000-00-00 00:00:00','Default',1,'U','0000-00-00 00:00:00',NULL),(5,4,'2017-05-21 20:55:00',5000,28,'2017-04-05 19:54:26','Default','2017-04-05 19:55:31','Default',3,'U','0000-00-00 00:00:00',NULL);
+/*!40000 ALTER TABLE `payroll_log` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-04-14  2:15:28
