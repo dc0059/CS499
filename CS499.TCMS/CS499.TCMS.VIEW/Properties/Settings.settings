@@ -21,7 +21,7 @@
       <Value Profile="(Default)">tcms</Value>
     </Setting>
     <Setting Name="StartupPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">TODO</Value>
+      <Value Profile="(Default)">C:\Users\cavando\OneDrive\Documents\UAH\CS499\CS499\Publish\</Value>
     </Setting>
     <Setting Name="UpdateLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">Not Deployed</Value>

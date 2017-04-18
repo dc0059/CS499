@@ -88,7 +88,7 @@ namespace CS499.TCMS.View.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("TODO")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\cavando\\OneDrive\\Documents\\UAH\\CS499\\CS499\\Publish\\")]
         public string StartupPath {
             get {
                 return ((string)(this["StartupPath"]));

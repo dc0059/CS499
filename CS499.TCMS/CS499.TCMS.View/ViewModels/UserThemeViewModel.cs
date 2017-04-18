@@ -107,16 +107,7 @@ namespace CS499.TCMS.View.ViewModels
                     break;
                 case AvalonThemes.Metro:
                     CoreAssembly.ChangeAvalonTheme(new MetroTheme());
-                    break;
-                case AvalonThemes.Office_2007_Black:
-                    CoreAssembly.ChangeAvalonTheme(new Office2007BlackTheme());
-                    break;
-                case AvalonThemes.Office_2007_Blue:
-                    CoreAssembly.ChangeAvalonTheme(new Office2007BlueTheme());
-                    break;
-                case AvalonThemes.Office_2007_Silver:
-                    CoreAssembly.ChangeAvalonTheme(new Office2007SilverTheme());
-                    break;
+                    break;                
                 case AvalonThemes.Visual_Studio_2010:
                     CoreAssembly.ChangeAvalonTheme(new VS2010Theme());
                     break;
@@ -129,10 +120,8 @@ namespace CS499.TCMS.View.ViewModels
                 case AvalonThemes.Visual_Studio_2013_Light:
                     CoreAssembly.ChangeAvalonTheme(new Vs2013LightTheme());
                     break;
-                case AvalonThemes.Windows_10:
-                    CoreAssembly.ChangeAvalonTheme(new Windows10Theme());
-                    break;
                 default:
+                    CoreAssembly.ChangeAvalonTheme(new GenericTheme());
                     break;
             }
 

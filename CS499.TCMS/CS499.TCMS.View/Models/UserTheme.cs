@@ -95,14 +95,10 @@ namespace CS499.TCMS.View.Models
         Generic = 0,
         Aero,
         Metro,
-        Office_2007_Black,
-        Office_2007_Blue,
-        Office_2007_Silver,
         Visual_Studio_2010,
         Visual_Studio_2013_Blue,
         Visual_Studio_2013_Dark,
-        Visual_Studio_2013_Light,
-        Windows_10
+        Visual_Studio_2013_Light
     }
 
 }

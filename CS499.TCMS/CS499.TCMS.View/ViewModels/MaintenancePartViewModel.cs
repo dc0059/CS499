@@ -124,6 +124,10 @@ namespace CS499.TCMS.View.ViewModels
                 this.MessengerInstance.Send<NotificationMessage<AllMaintenancePartViewModel>>(
                     new NotificationMessage<AllMaintenancePartViewModel>(null, null));
 
+                // send load notification to the all part view model
+                this.MessengerInstance.Send<NotificationMessage<AllPartViewModel>>(
+                    new NotificationMessage<AllPartViewModel>(null, null));
+
             });
 
         }
