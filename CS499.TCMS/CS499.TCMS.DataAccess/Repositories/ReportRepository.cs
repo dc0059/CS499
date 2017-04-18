@@ -30,7 +30,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT * FROM (SELECT m.ManifestID AS `Manifest ID`, m.ShipmentType AS `Shipment Type`, m.DepartureTime AS `Departure Time`, m.ETA, " +
-                              "m.Arrived, po.OrderNumber AS `Order Number`, s.Address AS `Source Address`, d.Address AS `Destination Address`, " +
+                              "CASE m.Arrived WHEN 0 THEN 'No' ELSE 'Yes' END AS `Arrived`, po.OrderNumber AS `Order Number`, CASE po.PaymentMade WHEN 0 THEN 'No' ELSE 'Yes' END AS `Payment Made`, s.Address AS `Source Address`, d.Address AS `Destination Address`, " +
                               "p.PartNumber AS `Part Number`, p.PartDescription AS `Part Description`, pi.PartStatus AS `Part Status`, pi.Quantity, " +
                               "p.PartPrice AS `Part Price`, SUM(pi.Quantity * p.PartPrice) AS `Total Cost` " +
                               "FROM ((((purchaseorder po " +
@@ -44,7 +44,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                               "s.Address, d.Address, p.PartNumber, p.PartDescription, pi.PartStatus, pi.Quantity, p.PartPrice " +
                               "UNION " +
                               "SELECT m.ManifestID AS `Manifest ID`, NULL AS `Shipment Type`, NULL AS `Departure Time`, NULL ETA, NULL Arrived, NULL AS `Order Number`, " +
-                              "NULL AS `Source Address`, NULL AS `Destination Address`, NULL AS `Part Number`, NULL AS `Part Description`, " +
+                              "NULL AS `Payment Made`, NULL AS `Source Address`, NULL AS `Destination Address`, NULL AS `Part Number`, NULL AS `Part Description`, " +
                               "NULL AS `Part Status`, NULL AS Quantity, 'Total:' AS `Part Price`, SUM(pi.Quantity * p.PartPrice) AS `Total Cost` " +
                               "FROM ((((purchaseorder po " +
                               "INNER JOIN businesspartners_addresses s ON (po.SourceID = s.CompanyID)) " +
@@ -146,7 +146,7 @@ namespace CS499.TCMS.DataAccess.Repositories
             QueryDefinition definition = new QueryDefinition()
             {
                 CommandText = "SELECT * FROM (SELECT m.ManifestID AS `Manifest ID`, m.ShipmentType AS `Shipment Type`, m.DepartureTime AS `Departure Time`, m.ETA, " +
-                              "m.Arrived, po.OrderNumber AS `Order Number`, s.Address AS `Source Address`, d.Address AS `Destination Address`, " +
+                              "CASE m.Arrived WHEN 0 THEN 'No' ELSE 'Yes' END AS `Arrived`, po.OrderNumber AS `Order Number`, CASE po.PaymentMade WHEN 0 THEN 'No' ELSE 'Yes' END AS `Payment Made`, s.Address AS `Source Address`, d.Address AS `Destination Address`, " +
                               "p.PartNumber AS `Part Number`, p.PartDescription AS `Part Description`, pi.PartStatus AS `Part Status`, pi.Quantity, " +
                               "p.PartPrice AS `Part Price`, SUM(pi.Quantity * p.PartPrice) AS `Total Cost` " +
                               "FROM ((((purchaseorder po " +
@@ -160,7 +160,7 @@ namespace CS499.TCMS.DataAccess.Repositories
                               "s.Address, d.Address, p.PartNumber, p.PartDescription, pi.PartStatus, pi.Quantity, p.PartPrice " +
                               "UNION " +
                               "SELECT m.ManifestID AS `Manifest ID`, NULL AS `Shipment Type`, NULL AS `Departure Time`, NULL ETA, NULL Arrived, NULL AS `Order Number`, " +
-                              "NULL AS `Source Address`, NULL AS `Destination Address`, NULL AS `Part Number`, NULL AS `Part Description`, " +
+                              "NULL AS `Payment Made`, NULL AS `Source Address`, NULL AS `Destination Address`, NULL AS `Part Number`, NULL AS `Part Description`, " +
                               "NULL AS `Part Status`, NULL AS Quantity, 'Total:' AS `Part Price`, SUM(pi.Quantity * p.PartPrice) AS `Total Cost` " +
                               "FROM ((((purchaseorder po " +
                               "INNER JOIN businesspartners_addresses s ON (po.SourceID = s.CompanyID)) " +
