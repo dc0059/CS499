@@ -271,6 +271,25 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
+        /// Gets the total cost.
+        /// </summary>
+        /// <value>
+        /// The total cost.
+        /// </value>
+        public double TotalCost
+        {
+            get
+            {
+                if (this.SelectedPart != null)
+                {
+                    return this.SelectedPart.PartPrice * this.Quantity;
+                }
+
+                return 0;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the maximum quantity.
         /// </summary>
         /// <value>

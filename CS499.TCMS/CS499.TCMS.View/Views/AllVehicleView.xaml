@@ -116,7 +116,7 @@
                                     Header="Vehicle Type"
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Capacity}"
-                                    Header="Capacity"
+                                    Header="Capacity (lbs.)"
                                     IsReadOnly="True"/>                
             </local:DataGridScrollToSelectedItem.Columns>
 

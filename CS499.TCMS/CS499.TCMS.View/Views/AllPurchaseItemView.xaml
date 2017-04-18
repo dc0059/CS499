@@ -115,6 +115,9 @@
                 <DataGridTextColumn Binding="{Binding PartStatus}"
                                     Header="Part Status"
                                     IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TotalCost, StringFormat=C2}"
+                                    Header="Total Cost"
+                                    IsReadOnly="True"/>
             </local:DataGridScrollToSelectedItem.Columns>
 
         </local:DataGridScrollToSelectedItem>

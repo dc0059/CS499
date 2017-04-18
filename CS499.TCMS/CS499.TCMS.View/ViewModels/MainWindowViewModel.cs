@@ -410,17 +410,17 @@ namespace CS499.TCMS.View.ViewModels
                     this.GetFullAccessCommands(commandList);
 
                     break;
-                case Enums.AccessLevel.ShippingData:
+                case Enums.AccessLevel.Shipping_Data:
 
                     this.GetShippingDataAccessCommands(commandList);
 
                     break;
-                case Enums.AccessLevel.MaintenanceData:
+                case Enums.AccessLevel.Maintenance_Data:
 
                     this.GetMaintenanceDataAccessCommands(commandList);
 
                     break;
-                case Enums.AccessLevel.DriverData:
+                case Enums.AccessLevel.Driver_Data:
 
                     // default commands
 

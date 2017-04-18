@@ -123,7 +123,7 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             // create new model
-            Vehicle model = new Vehicle(0, string.Empty, 2000, string.Empty, Enums.TruckMaxCapacity.class1, 6000);
+            Vehicle model = new Vehicle(0, string.Empty, 2000, string.Empty, Enums.TruckMaxCapacity.class_1, 6000);
 
             // create new ViewModel
             VehicleViewModel viewModel = new VehicleViewModel(model, this.vehicleRepository, this.TaskManager, true);

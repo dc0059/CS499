@@ -136,11 +136,14 @@
                 <DataGridTextColumn Binding="{Binding EmailAddress}"
                                     Header="Email Address"
                                     IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PayRate}"
+                <DataGridTextColumn Binding="{Binding PayRate, StringFormat=C2}"
                                     Header="Pay Rate"
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding EmploymentDate}"
                                     Header="Employment Date"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding YearsOfService}"
+                                    Header="Years of Service"
                                     IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding AccessLevel, Converter={StaticResource EnumToStringConverter}}"
                                     Header="Access Level"

@@ -59,7 +59,7 @@ namespace CS499.TCMS.View.ViewModels
                     Factory.Create<IUserRepository>(), this.TaskManager, this.dialog));
 
                 // create workspaces for the driver
-                if (this.user.AccessLevel == Enums.AccessLevel.DriverData)
+                if (this.user.AccessLevel == Enums.AccessLevel.Driver_Data)
                 {
 
                     // create my manifest ViewModel

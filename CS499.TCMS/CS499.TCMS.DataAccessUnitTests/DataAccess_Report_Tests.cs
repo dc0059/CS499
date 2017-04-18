@@ -38,7 +38,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("johnsza", "cs_499_tcms");
             IReportRepository reportRepo = factory.Create<IReportRepository>();
 
-            Vehicle TestVehicle = new Vehicle(4, "Mercedes-Benz", 2004, "Actros", Enums.TruckMaxCapacity.class5, 17500);
+            Vehicle TestVehicle = new Vehicle(4, "Mercedes-Benz", 2004, "Actros", Enums.TruckMaxCapacity.class_5, 17500);
             DataTable table = reportRepo.GetVehicleMaintenanceReport(TestVehicle);
 
             foreach (DataRow row in table.Rows)

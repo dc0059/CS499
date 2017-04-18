@@ -16,7 +16,7 @@ namespace CS499.TCMS.DataAccessUnitTests
         [TestMethod]
         public void VehicleInsertTest()
         {
-            Vehicle testVehicle = new Vehicle(12345, "Mercedes-Benz", 2004, "Actros",  Enums.TruckMaxCapacity.class6, 17500);
+            Vehicle testVehicle = new Vehicle(12345, "Mercedes-Benz", 2004, "Actros",  Enums.TruckMaxCapacity.class_6, 17500);
 
             RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
             IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
@@ -76,7 +76,7 @@ namespace CS499.TCMS.DataAccessUnitTests
             RepositoryFactory factory = new RepositoryFactory("cs_499_tcms", "johnsza");
             IVehicleRepository vehicleRepository = factory.Create<IVehicleRepository>();
 
-            Vehicle updateVehicle = new Vehicle(12347, "Chevy", 2016, "Thing",  Enums.TruckMaxCapacity.class3, 9000);
+            Vehicle updateVehicle = new Vehicle(12347, "Chevy", 2016, "Thing",  Enums.TruckMaxCapacity.class_3, 9000);
 
             vehicleRepository.Update(updateVehicle);
         }

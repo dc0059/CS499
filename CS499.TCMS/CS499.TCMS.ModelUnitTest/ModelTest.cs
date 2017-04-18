@@ -20,7 +20,7 @@ namespace CS499.TCMS.ModelUnitTest
         [TestMethod]
         public void VehicleModelTest()
         {
-            Vehicle testVehicle = new Vehicle(12345, "Mercedes-Benz", 2004, "Actros",  Enums.TruckMaxCapacity.class8, 17500);
+            Vehicle testVehicle = new Vehicle(12345, "Mercedes-Benz", 2004, "Actros",  Enums.TruckMaxCapacity.class_8, 17500);
             Assert.IsTrue(testVehicle.IsValid);
         }
 

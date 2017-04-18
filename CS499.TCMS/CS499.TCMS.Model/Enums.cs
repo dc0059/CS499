@@ -13,14 +13,14 @@ namespace CS499.TCMS.Model
         /// </summary>
         public enum TruckMaxCapacity
         {
-            class1 = 0,
-            class2,
-            class3,
-            class4,
-            class5,
-            class6,
-            class7,
-            class8
+            class_1 = 0,
+            class_2,
+            class_3,
+            class_4,
+            class_5,
+            class_6,
+            class_7,
+            class_8
         }
 
         /// <summary>
@@ -29,9 +29,9 @@ namespace CS499.TCMS.Model
         public enum AccessLevel
         {
             Full = 0,
-            ShippingData,
-            MaintenanceData,
-            DriverData
+            Shipping_Data,
+            Maintenance_Data,
+            Driver_Data
 
         }
 

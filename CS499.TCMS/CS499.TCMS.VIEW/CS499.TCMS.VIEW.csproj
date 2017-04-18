@@ -236,6 +236,7 @@
     <Compile Include="Services\ContentIdHelper.cs" />
     <Compile Include="Services\CoreAssembly.cs" />
     <Compile Include="Interfaces\IDialogService.cs" />
+    <Compile Include="Services\DateHelper.cs" />
     <Compile Include="Services\DescriptionNameAttribute.cs" />
     <Compile Include="Services\ExportService.cs" />
     <Compile Include="Services\PasswordService.cs" />

@@ -503,6 +503,17 @@ namespace CS499.TCMS.View.ViewModels
         }
 
         /// <summary>
+        /// Gets Years of Service
+        /// </summary>
+        public string YearsOfService
+        {
+            get
+            {
+                return this.EmploymentDate.ToYearsOfService();
+            }
+        }
+
+        /// <summary>
         /// <see cref="User"/>
         /// </summary>
         public Enums.AccessLevel AccessLevel
