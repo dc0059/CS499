@@ -98,12 +98,6 @@ namespace CS499.TCMS.View.ViewModels
                     this.purchaseItemRepository.Update(this.Model);
                 }
 
-                // decrement quantity on stock
-                this.SelectedPart.QuantityInStock -= this.Quantity;
-
-                // update part 
-                this.partRepository.Update(this.SelectedPart);
-
             },
             TaskCreationOptions.LongRunning),
             Messages.PurchaseItemSaving,
@@ -124,11 +118,6 @@ namespace CS499.TCMS.View.ViewModels
                 // send load notification to the all purchase item view model
                 this.MessengerInstance.Send<NotificationMessage<AllPurchaseItemViewModel>>(
                     new NotificationMessage<AllPurchaseItemViewModel>(null, null));
-
-                // send load notification to the all part view model
-                this.MessengerInstance.Send<NotificationMessage<AllPartViewModel>>(
-                    new NotificationMessage<AllPartViewModel>(null, null));
-
 
             });
 

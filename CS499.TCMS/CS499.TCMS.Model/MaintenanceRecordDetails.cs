@@ -57,9 +57,6 @@ namespace CS499.TCMS.Model
                 case "RepairDescription":
                     error = this.ValidateRepairDescription();
                     break;
-                case "RepairDate":
-                    error = this.ValidateRepairDate();
-                    break;
                 default:
                     Debug.Fail("Unexpected property being validated on MaintenanceRecordDetails: " + propertyName);
                     break;
@@ -97,18 +94,6 @@ namespace CS499.TCMS.Model
         {
             if (this.EmployeeID <= 0)
                 return Messages.InvalidID;
-            else
-                return null;
-        }
-
-        /// <summary>
-        /// Validate the repair date
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateRepairDate()
-        {
-            if (this.RepairDate.CompareTo(DateTime.Now) > 0)
-                return Messages.InvalidDate;
             else
                 return null;
         }
@@ -212,8 +197,7 @@ namespace CS499.TCMS.Model
             "DetailID",
             "MaintenanceID",
             "EmployeeID",
-            "RepairDescription",
-            "RepairDate"
+            "RepairDescription"
         };
 
         /// <summary>

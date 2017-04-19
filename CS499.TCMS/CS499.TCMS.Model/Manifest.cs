@@ -61,9 +61,6 @@ namespace CS499.TCMS.Model
                 case "VehicleID":
                     error = this.ValidateVehicleID();
                     break;
-                case "DepartureTime":
-                    error = this.ValidateDepartureTime();
-                    break;
                 case "ETA":
                     error = this.ValidateETA();
                     break;
@@ -108,17 +105,6 @@ namespace CS499.TCMS.Model
         {
             if (this.VehicleID <= 0)
                 return Messages.InvalidID;
-            return null;
-        }
-
-        /// <summary>
-        /// Validate the departure time
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateDepartureTime()
-        {
-            if (this.DepartureTime.CompareTo(DateTime.Now) > 0)
-                return Messages.InvalidDate;
             return null;
         }
 
@@ -248,7 +234,6 @@ namespace CS499.TCMS.Model
             "ManifestID",
             "ShipmentType",
             "VehicleID",
-            "DepartureTime",
             "ETA",
             "ShippingCost",
             "EmployeeID"

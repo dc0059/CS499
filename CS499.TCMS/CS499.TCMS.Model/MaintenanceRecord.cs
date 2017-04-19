@@ -47,10 +47,7 @@ namespace CS499.TCMS.Model
                     break;
                 case "VehicleID":
                     error = this.ValidateVehicleID();
-                    break;
-                case "MaintenanceDate":
-                    error = this.ValidateMaintenanceDate();
-                    break;
+                    break;               
                 case "MaintenanceDescription":
                     error = this.ValidateMaintenanceDescription();
                     break;
@@ -82,18 +79,7 @@ namespace CS499.TCMS.Model
                 return Messages.InvalidID;
             return null;
         }
-
-        /// <summary>
-        /// Validate the date of maintenance
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateMaintenanceDate()
-        {
-            if (this.MaintenanceDate.CompareTo(DateTime.Now) > 0)
-                return Messages.InvalidDate;
-            return null;
-        }
-
+                
         /// <summary>
         /// Validate the maintenance description
         /// </summary>
@@ -191,7 +177,6 @@ namespace CS499.TCMS.Model
         {
             "MaintenanceID",
             "VehicleID",
-            "MaintenanceDate",
             "MaintenanceDescription"
         };
 

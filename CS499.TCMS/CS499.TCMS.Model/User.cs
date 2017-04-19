@@ -118,9 +118,6 @@ namespace CS499.TCMS.Model
                 case "PayRate":
                     error = this.ValidatePayRate();
                     break;
-                case "EmploymentDate":
-                    error = this.ValidateEmploymentDate();
-                    break;
                 case "HomeStore":
                     error = this.ValidateHomeStore();
                     break;
@@ -266,17 +263,6 @@ namespace CS499.TCMS.Model
         {
             if (this.PayRate <= 0.0)
                 return Messages.InvalidValue;
-            return null;
-        }
-
-        /// <summary>
-        /// Validate the employment date
-        /// </summary>
-        /// <returns></returns>
-        private string ValidateEmploymentDate()
-        {
-            if (this.EmploymentDate.CompareTo(DateTime.Now) > 0)
-                return Messages.InvalidDate;
             return null;
         }
 
@@ -474,7 +460,6 @@ namespace CS499.TCMS.Model
             "CellPhone",
             "EmailAddress",
             "PayRate",
-            "EmploymentDate",
             "HomeStore",
             "JobDescription",
             "HashKey",

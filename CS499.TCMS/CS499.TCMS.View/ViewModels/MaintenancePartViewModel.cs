@@ -97,12 +97,6 @@ namespace CS499.TCMS.View.ViewModels
                     this.maintenancePartRepository.Update(this.Model);
                 }
 
-                // decrement quantity on stock
-                this.SelectedPart.QuantityInStock -= this.Quantity;
-
-                // update part 
-                this.partRepository.Update(this.SelectedPart);
-
             },
             TaskCreationOptions.LongRunning),
             Messages.MaintenancePartSaving,
@@ -123,10 +117,6 @@ namespace CS499.TCMS.View.ViewModels
                 // send load notification to the all maintenance part view model
                 this.MessengerInstance.Send<NotificationMessage<AllMaintenancePartViewModel>>(
                     new NotificationMessage<AllMaintenancePartViewModel>(null, null));
-
-                // send load notification to the all part view model
-                this.MessengerInstance.Send<NotificationMessage<AllPartViewModel>>(
-                    new NotificationMessage<AllPartViewModel>(null, null));
 
             });
 
