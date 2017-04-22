@@ -129,6 +129,12 @@ namespace CS499.TCMS.View.ViewModels
                 // refresh the list
                 this.ViewModels.Refresh();
 
+                // apply filter
+                if (this.Filter != null)
+                {
+                    (this as IFilterable).ApplyFilter(this.Filter);
+                }
+
                 // set loading flag
                 this.loading = false;
 
@@ -302,6 +308,13 @@ namespace CS499.TCMS.View.ViewModels
             PurchaseOrderViewModel viewModel = new PurchaseOrderViewModel(model, this.purchaseOrderRepository, this.TaskManager, true,
                 this.BusinessPartners, this.Manifests);
 
+            // set selected manifest to filter
+            if (this.Filter != null)
+            {
+                viewModel.SelectedManifest = this.Manifests.FirstOrDefault(
+                    (m) => m.ManifestID == Convert.ToInt64(this.Filter.FilterText));
+            }
+
             // send ViewModel
             this.SendViewModel(viewModel);
 
@@ -434,6 +447,9 @@ namespace CS499.TCMS.View.ViewModels
         void IFilterable.ApplyFilter(Filter filter)
         {
 
+            // remember filter
+            this.Filter = filter;
+
             // set search type
             this.SearchType = "equals";
 
@@ -530,6 +546,14 @@ namespace CS499.TCMS.View.ViewModels
         /// Flag indicating the business partners are loading
         /// </summary>
         private bool loadingBusinessPartners = false;
+
+        /// <summary>
+        /// Gets or sets the filter.
+        /// </summary>
+        /// <value>
+        /// The filter.
+        /// </value>
+        public Filter Filter { get; set; }
 
         /// <summary>
         /// Flag indicating the ViewModel is still loading data

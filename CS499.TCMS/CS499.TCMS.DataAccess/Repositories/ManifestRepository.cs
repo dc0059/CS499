@@ -147,8 +147,14 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
-                              "FROM manifest " +
+                CommandText = "SELECT man.ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, EmployeeID, " +
+                              "(SELECT SUM(pt.PartPrice * pi.Quantity) " +
+                              "FROM ((purchaseorder p " +
+                              "INNER JOIN manifest m ON (p.ManifestID = m.ManifestID)) " +
+                              "INNER JOIN purchaseitems pi ON (pi.OrderID = p.OrderID)) " +
+                              "INNER JOIN parts pt ON (pi.PartID = pt.PartID) " +
+                              "WHERE m.ManifestID = man.ManifestID ) AS ShippingCost " +
+                              "FROM manifest man " +
                               "ORDER BY ManifestID",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -169,8 +175,14 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
-                              "FROM manifest " +
+                CommandText = "SELECT man.ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, EmployeeID, " +
+                              "(SELECT SUM(pt.PartPrice * pi.Quantity) " +
+                              "FROM ((purchaseorder p " +
+                              "INNER JOIN manifest m ON (p.ManifestID = m.ManifestID)) " +
+                              "INNER JOIN purchaseitems pi ON (pi.OrderID = p.OrderID)) " +
+                              "INNER JOIN parts pt ON (pi.PartID = pt.PartID) " +
+                              "WHERE m.ManifestID = man.ManifestID ) AS ShippingCost " +
+                              "FROM manifest man " +
                               "WHERE EmployeeID = ? ",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -200,8 +212,14 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
-                              "FROM manifest " +
+                CommandText = "SELECT man.ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, EmployeeID, " +
+                              "(SELECT SUM(pt.PartPrice * pi.Quantity) " +
+                              "FROM ((purchaseorder p " +
+                              "INNER JOIN manifest m ON (p.ManifestID = m.ManifestID)) " +
+                              "INNER JOIN purchaseitems pi ON (pi.OrderID = p.OrderID)) " +
+                              "INNER JOIN parts pt ON (pi.PartID = pt.PartID) " +
+                              "WHERE m.ManifestID = man.ManifestID ) AS ShippingCost " +
+                              "FROM manifest man " +
                               "WHERE ShipmentType = ? ",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -231,8 +249,14 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
-                              "FROM manifest " +
+                CommandText = "SELECT man.ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, EmployeeID, " +
+                              "(SELECT SUM(pt.PartPrice * pi.Quantity) " +
+                              "FROM ((purchaseorder p " +
+                              "INNER JOIN manifest m ON (p.ManifestID = m.ManifestID)) " +
+                              "INNER JOIN purchaseitems pi ON (pi.OrderID = p.OrderID)) " +
+                              "INNER JOIN parts pt ON (pi.PartID = pt.PartID) " +
+                              "WHERE m.ManifestID = man.ManifestID ) AS ShippingCost " +
+                              "FROM manifest man " +
                               "WHERE ETA = ? ",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
@@ -262,8 +286,14 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
-                              "FROM manifest " +
+                CommandText = "SELECT man.ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, EmployeeID, " +
+                              "(SELECT SUM(pt.PartPrice * pi.Quantity) " +
+                              "FROM ((purchaseorder p " +
+                              "INNER JOIN manifest m ON (p.ManifestID = m.ManifestID)) " +
+                              "INNER JOIN purchaseitems pi ON (pi.OrderID = p.OrderID)) " +
+                              "INNER JOIN parts pt ON (pi.PartID = pt.PartID) " +
+                              "WHERE m.ManifestID = man.ManifestID ) AS ShippingCost " +
+                              "FROM manifest man " +
                               "WHERE DepartureTime = ? " +
                               "ORDER BY VehicleID",
                 cType = CommandType.Text,
@@ -294,9 +324,15 @@ namespace CS499.TCMS.DataAccess.Repositories
             // create query definition
             QueryDefinition definition = new QueryDefinition()
             {
-                CommandText = "SELECT ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, ShippingCost, EmployeeID " +
-                              "FROM manifest " +
-                              "WHERE ManifestID = ?",
+                CommandText = "SELECT man.ManifestID, ShipmentType, VehicleID, DepartureTime, ETA, Arrived, EmployeeID, " +
+                              "(SELECT SUM(pt.PartPrice * pi.Quantity) " +
+                              "FROM ((purchaseorder p " +
+                              "INNER JOIN manifest m ON (p.ManifestID = m.ManifestID)) " +
+                              "INNER JOIN purchaseitems pi ON (pi.OrderID = p.OrderID)) " +
+                              "INNER JOIN parts pt ON (pi.PartID = pt.PartID) " +
+                              "WHERE m.ManifestID = man.ManifestID ) AS ShippingCost " +
+                              "FROM manifest man " +
+                              "WHERE man.ManifestID = ?",
                 cType = CommandType.Text,
                 Database = "cs_499_tcms",
                 Type = ConnectionType.MySQL

@@ -21,5 +21,13 @@ namespace CS499.TCMS.DataAccess.IRepositories
         IEnumerable<Part> GetPartsByAvailability();
 
         void Delete(long PartID);
+
+        /// <summary>
+        /// Updates the quantity in stock.
+        /// </summary>
+        /// <param name="qty">The qty.</param>
+        /// <param name="id">The identifier.</param>
+        void UpdateQuantityInStock(int qty, long id);
+
     }
 }

@@ -10,6 +10,7 @@ namespace CS499.TCMS.Model
     /// </summary>
     public class Payroll : IModel
     {
+        
         #region Constructor
 
         /// <summary>
@@ -118,7 +119,7 @@ namespace CS499.TCMS.Model
 
         public override string ToString()
         {
-            return string.Format("{0}", this.PayrollID);
+            return string.Format("{0}");
         }
 
         public override bool Equals(object obj)
@@ -239,5 +240,6 @@ namespace CS499.TCMS.Model
             get { return this.GetValidationError(propertyName); }
         }
         #endregion
+
     }
 }

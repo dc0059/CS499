@@ -188,7 +188,7 @@ namespace CS499.TCMS.Model
 
         public override string ToString()
         {
-            return string.Format("{0}", this.CompanyName);
+            return string.Format("{0}{1}({2})", this.CompanyName, Environment.NewLine, this.Address);
         }
 
         public override bool Equals(object obj)

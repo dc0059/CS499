@@ -220,7 +220,8 @@
                 <TextBlock Text="Page"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
-                           Grid.Column="0"/>
+                           Grid.Column="0"
+                           Foreground="{DynamicResource AccentColorBrush}"/>
                 <Controls:NumericUpDown Value="{Binding ViewModels.CurrentPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Grid.Column="1"
                                         VerticalAlignment="Center"
@@ -230,13 +231,15 @@
                 <TextBlock Text="{Binding ViewModels.PageCount, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=of {0}}"
                            Grid.Column="2"
                            VerticalAlignment="Center"
-                           HorizontalAlignment="Left"/>
+                           HorizontalAlignment="Left"
+                           Foreground="{DynamicResource AccentColorBrush}"/>
             </Grid>
 
             <TextBlock Text="Items per page:"                       
                        VerticalAlignment="Center"
                        Grid.Column="5"
-                       Margin="5"/>
+                       Margin="5"
+                       Foreground="{DynamicResource AccentColorBrush}"/>
             <ComboBox ItemsSource="{Binding ViewModels.PageSizes}"
                       SelectedItem="{Binding ViewModels.PageSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Grid.Column="6"

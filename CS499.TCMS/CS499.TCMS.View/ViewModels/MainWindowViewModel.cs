@@ -131,6 +131,11 @@ namespace CS499.TCMS.View.ViewModels
                 // restart application
                 this.RestartApp();
             }
+            else if (e.KeyboardDevice.IsKeyDown(Key.LeftCtrl) && e.Key == Key.M)
+            {
+                // open menu
+                this.IsMenuOpen = true;
+            }
 
             // send key press event to the ViewModels
             this.SendKeys(e);

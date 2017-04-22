@@ -1,9 +1,4 @@
 ﻿using CS499.TCMS.View.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CS499.TCMS.View.Interfaces
 {
@@ -20,6 +15,18 @@ namespace CS499.TCMS.View.Interfaces
         /// </summary>
         /// <param name="filter">the filter</param>
         void ApplyFilter(Filter filter);
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the filter.
+        /// </summary>
+        /// <value>
+        /// The filter.
+        /// </value>
+        Filter Filter { get; set; }
 
         #endregion
 

@@ -268,6 +268,52 @@ namespace CS499.TCMS.DataAccess.Repositories
             model.PartID = id;
         }
 
+        /// <summary>
+        /// Updates the quantity in stock.
+        /// </summary>
+        /// <param name="qty">The qty.</param>
+        /// <param name="id">The identifier.</param>
+        void IPartRepository.UpdateQuantityInStock(int qty, long id)
+        {
+
+            //create query definition
+            QueryDefinition definition = new QueryDefinition()
+            {
+                CommandText = "UPDATE parts " +
+                              "SET QuantityInStock = QuantityInStock - ?, LastModifiedBy = ? " +
+                              "WHERE PartID = ?",
+                cType = CommandType.Text,
+                Database = "cs_499_tcms",
+                Type = ConnectionType.MySQL
+            };
+
+            // create parameter definition
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_QuantityInStock",
+                Type = DbType.Int16,
+                Value = qty
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_LastModifiedBy",
+                Type = DbType.String,
+                Value = this.Database.UserName
+            });
+            definition.Parameters.Add(new ParameterDefinition()
+            {
+                Direction = ParameterDirection.Input,
+                Name = "P_PartID",
+                Type = DbType.Int64,
+                Value = id
+            });
+
+            this.Database.ExecuteModQuery(definition);
+
+        }
+
         public void Update(Part model)
         {
             //create query definition

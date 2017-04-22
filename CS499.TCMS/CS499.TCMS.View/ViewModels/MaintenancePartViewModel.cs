@@ -97,11 +97,18 @@ namespace CS499.TCMS.View.ViewModels
                     this.maintenancePartRepository.Update(this.Model);
                 }
 
+                // decrement quantity in stock
+                this.partRepository.UpdateQuantityInStock(this.Model.Quantity, this.SelectedPart.PartID);
+
             },
             TaskCreationOptions.LongRunning),
             Messages.MaintenancePartSaving,
             () =>
             {
+
+                // send load notification to the all part view model
+                this.MessengerInstance.Send<NotificationMessage<AllPartViewModel>>(
+                    new NotificationMessage<AllPartViewModel>(null, null));
 
                 // request to remove from parent workspace
                 this.CloseCommand.Execute(this);
@@ -422,7 +429,10 @@ namespace CS499.TCMS.View.ViewModels
             }
             set
             {
+
                 base.IsNew = value;
+                base.OnPropertyChanged("IsNew");
+
             }
         }
 

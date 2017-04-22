@@ -130,6 +130,12 @@ namespace CS499.TCMS.View.ViewModels
                 // refresh the list
                 this.ViewModels.Refresh();
 
+                // apply filter
+                if (this.Filter != null)
+                {
+                    (this as IFilterable).ApplyFilter(this.Filter);
+                }
+
                 // set loading flag
                 this.loading = false;
 
@@ -233,7 +239,7 @@ namespace CS499.TCMS.View.ViewModels
         {
 
             List<Part> models = null;
-
+           
             // set loading flag
             this.loadingParts = true;
 
@@ -303,6 +309,13 @@ namespace CS499.TCMS.View.ViewModels
             MaintenancePartViewModel viewModel = new MaintenancePartViewModel(model, this.maintenancePartRepository, this.TaskManager, true,
                 this.MaintenanceRecordDetails, this.Parts, this.partRepository);
 
+            // set maintenance record detail to filter
+            if (this.Filter != null)
+            {
+                viewModel.SelectedMaintenanceRecordDetail = this.MaintenanceRecordDetails.FirstOrDefault(
+                    (d) => d.DetailID == Convert.ToInt64(Filter.FilterText));
+            }
+
             // send ViewModel
             this.SendViewModel(viewModel);
 
@@ -352,15 +365,19 @@ namespace CS499.TCMS.View.ViewModels
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
-                this.maintenancePartRepository.Delete(viewModel.Model);
+                // increment quantity in stock
+                this.partRepository.UpdateQuantityInStock(-viewModel.Model.Quantity, viewModel.Model.PartID);
 
+                // delete model
+                this.maintenancePartRepository.Delete(viewModel.Model);
+                
             },
             TaskCreationOptions.LongRunning),
             Messages.AllMaintenancePartDeleting,
             () =>
             {
 
-                this.Load();
+                this.MessengerInstance.Send<NotificationMessage<AllMaintenancePartViewModel>>(null, null);
 
             },
             Messages.MainWindowInitialStatus,
@@ -435,6 +452,9 @@ namespace CS499.TCMS.View.ViewModels
         void IFilterable.ApplyFilter(Filter filter)
         {
 
+            // remember filter
+            this.Filter = filter;
+
             // set search type
             this.SearchType = "equals";
 
@@ -489,6 +509,14 @@ namespace CS499.TCMS.View.ViewModels
         /// Flag indicating the parts are loading
         /// </summary>
         private bool loadingParts = false;
+
+        /// <summary>
+        /// Gets or sets the filter.
+        /// </summary>
+        /// <value>
+        /// The filter.
+        /// </value>
+        public Filter Filter { get; set; }
 
         /// <summary>
         /// Flag indicating the ViewModel is still loading data

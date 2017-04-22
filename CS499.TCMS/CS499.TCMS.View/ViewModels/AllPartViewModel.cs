@@ -41,6 +41,8 @@ namespace CS499.TCMS.View.ViewModels
             this.partRepository = partRepository;
             this.Load();
             this.MessengerInstance.Register<NotificationMessage<AllPartViewModel>>(this, (n) => this.Load(n));
+            this.MessengerInstance.Register<NotificationMessage<AllMaintenancePartViewModel>>(this, (n) => this.Load());
+            this.MessengerInstance.Register<NotificationMessage<AllPurchaseItemViewModel>>(this, (n) => this.Load());
             this.SearchType = "contains";
         }
 

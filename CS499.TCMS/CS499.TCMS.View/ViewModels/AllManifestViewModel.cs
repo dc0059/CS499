@@ -56,6 +56,7 @@ namespace CS499.TCMS.View.ViewModels
             this.MessengerInstance.Register<NotificationMessage<AllManifestViewModel>>(this, (n) => this.Load(n));
             this.MessengerInstance.Register<NotificationMessage<AllVehicleViewModel>>(this, (n) => this.LoadVehicles(n));
             this.MessengerInstance.Register<NotificationMessage<AllUserViewModel>>(this, (n) => this.LoadUsers(n));
+            this.MessengerInstance.Register<NotificationMessage<AllPurchaseItemViewModel>>(this, (n) => this.Load());
             this.SearchType = "contains";
         }
 

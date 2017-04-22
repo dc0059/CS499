@@ -35,7 +35,9 @@
         <TextBlock Grid.Row="0"
                    Grid.Column="0"
                    Text="Report Type:"
-                   VerticalAlignment="Center"/>
+                   VerticalAlignment="Center"
+                   Margin="5"
+                   Foreground="{DynamicResource AccentColorBrush}"/>
 
         <ComboBox Grid.Row="0"
                   Grid.Column="1"
@@ -51,7 +53,9 @@
                    Grid.Column="0"
                    Text="Vehicle:"
                    VerticalAlignment="Center"
-                   Visibility="{Binding VehicleSelectionVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                   Visibility="{Binding VehicleSelectionVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}"
+                   Margin="5"
+                   Foreground="{DynamicResource AccentColorBrush}"/>
 
         <ComboBox Grid.Row="1"
                   Grid.Column="1"
@@ -64,7 +68,9 @@
                    Grid.Column="0"
                    Text="Start Date:"
                    VerticalAlignment="Center"
-                   Visibility="{Binding DateRangeVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                   Visibility="{Binding DateRangeVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}"
+                   Margin="5"
+                   Foreground="{DynamicResource AccentColorBrush}"/>
 
         <DatePicker Grid.Row="2"
                     Grid.Column="1"
@@ -76,7 +82,9 @@
                    Grid.Column="0"
                    Text="End Date:"
                    VerticalAlignment="Center"
-                   Visibility="{Binding DateRangeVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                   Visibility="{Binding DateRangeVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                   Margin="5"
+                   Foreground="{DynamicResource AccentColorBrush}"/>
 
         <DatePicker Grid.Row="3"
                     Grid.Column="1"

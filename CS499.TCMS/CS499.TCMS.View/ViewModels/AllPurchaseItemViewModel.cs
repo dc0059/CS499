@@ -130,6 +130,12 @@ namespace CS499.TCMS.View.ViewModels
                 // refresh the list
                 this.ViewModels.Refresh();
 
+                // apply filter
+                if (this.Filter != null)
+                {
+                    (this as IFilterable).ApplyFilter(this.Filter);
+                }
+
                 // set loading flag
                 this.loading = false;
 
@@ -303,6 +309,13 @@ namespace CS499.TCMS.View.ViewModels
             PurchaseItemViewModel viewModel = new PurchaseItemViewModel(model, this.purchaseItemRepository, this.TaskManager, true,
                 this.Orders, this.Parts, this.partRepository);
 
+            // set selected order number to filter
+            if (this.Filter != null)
+            {
+                viewModel.SelectedPurchaseOrder = this.Orders.FirstOrDefault(
+                    (p) => p.OrderNumber == Convert.ToInt64(this.Filter.FilterText));
+            }
+
             // send ViewModel
             this.SendViewModel(viewModel);
 
@@ -352,6 +365,10 @@ namespace CS499.TCMS.View.ViewModels
             this.TaskManager.AddTask(Task.Factory.StartNew(() =>
             {
 
+                // increment quantity in stock
+                this.partRepository.UpdateQuantityInStock(-viewModel.Model.Quantity, viewModel.Model.PartID);
+
+                // delete model
                 this.purchaseItemRepository.Delete(viewModel.Model);
 
             },
@@ -360,7 +377,7 @@ namespace CS499.TCMS.View.ViewModels
             () =>
             {
 
-                this.Load();
+                this.MessengerInstance.Send<NotificationMessage<AllPurchaseItemViewModel>>(null, null);
 
             },
             Messages.MainWindowInitialStatus,
@@ -435,6 +452,9 @@ namespace CS499.TCMS.View.ViewModels
         void IFilterable.ApplyFilter(Filter filter)
         {
 
+            // remember filter
+            this.Filter = filter;
+
             // set search type
             this.SearchType = "equals";
 
@@ -489,6 +509,14 @@ namespace CS499.TCMS.View.ViewModels
         /// Flag indicating the parts are loading
         /// </summary>
         private bool loadingParts = false;
+
+        /// <summary>
+        /// Gets or sets the filter.
+        /// </summary>
+        /// <value>
+        /// The filter.
+        /// </value>
+        public Filter Filter { get; set; }
 
         /// <summary>
         /// Flag indicating the ViewModel is still loading data

@@ -64,9 +64,6 @@ namespace CS499.TCMS.Model
                 case "ETA":
                     error = this.ValidateETA();
                     break;
-                case "ShippingCost":
-                    error = this.ValidateShippingCost();
-                    break;
                 case "EmployeeID":
                     error = this.ValidateEmployeeID();
                     break;
@@ -116,17 +113,6 @@ namespace CS499.TCMS.Model
         {
             if (this.ETA.CompareTo(this.DepartureTime) < 0)
                 return Messages.InvalidDate;
-            return null;
-        }
-
-        /// <summary>
-        /// Validate the shipping cost
-        /// </summary>
-        /// <returns>string for the error</returns>
-        private string ValidateShippingCost()
-        {
-            if (this.ManifestID < 0.0)
-                return Messages.InvalidValue;
             return null;
         }
 
@@ -235,7 +221,6 @@ namespace CS499.TCMS.Model
             "ShipmentType",
             "VehicleID",
             "ETA",
-            "ShippingCost",
             "EmployeeID"
         };
 

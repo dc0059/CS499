@@ -116,6 +116,7 @@
 													Controls:TextBoxHelper.Watermark="Enter shipping cost"
 													Controls:TextBoxHelper.ClearTextButton="True"
 													StringFormat="C2"
+                                                    IsEnabled="False"
 													Grid.Column="1"
 													Grid.Row="4"
 													Margin="0, 10, 0, 10"/>

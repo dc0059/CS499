@@ -11,6 +11,7 @@
 	<Border BorderBrush="{DynamicResource AccentColorBrush}"
 			BorderThickness="1"
 			Margin="5">
+        
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
@@ -39,47 +40,51 @@
 						Content="{iconPacks:PackIconModern Kind=Save, Height=26, Width=26}"/>
 			</Grid>
 
-			<Grid Grid.Row="1">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="*"/>
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-				</Grid.RowDefinitions>
+            <Expander Header="Vehicle Information"
+                      IsExpanded="True"
+                      Margin="5"
+                      Grid.Row="1">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-				<TextBlock VerticalAlignment="Center"
+                    <TextBlock VerticalAlignment="Center"
 						   Margin="5"
 						   Text="Vehicle ID:"
 						   Grid.Column="0"
 						   Grid.Row="0"/>
-				<TextBox Text="{Binding VehicleID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Text="{Binding VehicleID, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
 						 IsReadOnly="True"
 						 Grid.Column="1"
 						 Grid.Row="0"
 						 Margin="0, 10, 5, 10"/>
-				<TextBlock VerticalAlignment="Center"
+                    <TextBlock VerticalAlignment="Center"
 						   Margin="5"
 						   Text="Brand:"
 						   Grid.Column="0"
 						   Grid.Row="1"/>
-				<TextBox Text="{Binding Brand, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                    <TextBox Text="{Binding Brand, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
 						 Controls:TextBoxHelper.Watermark="Enter brand"
 						 Controls:TextBoxHelper.ClearTextButton="True"                                 
 						 Grid.Column="1"
 						 Grid.Row="1"
 						 Margin="0, 10, 5, 10"/>
-				<TextBlock VerticalAlignment="Center"
+                    <TextBlock VerticalAlignment="Center"
 						   Margin="5"
 						   Text="Year:"
 						   Grid.Column="0"
 						   Grid.Row="2"/>
-				<Controls:NumericUpDown Value="{Binding Year, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                    <Controls:NumericUpDown Value="{Binding Year, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
 										Controls:TextBoxHelper.Watermark="Enter year"
 										Controls:TextBoxHelper.ClearTextButton="True"
 										Maximum="3000"
@@ -87,35 +92,35 @@
 										Grid.Column="1"
 										Grid.Row="2"
 										Margin="0, 10, 5, 10"/>
-				<TextBlock VerticalAlignment="Center"
+                    <TextBlock VerticalAlignment="Center"
 						   Margin="5"
 						   Text="Model:"
 						   Grid.Column="0"
 						   Grid.Row="3"/>
-				<TextBox Text="{Binding VehicleModel, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                    <TextBox Text="{Binding VehicleModel, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
 						 Controls:TextBoxHelper.Watermark="Enter model"
 						 Controls:TextBoxHelper.ClearTextButton="True"                                 
 						 Grid.Column="1"
 						 Grid.Row="3"
 						 Margin="0, 10, 5, 10"/>
-				<TextBlock VerticalAlignment="Center"
+                    <TextBlock VerticalAlignment="Center"
 						   Margin="5"
 						   Text="Vehicle Type (Class):"
 						   Grid.Column="0"
 						   Grid.Row="4"/>
-				<ComboBox ItemsSource="{Binding VehicleTypes}"
+                    <ComboBox ItemsSource="{Binding VehicleTypes}"
 						  SelectedItem="{Binding VehicleType, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, Converter={StaticResource EnumToStringConverter}}"
 						  Controls:TextBoxHelper.Watermark="Select vehicle type"
 						  Controls:TextBoxHelper.ClearTextButton="True"                                 
 						  Grid.Column="1"
 						  Grid.Row="4"
 						  Margin="0, 10, 5, 10"/>
-				<TextBlock VerticalAlignment="Center"
+                    <TextBlock VerticalAlignment="Center"
 						   Margin="5"
 						   Text="Capacity (In Lbs.):"
 						   Grid.Column="0"
 						   Grid.Row="5"/>
-				<Controls:NumericUpDown Value="{Binding Capacity, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                    <Controls:NumericUpDown Value="{Binding Capacity, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
 										Controls:TextBoxHelper.Watermark="Enter capacity"
 										Controls:TextBoxHelper.ClearTextButton="True"																				
 										Grid.Column="1"
@@ -123,8 +128,9 @@
 										Margin="0, 10, 5, 10"/>
 
 
-			</Grid>
+                </Grid>
+            </Expander>
 
-		</Grid>
+        </Grid>
 	</Border>
 </UserControl>
